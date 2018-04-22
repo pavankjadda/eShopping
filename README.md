@@ -1,2 +1,2 @@
-# SpringTesting
-Spring Boot testing with JUnit and SpringTest
+# Spring Boot tests with JUnit and SpringTest
+
