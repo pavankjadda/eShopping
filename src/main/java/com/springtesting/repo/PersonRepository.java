@@ -15,4 +15,7 @@ public interface PersonRepository   extends JpaRepository<Person,String>
 
     Person findByLastNameContains(String lastName);
 
+    @SuppressWarnings("unchecked")
+    Person  saveAndFlush(Person person);
+
 }
