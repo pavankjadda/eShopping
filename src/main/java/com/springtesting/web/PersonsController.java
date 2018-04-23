@@ -3,10 +3,7 @@ package com.springtesting.web;
 import com.springtesting.model.Person;
 import com.springtesting.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,11 @@ public class PersonsController
     public List<Person> getPersons()
     {
         return personService.getPersons();
+    }
+
+    @PostMapping(value = "/persons")
+    public Person getPersons(@RequestBody   Person  person)
+    {
+        return personService.createPerson(person);
     }
 }

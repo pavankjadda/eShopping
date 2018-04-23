@@ -23,4 +23,9 @@ public class PersonService
     {
         return personRepository.findAll();
     }
+
+    public Person createPerson(Person   person)
+    {
+        return personRepository.saveAndFlush(person);
+    }
 }
