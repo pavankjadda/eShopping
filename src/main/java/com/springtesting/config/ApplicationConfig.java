@@ -1,44 +1,40 @@
 package com.springtesting.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
-import org.springframework.session.web.http.HttpSessionIdResolver;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
+@SuppressWarnings("deprecation")
+@EnableWebMvc
 @Configuration
-public class ApplicationConfig implements WebMvcConfigurer
+@ComponentScan(basePackages = {"com.springtesting"})
+public class ApplicationConfig  extends WebMvcConfigurerAdapter
 {
-    private static final String[] CLASSPATH_RESOURCE_LOCATIONS =
-            {
-                    "classpath:/META-INF/resources/", "classpath:/resources/",
-                    "classpath:/static/", "classpath:/public/","classpath:/static/vendor/","classpath:/static/custom/"
-            };
+    public ApplicationConfig()
+    {
+        super();
+    }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry)
+    public void addViewControllers(final ViewControllerRegistry registry)
     {
-        registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+        super.addViewControllers(registry);
+        registry.addViewController("/").setViewName("index");
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder()
+    public ViewResolver viewResolver()
     {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher()
-    {
-        return new HttpSessionEventPublisher();
-    }
-
-    @Bean
-    public HttpSessionIdResolver httpSessionIdResolver()
-    {
-        return HeaderHttpSessionIdResolver.xAuthToken();
+        final InternalResourceViewResolver bean = new InternalResourceViewResolver();
+        bean.setViewClass(JstlView.class);
+        bean.setPrefix("/WEB-INF/jsp/");
+        bean.setSuffix(".jsp");
+        return bean;
     }
 }

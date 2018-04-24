@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class EmployeeRepositoryTest
+public class PersonRepositoryTest
 {
     @Autowired
     private TestEntityManager   testEntityManager;
