@@ -2,6 +2,7 @@ package com.springtesting;
 
 import com.springtesting.model.Person;
 import com.springtesting.repo.PersonRepository;
+import com.springtesting.util.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
