@@ -51,7 +51,7 @@ pipeline {
                         echo 'This will run only if the run was marked as unstable'
                         mail to: 'testuser3130@outlook.com',
                             subject: "Unstable Pipeline: ${currentBuild.fullDisplayName}",
-                            body: "Something is wrong with ${env.BUILD_URL}"
+                            body: "Unstable Pipeline ${env.BUILD_URL}"
                     }
                     changed 
                     {
@@ -59,7 +59,7 @@ pipeline {
                         echo 'For example, if the Pipeline was previously failing but is now successful'
                         mail to: 'testuser3130@outlook.com',
                             subject: "Changed Pipeline: ${currentBuild.fullDisplayName}",
-                            body: "Something is wrong with ${env.BUILD_URL}"
+                            body: "Changed Pipeline: ${currentBuild.fullDisplayName}"
                     }
             }
         }
@@ -72,7 +72,7 @@ pipeline {
                 timeout(time: 3, unit: 'MINUTES') 
                 {
                     sh 'echo "Deliver stage started"'
-                    sh './jenkins/scripts/deliver.sh' 
+                    //sh './jenkins/scripts/deliver.sh' 
                     sh 'echo "Deliver stage Ended. Deployment successful"'
                     sh './health-check.sh'
                     mail to: 'testuser3130@outlook.com',
