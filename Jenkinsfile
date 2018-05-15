@@ -76,7 +76,7 @@ pipeline {
                     sh './health-check.sh'
                     mail to: 'testuser3130@outlook.com',
                             subject: "Deployed Pipeline: ${currentBuild.fullDisplayName}",
-                            body:  "Deployed Pipeline: ${currentBuild.fullDisplayName} and see full report here ${env.BUILD_URL}""
+                            body:  "Deployed Pipeline: ${currentBuild.fullDisplayName} and see full report here ${env.BUILD_URL}"
                 }
                 
             }
