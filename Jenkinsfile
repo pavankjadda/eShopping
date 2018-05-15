@@ -55,14 +55,16 @@ pipeline {
         { 
             steps 
             {
-                sh 'echo "Deliver stage started"'
-                sh './jenkins/scripts/deliver.sh' 
-                sh 'echo "Deliver stage Ended. Deployment successful"'
-            }
-            timeout(time: 3, unit: 'MINUTES') 
-            {
+                timeout(time: 3, unit: 'MINUTES') 
+                {
+                    sh 'echo "Deliver stage started"'
+                    sh './jenkins/scripts/deliver.sh' 
+                    sh 'echo "Deliver stage Ended. Deployment successful"'
                     sh './health-check.sh'
+                }
+                
             }
+            
         }
     }
 }
