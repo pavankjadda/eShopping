@@ -74,7 +74,7 @@ pipeline {
                     sh 'echo "Deliver stage started"'
                     //sh './jenkins/scripts/deliver.sh' 
                     sh 'echo "Deliver stage Ended. Deployment successful"'
-                    sh './health-check.sh'
+                    //sh './health-check.sh'
                     mail to: 'testuser3130@outlook.com',
                             subject: "Deployed Pipeline: ${currentBuild.fullDisplayName}",
                             body:  "Deployed Pipeline: ${currentBuild.fullDisplayName} and see full report here ${env.BUILD_URL}"
