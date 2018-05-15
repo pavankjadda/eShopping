@@ -1,4 +1,4 @@
-package com.springtesting;
+package com.springtesting.mockito;
 
 import com.springtesting.model.Person;
 import com.springtesting.repo.PersonRepository;

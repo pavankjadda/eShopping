@@ -1,5 +1,6 @@
-package com.springtesting;
+package com.springtesting.mockito;
 
+import com.springtesting.SpringtestingApplication;
 import com.springtesting.model.Person;
 import com.springtesting.repo.PersonRepository;
 import com.springtesting.util.JsonUtil;
