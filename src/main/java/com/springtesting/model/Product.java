@@ -1,5 +1,6 @@
 package com.springtesting.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Product implements Serializable
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
+
 
     @ManyToMany(mappedBy = "productlist")
     private List<OrderDetail> orderDetail =new ArrayList<OrderDetail>();

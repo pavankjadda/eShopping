@@ -1,5 +1,6 @@
 package com.springtesting.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class OrderDetail
     @JoinColumn(name = "purchased_By")
     private User PurchasedBy;
 
-
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "order_detail_productlist",

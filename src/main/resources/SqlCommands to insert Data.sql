@@ -23,5 +23,8 @@ INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_nam
 INSERT INTO `springtesting`.`order_detail`(`id`,`purchased_by`) VALUES('ORD1001','user1001');
 
 
+
 /* Insert Data into Order Detail Products Table  */
-INSERT INTO `springtesting`.`order_detail_productlist`(`order_detail_id`,`productlist_id`) VALUES('ord1001','p1001');
+INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(1,'ord1001','p1001');
+INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(2,'ord1001','p1002');
+INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(3,'ord1001','p1003');
