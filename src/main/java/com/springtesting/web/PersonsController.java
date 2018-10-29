@@ -11,8 +11,13 @@ import java.util.List;
 @RequestMapping("/api")
 public class PersonsController
 {
+    private final PersonService personService;
+
     @Autowired
-    private PersonService personService;
+    public PersonsController(PersonService personService)
+    {
+        this.personService = personService;
+    }
 
     @GetMapping(value = "/person/{id}")
     public Person getPersonById(@PathVariable   String  id)
