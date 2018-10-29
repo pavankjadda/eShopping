@@ -28,7 +28,7 @@ public class Product implements Serializable
     @JoinColumn(name="category_id")
     private Category category;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "productlist")
     private List<OrderDetail> orderDetail =new ArrayList<OrderDetail>();
 
