@@ -15,8 +15,7 @@ import java.util.List;
 public class Product implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @NotNull(message = "Product name must not be null")
     @NotEmpty

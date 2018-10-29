@@ -13,9 +13,7 @@ public class OrderDetail
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "purchased_By")
