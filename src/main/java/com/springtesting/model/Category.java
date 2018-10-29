@@ -13,8 +13,7 @@ public class Category
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @NotNull(message = "Category name must not be null")
     @NotEmpty
