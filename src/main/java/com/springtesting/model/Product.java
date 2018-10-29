@@ -31,5 +31,4 @@ public class Product implements Serializable
     @JsonIgnore
     @ManyToMany(mappedBy = "productlist")
     private List<OrderDetail> orderDetail =new ArrayList<OrderDetail>();
-
 }
