@@ -1,10 +1,8 @@
 package com.springtesting.web;
 
-import com.springtesting.model.Category;
-import com.springtesting.model.OrderDetail;
-import com.springtesting.model.Person;
-import com.springtesting.model.Product;
+import com.springtesting.model.*;
 import com.springtesting.repo.CategoryRepository;
+import com.springtesting.repo.OrderDetailProductRepository;
 import com.springtesting.repo.OrderDetailRepository;
 import com.springtesting.repo.ProductRepository;
 import com.springtesting.service.PersonService;
@@ -25,12 +23,15 @@ public class GenericController
 
     private final OrderDetailRepository orderDetailRepository;
 
-    public GenericController(PersonService personService, CategoryRepository categoryRepository, ProductRepository productRepository, OrderDetailRepository orderDetailRepository)
+    private final OrderDetailProductRepository orderDetailProductRepository;
+
+    public GenericController(PersonService personService, CategoryRepository categoryRepository, ProductRepository productRepository, OrderDetailRepository orderDetailRepository, OrderDetailProductRepository orderDetailProductRepository)
     {
         this.personService = personService;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
         this.orderDetailRepository = orderDetailRepository;
+        this.orderDetailProductRepository = orderDetailProductRepository;
     }
 
     //Category Controller Methods
@@ -96,6 +97,15 @@ public class GenericController
     public Optional<OrderDetail> getOrderDetail(@PathVariable String id)
     {
         return orderDetailRepository.findById(id);
+    }
+
+    //Customer Order Products Controller methods
+
+
+    @GetMapping(value = "/orderproducts/{orderId}")
+    public List<OrderDetailProduct> getOrdersAndProducts(@PathVariable String orderId)
+    {
+        return orderDetailProductRepository.findByOrderDetailId(orderId);
     }
 
 
