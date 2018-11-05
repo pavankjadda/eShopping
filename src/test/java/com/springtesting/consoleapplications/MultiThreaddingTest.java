@@ -7,12 +7,21 @@ public class MultiThreaddingTest
         int cores = Runtime.getRuntime().availableProcessors();
         System.out.println("Cores=> "+cores);
 
-        for(int i=0;i<1000000;i++)
+        try
         {
-            FileReadUtil fileReadUtil=new FileReadUtil();
-            fileReadUtil.setName("Thread-"+i);
-            fileReadUtil.start();
+            for(int i=0;i<1000;i++)
+            {
+                FileReadUtil fileReadUtil=new FileReadUtil();
+                fileReadUtil.setName(""+i);
+                fileReadUtil.start();
+            }
         }
+        finally
+        {
+            System.out.println("Active Threads=> "+Thread.activeCount());
+            Runtime.getRuntime().gc();
+        }
+
 
 
     }
