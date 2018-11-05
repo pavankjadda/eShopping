@@ -1,8 +1,6 @@
 package com.springtesting.security;
 
 
-import com.springtesting.repo.PersonRepository;
-import com.springtesting.repo.ProductRepository;
 import com.springtesting.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
