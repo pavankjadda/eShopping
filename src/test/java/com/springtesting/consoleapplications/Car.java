@@ -2,7 +2,7 @@ package com.springtesting.consoleapplications;
 
 public class Car
 {
-    private static Car carObject = null;
+    private static Car carObject=null;
 
     public String make;
 
@@ -10,13 +10,13 @@ public class Car
 
     private Car()
     {
-        this.make = "BMW";
-        this.model = "Q5";
+        this.make="BMW";
+        this.model="Q5";
     }
 
     public static Car getInstance()
     {
-        if (carObject == null)
+        if(carObject == null)
             return new Car();
         return carObject;
     }
