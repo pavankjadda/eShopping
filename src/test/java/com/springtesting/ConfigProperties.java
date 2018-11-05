@@ -15,7 +15,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "jdbc")
 public class ConfigProperties
 {
-    public static class Credentials
+    static class Credentials
     {
         private String authMethod;
         private String username;
