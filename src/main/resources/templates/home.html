@@ -1,10 +1,10 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <body>
-<h1>Welcome Home</h1>
+    <h1>Welcome Home</h1>
 
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Sign Out"/>
-</form>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </body>
 </html>
