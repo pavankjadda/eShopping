@@ -1,7 +1,8 @@
 package com.springtesting.security;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
 {
-    private Log logger = LogFactory.getLog(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(CustomLogoutSuccessHandler.class);
 
     private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
 
