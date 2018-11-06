@@ -1,4 +1,4 @@
-package com.springtesting.service;
+package com.springtesting.security;
 
 import com.springtesting.model.User;
 import com.springtesting.repo.UserRepository;

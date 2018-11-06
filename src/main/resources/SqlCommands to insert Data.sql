@@ -15,12 +15,12 @@ INSERT INTO `springtesting`.`product`(`id`,`name`,`category_id`) VALUES('p1003',
 
 
 /* Insert Data into User Table  */
-INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('user1001','3490 Mnd Dr','jdoe@gma.com','John','Doe');
-INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('user1002','433 Daek Dr','jreacher@gma.com','Jack','Reacher');
+INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('1001','3490 Mnd Dr','jdoe@gma.com','John','Doe');
+INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('1002','433 Daek Dr','jreacher@gma.com','Jack','Reacher');
 
 
 /* Insert Data into Order Detail Table  */
-INSERT INTO `springtesting`.`order_detail`(`id`,`purchased_by`) VALUES('ORD1001','user1001');
+INSERT INTO `springtesting`.`order_detail`(`id`,`purchased_by`) VALUES('ORD1001','1001');
 
 
 
