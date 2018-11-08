@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.session.InvalidSessionStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -63,9 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-            .antMatchers("/api/**").permitAll()
+            //.antMatchers("/api/**").permitAll()
             .anyRequest().authenticated()
             .and()
+                .httpBasic()
+                .and()
         .formLogin()
             .loginPage("/login")
             .loginProcessingUrl("/login")
@@ -73,8 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .permitAll()
             .and()
         .logout()
-            .clearAuthentication(true)
-            .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
             .logoutSuccessHandler(new CustomLogoutSuccessHandler())
             .permitAll();
