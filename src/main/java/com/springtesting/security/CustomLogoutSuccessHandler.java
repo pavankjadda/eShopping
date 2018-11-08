@@ -33,6 +33,5 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
         {
             logger.debug("Exception thrown while logging out");
         }
-
     }
 }
