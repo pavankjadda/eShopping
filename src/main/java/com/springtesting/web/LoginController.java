@@ -38,12 +38,7 @@ public class LoginController
         // If NOT anonymous user, get user info
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
-            String currentUserName = authentication.getName();
             String username=request.getUserPrincipal().getName();
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= (UsernamePasswordAuthenticationToken) request.getUserPrincipal();
-            //usernamePasswordAuthenticationToken.getPrincipal().toString();
-            PreAuthenticatedAuthenticationToken preAuthenticatedAuthenticationToken= (PreAuthenticatedAuthenticationToken) request.getUserPrincipal();
-            preAuthenticatedAuthenticationToken.getPrincipal().toString();
             Cookie[] cookies=request.getCookies();
             for(Cookie cookie: cookies)
             {
@@ -94,6 +89,16 @@ public class LoginController
             modelAndView.setViewName("redirect:login");
             return modelAndView;
         }
+
+        Cookie[] cookies=request.getCookies();
+        for(Cookie cookie: cookies)
+        {
+            if(cookie.getName().equals("JSESSIONID"))
+            {
+                String sessionValue=cookie.getValue();
+            }
+        }
+
         modelAndView.setViewName("home");
         return modelAndView;
     }
