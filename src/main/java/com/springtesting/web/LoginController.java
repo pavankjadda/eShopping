@@ -64,7 +64,7 @@ public class LoginController
     @PostMapping(value = "/login")
     public ModelAndView validateLoginDetails(@RequestParam("username") String username, @RequestParam("password") String password, final HttpServletRequest request)
     {
-        /*
+        //This is not being executed as Authentication Success Handler redirects page
         //Store Session
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(username, password);
         Authentication auth = authManager.authenticate(authReq);
@@ -73,7 +73,7 @@ public class LoginController
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
-*/
+
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("home");
         return modelAndView;
