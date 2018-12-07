@@ -1,7 +1,6 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.model.SessionHistory;
-import com.springtesting.repo.SessionHistoryRepository;
+import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -11,117 +10,88 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Collection;
 
-
+@Data
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
-    private Log logger = LogFactory.getLog(this.getClass());
-
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    private SessionHistoryRepository sessionHistoryRepository;
+    protected Log logger = LogFactory.getLog(this.getClass());
 
 
-    public CustomAuthenticationSuccessHandler(SessionHistoryRepository sessionHistoryRepository)
+    private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
+
+    public CustomAuthenticationSuccessHandler()
     {
-        this.sessionHistoryRepository=sessionHistoryRepository;
+
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
     {
-        handle(request, response, authentication);
+        handle(request,response,authentication);
         clearAuthenticationAttributes(request);
-        saveRequesterInformation(request,response,authentication);
-    }
-
-    private void saveRequesterInformation(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-    {
-        SessionHistory sessionHistory=new SessionHistory();
-        sessionHistory.setSessionId(request.getSession(false).getId());
-        sessionHistory.setCreationTime(convertLongTime(request.getSession(false).getCreationTime()));
-        sessionHistory.setLastAccessTime(convertLongTime(request.getSession(false).getLastAccessedTime()));
-        sessionHistory.setMaxInactiveInterval(request.getSession(false).getMaxInactiveInterval());
-        sessionHistory.setLoggedDataTime(LocalDateTime.now());
-        sessionHistory.setUsername(authentication.getName());
-        sessionHistory.setRequesterIpAddress(request.getRemoteAddr());
-        sessionHistory.setRequesterPort(request.getRemotePort());
-        sessionHistory.setRequestedMethod(request.getMethod());
-        sessionHistory.setLocalIpAddress(request.getLocalAddr());
-        sessionHistory.setLocalPort(request.getLocalPort());
-        sessionHistory.setServerName(request.getServerName());
-        sessionHistory.setServerPort(request.getServerPort());
-        sessionHistory.setBrowserInformation(request.getAuthType());
-        sessionHistory.setAuthType(request.getAuthType());
         
-        try
-        {
-            sessionHistoryRepository.saveAndFlush(sessionHistory);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
-        String targetUrl = determineTargetUrl(authentication);
-        if (response.isCommitted())
+        String targetUrl=determineTargetUrl(authentication);
+        if(response.isCommitted())
         {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
-        redirectStrategy.sendRedirect(request, response, targetUrl);
+        redirectStrategy.sendRedirect(request,response,targetUrl);
     }
 
     private String determineTargetUrl(Authentication authentication)
     {
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for (GrantedAuthority grantedAuthority : authorities)
+        boolean isUser = false;
+        boolean isAdmin = false;
+        Collection<? extends GrantedAuthority> authorities= authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority:authorities)
         {
 
-            if (grantedAuthority.getAuthority().equals("ROLE_USER"))
+            if(grantedAuthority.getAuthority().equals("ROLE_USER"))
             {
-                return "/home.html";
+                isUser = true;
+                break;
             }
-            else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
+            else if(grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
             {
-                return "/admin.html";
+                isAdmin = true;
+                break;
             }
-        }
+        } // End of for loop
 
-        return "/login";
+        isUser = true;
+        if(isAdmin)
+            return "/admin.html";
+        else if(isUser)
+            return "/home.html";
+        else
+            throw new IllegalStateException();
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request)
     {
-        HttpSession session = request.getSession(false);
-        if (session == null)
+        HttpSession session=request.getSession(false);
+        if(session == null)
             return;
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-    }
-
-    protected RedirectStrategy getRedirectStrategy()
-    {
-        return redirectStrategy;
     }
 
     public void setRedirectStrategy(RedirectStrategy redirectStrategy)
     {
         this.redirectStrategy = redirectStrategy;
     }
-
-    public LocalDateTime convertLongTime(long longValue)
+    protected RedirectStrategy getRedirectStrategy()
     {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
+        return redirectStrategy;
     }
 }
