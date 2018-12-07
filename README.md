@@ -7,6 +7,7 @@ Spring Security implementation with Spring Session, Spring Data and Spring Boot.
 4. Enrypt the password in database and store credentials in MySql Database
 5. Restrict users from accessing orders, products without authentication
 6. Deal with invalidating session, authorized user trying to authenticate again etc. 
-7. Provide Stateless authentication for atleast one REST API
+7. Provide role management and restrict users from accessing unauthorized content i.e. Users trying to access Admin data
+8. Provide Stateless authentication for atleast one REST API
 
 
