@@ -18,13 +18,14 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 {
     private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
 
-    private PasswordEncoder passwordEncoder;
-
     private volatile String userNotFoundEncodedPassword;
+
+    private PasswordEncoder passwordEncoder;
 
     private UserDetailsService userDetailsService;
 
     private UserDetailsPasswordService userDetailsPasswordService;
+
 
     public CustomDaoAuthenticationProvider()
     {
@@ -36,10 +37,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         if (authentication.getCredentials() == null)
         {
             logger.debug("Authentication failed: no credentials provided");
-
-            throw new BadCredentialsException(messages.getMessage(
-                    "AbstractUserDetailsAuthenticationProvider.badCredentials",
-                    "Message: Authentication failed: no credentials provided"));
+            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: no credentials provided"));
         }
 
         String presentedPassword = authentication.getCredentials().toString();
@@ -47,10 +45,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword()))
         {
             logger.debug("Authentication failed: password does not match stored value");
-
-            throw new BadCredentialsException(messages.getMessage(
-                    "AbstractUserDetailsAuthenticationProvider.badCredentials",
-                    "Message: Authentication failed: password does not match stored value"));
+            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: password does not match stored value"));
         }
     }
 
@@ -89,8 +84,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user)
     {
-        boolean upgradeEncoding = this.userDetailsPasswordService != null
-                && this.passwordEncoder.upgradeEncoding(user.getPassword());
+        boolean upgradeEncoding = this.userDetailsPasswordService != null && this.passwordEncoder.upgradeEncoding(user.getPassword());
         if (upgradeEncoding)
         {
             String presentedPassword = authentication.getCredentials().toString();
@@ -121,15 +115,6 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     {
         return passwordEncoder;
     }
-
-
-    /**
-     * Sets the PasswordEncoder instance to be used to encode and validate passwords. If
-     * not set, the password will be compared using {@link PasswordEncoderFactories#createDelegatingPasswordEncoder()}
-     *
-     * @param passwordEncoder must be an instance of one of the {@code PasswordEncoder}
-     *                        types.
-     */
 
 
     public void setPasswordEncoder(PasswordEncoder passwordEncoder)
