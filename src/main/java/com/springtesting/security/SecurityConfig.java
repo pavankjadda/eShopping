@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         return daoAuthenticationProvider;
     }
 
+    /* BCrypt strength should 12 or more*/
     @Bean
     public PasswordEncoder getBCryptPasswordEncoder()
     {
