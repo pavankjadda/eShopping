@@ -1,4 +1,4 @@
-package com.springtesting.security;
+package com.springtesting.security.providers;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -22,7 +22,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     private PasswordEncoder passwordEncoder;
 
-    private UserDetailsService userDetailsService;
+    private UserDetailsService myUserDetailsService;
 
     private UserDetailsPasswordService userDetailsPasswordService;
 
@@ -51,7 +51,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull(this.userDetailsService, "A UserDetailsService must be set");
+        Assert.notNull(this.myUserDetailsService, "A UserDetailsService must be set");
     }
 
     protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException
@@ -81,6 +81,11 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         }
     }
 
+    /**
+     * Creates a successful {@link Authentication} object.
+     * Subclasses will usually store the original credentials the user supplied (not
+     * salted or encoded passwords) in the returned <code>Authentication</code> object.
+     * </p>*/
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user)
     {
@@ -108,6 +113,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         {
             String presentedPassword = authentication.getCredentials().toString();
             this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
+            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: Username and Password Null"));
         }
     }
 
@@ -126,16 +132,15 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     protected UserDetailsService getUserDetailsService()
     {
-        return userDetailsService;
+        return myUserDetailsService;
     }
 
     public void setUserDetailsService(UserDetailsService userDetailsService)
     {
-        this.userDetailsService = userDetailsService;
+        this.myUserDetailsService = userDetailsService;
     }
 
-    public void setUserDetailsPasswordService(
-            UserDetailsPasswordService userDetailsPasswordService)
+    public void setUserDetailsPasswordService(UserDetailsPasswordService userDetailsPasswordService)
     {
         this.userDetailsPasswordService = userDetailsPasswordService;
     }

@@ -1,11 +1,15 @@
-package com.springtesting.security;
+package com.springtesting.security.config;
 
 
+import com.springtesting.security.MyUserDetailsService;
+import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
+import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
+import com.springtesting.security.handlers.CustomLogoutSuccessHandler;
+import com.springtesting.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

@@ -1,4 +1,4 @@
-package com.springtesting.security;
+package com.springtesting.security.handlers;
 
 import lombok.Data;
 import org.apache.commons.logging.Log;

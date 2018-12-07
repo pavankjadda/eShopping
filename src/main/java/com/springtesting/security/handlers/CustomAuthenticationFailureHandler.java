@@ -1,4 +1,4 @@
-package com.springtesting.security;
+package com.springtesting.security.handlers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

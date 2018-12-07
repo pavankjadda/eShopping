@@ -1,4 +1,4 @@
-package com.springtesting.security;
+package com.springtesting.security.util;
 
 import org.springframework.stereotype.Service;
 
