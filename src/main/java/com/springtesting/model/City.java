@@ -1,6 +1,6 @@
 package com.springtesting.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "city")
 @Data
-public class City extends AbstractAuditingEntity
+public class City
 {
     @Id
     @Column(name = "id")
@@ -21,14 +21,12 @@ public class City extends AbstractAuditingEntity
 
     @ManyToOne
     @JoinColumn(name = "state_id")
-    @JsonIgnore
+    @JsonManagedReference
     private State state;
 
-    public City()
-    {
-    }
+    public City() { }
 
-    public City(String name, State state)
+    public City( String name, State state)
     {
         this.name = name;
         this.state = state;

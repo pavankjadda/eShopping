@@ -12,12 +12,11 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user_profile")
-public class UserProfile extends AbstractAuditingEntity
+public class UserProfile
 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
 
@@ -41,10 +40,10 @@ public class UserProfile extends AbstractAuditingEntity
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private List<Address> addresses = new ArrayList<>();
+    private List<Address> addresses=new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;

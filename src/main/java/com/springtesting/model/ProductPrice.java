@@ -8,24 +8,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_price")
 @Data
-public class ProductPrice extends AbstractAuditingEntity
+public class ProductPrice
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
+    @Column(name = "product_id",nullable = false)
+    private String productId;
 
-    @Column(name = "price_id", nullable = false)
+    @Column(name = "price_id",nullable = false)
     private Long priceId;
 
-    public ProductPrice()
-    {
-    }
+    public ProductPrice() {};
 
-    public ProductPrice(Long productId, Long priceId)
+    public ProductPrice(String productId, Long priceId)
     {
         this.productId = productId;
         this.priceId = priceId;

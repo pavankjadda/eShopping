@@ -7,14 +7,14 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "address_type")
-public class AddressType extends AbstractAuditingEntity
+public class AddressType
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type",nullable = false)
     private String type;
 
     public AddressType()
@@ -24,6 +24,6 @@ public class AddressType extends AbstractAuditingEntity
 
     public AddressType(String type)
     {
-        this.type = type;
+        this.type=type;
     }
 }

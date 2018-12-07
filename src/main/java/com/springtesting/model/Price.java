@@ -1,6 +1,6 @@
 package com.springtesting.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,23 +10,22 @@ import java.util.List;
 @Entity
 @Table(name = "price")
 @Data
-public class Price extends AbstractAuditingEntity
+public class Price
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @OneToOne
     @JoinColumn(name = "currency_id")
     private Currency currency;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount",nullable = false)
     private Double amount;
 
     @ManyToMany
-    @JsonIgnore
-    private List<Product> productList = new ArrayList<>();
+    @JsonBackReference
+    private List<Product> productList=new ArrayList<>();
 
 
     public Price()

@@ -2,22 +2,19 @@ package com.springtesting.model;
 
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "currency")
 @Data
-public class Currency extends AbstractAuditingEntity
+public class Currency
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name",nullable = false)
     private String name;
 
     @Column(name = "symbol")
@@ -27,9 +24,7 @@ public class Currency extends AbstractAuditingEntity
     private String isoCode;
 
 
-    public Currency()
-    {
-    }
+    public Currency() {};
 
     public Currency(String name, String symbol, String isoCode)
     {
