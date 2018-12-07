@@ -5,5 +5,7 @@ Spring Security implementation with Spring Session, Spring Data and Spring Boot.
 2. Login with credentials and persist session between calls until user closes browser
 3. Implement 'Remember Me' checkbox and provide session management between sessions (Show homepage or requested page despite closing the browser)
 4. Enrypt the password in database and store credentials in MySql Database
+5. Restrict users from accessing orders, products without authentication
+6. Provide StateLess authentication for one specific REST API
 
 
