@@ -32,15 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     public void configure(AuthenticationManagerBuilder auth)
     {
-
         auth.authenticationProvider(getDaoAuthenticationProvider());
-
     }
 
     @Bean
-    public DaoAuthenticationProvider getDaoAuthenticationProvider()
+    public CustomDaoAuthenticationProvider getDaoAuthenticationProvider()
     {
-        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+        CustomDaoAuthenticationProvider daoAuthenticationProvider=new CustomDaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
         return daoAuthenticationProvider;
@@ -49,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public PasswordEncoder getBCryptPasswordEncoder()
     {
-        return new BCryptPasswordEncoder(11);
+        return new BCryptPasswordEncoder(12);
     }
 
     @Override
@@ -65,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .loginPage("/login")
             .loginProcessingUrl("/login")
             .successHandler(new CustomAuthenticationSuccessHandler())
+            .failureHandler(new CustomAuthenticationFailureHandler())
             .permitAll()
             .and()
         .logout()
