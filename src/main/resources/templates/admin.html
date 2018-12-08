@@ -1,21 +1,10 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <body>
-<h1>Welcome Home Admin</h1>
+    <h1>Welcome Home Admin</h1>
 
-<div class="container">
-    <ul>
-        <li><a href="/admin">Home</a></li>
-        <li><a href="/admin/session-registry/users">Users</a></li>
-        <li><a href="/admin/session-registry/active-users">Active Users</a></li>
-        <li><a href="/admin/session-registry/active-users">Active Sessions</a></li>
-        <li><a href="/admin/session-registry/active-users/admin">Admin Sessions</a></li>
-    </ul>
-</div>
-
-
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Sign Out"/>
-</form>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </body>
 </html>

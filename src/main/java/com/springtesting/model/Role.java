@@ -9,6 +9,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -29,15 +30,15 @@ public class Role implements Serializable
 
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference
-    private List<User> users=new ArrayList<>();
+    private Collection<User> users;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "role_privilege",
             joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id",referencedColumnName = "id")
     )
     @JsonManagedReference
-    private List<Privilege> privileges=new ArrayList<>();
+    private Collection<Privilege> privileges;
 
 }

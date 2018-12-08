@@ -104,4 +104,21 @@ public class LoginController
         modelAndView.setViewName("home");
         return modelAndView;
     }
+
+    @GetMapping(value = {"/admin","/admin.html"})
+    public ModelAndView loadAdminHomePage(HttpServletRequest request)
+    {
+        ModelAndView modelAndView=new ModelAndView();
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        if(authentication instanceof AnonymousAuthenticationToken)
+        {
+            modelAndView.setViewName("redirect:login");
+            return modelAndView;
+        }
+
+        //String sessionValue=getSessionValue(request);
+
+        modelAndView.setViewName("admin");
+        return modelAndView;
+    }
 }
