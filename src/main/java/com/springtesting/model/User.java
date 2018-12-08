@@ -6,12 +6,13 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 @Entity
 @Data
 @Table(name = "user")
-public class User
+public class User implements Serializable
 {
     private static final long serialVersionUID = 1L;
 

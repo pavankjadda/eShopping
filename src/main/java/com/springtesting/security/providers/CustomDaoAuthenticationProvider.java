@@ -32,6 +32,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
 
+    /* Validate Password against Database */
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException
     {
         if (authentication.getCredentials() == null)
@@ -42,7 +43,12 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
         String presentedPassword = authentication.getCredentials().toString();
 
-        if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword()))
+        if (presentedPassword.equals(""))
+        {
+            logger.debug("Authentication failed: password is empty");
+            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: Password is Empty"));
+        }
+        else if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword()))
         {
             logger.debug("Authentication failed: password does not match stored value");
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: password does not match stored value"));
@@ -51,7 +57,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull(this.myUserDetailsService, "A UserDetailsService must be set");
+        Assert.notNull(myUserDetailsService, "A UserDetailsService must be set");
     }
 
     protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException
@@ -59,7 +65,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         prepareTimingAttackProtection();
         try
         {
-            UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
+            UserDetails loadedUser = myUserDetailsService.loadUserByUsername(username);
             if (loadedUser == null)
             {
                 throw new InternalAuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
@@ -107,13 +113,17 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         }
     }
 
+    /*Different response times when providing existing and non-existing usernames allows attacker to know about existing users. It could make it easier for an attacker to test for existing usernames.
+      This method helps to generalize the response for both the cases
+    */
     private void mitigateAgainstTimingAttack(UsernamePasswordAuthenticationToken authentication)
     {
         if (authentication.getCredentials() != null)
         {
             String presentedPassword = authentication.getCredentials().toString();
             this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
-            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: Username and Password Null"));
+            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials",
+                        "Message: Authentication failed: Can not find Username "));
         }
     }
 
