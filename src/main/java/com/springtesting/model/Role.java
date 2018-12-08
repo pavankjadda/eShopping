@@ -7,9 +7,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +16,7 @@ import java.util.List;
 @Table(name = "role")
 public class Role implements Serializable
 {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,7 @@ public class Role implements Serializable
 
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference
-    private List<User> users;
+    private List<User> users=new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +38,6 @@ public class Role implements Serializable
             inverseJoinColumns = @JoinColumn(name = "privilege_id",referencedColumnName = "id")
     )
     @JsonManagedReference
-    private List<Privilege> privileges;
+    private List<Privilege> privileges=new ArrayList<>();
 
 }
