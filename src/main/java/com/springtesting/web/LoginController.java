@@ -37,14 +37,8 @@ public class LoginController
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
             String username=request.getUserPrincipal().getName();
-            Cookie[] cookies=request.getCookies();
-            for(Cookie cookie: cookies)
-            {
-                if(cookie.getName().equals("JSESSIONID"))
-                {
-                    String sessionValue=cookie.getValue();
-                }
-            }
+            String sessionValue=getSessionValue(request);
+
             modelAndView.setViewName("redirect:home");
             return modelAndView;
         }
@@ -58,12 +52,29 @@ public class LoginController
         return modelAndView;
     }
 
+    private String getSessionValue(HttpServletRequest request)
+    {
+        String sessionValue=null;
+        Cookie[] cookies=request.getCookies();
+        for(Cookie cookie: cookies)
+        {
+            if(cookie.getName().equals("JSESSIONID"))
+            {
+                sessionValue=cookie.getValue();
+            }
+        }
+        return sessionValue;
+    }
+
 
     @PostMapping(value = "/login")
-    public ModelAndView validateLoginDetails(@RequestParam("username") String username, @RequestParam("password") String password, final HttpServletRequest request)
+    public void validateLoginDetails(@RequestParam("username") String username, @RequestParam("password") String password, final HttpServletRequest request)
     {
         //This is not being executed as Authentication Success Handler redirects page
-        //Store Session
+        System.out.println("Inside validateLoginDetails() method");
+
+        /*
+         System.out.println("Inside validateLoginDetails() method");
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(username, password);
         Authentication auth = authManager.authenticate(authReq);
         //PreAuthenticatedAuthenticationToken preAuthenticatedAuthenticationToken=new PreAuthenticatedAuthenticationToken();
@@ -75,7 +86,10 @@ public class LoginController
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("home");
         return modelAndView;
+         */
+
     }
+
 
     @GetMapping(value = {"/home","/home.html"})
     public ModelAndView loadHomePage(HttpServletRequest request)
@@ -88,14 +102,7 @@ public class LoginController
             return modelAndView;
         }
 
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie: cookies)
-        {
-            if(cookie.getName().equals("JSESSIONID"))
-            {
-                String sessionValue=cookie.getValue();
-            }
-        }
+        String sessionValue=getSessionValue(request);
 
         modelAndView.setViewName("home");
         return modelAndView;
