@@ -1,11 +1,12 @@
 package com.springtesting.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,32 +22,7 @@ public class Privilege implements Serializable
 
     private String name;
 
-    @JsonBackReference
     @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
-
-    public Privilege()
-    {
-    }
-
-    public Privilege(String name)
-    {
-        this.name = name;
-    }
-
-
-    public Privilege(String name, Collection<Role> roles)
-    {
-        this.name = name;
-        this.roles = roles;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Privilege{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    @JsonBackReference
+    private List<Role> roles;
 }

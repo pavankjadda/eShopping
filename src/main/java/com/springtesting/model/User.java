@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -26,8 +27,6 @@ public class User implements Serializable
     @Column
     private Boolean active;
 
-    @NotNull(message = "Address must not be null")
-    @NotEmpty
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -36,17 +35,34 @@ public class User implements Serializable
     @JsonManagedReference
     private UserProfile userProfile;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
+    )
+    @JsonManagedReference
+    private List<Role> roles;
 
     public User()
     {
 
     }
 
-    public User(String username, @NotNull(message = "Address must not be null") @NotEmpty String password, Boolean active, UserProfile userProfile)
+    public User(String username, String password, Boolean active, UserProfile userProfile)
     {
         this.username = username;
         this.password = password;
         this.active = active;
         this.userProfile = userProfile;
+    }
+
+    public User(String username, Boolean active, String password, UserProfile userProfile, List<Role> roles)
+    {
+        this.username = username;
+        this.active = active;
+        this.password = password;
+        this.userProfile = userProfile;
+        this.roles = roles;
     }
 }
