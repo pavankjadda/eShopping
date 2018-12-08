@@ -2,9 +2,11 @@ package com.springtesting.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 @Controller
 public class LoginController
@@ -99,26 +102,39 @@ public class LoginController
             return modelAndView;
         }
 
-        String sessionValue=getSessionValue(request);
-
         modelAndView.setViewName("home");
         return modelAndView;
     }
 
     @GetMapping(value = {"/admin","/admin.html"})
+    @Secured({"ROLE_ADMIN"})
     public ModelAndView loadAdminHomePage(HttpServletRequest request)
     {
         ModelAndView modelAndView=new ModelAndView();
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         if(authentication instanceof AnonymousAuthenticationToken)
-        {
             modelAndView.setViewName("redirect:login");
-            return modelAndView;
-        }
 
-        //String sessionValue=getSessionValue(request);
-
-        modelAndView.setViewName("admin");
+        if(hasAdminRole(authentication.getAuthorities()))
+            modelAndView.setViewName("admin");
+        else
+            modelAndView.setViewName("403");
         return modelAndView;
+    }
+
+    private boolean hasAdminRole(Collection<? extends GrantedAuthority> authorities)
+    {
+        for (GrantedAuthority grantedAuthority:authorities)
+        {
+            if(grantedAuthority.getAuthority().equals("ROLE_USER"))
+            {
+                return false;
+            }
+            else if(grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
