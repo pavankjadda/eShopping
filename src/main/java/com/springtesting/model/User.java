@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,12 +18,13 @@ public class User implements Serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "active")
     private Boolean active;
 
     @Column(name = "password", nullable = false)
@@ -35,6 +35,7 @@ public class User implements Serializable
     @JsonManagedReference
     private UserProfile userProfile;
 
+
     @ManyToMany
     @JoinTable(
             name = "user_role",
@@ -42,7 +43,7 @@ public class User implements Serializable
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
     @JsonManagedReference
-    private List<Role> roles;
+    private List<Role> roles=new ArrayList<>();
 
     public User()
     {
@@ -57,12 +58,4 @@ public class User implements Serializable
         this.userProfile = userProfile;
     }
 
-    public User(String username, Boolean active, String password, UserProfile userProfile, List<Role> roles)
-    {
-        this.username = username;
-        this.active = active;
-        this.password = password;
-        this.userProfile = userProfile;
-        this.roles = roles;
-    }
 }

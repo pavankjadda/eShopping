@@ -29,7 +29,7 @@ public class UserController
         return userRepository.saveAndFlush(user);
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/users/list")
     public List<User> findAll()
     {
         return userRepository.findAll();

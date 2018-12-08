@@ -1,6 +1,5 @@
 package com.springtesting.mockito;
 
-import com.springtesting.model.Role;
 import com.springtesting.model.User;
 import com.springtesting.repo.PrivilegeRepository;
 import com.springtesting.repo.RoleRepository;
@@ -10,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 

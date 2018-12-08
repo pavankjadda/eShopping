@@ -1,11 +1,11 @@
 package com.springtesting.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,5 +24,5 @@ public class Privilege implements Serializable
 
     @ManyToMany(mappedBy = "privileges")
     @JsonBackReference
-    private List<Role> roles;
+    private List<Role> roles=new ArrayList<>();;
 }

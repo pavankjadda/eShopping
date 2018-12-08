@@ -59,28 +59,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-            //.antMatchers("/api/**").permitAll()
+            //.antMatchers("/users/**").permitAll()
             .anyRequest().authenticated()
             .and()
                 .httpBasic()
-                .and()
-        .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/login")
-            .successHandler(new CustomAuthenticationSuccessHandler())
-            .failureHandler(new CustomAuthenticationFailureHandler())
-            .permitAll()
             .and()
-        .logout()
-            .deleteCookies("JSESSIONID")
-            .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-            .permitAll();
+                .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .successHandler(new CustomAuthenticationSuccessHandler())
+                    .failureHandler(new CustomAuthenticationFailureHandler())
+                    .permitAll()
+            .and()
+                .logout()
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+                    .permitAll();
 
         http.sessionManagement()
-                .invalidSessionUrl("/invalidSession.html")
-                .sessionFixation()
-                .migrateSession()
-                .maximumSessions(2);
+                        .invalidSessionUrl("/invalidSession.html")
+                        .sessionFixation()
+                        .migrateSession()
+                        .maximumSessions(2);
     }
 
     @Override
