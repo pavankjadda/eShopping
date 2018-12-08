@@ -1,30 +1,41 @@
+-- noinspection SqlNoDataSourceInspectionForFile
 
 /* Insert Data into Category Table */
-INSERT INTO `springtesting`.`category`(`id`,`name`) VALUES('1002','Grocessory');
-INSERT INTO `springtesting`.`category`(`id`,`name`) VALUES('1003','Electronics');
-INSERT INTO `springtesting`.`category`(`id`,`name`) VALUES('1001','Books');
-
-
+INSERT INTO springsecuritydb.category VALUES('1002','Grocessory');
+INSERT INTO springsecuritydb.category VALUES('1003','Electronics');
+INSERT INTO springsecuritydb.category VALUES('1001','Books');
 
 
 /* Insert Data into Product Table  */
-INSERT INTO `springtesting`.`product`(`id`,`name`,`category_id`) VALUES('p1001','iPhoneX',1003);
-INSERT INTO `springtesting`.`product`(`id`,`name`,`category_id`) VALUES('p1002','GalaxyS10',1003);
-INSERT INTO `springtesting`.`product`(`id`,`name`,`category_id`) VALUES('p1003','Google Pixel',1003);
+INSERT INTO springsecuritydb.product VALUES('p1001','iPhoneX',1003);
+INSERT INTO springsecuritydb.product VALUES('p1002','GalaxyS10',1003);
+INSERT INTO springsecuritydb.product VALUES('p1003','Google Pixel',1003);
+
+/* Insert Data into Order Detail Table  */
+INSERT INTO springsecuritydb.order_detail VALUES('ORD1001','1001');
+
+/* Insert Data into Order Detail Products Table  */
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(1,'ord1001','p1001');
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(2,'ord1001','p1002');
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(3,'ord1001','p1003');
 
 
 
 /* Insert Data into User Table  */
-INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('1001','3490 Mnd Dr','jdoe@gma.com','John','Doe');
-INSERT INTO `springtesting`.`user`(`id`,`address`,`email`,`first_name`,`last_name`) VALUES('1002','433 Daek Dr','jreacher@gma.com','Jack','Reacher');
+INSERT INTO springsecuritydb.user VALUES(1,1,'$2a$12$pqcdXB.Xboa7pGNba51YHuWQVhlZM8TVguRUCL2ss8GOwhEqiqwOu','admin');
+INSERT INTO springsecuritydb.user VALUES(2,1,'$2a$12$kRstkVGM88bvzGqxcWDX5eVDvT0iy40YPAKMRiKX9D2jIsXmKXOAK','user');
 
 
-/* Insert Data into Order Detail Table  */
-INSERT INTO `springtesting`.`order_detail`(`id`,`purchased_by`) VALUES('ORD1001','1001');
+/* Insert Data into Role Table  */
+insert into springsecuritydb.role values(1,'ROLE_USER');
+insert into springsecuritydb.role values(2,'ROLE_ADMIN');
 
+/* Insert Data into Privilege Table  */
+insert into springsecuritydb.privilege values(1,'READ_PRIVILEGE');
+insert into springsecuritydb.privilege values(2,'WRITE_PRIVILEGE');
+insert into springsecuritydb.privilege values(3,'DELETE_PRIVILEGE');
 
-
-/* Insert Data into Order Detail Products Table  */
-INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(1,'ord1001','p1001');
-INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(2,'ord1001','p1002');
-INSERT INTO `springtesting`.`order_detail_productlist`(`id`,`order_detail_id`,`productlist_id`) VALUES(3,'ord1001','p1003');
+/* Insert Data into UserRole Table  */
+insert into springsecuritydb.user_role values(1,'READ_PRIVILEGE');
+insert into springsecuritydb.user_role values(2,'WRITE_PRIVILEGE');
+insert into springsecuritydb.user_role values(3,'DELETE_PRIVILEGE');

@@ -4,22 +4,26 @@ import com.springtesting.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 public class MyUserPrincipal implements UserDetails
 {
+
     private User user;
 
+    private Collection<? extends GrantedAuthority> roles;
 
-    public MyUserPrincipal(User user)
+    public MyUserPrincipal(User user, Collection<? extends GrantedAuthority> roles)
     {
         this.user=user;
+        this.roles=roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        return null;
+        return roles;
     }
 
     @Override
