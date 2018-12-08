@@ -22,7 +22,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 {
     protected Log logger = LogFactory.getLog(this.getClass());
 
-
     private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
 
     public CustomAuthenticationSuccessHandler()
@@ -51,31 +50,21 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     private String determineTargetUrl(Authentication authentication)
     {
-        boolean isUser = false;
-        boolean isAdmin = false;
         Collection<? extends GrantedAuthority> authorities= authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority:authorities)
         {
 
             if(grantedAuthority.getAuthority().equals("ROLE_USER"))
             {
-                isUser = true;
-                break;
+                return "/home.html";
             }
             else if(grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
             {
-                isAdmin = true;
-                break;
+                return "/admin.html";
             }
-        } // End of for loop
+        }
 
-        isUser = true;
-        if(isAdmin)
-            return "/admin.html";
-        else if(isUser)
-            return "/home.html";
-        else
-            throw new IllegalStateException();
+        return "/login";
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request)

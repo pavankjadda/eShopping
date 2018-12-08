@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -24,5 +25,5 @@ public class Privilege implements Serializable
 
     @ManyToMany(mappedBy = "privileges")
     @JsonBackReference
-    private List<Role> roles=new ArrayList<>();;
+    private Collection<Role> roles;
 }
