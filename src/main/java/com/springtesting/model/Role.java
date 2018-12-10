@@ -30,9 +30,9 @@ public class Role implements Serializable
 
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference
-    private Collection<User> users;
+    private Collection<User> users;;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
         name = "role_privilege",
             joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"),
