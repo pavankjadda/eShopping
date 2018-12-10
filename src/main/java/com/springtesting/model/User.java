@@ -5,9 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 @Entity
@@ -33,7 +31,6 @@ public class User implements Serializable
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "user_profile_id")
-    @JsonManagedReference
     private UserProfile userProfile;
 
 
@@ -43,7 +40,6 @@ public class User implements Serializable
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
-    @JsonManagedReference
     private Collection<Role> roles;
 
     public User()
