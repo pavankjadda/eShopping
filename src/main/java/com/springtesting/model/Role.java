@@ -29,7 +29,7 @@ public class Role implements Serializable
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;;
+    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(

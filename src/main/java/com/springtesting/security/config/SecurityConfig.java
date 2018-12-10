@@ -5,27 +5,33 @@ import com.springtesting.security.MyUserDetailsService;
 import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
 import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
 import com.springtesting.security.handlers.CustomLogoutSuccessHandler;
-import com.springtesting.security.handlers.UsersAccessDecisionManager;
 import com.springtesting.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.jdbc.JdbcOperationsSessionRepository;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
-import java.util.Collection;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @Configuration
@@ -33,6 +39,9 @@ import java.util.Collection;
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
+
+    /*@Autowired
+    FindByIndexNameSessionRepository<? extends Session> sessionRepository;*/
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
@@ -89,15 +98,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                         .permitAll()
             .and()
-                    .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400);
+                    .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
 
         http.sessionManagement()
-                        .invalidSessionUrl("/invalidSession.html")
-                        .sessionFixation()
-                        .migrateSession()
-                        .maximumSessions(2);
+                        .invalidSessionUrl("/login.html")
+                        //.invalidSessionStrategy((request, response) -> request.logout())
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true);
+                        //.sessionRegistry(sessionRegistry());;
     }
+
+    @Bean
+    public SpringSessionRememberMeServices springSessionRememberMeServices()
+    {
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+        // optionally customize
+        rememberMeServices.setRememberMeParameterName("remember-me");
+        rememberMeServices.setValiditySeconds(ApplicationConstants.rememberMeTimeOut);
+        return rememberMeServices;
+    }
+
+
+   /* @Bean
+    SpringSessionBackedSessionRegistry sessionRegistry()
+    {
+        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
+    }*/
 
     @Override
     public void configure(WebSecurity web) throws Exception
