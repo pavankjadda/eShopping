@@ -29,6 +29,10 @@ INSERT INTO springsecuritydb.user VALUES(2,1,'$2a$12$kRstkVGM88bvzGqxcWDX5eVDvT0
 /* Insert Data into Role Table  */
 insert into springsecuritydb.role values(1,'ROLE_USER');
 insert into springsecuritydb.role values(2,'ROLE_ADMIN');
+insert into springsecuritydb.role values(3,'ROLE_APIUSER');
+insert into springsecuritydb.role values(4,'ROLE_DBA');
+insert into springsecuritydb.role values(5,'ROLE_SELLER');
+insert into springsecuritydb.role values(6,'ROLE_BUYER');
 
 /* Insert Data into Privilege Table  */
 insert into springsecuritydb.privilege values(1,'READ_PRIVILEGE');
@@ -36,9 +40,8 @@ insert into springsecuritydb.privilege values(2,'WRITE_PRIVILEGE');
 insert into springsecuritydb.privilege values(3,'DELETE_PRIVILEGE');
 
 /* Insert Data into UserRole Table  */
-insert into springsecuritydb.user_role values(1,2);
-insert into springsecuritydb.user_role values(2,1);
 INSERT INTO `springsecuritydb`.`user_role`(`id`,`user_id`,`role_id`) VALUES (1,2,1);
+INSERT INTO `springsecuritydb`.`user_role`(`id`,`user_id`,`role_id`) VALUES (1,1,2);
 
 /* Insert Data into RolePrivilege Table  */
 insert into springsecuritydb.role_privilege values(2,1);

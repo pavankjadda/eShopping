@@ -13,11 +13,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Service
+@Transactional
 public class MyUserDetailsService implements UserDetailsService
 {
     private UserRepository userRepository;
@@ -38,7 +40,6 @@ public class MyUserDetailsService implements UserDetailsService
         if(user == null)
             throw new UsernameNotFoundException("Could not find Username");
         return new MyUserPrincipal(user,getGrantedAuthorities(user.getRoles()));
-        //return new MyUserPrincipal(user,getAuthorities(user.getRoles()));
     }
 
 
