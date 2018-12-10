@@ -41,7 +41,7 @@ insert into springsecuritydb.privilege values(3,'DELETE_PRIVILEGE');
 
 /* Insert Data into UserRole Table  */
 INSERT INTO `springsecuritydb`.`user_role`(`id`,`user_id`,`role_id`) VALUES (1,2,1);
-INSERT INTO `springsecuritydb`.`user_role`(`id`,`user_id`,`role_id`) VALUES (1,1,2);
+INSERT INTO `springsecuritydb`.`user_role`(`id`,`user_id`,`role_id`) VALUES (2,1,2);
 
 /* Insert Data into RolePrivilege Table  */
 insert into springsecuritydb.role_privilege values(2,1);
