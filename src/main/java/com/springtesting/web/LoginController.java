@@ -109,7 +109,6 @@ public class LoginController
     }
 
     @GetMapping(value = {"/admin","/admin.html"})
-    @Secured({"ROLE_ADMIN"})
     public ModelAndView loadAdminHomePage(HttpServletRequest request)
     {
         ModelAndView modelAndView=new ModelAndView();
