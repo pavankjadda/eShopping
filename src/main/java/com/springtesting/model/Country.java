@@ -35,7 +35,7 @@ public class Country
     @JsonManagedReference
     private Region region;
 
-    public Country() {};
+    public Country() {}
 
     public Country(String name)
     {
