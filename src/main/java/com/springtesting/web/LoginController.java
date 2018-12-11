@@ -27,6 +27,8 @@ public class LoginController
     @Resource(name="authenticationManager")
     private AuthenticationManager authManager;
 
+
+
     @GetMapping(value = {"/","/login"})
     public ModelAndView getLoginPage(HttpServletRequest request)
     {
