@@ -38,7 +38,7 @@ public class Product implements Serializable
     private List<OrderDetail> ordersList =new ArrayList<OrderDetail>();
 
 
-    public Product() {};
+    public Product() {}
 
     public Product(String id, String name, Category category)
     {

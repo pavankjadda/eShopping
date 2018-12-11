@@ -24,7 +24,7 @@ public class Currency
     private String isoCode;
 
 
-    public Currency() {};
+    public Currency() {}
 
     public Currency(String name, String symbol, String isoCode)
     {
