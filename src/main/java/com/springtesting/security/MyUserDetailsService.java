@@ -1,6 +1,5 @@
 package com.springtesting.security;
 
-import com.springtesting.model.Privilege;
 import com.springtesting.model.Role;
 import com.springtesting.model.User;
 import com.springtesting.repo.RoleRepository;
