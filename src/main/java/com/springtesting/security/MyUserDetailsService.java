@@ -2,7 +2,6 @@ package com.springtesting.security;
 
 import com.springtesting.model.Role;
 import com.springtesting.model.User;
-import com.springtesting.repo.RoleRepository;
 import com.springtesting.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,9 +34,8 @@ public class MyUserDetailsService implements UserDetailsService
         User user=userRepository.findByUsername(username);
         if(user == null)
             throw new UsernameNotFoundException("Could not find Username");
-        return new MyUserPrincipal(user,getGrantedAuthorities(user.getRoles()));
+        return new MyUserDetails(user,getGrantedAuthorities(user.getRoles()));
     }
-
 
     private List<GrantedAuthority> getGrantedAuthorities(Collection<Role> roles)
     {

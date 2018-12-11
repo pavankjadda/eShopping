@@ -2,16 +2,12 @@ package com.springtesting.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Data
@@ -43,4 +39,26 @@ public class Role implements Serializable
     private Collection<Privilege> privileges;
 
 
+    public Role() {}
+
+    public Role(String name)
+    {
+        this.name = name;
+    }
+
+    public Role(String name, Collection<User> users, Collection<Privilege> privileges)
+    {
+        this.name = name;
+        this.users = users;
+        this.privileges = privileges;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
