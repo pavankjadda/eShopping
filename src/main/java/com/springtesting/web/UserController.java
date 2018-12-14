@@ -3,9 +3,11 @@ package com.springtesting.web;
 import com.springtesting.model.User;
 import com.springtesting.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,9 +32,16 @@ public class UserController
     }
 
     @GetMapping(value = "/users/list")
-    public List<User> findAll()
+    public Page<User> findAll(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit)
     {
-        return userRepository.findAll();
+        if (pageNumber == null)
+            pageNumber = 0;
+        if(limit== null)
+            limit=10;
+        Page<User> pageUsers=userRepository.findAll(PageRequest.of(pageNumber,limit,Sort.by(Sort.Direction.ASC,"id")));
+        for(User user:pageUsers)
+            System.out.println(user.toString());
+        return pageUsers;
     }
 
     @GetMapping(value = "/user/{id}")
@@ -41,5 +50,9 @@ public class UserController
         return userRepository.findById(id);
     }
 
-
+    @GetMapping(value = "/user/{username}")
+    public User findByUsername(@PathVariable String username)
+    {
+        return userRepository.findByUsername(username);
+    }
 }
