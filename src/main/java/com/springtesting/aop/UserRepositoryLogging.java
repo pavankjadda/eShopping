@@ -1,11 +1,12 @@
 package com.springtesting.aop;
 
 import com.springtesting.model.User;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,12 @@ public class UserRepositoryLogging
     private Logger log= LoggerFactory.getLogger(UserRepositoryLogging.class);
 
 
-    //@Pointcut(value = "com.springtesting.repo.UserRepository.findAll() && args(pageable)")
-    @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll(..))")
-    public void getUserRepositoryFindAll() {};
+    @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll()) && args(pageable,..)")
+    private void getUserRepositoryFindAll(Pageable pageable) {};
 
 
-    @After(value = "getUserRepositoryFindAll()")
-    public void findAll()
+    @After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
+    private void findAll(Pageable pageable)
     {
         log.warn("Log Message: Inside UserRepositoryLogging findAll() advice");
     }
