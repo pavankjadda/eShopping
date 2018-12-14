@@ -18,21 +18,21 @@ public class UserRepositoryLogging
 
 
     //@Pointcut(value = "com.springtesting.repo.UserRepository.findAll() && args(pageable)")
-    @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll(pageable))", argNames = "pageable")
-    public void getUserRepositoryFindAll(Pageable pageable) {};
+    @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll(..))")
+    public void getUserRepositoryFindAll() {};
 
 
-    @After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
-    public void findAll(Pageable pageable)
+    @After(value = "getUserRepositoryFindAll()")
+    public void findAll()
     {
         log.warn("Log Message: Inside UserRepositoryLogging findAll() advice");
     }
 
- /*   @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(pageable))",returning = "returnValue")
+    @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(..))",returning = "returnValue")
     public void logReturningUsers(Object returnValue)
     {
         Page<User> pageUsers= (Page<User>) returnValue;
         for(User user:pageUsers)
-            System.out.println(user.toString());
-    }*/
+            System.out.println("Log: "+user.toString());
+    }
 }
