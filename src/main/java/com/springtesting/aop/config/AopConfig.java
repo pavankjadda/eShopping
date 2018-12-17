@@ -1,4 +1,4 @@
-package com.springtesting.aop;
+package com.springtesting.aop.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
