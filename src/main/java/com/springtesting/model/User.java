@@ -24,16 +24,16 @@ public class User implements Serializable
     @Column(name = "username")
     private String username;
 
-    @Column(name = "active",columnDefinition = "true")
+    @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "credentials_non_expired",columnDefinition = "true")
+    @Column(name = "credentials_non_expired")
     private Boolean credentialsNonExpired;
 
-    @Column(name = "account_non_locked",columnDefinition = "true")
+    @Column(name = "account_non_locked")
     private Boolean accountNonLocked;
 
-    @Column(name = "account_non_expired",columnDefinition = "true")
+    @Column(name = "account_non_expired")
     private Boolean AccountNonExpired;
 
     @Column(name = "password", nullable = false)
