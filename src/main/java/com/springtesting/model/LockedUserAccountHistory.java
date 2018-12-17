@@ -4,11 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "locked_user_account_history")
+@Table(name = "locked")
 public class LockedUserAccountHistory
 {
     private static final long serialVersionUID = 1L;
