@@ -16,10 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@Data
+
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
-    protected Log logger = LogFactory.getLog(this.getClass());
+    private Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
 

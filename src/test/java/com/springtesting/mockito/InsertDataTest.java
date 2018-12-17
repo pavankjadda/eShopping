@@ -106,7 +106,7 @@ public class InsertDataTest
                 try
                 {
                     //Check if City name exists in Database
-                    if(!cityRepository.findByNameAndState(cityName,state).isPresent())
+                    //if(!cityRepository.findByNameAndState(cityName,state).isPresent())
                         cityList.add(new City(cityName,state));
                 }
                 catch (Exception e)
