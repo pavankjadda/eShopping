@@ -1,5 +1,5 @@
 {
-  "Alabama": [
+  "Alabama":[
     "ABBEVILLE",
     "ADAMSVILLE",
     "ADDISON",
@@ -495,7 +495,7 @@
     "YELLOW BLUFF",
     "YORK"
   ],
-  "Alaska": [
+  "Alaska":[
     "ADAK",
     "AKHIOK",
     "AKIACHAK",
@@ -846,10 +846,10 @@
     "Y",
     "YAKUTAT"
   ],
-  "American Samoa": [
+  "American Samoa":[
     "American Samoa"
   ],
-  "Arizona": [
+  "Arizona":[
     "AJO",
     "AK-CHIN VILLAGE",
     "AMADO",
@@ -1101,7 +1101,7 @@
     "YOUNGTOWN",
     "YUMA"
   ],
-  "Arkansas": [
+  "Arkansas":[
     "ADONA",
     "ALEXANDER",
     "ALICIA",
@@ -1622,7 +1622,7 @@
     "YELLVILLE",
     "ZINC"
   ],
-  "California": [
+  "California":[
     "ACTON",
     "ADELANTO",
     "AGOURA HILLS",
@@ -2701,7 +2701,7 @@
     "YUCAIPA",
     "YUCCA VALLEY"
   ],
-  "Colorado": [
+  "Colorado":[
     "ACRES GREEN",
     "AGUILAR",
     "AIR FORCE ACADEMY",
@@ -3057,7 +3057,7 @@
     "YAMPA",
     "YUMA"
   ],
-  "Connecticut": [
+  "Connecticut":[
     "ANSONIA",
     "BANTAM",
     "BETHEL",
@@ -3179,7 +3179,7 @@
     "WOODBURY CENTER",
     "WOODMONT"
   ],
-  "Delaware": [
+  "Delaware":[
     "ARDEN",
     "ARDENCROFT",
     "ARDENTOWN",
@@ -3257,13 +3257,13 @@
     "WOODSIDE EAST",
     "WYOMING"
   ],
-  "District Of Columbia": [
+  "District Of Columbia":[
     "WASHINGTON"
   ],
-  "Federated States Of Micronesia": [
+  "Federated States Of Micronesia":[
     "FSM"
   ],
-  "Florida": [
+  "Florida":[
     "ALACHUA",
     "ALFORD",
     "ALTAMONTE SPRINGS",
@@ -4153,7 +4153,7 @@
     "ZEPHYRHILLS WEST",
     "ZOLFO SPRINGS"
   ],
-  "Georgia": [
+  "Georgia":[
     "ABBEVILLE",
     "ACWORTH",
     "ADAIRSVILLE",
@@ -4751,10 +4751,10 @@
     "YOUNG HARRIS",
     "ZEBULON"
   ],
-  "Guam": [
+  "Guam":[
     "GUAM"
   ],
-  "Hawaii": [
+  "Hawaii":[
     "AHUIMANU",
     "AIEA",
     "AINALOA",
@@ -4887,7 +4887,7 @@
     "WHEELER AFB",
     "WHITMORE VILLAGE"
   ],
-  "Idaho": [
+  "Idaho":[
     "ABERDEEN",
     "ACEQUIA",
     "ALBION",
@@ -5094,7 +5094,7 @@
     "WINCHESTER",
     "WORLEY"
   ],
-  "Illinois": [
+  "Illinois":[
     "ABINGDON",
     "ADDIEVILLE",
     "ADDISON",
@@ -6409,7 +6409,7 @@
     "ZEIGLER",
     "ZION"
   ],
-  "Indiana": [
+  "Indiana":[
     "ADVANCE",
     "AKRON",
     "ALAMO",
@@ -7012,7 +7012,7 @@
     "ZANESVILLE",
     "ZIONSVILLE"
   ],
-  "Iowa": [
+  "Iowa":[
     "ACKLEY",
     "ACKWORTH",
     "ADAIR",
@@ -7968,7 +7968,7 @@
     "ZEARING",
     "ZWINGLE"
   ],
-  "Kansas": [
+  "Kansas":[
     "ABBYVILLE",
     "ABILENE",
     "ADMIRE",
@@ -8601,7 +8601,7 @@
     "ZENDA",
     "ZURICH"
   ],
-  "Kentucky": [
+  "Kentucky":[
     "ADAIRVILLE",
     "ALBANY",
     "ALEXANDRIA",
@@ -9070,7 +9070,7 @@
     "WORTHVILLE",
     "WURTLAND"
   ],
-  "Louisiana": [
+  "Louisiana":[
     "ABBEVILLE",
     "ABITA SPRINGS",
     "ADDIS",
@@ -9470,7 +9470,7 @@
     "ZACHARY",
     "ZWOLLE"
   ],
-  "Maine": [
+  "Maine":[
     "ANSON",
     "AUBURN",
     "AUGUSTA",
@@ -9583,10 +9583,10 @@
     "YARMOUTH",
     "YORK HARBOR"
   ],
-  "Marshall Islands": [
+  "Marshall Islands":[
     "MARSHALL ISLANDS"
   ],
-  "Maryland": [
+  "Maryland":[
     "ABERDEEN",
     "ABERDEEN PROVING GROUND",
     "ACCIDENT",
@@ -9956,7 +9956,7 @@
     "WOODMORE",
     "WOODSBORO"
   ],
-  "Massachusetts": [
+  "Massachusetts":[
     "ABINGTON",
     "ACUSHNET CENTER",
     "ADAMS",
@@ -10193,7 +10193,7 @@
     "WORCESTER",
     "YARMOUTH PORT"
   ],
-  "Michigan": [
+  "Michigan":[
     "ADDISON",
     "ADRIAN",
     "AHMEEK",
@@ -10825,7 +10825,7 @@
     "ZEELAND",
     "ZILWAUKEE"
   ],
-  "Minnesota": [
+  "Minnesota":[
     "ADA",
     "ADAMS",
     "ADRIAN",
@@ -11694,7 +11694,7 @@
     "ZUMBRO FALLS",
     "ZUMBROTA"
   ],
-  "Mississippi": [
+  "Mississippi":[
     "ABBEVILLE",
     "ABERDEEN",
     "ACKERMAN",
@@ -12025,7 +12025,7 @@
     "WOODVILLE",
     "YAZOO CITY"
   ],
-  "Missouri": [
+  "Missouri":[
     "ADRIAN",
     "ADVANCE",
     "AFFTON",
@@ -12999,7 +12999,7 @@
     "WYATT",
     "ZALMA"
   ],
-  "Montana": [
+  "Montana":[
     "ABSAROKEE",
     "AGENCY",
     "ALBERTON",
@@ -13276,7 +13276,7 @@
     "WYE",
     "WYOLA"
   ],
-  "Nebraska": [
+  "Nebraska":[
     "ABIE",
     "ADAMS",
     "AINSWORTH",
@@ -13815,7 +13815,7 @@
     "YORK",
     "YUTAN"
   ],
-  "Nevada": [
+  "Nevada":[
     "BATTLE MOUNTAIN",
     "BEATTY",
     "BLUE DIAMOND",
@@ -13888,7 +13888,7 @@
     "YERINGTON",
     "ZEPHYR COVE-ROUND HILL VILLAGE"
   ],
-  "New Hampshire": [
+  "New Hampshire":[
     "ANTRIM",
     "BERLIN",
     "BRISTOL",
@@ -13950,7 +13950,7 @@
     "WOLFEBORO",
     "WOODSVILLE"
   ],
-  "New Jersey": [
+  "New Jersey":[
     "ABSECON",
     "ALLAMUCHY-PANTHER VALLEY",
     "ALLENDALE",
@@ -14457,7 +14457,7 @@
     "YARDVILLE-GROVEVILLE",
     "YORKETOWN"
   ],
-  "New Mexico": [
+  "New Mexico":[
     "ACOMITA LAKE",
     "AGUA FRIA",
     "ALAMO",
@@ -14693,7 +14693,7 @@
     "ZIA PUEBLO",
     "ZUNI PUEBLO"
   ],
-  "New York": [
+  "New York":[
     "ACCORD",
     "ADAMS",
     "ADAMS CENTER",
@@ -15745,7 +15745,7 @@
     "YOUNGSTOWN",
     "ZENA"
   ],
-  "North Carolina": [
+  "North Carolina":[
     "ABERDEEN",
     "AHOSKIE",
     "ALAMANCE",
@@ -16402,7 +16402,7 @@
     "YOUNGSVILLE",
     "ZEBULON"
   ],
-  "North Dakota": [
+  "North Dakota":[
     "ABERCROMBIE",
     "ADAMS",
     "ALAMO",
@@ -16777,10 +16777,10 @@
     "ZAP",
     "ZEELAND"
   ],
-  "Northern Mariana Islands": [
+  "Northern Mariana Islands":[
     "NORTHERN MARIANA ISLANDS"
   ],
-  "Ohio": [
+  "Ohio":[
     "ABERDEEN",
     "ADA",
     "ADAMSVILLE",
@@ -17836,7 +17836,7 @@
     "ZANESVILLE",
     "ZOAR"
   ],
-  "Oklahoma": [
+  "Oklahoma":[
     "ACHILLE",
     "ADA",
     "ADAIR",
@@ -18529,7 +18529,7 @@
     "ZENA",
     "ZION"
   ],
-  "Oregon": [
+  "Oregon":[
     "ADAIR VILLAGE",
     "ADAMS",
     "ADRIAN",
@@ -18840,10 +18840,10 @@
     "YAMHILL",
     "YONCALLA"
   ],
-  "Palau": [
+  "Palau":[
     "Palau"
   ],
-  "Pennsylvania": [
+  "Pennsylvania":[
     "AARONSBURG",
     "ABBOTTSTOWN",
     "ADAMSBURG",
@@ -20245,7 +20245,7 @@
     "ZELIENOPLE",
     "ZION"
   ],
-  "Puerto Rico": [
+  "Puerto Rico":[
     "ACEITUNAS",
     "ADJUNTAS",
     "AGUADA",
@@ -20472,7 +20472,7 @@
     "YAUCO",
     "YAUREL"
   ],
-  "Rhode Island": [
+  "Rhode Island":[
     "ASHAWAY",
     "BARRINGTON",
     "BRADFORD",
@@ -20501,7 +20501,7 @@
     "WEST WARWICK",
     "WOONSOCKET"
   ],
-  "South Carolina": [
+  "South Carolina":[
     "ABBEVILLE",
     "AIKEN",
     "ALLENDALE",
@@ -20871,7 +20871,7 @@
     "YEMASSEE",
     "YORK"
   ],
-  "South Dakota": [
+  "South Dakota":[
     "ABERDEEN",
     "AGAR",
     "AKASKA",
@@ -21223,7 +21223,7 @@
     "YALE",
     "YANKTON"
   ],
-  "Tennessee": [
+  "Tennessee":[
     "ADAMS",
     "ADAMSVILLE",
     "ALAMO",
@@ -21607,7 +21607,7 @@
     "WOODLAND MILLS",
     "YORKVILLE"
   ],
-  "Texas": [
+  "Texas":[
     "ABBOTT",
     "ABERNATHY",
     "ABILENE",
@@ -23119,7 +23119,7 @@
     "ZAVALLA",
     "ZUEHL"
   ],
-  "Utah": [
+  "Utah":[
     "ALPINE",
     "ALTA",
     "ALTAMONT",
@@ -23410,7 +23410,7 @@
     "WOODRUFF",
     "WOODS CROSS"
   ],
-  "Vermont": [
+  "Vermont":[
     "ALBANY",
     "ALBURG",
     "ARLINGTON",
@@ -23479,10 +23479,10 @@
     "WINOOSKI",
     "WOODSTOCK"
   ],
-  "Virgin Islands": [
+  "Virgin Islands":[
     "Virgin Islands"
   ],
-  "Virginia": [
+  "Virginia":[
     "ABINGDON",
     "ACCOMAC",
     "ADWOLF",
@@ -23855,7 +23855,7 @@
     "YORKSHIRE",
     "YORKTOWN"
   ],
-  "Washington": [
+  "Washington":[
     "ABERDEEN",
     "ABERDEEN GARDENS",
     "ACME",
@@ -24379,7 +24379,7 @@
     "YELM",
     "ZILLAH"
   ],
-  "West Virginia": [
+  "West Virginia":[
     "ADDISON (WEBSTER SPRINGS)",
     "ALBRIGHT",
     "ALDERSON",
@@ -24663,7 +24663,7 @@
     "WOMELSDORF (COALTON)",
     "WORTHINGTON"
   ],
-  "Wisconsin": [
+  "Wisconsin":[
     "ABBOTSFORD",
     "ADAMS",
     "ADELL",
@@ -25295,7 +25295,7 @@
     "YUBA",
     "ZOAR"
   ],
-  "Wyoming": [
+  "Wyoming":[
     "AFTON",
     "AIRPORT ROAD",
     "ALBANY",

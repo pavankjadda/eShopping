@@ -3,9 +3,14 @@ package com.springtesting.mockito;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springtesting.model.Currency;
-import com.springtesting.model.*;
-import com.springtesting.repo.*;
+import com.springtesting.model.City;
+import com.springtesting.model.Country;
+import com.springtesting.model.Region;
+import com.springtesting.model.State;
+import com.springtesting.repo.CityRepository;
+import com.springtesting.repo.CountryRepository;
+import com.springtesting.repo.RegionRepository;
+import com.springtesting.repo.StateRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Instant;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -41,12 +45,6 @@ public class InsertDataTest
     @Autowired
     private CityRepository cityRepository;
 
-    @Autowired
-    private CurrencyRepository currencyRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
     @Before
     public void setUp()
     {
@@ -54,40 +52,19 @@ public class InsertDataTest
     }
 
     @Test
-    public void insertCategory()
-    {
-        Category category = new Category();
-        category.setId(1001L);
-        category.setName("Books");
-        category.setCreatedBy("Pavan");
-        category.setCreatedDate(Instant.now());
-        categoryRepository.saveAndFlush(category);
-    }
-
-    @Test
-    public void insertCurrency()
-    {
-        Currency currency = new Currency();
-        currency.setIsoCode("USD");
-        currency.setName("USD");
-        currency.setSymbol("$");
-        currencyRepository.saveAndFlush(currency);
-    }
-
-    @Test
     public void insertCountryData()
     {
         try
         {
-            String[] isoCountries = Locale.getISOCountries();
-            List<Country> countryList = new ArrayList<>();
-            for (String isoCountryCode : isoCountries)
+            String[] isoCountries= Locale.getISOCountries();
+            List<Country> countryList=new ArrayList<>();
+            for(String isoCountryCode : isoCountries)
             {
-                Locale locale = new Locale("", isoCountryCode);
-                String countryCode = locale.getCountry();
-                String countryIsoCode = locale.getISO3Country();
-                String countryName = locale.getDisplayName();
-                Country country = new Country(countryName, countryCode, countryIsoCode, findRegion("NA"));
+                Locale locale=new Locale("",isoCountryCode);
+                String countryCode=locale.getCountry();
+                String countryIsoCode=locale.getISO3Country();
+                String countryName=locale.getDisplayName();
+                Country country=new Country(countryName,countryCode,countryIsoCode,findRegion("NA"));
                 countryList.add(country);
             }
             countryRepository.saveAll(countryList);
@@ -104,11 +81,11 @@ public class InsertDataTest
     @Test
     public void insertStateData() throws IOException
     {
-        Map<String, String> statesMap = new HashMap<>();
+        Map<String,String> statesMap=new HashMap<>();
         readStatesDataFromJsonFile(statesMap);
-        for (Map.Entry<String, String> e : statesMap.entrySet())
+        for (Map.Entry<String,String> e: statesMap.entrySet())
         {
-            stateRepository.saveAndFlush(new State(e.getValue(), e.getKey(), findCountry("United States")));
+            stateRepository.saveAndFlush(new State(e.getValue(),e.getKey(),findCountry("United States")));
         }
     }
 
@@ -116,21 +93,21 @@ public class InsertDataTest
     @Test
     public void insertCitisData() throws IOException
     {
-        HashMap<String, List<String>> citisMap = new HashMap<>();
-        citisMap = readCitisDataFromJsonFile(citisMap); //Ignore this message
+        HashMap<String,List<String>> citisMap= new HashMap<>();
+        citisMap=readCitisDataFromJsonFile(citisMap); //Ignore this message
 
-        for (HashMap.Entry<String, List<String>> mapEntry : citisMap.entrySet())
+        for (HashMap.Entry<String,List<String>> mapEntry: citisMap.entrySet())
         {
-            State state = findState(mapEntry.getKey());
-            List<String> citiesInState = mapEntry.getValue();
-            List<City> cityList = new ArrayList<>();
+            State state=findState(mapEntry.getKey());
+            List<String> citiesInState=mapEntry.getValue();
+            List<City> cityList=new ArrayList<>();
             for (String cityName : citiesInState)
             {
                 try
                 {
                     //Check if City name exists in Database
-                    //if(!cityRepository.findByNameAndState(cityName,state).isPresent())
-                    cityList.add(new City(cityName, state));
+                    if(!cityRepository.findByNameAndState(cityName,state).isPresent())
+                        cityList.add(new City(cityName,state));
                 }
                 catch (Exception e)
                 {
@@ -158,16 +135,17 @@ public class InsertDataTest
     }
 
 
+
     public void readStatesDataFromJsonFile(Map<String, String> statesMap) throws IOException
     {
         File file = new ClassPathResource("data/us-states-data.json").getFile();
         byte[] mapByteData = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(mapByteData);
-        for (int i = 0; i < rootNode.size(); i++)
+        JsonNode rootNode =objectMapper.readTree(mapByteData);
+        for (int i=0;i<rootNode.size();i++)
         {
-            statesMap.put(rootNode.get(i).get("abbreviation").textValue(), rootNode.get(i).get("name").textValue());
+            statesMap.put(rootNode.get(i).get("abbreviation").textValue(),rootNode.get(i).get("name").textValue());
         }
     }
 
