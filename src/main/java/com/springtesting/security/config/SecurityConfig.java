@@ -15,9 +15,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 
@@ -27,13 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    /*@Autowired
-    FindByIndexNameSessionRepository<? extends Session> sessionRepository;*/
+    //@Autowired
+    //private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
     {
         this.userDetailsService = userDetailsService;
+        //this.sessionRepository = sessionRepository;
     }
 
 
@@ -94,8 +100,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         //.invalidSessionStrategy((request, response) -> request.logout())
                         .sessionFixation().migrateSession()
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true);
-                        //.sessionRegistry(sessionRegistry());;
+                        .maxSessionsPreventsLogin(true)
+                        .sessionRegistry(sessionRegistry());
     }
 
     @Bean
@@ -109,10 +115,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
 
-   /* @Bean
-    SpringSessionBackedSessionRegistry sessionRegistry()
+    @Bean
+    public SessionRegistry sessionRegistry()
     {
-        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
+        return new SessionRegistryImpl();
+    }
+
+
+  /* @Bean
+   SpringSessionBackedSessionRegistry<Session> sessionRegistry()
+    {
+        return new SpringSessionBackedSessionRegistry<Session>(this.sessionRepository);
     }*/
 
     @Override

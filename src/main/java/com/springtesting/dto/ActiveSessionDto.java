@@ -1,10 +1,7 @@
 package com.springtesting.dto;
 
-import com.springtesting.security.MyUserDetails;
 import lombok.Data;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @Data
@@ -25,10 +22,5 @@ public class ActiveSessionDto
         this.lastRequest = lastRequest;
         this.sessionId = sessionId;
         this.expired = expired;
-    }
-
-    public ActiveSessionDto(MyUserDetails myUserDetails, HttpServletRequest request, HttpServletResponse response)
-    {
-        this.username=myUserDetails.getUsername();
     }
 }
