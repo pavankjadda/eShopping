@@ -1,6 +1,7 @@
 package com.springtesting.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,8 +24,17 @@ public class User implements Serializable
     @Column(name = "username")
     private String username;
 
-    @Column(name = "active")
+    @Column(name = "active",columnDefinition = "true")
     private Boolean active;
+
+    @Column(name = "credentials_non_expired",columnDefinition = "true")
+    private Boolean credentialsNonExpired;
+
+    @Column(name = "account_non_locked",columnDefinition = "true")
+    private Boolean accountNonLocked;
+
+    @Column(name = "account_non_expired",columnDefinition = "true")
+    private Boolean AccountNonExpired;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -32,7 +42,6 @@ public class User implements Serializable
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
-
 
     @ManyToMany
     @JoinTable(
