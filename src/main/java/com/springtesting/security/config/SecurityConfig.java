@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    @Autowired
-    private FindByIndexNameSessionRepository sessionRepository;
+    /*@Autowired
+    private FindByIndexNameSessionRepository sessionRepository;*/
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
@@ -44,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         //this.sessionRepository = sessionRepository;
     }
 
-    void consume()
+   /* void consume()
     {
         Session session = (Session) this.sessionRepository.createSession();
         session.setAttribute("test", UUID.randomUUID().toString());
         this.sessionRepository.save(session);
-    }
+    }*/
 
     @Override
     public void configure(AuthenticationManagerBuilder auth)
@@ -123,18 +123,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
 
-    /*@Bean
+    @Bean
     public SessionRegistry sessionRegistry()
     {
         return new SessionRegistryImpl();
-    }*/
+    }
 
 
-   @Bean
+   /*@Bean
    SpringSessionBackedSessionRegistry<Session> sessionRegistry()
     {
         return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
-    }
+    }*/
 
     @Override
     public void configure(WebSecurity web) throws Exception
