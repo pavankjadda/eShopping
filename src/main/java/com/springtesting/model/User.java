@@ -3,6 +3,7 @@ package com.springtesting.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.Collection;
 @Entity
 @Data
 @Table(name = "user")
-public class User implements Serializable
+public class User extends AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 

@@ -5,12 +5,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springtesting.model.City;
 import com.springtesting.model.Country;
+import com.springtesting.model.Currency;
 import com.springtesting.model.Region;
 import com.springtesting.model.State;
-import com.springtesting.repo.CityRepository;
-import com.springtesting.repo.CountryRepository;
-import com.springtesting.repo.RegionRepository;
-import com.springtesting.repo.StateRepository;
+import com.springtesting.repo.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,10 +43,25 @@ public class InsertDataTest
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private CurrencyRepository currencyRepository;
+
+
     @Before
     public void setUp()
     {
 
+    }
+
+    @Test
+    public void insertCurrency()
+    {
+        Currency currency=new Currency();
+        currency.setIsoCode("USD");
+        currency.setName("USD");
+        currency.setSymbol("$");
+
+        currencyRepository.saveAndFlush(currency);
     }
 
     @Test

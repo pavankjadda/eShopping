@@ -1,7 +1,7 @@
 package com.springtesting.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.envers.Audited;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,23 +13,23 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Audited
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
     @CreatedBy
-    @Column(name = "created_by", nullable = false, length = 255, updatable = false)
+    @Column(name = "created_by",nullable = false, length = 255, updatable = false)
     @JsonIgnore
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
+    @Column(name = "created_date",nullable = true,updatable = false)
     @JsonIgnore
-    private Instant createdDate = Instant.now();
+    private LocalDateTime createdDate=LocalDateTime.now();
 
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 255)
@@ -39,7 +39,7 @@ public abstract class AbstractAuditingEntity implements Serializable
     @LastModifiedDate
     @Column(name = "last_modified_date")
     @JsonIgnore
-    private Instant lastModifiedDate = Instant.now();
+    private LocalDateTime lastModifiedDate=LocalDateTime.now();
 
 
     public String getCreatedBy()
@@ -52,12 +52,12 @@ public abstract class AbstractAuditingEntity implements Serializable
         this.createdBy = createdBy;
     }
 
-    public Instant getCreatedDate()
+    public LocalDateTime getCreatedDate()
     {
         return createdDate;
     }
 
-    public void setCreatedDate(Instant createdDate)
+    public void setCreatedDate(LocalDateTime createdDate)
     {
         this.createdDate = createdDate;
     }
@@ -72,12 +72,12 @@ public abstract class AbstractAuditingEntity implements Serializable
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Instant getLastModifiedDate()
+    public LocalDateTime getLastModifiedDate()
     {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Instant lastModifiedDate)
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate)
     {
         this.lastModifiedDate = lastModifiedDate;
     }
