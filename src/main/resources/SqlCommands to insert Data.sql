@@ -1,7 +1,7 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 /* Insert Data into Category Table */
-INSERT INTO springsecuritydb.category VALUES('1002','Grocessory');
+INSERT INTO springsecuritydb.category VALUES('1002','Grocery');
 INSERT INTO springsecuritydb.category VALUES('1003','Electronics');
 INSERT INTO springsecuritydb.category VALUES('1001','Books');
 
