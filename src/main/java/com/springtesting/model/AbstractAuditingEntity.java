@@ -27,7 +27,7 @@ public abstract class AbstractAuditingEntity implements Serializable
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_date",nullable = true,updatable = false)
+    @Column(name = "created_date",nullable = false,updatable = false)
     @JsonIgnore
     private LocalDateTime createdDate=LocalDateTime.now();
 

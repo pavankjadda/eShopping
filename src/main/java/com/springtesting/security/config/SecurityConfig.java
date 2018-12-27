@@ -104,11 +104,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
 
         http.sessionManagement()
-                        .invalidSessionUrl("/login.html")
+                        //.invalidSessionUrl("/login.html")
                         //.invalidSessionStrategy((request, response) -> request.logout())
                         .sessionFixation().migrateSession()
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true)
+                        .maxSessionsPreventsLogin(false)
                         .sessionRegistry(sessionRegistry());
     }
 
