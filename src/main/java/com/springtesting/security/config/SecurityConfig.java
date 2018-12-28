@@ -24,7 +24,14 @@ import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -103,6 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
 
+                http.cors();
+
         http.sessionManagement()
                         //.invalidSessionUrl("/login.html")
                         //.invalidSessionStrategy((request, response) -> request.logout())
@@ -110,6 +119,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)
                         .sessionRegistry(sessionRegistry());
+
+        http.csrf()
+            .disable();
+
     }
 
     @Bean
@@ -121,7 +134,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         rememberMeServices.setValiditySeconds(ApplicationConstants.rememberMeTimeOut);
         return rememberMeServices;
     }
-
+    /*
+    @Bean
+    public WebMvcConfigurer corsConfigurer()
+    {
+        return new WebMvcConfigurer()
+        {
+            @Override
+            public void addCorsMappings(CorsRegistry registry)
+            {
+                registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
+            }
+        };
+        return new WebMvcConfigurerAdapter()
+        {
+            @Override
+            public void addCorsMappings(CorsRegistry registry)
+            {
+                registry.addMapping("**").allowedOrigins("http://localhost:4200");
+            }
+        };
+    }*/
+   @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.applyPermitDefaultValues();
+        //configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Bean
     public SessionRegistry sessionRegistry()
