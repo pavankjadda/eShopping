@@ -16,7 +16,7 @@ public class GetUserDetailsUtil
         // If NOT anonymous user, get user info
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
-            MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
             return myUserDetails.getUsername();
         }
         return "";

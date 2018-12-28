@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "category")
