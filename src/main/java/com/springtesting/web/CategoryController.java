@@ -25,7 +25,6 @@ public class CategoryController
         this.getUserDetailsUtil = getUserDetailsUtil;
     }
 
-
     @GetMapping(path = "/list")
     public List<Category> getAllCategories()
     {
