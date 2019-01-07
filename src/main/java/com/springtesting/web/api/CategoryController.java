@@ -1,4 +1,4 @@
-package com.springtesting.web;
+package com.springtesting.web.api;
 
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
@@ -35,7 +35,6 @@ public class CategoryController
     @PostMapping(value = "/create")
     public Category createNewCategory(@RequestBody Category category)
     {
-        //validateCategory(category);
         return categoryRepository.saveAndFlush(category);
     }
 

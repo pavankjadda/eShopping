@@ -9,10 +9,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AopConfig
 {
-
-    @Bean
-    public AuthenticationSuccessLogger loggingAspect()
-    {
-        return new AuthenticationSuccessLogger();
-    }
+  //Beans created through @Component annotation on Logger class
 }
