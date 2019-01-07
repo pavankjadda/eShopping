@@ -3,14 +3,12 @@ package com.springtesting.web.api;
 
 import com.springtesting.model.City;
 import com.springtesting.repo.CityRepository;
-import com.springtesting.repo.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

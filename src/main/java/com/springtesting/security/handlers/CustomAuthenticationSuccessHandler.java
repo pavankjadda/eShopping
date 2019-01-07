@@ -1,6 +1,5 @@
 package com.springtesting.security.handlers;
 
-import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;

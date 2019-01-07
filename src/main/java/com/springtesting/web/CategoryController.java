@@ -1,13 +1,10 @@
 package com.springtesting.web;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
-import com.springtesting.security.util.GetUserDetailsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +13,11 @@ import java.util.Optional;
 public class CategoryController
 {
     private final CategoryRepository categoryRepository;
-    private final GetUserDetailsUtil getUserDetailsUtil;
 
     @Autowired
-    public CategoryController(CategoryRepository categoryRepository, GetUserDetailsUtil getUserDetailsUtil)
+    public CategoryController(CategoryRepository categoryRepository)
     {
         this.categoryRepository = categoryRepository;
-        this.getUserDetailsUtil = getUserDetailsUtil;
     }
 
     @GetMapping(path = "/list")
@@ -47,7 +42,6 @@ public class CategoryController
     @PutMapping(value = "/update")
     public Category updateCategory(@RequestBody Category category)
     {
-        validateCategory(category);
         return categoryRepository.saveAndFlush(category);
     }
 
@@ -58,15 +52,5 @@ public class CategoryController
     }
 
 
-    private void validateCategory(Category category)
-    {
-        String username=getUserDetailsUtil.getUserPrincipalName();
-        if(category.getCreatedBy() == null)
-            category.setCreatedBy(username);
-        if(category.getCreatedBy() == null)
-            category.setLastModifiedBy(username);
-        category.setCreatedDate(LocalDateTime.now());
-        category.setLastModifiedDate(LocalDateTime.now());
-    }
 
 }

@@ -3,6 +3,7 @@ package com.springtesting.security.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
+
 import java.util.UUID;
 
 class ParameterizedConsumer<S extends Session>
