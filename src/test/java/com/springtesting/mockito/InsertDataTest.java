@@ -3,8 +3,8 @@ package com.springtesting.mockito;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springtesting.model.*;
 import com.springtesting.model.Currency;
+import com.springtesting.model.*;
 import com.springtesting.repo.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -60,7 +60,7 @@ public class InsertDataTest
         category.setId("1001");
         category.setName("Books");
         category.setCreatedBy("Pavan");
-        category.setCreatedDate(LocalDateTime.now());
+        category.setCreatedDate(Instant.now());
         categoryRepository.saveAndFlush(category);
     }
 
