@@ -57,7 +57,7 @@ public class InsertDataTest
     public void insertCategory()
     {
         Category category=new Category();
-        category.setId("1001");
+        category.setId(1001L);
         category.setName("Books");
         category.setCreatedBy("Pavan");
         category.setCreatedDate(Instant.now());
