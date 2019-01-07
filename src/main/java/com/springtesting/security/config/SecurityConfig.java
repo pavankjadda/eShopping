@@ -20,6 +20,9 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -30,12 +33,13 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    /*@Autowired
-    private FindByIndexNameSessionRepository sessionRepository;*/
+    @Autowired
+    private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
@@ -161,18 +165,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         return source;
     }
 
-    @Bean
+  /*  @Bean
     public SessionRegistry sessionRegistry()
     {
         return new SessionRegistryImpl();
-    }
+    }*/
 
 
-   /*@Bean
-   SpringSessionBackedSessionRegistry<Session> sessionRegistry()
+    @Bean
+    SpringSessionBackedSessionRegistry sessionRegistry()
     {
         return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
-    }*/
+    }
 
     @Override
     public void configure(WebSecurity web) throws Exception
