@@ -10,12 +10,10 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class UserLogging
 {
-    private Logger logger = LoggerFactory.getLogger(UserLogging.class);
+    private Logger logger=LoggerFactory.getLogger(UserLogging.class);
 
     @Pointcut("execution(* com.springtesting.model.User.*(..))")
-    public void getUserPointCut()
-    {
-    }
+    public void getUserPointCut() {};
 
 
     @Before("getUserPointCut()")

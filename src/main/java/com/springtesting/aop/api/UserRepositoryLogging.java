@@ -15,13 +15,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRepositoryLogging
 {
-    private Logger log = LoggerFactory.getLogger(UserRepositoryLogging.class);
+    private Logger log= LoggerFactory.getLogger(UserRepositoryLogging.class);
 
 
     @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll(..)) && args(pageable,..)")
-    public void getUserRepositoryFindAll(Pageable pageable)
-    {
-    }
+    public void getUserRepositoryFindAll(Pageable pageable) {};
 
     @After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
     public void findAll(Pageable pageable)
@@ -31,11 +29,11 @@ public class UserRepositoryLogging
     }
 
 
-    @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(..))", returning = "returnValue")
+   @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(..))",returning = "returnValue")
     public void logReturningUsers(Object returnValue)
     {
-        Page<User> pageUsers = (Page<User>) returnValue;
-        for (User user : pageUsers)
-            System.out.println("Log: " + user.toString());
+        Page<User> pageUsers= (Page<User>) returnValue;
+        for(User user:pageUsers)
+            System.out.println("Log: "+user.toString());
     }
 }

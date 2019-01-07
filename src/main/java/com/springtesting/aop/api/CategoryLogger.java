@@ -14,14 +14,6 @@ public class CategoryLogger
 {
     private Logger logger=LoggerFactory.getLogger(CategoryLogger.class);
 
-    /**
-     * Pointcut that matches all Spring beans in the application's main packages.
-     */
-    @Pointcut("within(com.springtesting.repo..*) || within(com.springtesting.service..*) || within(com.springtesting.web.api..*) ")
-    public void applicationPackagePointcut()
-    {
-    }
-
     @Pointcut("within(com.springtesting.web.api.CategoryController)")
     public void categoryControllerPointcut()
     {
