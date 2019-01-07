@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api/v2/session-registry")
 public class SessionRegistryController
 {
+    /*
     private final SessionRegistry sessionRegistry;
 
 
@@ -57,5 +58,5 @@ public class SessionRegistryController
         }
     }
 
-
+*/
 }
