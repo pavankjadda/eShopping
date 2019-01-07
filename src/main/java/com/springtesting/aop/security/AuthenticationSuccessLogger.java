@@ -8,20 +8,21 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Aspect
+@Component
 public class AuthenticationSuccessLogger
 {
     private Logger logger=LoggerFactory.getLogger(AuthenticationSuccessLogger.class);
 
 
 
-    @Pointcut("within(@org.springframework.stereotype.Repository *)" +
-            " || within(@org.springframework.stereotype.Service *)" +
-            " || within(@org.springframework.web.bind.annotation.RestController *)")
-    public void springBeanPointcut()
+    @Pointcut("within(com.springtesting.security.handlers.CustomAuthenticationSuccessHandler..*)")
+    public void customAuthenticationSuccessHandlerPointcut()
     {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
@@ -29,16 +30,12 @@ public class AuthenticationSuccessLogger
     /**
      * Pointcut that matches all Spring beans in the application's main packages.
      */
-    @Pointcut("within(com.springtesting.repo..*)"+
-            " || within(com.springtesting.service..*)"+
-            " || within(com.springtesting.web..*) || within(com.springtesting.security.handlers.CustomAuthenticationSuccessHandler..*)")
+    @Pointcut("within(com.springtesting.repo..*) || within(com.springtesting.service..*) || within(com.springtesting.web..*)")
     public void applicationPackagePointcut()
     {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
-
-    @Around("applicationPackagePointcut() && springBeanPointcut()")
+    @Around("applicationPackagePointcut() && customAuthenticationSuccessHandlerPointcut()")
     public Object logCustomAuthenticationSuccessHandlerPointcut(ProceedingJoinPoint proceedingJoinPoint)
     {
         logger.info("Enter: {}.{}() with argument[s] = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
@@ -66,7 +63,7 @@ public class AuthenticationSuccessLogger
      * @param joinPoint join point for advice
      * @param e exception
      */
-    @AfterThrowing(pointcut = "applicationPackagePointcut() && springBeanPointcut()", throwing = "e")
+    @AfterThrowing(pointcut = "applicationPackagePointcut() && customAuthenticationSuccessHandlerPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e)
     {
             logger.info("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),

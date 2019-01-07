@@ -27,7 +27,7 @@ public class CategoryController
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Category> findCategoryById(@PathVariable Long id)
+    public Optional<Category> findCategoryById(@PathVariable String id)
     {
         return categoryRepository.findById(id);
     }
@@ -50,10 +50,6 @@ public class CategoryController
         return categoryRepository.saveAll(categories);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public void deleteCategoryById(@PathVariable Long id)
-    {
-        categoryRepository.deleteById(id);
-    }
+
 
 }
