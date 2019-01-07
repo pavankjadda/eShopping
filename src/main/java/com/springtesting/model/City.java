@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "city")
 @Data
-public class City
+public class City extends AbstractAuditingEntity
 {
     @Id
     @Column(name = "id")

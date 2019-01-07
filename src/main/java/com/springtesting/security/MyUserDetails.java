@@ -8,7 +8,6 @@ import java.util.Collection;
 
 public class MyUserDetails implements UserDetails
 {
-
     private User user;
 
     private Collection<? extends GrantedAuthority> roles;
@@ -40,24 +39,31 @@ public class MyUserDetails implements UserDetails
     @Override
     public boolean isAccountNonExpired()
     {
-        return true;
+        return user.getAccountNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked()
     {
-        return true;
+        return user.getAccountNonLocked();
     }
 
+    /**
+     * Indicates whether the user's credentials (password) has expired. Expired
+     * credentials prevent authentication.
+     *
+     * @return <code>true</code> if the user's credentials are valid (ie non-expired),
+     * <code>false</code> if no longer valid (ie expired)
+     */
     @Override
     public boolean isCredentialsNonExpired()
     {
-        return true;
+        return user.getCredentialsNonExpired();
     }
 
     @Override
     public boolean isEnabled()
     {
-        return true;
+        return user.getActive();
     }
 }

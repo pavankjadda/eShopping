@@ -1,7 +1,7 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 /* Insert Data into Category Table */
-INSERT INTO springsecuritydb.category VALUES('1002','Grocessory');
+INSERT INTO springsecuritydb.category VALUES('1002','Grocery');
 INSERT INTO springsecuritydb.category VALUES('1003','Electronics');
 INSERT INTO springsecuritydb.category VALUES('1001','Books');
 
@@ -22,8 +22,8 @@ INSERT INTO springsecuritydb.order_detail_productlist VALUES(3,'ord1001','p1003'
 
 
 /* Insert Data into User Table  */
-INSERT INTO springsecuritydb.user VALUES(1,1,'$2a$12$pqcdXB.Xboa7pGNba51YHuWQVhlZM8TVguRUCL2ss8GOwhEqiqwOu','admin');
-INSERT INTO springsecuritydb.user VALUES(2,1,'$2a$12$kRstkVGM88bvzGqxcWDX5eVDvT0iy40YPAKMRiKX9D2jIsXmKXOAK','user');
+INSERT INTO springsecuritydb.user VALUES(1,1,1,1,1,'$2a$12$pqcdXB.Xboa7pGNba51YHuWQVhlZM8TVguRUCL2ss8GOwhEqiqwOu','admin');
+INSERT INTO springsecuritydb.user VALUES(2,1,1,1,1,'$2a$12$kRstkVGM88bvzGqxcWDX5eVDvT0iy40YPAKMRiKX9D2jIsXmKXOAK','user');
 
 
 /* Insert Data into Role Table  */

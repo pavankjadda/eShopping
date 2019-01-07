@@ -11,7 +11,7 @@ import java.util.Collection;
 @Entity
 @Data
 @Table(name = "user")
-public class User implements Serializable
+public class User extends AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
@@ -26,13 +26,21 @@ public class User implements Serializable
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "credentials_non_expired")
+    private Boolean credentialsNonExpired;
+
+    @Column(name = "account_non_locked")
+    private Boolean accountNonLocked;
+
+    @Column(name = "account_non_expired")
+    private Boolean AccountNonExpired;
+
     @Column(name = "password", nullable = false)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
-
 
     @ManyToMany
     @JoinTable(

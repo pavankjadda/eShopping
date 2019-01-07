@@ -15,27 +15,45 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    /*@Autowired
-    FindByIndexNameSessionRepository<? extends Session> sessionRepository;*/
+    @Autowired
+    private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
     {
         this.userDetailsService = userDetailsService;
+        //this.sessionRepository = sessionRepository;
     }
 
+   /* void consume()
+    {
+        Session session = (Session) this.sessionRepository.createSession();
+        session.setAttribute("test", UUID.randomUUID().toString());
+        this.sessionRepository.save(session);
+    }*/
 
     @Override
     public void configure(AuthenticationManagerBuilder auth)
@@ -68,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
-                    .antMatchers("/api/**").hasAuthority(AuthorityConstants.ApiUser)
+                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser,AuthorityConstants.Admin)
                     .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
                     .anyRequest().authenticated()
             .and()
@@ -89,13 +107,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
 
+                http.cors();
+
         http.sessionManagement()
-                        .invalidSessionUrl("/login.html")
+                        //.invalidSessionUrl("/login.html")
                         //.invalidSessionStrategy((request, response) -> request.logout())
                         .sessionFixation().migrateSession()
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true);
-                        //.sessionRegistry(sessionRegistry());;
+                        .maxSessionsPreventsLogin(false)
+                        .sessionRegistry(sessionRegistry());
+
+        http.csrf()
+            .disable();
+
     }
 
     @Bean
@@ -107,13 +131,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         rememberMeServices.setValiditySeconds(ApplicationConstants.rememberMeTimeOut);
         return rememberMeServices;
     }
+    /*
+    @Bean
+    public WebMvcConfigurer corsConfigurer()
+    {
+        return new WebMvcConfigurer()
+        {
+            @Override
+            public void addCorsMappings(CorsRegistry registry)
+            {
+                registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
+            }
+        };
+        return new WebMvcConfigurerAdapter()
+        {
+            @Override
+            public void addCorsMappings(CorsRegistry registry)
+            {
+                registry.addMapping("**").allowedOrigins("http://localhost:4200");
+            }
+        };
+    }*/
+   @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.applyPermitDefaultValues();
+        //configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+  /*  @Bean
+    public SessionRegistry sessionRegistry()
+    {
+        return new SessionRegistryImpl();
+    }*/
 
 
-   /* @Bean
+    @Bean
     SpringSessionBackedSessionRegistry sessionRegistry()
     {
         return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
-    }*/
+    }
 
     @Override
     public void configure(WebSecurity web) throws Exception
