@@ -1,4 +1,4 @@
-package com.springtesting.aop;
+package com.springtesting.aop.api;
 
 import com.springtesting.model.User;
 import org.aspectj.lang.annotation.After;
