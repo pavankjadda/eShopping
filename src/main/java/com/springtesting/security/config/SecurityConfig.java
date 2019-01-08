@@ -15,9 +15,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.Session;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -29,12 +32,10 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 
-public class SecurityConfig extends WebSecurityConfigurerAdapter
+public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    /*@Autowired
-    private FindByIndexNameSessionRepository<? extends Session> sessionRepository;*/
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
@@ -42,13 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         this.userDetailsService = userDetailsService;
         //this.sessionRepository = sessionRepository;
     }
-
-   /* void consume()
-    {
-        Session session = (Session) this.sessionRepository.createSession();
-        session.setAttribute("test", UUID.randomUUID().toString());
-        this.sessionRepository.save(session);
-    }*/
 
     @Override
     public void configure(AuthenticationManagerBuilder auth)
@@ -110,8 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         .sessionFixation().migrateSession()
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)
-                        //.sessionRegistry(sessionRegistry());
-                        ;
+                        .sessionRegistry(sessionRegistry());
 
         http.csrf()
             .disable();
@@ -161,17 +154,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         return source;
     }
 
-  /*  @Bean
+    @Bean
     public SessionRegistry sessionRegistry()
     {
         return new SessionRegistryImpl();
-    }*/
+    }
 
 
-   /* @Bean
-    SpringSessionBackedSessionRegistry sessionRegistry()
+    /*@Bean
+    public SpringSessionBackedSessionRegistry<S> sessionRegistry()
     {
-        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
+        return (SpringSessionBackedSessionRegistry<S>) new ParameterizedConsumer<S>().getSessionRepository();
     }*/
 
     @Override
