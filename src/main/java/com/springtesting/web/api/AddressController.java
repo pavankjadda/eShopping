@@ -16,7 +16,7 @@ public class AddressController
 
     public AddressController(AddressRepository addressRepository)
     {
-        this.addressRepository=addressRepository;
+        this.addressRepository = addressRepository;
     }
 
     @PostMapping(path = "/create")

@@ -1,8 +1,7 @@
 var BCrypt = Class.create();
 BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
     {
-        initialize:function()
-        {
+        initialize: function () {
             var GENSALT_DEFAULT_LOG2_ROUNDS = 12;
             var BCRYPT_SALT_LEN = 16;
             var BLOWFISH_NUM_ROUNDS = 16;
@@ -237,40 +236,30 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             ];
 
         },
-        keyState:function()
-        {
+        keyState: function () {
             this.P = this.P_ORIG.slice(0);
             this.S = this.S_ORIG.slice(0);
             this.offp = 0;
         },
 
 
-        getByte:function(c)
-        {
+        getByte: function (c) {
             var ret = 0;
-            var b='';
-            try
-            {
+            var b = '';
+            try {
                 b = c.charCodeAt(0);
-            }
-
-            catch (err)
-            {
+            } catch (err) {
                 b = c;
             }
 
-            if (b > 127)
-            {
+            if (b > 127) {
                 return -128 + (b % 128);
-            }
-            else
-            {
+            } else {
                 return b;
             }
         },
 
-        encode_base64:function(d, len)
-        {
+        encode_base64: function (d, len) {
             var off = 0;
             var rs = [];
             var c1;
@@ -301,8 +290,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return rs.join('');
         },
 
-        char64:function (x)
-        {
+        char64: function (x) {
             var code = x.charCodeAt(0);
             if (code < 0 || code > this.INDEX_64.length) {
                 return -1;
@@ -310,8 +298,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return this.INDEX_64[code];
         },
 
-        decode_base64:function (s, maxolen)
-        {
+        decode_base64: function (s, maxolen) {
             var off = 0;
             var slen = s.length;
             var olen = 0;
@@ -354,7 +341,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return ret;
         },
 
-        encipher:function (lr, off, state) {
+        encipher: function (lr, off, state) {
             var i;
             var n;
             var l = lr[off];
@@ -381,8 +368,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return state;
         },
 
-        streamtoword:function (data, state)
-        {
+        streamtoword: function (data, state) {
             var i;
             var word = 0;
             var off = state.offp;
@@ -394,11 +380,10 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return word;
         },
 
-        key:function (key, state)
-        {
+        key: function (key, state) {
             var i;
             state.offp = 0;
-            var lr = new Array(0x00000000, 0x00000000);
+            var lr = [0x00000000, 0x00000000];
             var plen = state.P.length;
             var slen = state.S.length;
 
@@ -419,11 +404,10 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return state;
         },
 
-        ekskey:function (data, key, state)
-        {
+        ekskey: function (data, key, state) {
             var i;
             state.offp = 0;
-            var lr = new Array(0x00000000, 0x00000000);
+            var lr = [0x00000000, 0x00000000];
             var plen = state.P.length;
             var slen = state.S.length;
 
@@ -447,8 +431,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             return state;
         },
 
-        crypt_raw:function (password, salt, log_rounds, cdata, callback, progress)
-        {
+        crypt_raw: function (password, salt, log_rounds, cdata, callback, progress) {
             var rounds;
             var j;
             var clen = cdata.length;
@@ -466,7 +449,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             var state = new keyState();
             ekskey(salt, password, state);
             var i = 0;
-            setTimeout(function() {
+            setTimeout(function () {
                 if (i < rounds) {
                     var start = new Date();
                     for (; i != rounds;) {
@@ -500,8 +483,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
 
         },
 
-        password_to_bytes:function (password)
-        {
+        password_to_bytes: function (password) {
             var passwordb = [];
             for (var n = 0; n < password.length; n++) {
                 var c = password.charCodeAt(n);
@@ -540,8 +522,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
          */
 
 //hashpw:function (password, salt, callback, progress) 
-        hashpw:function (password, salt, progress)
-        {
+        hashpw: function (password, salt, progress) {
             var real_salt;
             var passwordb = [];
             var saltb = [];
@@ -549,10 +530,11 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             var minor = String.fromCharCode(0);
             var rounds = 0;
             var off = 0;
-            var hashedPassword='';
+            var hashedPassword = '';
 
             if (!progress) {
-                progress = function() {};
+                progress = function () {
+                };
             }
 
             if (salt.charAt(0) != '$' || salt.charAt(1) != '2')
@@ -581,8 +563,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
                 saltb,
                 rounds,
                 BF_CRYPT_CIPHERTEXT.slice(0),
-                function(hashed)
-                {
+                function (hashed) {
                     var rs = [];
                     rs.push("$2");
                     if (minor >= 'a')
@@ -595,14 +576,13 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
                     rs.push(encode_base64(saltb, saltb.length));
                     rs.push(encode_base64(hashed, BF_CRYPT_CIPHERTEXT.length * 4 - 1));
                     //callback(rs.join(''));
-                    hashedPassword=rs.join('');
+                    hashedPassword = rs.join('');
                 },
                 progress);
             return hashedPassword;
         },
 
-        gensalt:function (rounds)
-        {
+        gensalt: function (rounds) {
             var iteration_count = rounds;
             if (iteration_count < 4 || iteration_count > 30) {
                 throw "Rounds exceded maximum (30)!";
@@ -614,14 +594,13 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
             output.push(iteration_count.toString());
             output.push('$');
             //var s1 = new Int8Array(this.BCRYPT_SALT_LEN);
-            var s1=Array(this.BCRYPT_SALT_LEN);
+            var s1 = Array(this.BCRYPT_SALT_LEN);
             window.crypto.getRandomValues(s1);
             output.push(encode_base64(s1, this.BCRYPT_SALT_LEN));
             return output.join('');
         },
 
-        checkpw:function (plaintext, hashed, callback, progress)
-        {
+        checkpw: function (plaintext, hashed, callback, progress) {
             var off = 0;
             if (hashed.charAt(0) != '$' || hashed.charAt(1) != '2')
                 throw "Invalid salt version";
@@ -635,7 +614,7 @@ BCrypt.prototype = Object.extendsObject(global.AbstractAjaxProcessor,
                 off = 4;
             }
             salt = hashed.substring(0, off + 25);
-            hashpw(plaintext, salt, function(try_pass) {
+            hashpw(plaintext, salt, function (try_pass) {
                 var ret = 0;
                 for (var i = 0; i < hashed.length; i++) {
                     ret |= getByte(hashed[i]) ^ getByte(try_pass[i]);

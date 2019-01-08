@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name ="order_history_product")
+@Table(name = "order_history_product")
 public class OrderHistoryProduct
 {
     @Id
@@ -23,7 +23,7 @@ public class OrderHistoryProduct
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name="category_id")
+    @Column(name = "category_id")
     private String category;
 
     @Column(name = "price")

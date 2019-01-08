@@ -11,7 +11,7 @@ import java.util.List;
 public class PersonService
 {
     @Autowired
-    private PersonRepository    personRepository;
+    private PersonRepository personRepository;
 
 
     public Person getPersonById(String id)
@@ -24,7 +24,7 @@ public class PersonService
         return personRepository.findAll();
     }
 
-    public Person createPerson(Person   person)
+    public Person createPerson(Person person)
     {
         return personRepository.saveAndFlush(person);
     }

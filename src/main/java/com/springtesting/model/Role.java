@@ -22,7 +22,7 @@ public class Role implements Serializable
     private Long id;
 
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @JsonBackReference
@@ -31,15 +31,17 @@ public class Role implements Serializable
 
     @ManyToMany
     @JoinTable(
-        name = "role_privilege",
-            joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id",referencedColumnName = "id")
+            name = "role_privilege",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
     )
     @JsonManagedReference
     private Collection<Privilege> privileges;
 
 
-    public Role() {}
+    public Role()
+    {
+    }
 
     public Role(String name)
     {

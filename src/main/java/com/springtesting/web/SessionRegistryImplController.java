@@ -25,14 +25,14 @@ public class SessionRegistryImplController
     public SessionRegistryImplController(SessionRegistry sessionRegistry, MyUserDetailsService myUserDetailsService)
     {
         this.sessionRegistry = sessionRegistry;
-        this.myUserDetailsService=myUserDetailsService;
+        this.myUserDetailsService = myUserDetailsService;
     }
 
     @GetMapping(value = {"/users"})
     public List<String> getAllUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
-                .filter(user -> !sessionRegistry.getAllSessions(user,false).isEmpty())
+                .filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
                 .map(Object::toString)
                 .collect(Collectors.toList());
     }
@@ -41,7 +41,7 @@ public class SessionRegistryImplController
     public List<String> getActiveUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
-                .filter(user -> !sessionRegistry.getAllSessions(user,false).isEmpty())
+                .filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
                 .map(Object::toString)
                 .collect(Collectors.toList());
     }
@@ -52,8 +52,8 @@ public class SessionRegistryImplController
     {
         //return sessionRegistry.getAllSessions(myUserDetailsService.loadUserByUsername(username),false);
 
-        MyUserDetails myUserDetails= (MyUserDetails)sessionRegistry.getAllPrincipals().get(0);
-        if(myUserDetails.getUsername().equals(username))
+        MyUserDetails myUserDetails = (MyUserDetails) sessionRegistry.getAllPrincipals().get(0);
+        if (myUserDetails.getUsername().equals(username))
             return sessionRegistry.getAllSessions(myUserDetails, false);
         return null;
     }*/

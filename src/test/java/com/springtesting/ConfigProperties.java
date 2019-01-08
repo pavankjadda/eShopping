@@ -15,14 +15,6 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "jdbc")
 public class ConfigProperties
 {
-    static class Credentials
-    {
-        private String authMethod;
-        private String username;
-        private String password;
-
-        // standard getters and setters
-    }
     private String host;
     private int port;
     private String from;
@@ -31,9 +23,9 @@ public class ConfigProperties
     private Map<String, String> additionalHeaders;
 
     @Bean
-    public DatabaseConfig   databaseConfig()
+    public DatabaseConfig databaseConfig()
     {
-        DatabaseConfig  dbConfig=new DatabaseConfig();
+        DatabaseConfig dbConfig = new DatabaseConfig();
         dbConfig.setHost(host);
         dbConfig.setPort(port);
         dbConfig.setFrom(from);
@@ -42,5 +34,14 @@ public class ConfigProperties
         dbConfig.setAdditionalHeaders(additionalHeaders);
 
         return dbConfig;
+    }
+
+    static class Credentials
+    {
+        private String authMethod;
+        private String username;
+        private String password;
+
+        // standard getters and setters
     }
 }

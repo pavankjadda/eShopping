@@ -8,11 +8,11 @@
 <h4>You do not have authority access this page, Click <a href="/home"> here </a>to go home</h4>
 
 
-<form th:action="@{/logout}" method="post">
+<form method="post" th:action="@{/logout}">
     <input type="submit" value="Sign Out"/>
 </form>
 
-<form th:action="@{/home}" method="get">
+<form method="get" th:action="@{/home}">
     <input type="submit" value="Go Home"/>
 </form>
 </body>

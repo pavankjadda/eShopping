@@ -11,14 +11,17 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:test.properties")
 public class PropertyResourceTest
 {
-    private  String  jdbcUrl;
-
-    private  String  jdbcUsername;
-
-    private  String  jdbcPassword;
-
     @Autowired
     Environment environment;
+    private String jdbcUrl;
+    private String jdbcUsername;
+    private String jdbcPassword;
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev()
+    {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
     public String getJdbcUrl()
     {
@@ -37,7 +40,7 @@ public class PropertyResourceTest
 
     public void setJdbcUsername()
     {
-        this.jdbcUsername =  environment.getProperty("jdbc.username");
+        this.jdbcUsername = environment.getProperty("jdbc.username");
     }
 
     public String getJdbcPassword()
@@ -47,7 +50,7 @@ public class PropertyResourceTest
 
     public void setJdbcPassword()
     {
-        this.jdbcPassword =  environment.getProperty("jdbc.password");
+        this.jdbcPassword = environment.getProperty("jdbc.password");
     }
 
     public Environment getEnvironment()
@@ -58,11 +61,5 @@ public class PropertyResourceTest
     public void setEnvironment(Environment environment)
     {
         this.environment = environment;
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev()
-    {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 }

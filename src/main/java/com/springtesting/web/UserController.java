@@ -36,9 +36,9 @@ public class UserController
     {
         if (pageNumber == null)
             pageNumber = 0;
-        if(limit == null)
-            limit=10;
-        return userRepository.findAll(PageRequest.of(pageNumber,limit,Sort.by(Sort.Direction.ASC,"id")));
+        if (limit == null)
+            limit = 10;
+        return userRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     @GetMapping(value = "/user/{id}")

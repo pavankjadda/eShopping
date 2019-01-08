@@ -16,7 +16,7 @@ public class UserProfileController
     @Autowired
     public UserProfileController(UserProfileRepository userProfileRepository)
     {
-        this.userProfileRepository=userProfileRepository;
+        this.userProfileRepository = userProfileRepository;
     }
 
     @PostMapping(value = "/userprofile/create")

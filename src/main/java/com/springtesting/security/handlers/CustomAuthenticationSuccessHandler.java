@@ -30,7 +30,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private SessionHistoryService sessionHistoryService;
     private Log logger = LogFactory.getLog(this.getClass());
 
-    private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public CustomAuthenticationSuccessHandler()
     {
@@ -46,7 +46,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
-        handle(request,response,authentication);
+        handle(request, response, authentication);
         clearAuthenticationAttributes(request);
         //Save Login History in DB
         saveSuccessLogin(request,response,authentication);
@@ -69,26 +69,26 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     public void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
-        String targetUrl=determineTargetUrl(authentication);
-        if(response.isCommitted())
+        String targetUrl = determineTargetUrl(authentication);
+        if (response.isCommitted())
         {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
-        redirectStrategy.sendRedirect(request,response,targetUrl);
+        redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
     private String determineTargetUrl(Authentication authentication)
     {
-        Collection<? extends GrantedAuthority> authorities= authentication.getAuthorities();
-        for (GrantedAuthority grantedAuthority:authorities)
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority : authorities)
         {
 
-            if(grantedAuthority.getAuthority().equals("ROLE_USER"))
+            if (grantedAuthority.getAuthority().equals("ROLE_USER"))
             {
                 return "/home.html";
             }
-            else if(grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
+            else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
             {
                 return "/admin.html";
             }
@@ -99,18 +99,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     private void clearAuthenticationAttributes(HttpServletRequest request)
     {
-        HttpSession session=request.getSession(false);
-        if(session == null)
+        HttpSession session = request.getSession(false);
+        if (session == null)
             return;
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+    }
+
+    protected RedirectStrategy getRedirectStrategy()
+    {
+        return redirectStrategy;
     }
 
     public void setRedirectStrategy(RedirectStrategy redirectStrategy)
     {
         this.redirectStrategy = redirectStrategy;
-    }
-    protected RedirectStrategy getRedirectStrategy()
-    {
-        return redirectStrategy;
     }
 }

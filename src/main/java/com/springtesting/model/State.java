@@ -20,7 +20,7 @@ public class State
     private String code;
 
     @Column(name = "name")
-    @Length(max = 200,min = 2)
+    @Length(max = 200, min = 2)
     private String name;
 
     @ManyToOne
@@ -29,12 +29,14 @@ public class State
     private Country country;
 
 
-    public State() {}
+    public State()
+    {
+    }
 
     public State(@Length(max = 100, min = 2) String name, String code, Country country)
     {
         this.name = name;
-        this.code=code;
+        this.code = code;
         this.country = country;
     }
 }
