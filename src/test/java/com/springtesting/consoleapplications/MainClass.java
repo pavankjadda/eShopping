@@ -6,7 +6,7 @@ public class MainClass
 {
     public static void main(String[] args)
     {
-        User user=new User();
+        User user = new User();
         user.setActive(true);
         user.setId(1L);
         user.setPassword("admin");

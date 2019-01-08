@@ -14,8 +14,8 @@ public class MyUserDetails implements UserDetails
 
     public MyUserDetails(User user, Collection<? extends GrantedAuthority> roles)
     {
-        this.user=user;
-        this.roles=roles;
+        this.user = user;
+        this.roles = roles;
     }
 
     @Override

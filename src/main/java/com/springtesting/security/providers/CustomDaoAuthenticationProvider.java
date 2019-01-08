@@ -91,7 +91,8 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
      * Creates a successful {@link Authentication} object.
      * Subclasses will usually store the original credentials the user supplied (not
      * salted or encoded passwords) in the returned <code>Authentication</code> object.
-     * </p>*/
+     * </p>
+     */
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user)
     {
@@ -123,7 +124,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
             String presentedPassword = authentication.getCredentials().toString();
             this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials",
-                        "Message: Authentication failed: Can not find Username "));
+                    "Message: Authentication failed: Can not find Username "));
         }
     }
 

@@ -22,8 +22,9 @@ INSERT INTO springsecuritydb.order_detail_productlist VALUES(3,'ord1001','p1003'
 
 
 /* Insert Data into User Table  */
-INSERT INTO springsecuritydb.user VALUES(1,1,1,1,1,'$2a$12$pqcdXB.Xboa7pGNba51YHuWQVhlZM8TVguRUCL2ss8GOwhEqiqwOu','admin');
-INSERT INTO springsecuritydb.user VALUES(2,1,1,1,1,'$2a$12$kRstkVGM88bvzGqxcWDX5eVDvT0iy40YPAKMRiKX9D2jIsXmKXOAK','user');
+INSERT INTO `springsecuritydb`.`user` VALUES(1,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2y$12$ALU6qByNCKqkaTyjdLyqyOe7nQ0mGwQY3gXqBQ3DQKdfS4Yqwd7Jq','admin');
+INSERT INTO `springsecuritydb`.`user` VALUES(2,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2a$12$JZipNtfy6B/wa9AvbrPq6.o9yi9TYR7CK.j3XG6BY3P3DwuFg7pWe','user');
+
 
 
 /* Insert Data into Role Table  */

@@ -21,24 +21,23 @@ import java.util.Collection;
 @Controller
 public class LoginController
 {
-    private Logger log=LoggerFactory.getLogger(LoginController.class);
+    private Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @Resource(name="authenticationManager")
+    @Resource(name = "authenticationManager")
     private AuthenticationManager authManager;
 
 
-
-    @GetMapping(value = {"/","/login"})
+    @GetMapping(value = {"/", "/login"})
     public ModelAndView getLoginPage(HttpServletRequest request)
     {
-        ModelAndView modelAndView=new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // If NOT anonymous user, get user info
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
-            String username=request.getUserPrincipal().getName();
-            String sessionValue=getSessionValue(request);
+            String username = request.getUserPrincipal().getName();
+            String sessionValue = getSessionValue(request);
 
             modelAndView.setViewName("redirect:home");
             return modelAndView;
@@ -55,13 +54,13 @@ public class LoginController
 
     private String getSessionValue(HttpServletRequest request)
     {
-        String sessionValue=null;
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie: cookies)
+        String sessionValue = null;
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies)
         {
-            if(cookie.getName().equals("JSESSIONID"))
+            if (cookie.getName().equals("JSESSIONID"))
             {
-                sessionValue=cookie.getValue();
+                sessionValue = cookie.getValue();
             }
         }
         return sessionValue;
@@ -92,12 +91,12 @@ public class LoginController
     }
 
 
-    @GetMapping(value = {"/home","/home.html"})
+    @GetMapping(value = {"/home", "/home.html"})
     public ModelAndView loadHomePage(HttpServletRequest request)
     {
-        ModelAndView modelAndView=new ModelAndView();
-        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        if(authentication instanceof AnonymousAuthenticationToken)
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken)
         {
             modelAndView.setViewName("redirect:login");
             return modelAndView;
@@ -107,15 +106,15 @@ public class LoginController
         return modelAndView;
     }
 
-    @GetMapping(value = {"/admin","/admin.html"})
+    @GetMapping(value = {"/admin", "/admin.html"})
     public ModelAndView loadAdminHomePage(HttpServletRequest request)
     {
-        ModelAndView modelAndView=new ModelAndView();
-        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        if(authentication instanceof AnonymousAuthenticationToken)
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken)
             modelAndView.setViewName("redirect:login");
 
-        if(hasAdminRole(authentication.getAuthorities()))
+        if (hasAdminRole(authentication.getAuthorities()))
             modelAndView.setViewName("admin");
         else
             modelAndView.setViewName("403");
@@ -124,13 +123,13 @@ public class LoginController
 
     private boolean hasAdminRole(Collection<? extends GrantedAuthority> authorities)
     {
-        for (GrantedAuthority grantedAuthority:authorities)
+        for (GrantedAuthority grantedAuthority : authorities)
         {
-            if(grantedAuthority.getAuthority().equals("ROLE_USER"))
+            if (grantedAuthority.getAuthority().equals("ROLE_USER"))
             {
                 return false;
             }
-            else if(grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
+            else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
             {
                 return true;
             }

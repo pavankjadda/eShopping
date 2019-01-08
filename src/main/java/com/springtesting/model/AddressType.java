@@ -14,7 +14,7 @@ public class AddressType
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "type",nullable = false)
+    @Column(name = "type", nullable = false)
     private String type;
 
     public AddressType()
@@ -24,6 +24,6 @@ public class AddressType
 
     public AddressType(String type)
     {
-        this.type=type;
+        this.type = type;
     }
 }

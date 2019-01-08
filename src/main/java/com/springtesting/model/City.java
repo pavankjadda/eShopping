@@ -24,9 +24,11 @@ public class City extends AbstractAuditingEntity
     @JsonManagedReference
     private State state;
 
-    public City() { }
+    public City()
+    {
+    }
 
-    public City( String name, State state)
+    public City(String name, State state)
     {
         this.name = name;
         this.state = state;

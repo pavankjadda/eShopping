@@ -17,7 +17,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
 {
     private Logger logger = LoggerFactory.getLogger(CustomLogoutSuccessHandler.class);
 
-    private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
@@ -26,10 +26,10 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
         {
             authentication.setAuthenticated(false);
             request.logout();
-            String targetUrl="/login";
-            redirectStrategy.sendRedirect(request,response,targetUrl);
+            String targetUrl = "/login";
+            redirectStrategy.sendRedirect(request, response, targetUrl);
         }
-      finally
+        finally
         {
             logger.debug("Exception thrown while logging out");
         }

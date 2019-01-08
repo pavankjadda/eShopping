@@ -18,22 +18,22 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 {
     protected Log logger = LogFactory.getLog(this.getClass());
 
-    private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
     {
         System.out.println("Inside onAuthenticationFailure() method: Login Failed, redirecting to Login Page");
-        System.out.println("Exception: "+exception.toString());
-        handle(request,response,exception);
+        System.out.println("Exception: " + exception.toString());
+        handle(request, response, exception);
         clearAuthenticationAttributes(request);
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException
     {
-        String targetUrl=determineTargetUrl(exception);
-        redirectStrategy.sendRedirect(request,response,targetUrl);
+        String targetUrl = determineTargetUrl(exception);
+        redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
     private String determineTargetUrl(AuthenticationException authentication)
@@ -43,18 +43,19 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
     private void clearAuthenticationAttributes(HttpServletRequest request)
     {
-        HttpSession session=request.getSession(false);
-        if(session == null)
+        HttpSession session = request.getSession(false);
+        if (session == null)
             return;
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+    }
+
+    protected RedirectStrategy getRedirectStrategy()
+    {
+        return redirectStrategy;
     }
 
     public void setRedirectStrategy(RedirectStrategy redirectStrategy)
     {
         this.redirectStrategy = redirectStrategy;
-    }
-    protected RedirectStrategy getRedirectStrategy()
-    {
-        return redirectStrategy;
     }
 }

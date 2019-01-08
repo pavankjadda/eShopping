@@ -13,7 +13,7 @@ public class AuditorAwareImpl implements AuditorAware<String>
     @Override
     public Optional<String> getCurrentAuditor()
     {
-        Optional<MyUserDetails> optionalMyUserDetails=Optional.ofNullable(SecurityContextHolder.getContext())
+        Optional<MyUserDetails> optionalMyUserDetails = Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .filter(Authentication::isAuthenticated)
                 .map(Authentication::getPrincipal)

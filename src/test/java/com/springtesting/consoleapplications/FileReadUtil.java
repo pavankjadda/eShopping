@@ -4,25 +4,25 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class FileReadUtil   extends Thread
+public class FileReadUtil extends Thread
 {
     public void run()
     {
         try
         {
-            System.out.println("Thread "+currentThread().getName()+" is Running");
-            File file=new File("/home/cuckoo/.cuckoo/storage/analyses/"+currentThread().getName()+"/reports/report.json");
-            if(file.isFile())
+            System.out.println("Thread " + currentThread().getName() + " is Running");
+            File file = new File("/home/cuckoo/.cuckoo/storage/analyses/" + currentThread().getName() + "/reports/report.json");
+            if (file.isFile())
             {
-                BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
-                int numberofLines=0;
-                while (bufferedReader.readLine()!=null)
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                int numberofLines = 0;
+                while (bufferedReader.readLine() != null)
                 {
                     //System.out.println("Line => "+bufferedReader.readLine());
                     numberofLines++;
                 }
-                System.out.println("Thread: "+currentThread().getName());
-                System.out.println(" Number of Lines in file: "+currentThread().getName()+" are "+numberofLines);
+                System.out.println("Thread: " + currentThread().getName());
+                System.out.println(" Number of Lines in file: " + currentThread().getName() + " are " + numberofLines);
             }
             /*
             for (int i=779;i>0;i--)
@@ -59,7 +59,7 @@ public class FileReadUtil   extends Thread
         }
         finally
         {
-            System.out.println("Thread "+currentThread().getName()+" exiting");
+            System.out.println("Thread " + currentThread().getName() + " exiting");
             Runtime.getRuntime().gc();
         }
     }

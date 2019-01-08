@@ -24,7 +24,7 @@ public class OrderDetailProduct
     {
     }
 
-    public OrderDetailProduct( String orderDetailId, String productListId)
+    public OrderDetailProduct(String orderDetailId, String productListId)
     {
         this.orderDetailId = orderDetailId;
         this.productListId = productListId;

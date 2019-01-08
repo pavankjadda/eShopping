@@ -13,14 +13,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class CityRepositoryLogger
 {
-    private Logger logger= LoggerFactory.getLogger(CityRepositoryLogger.class);
+    private Logger logger = LoggerFactory.getLogger(CityRepositoryLogger.class);
 
     @Pointcut("execution(* com.springtesting.repo.CityRepository.findAll(..))")
-    private void getFindAll() {};
+    private void getFindAll()
+    {
+    }
 
     @Pointcut(value = "execution(* com.springtesting.repo.CityRepository.findByNameAndState(..)) && args(name,state,..)",
             argNames = "name,state")
-    private void getFindByNameAndState(String name, State state) {};
+    private void getFindByNameAndState(String name, State state)
+    {
+    }
 
     @After(value = "getFindAll()")
     private void afterFindAll(JoinPoint joinPoint)
@@ -28,7 +32,7 @@ public class CityRepositoryLogger
         logger.error("Inside CityRepositoryLogger  afterFindAll()");
     }
 
-    @After(value = "getFindByNameAndState(name,state)",argNames = "name,state")
+    @After(value = "getFindByNameAndState(name,state)", argNames = "name,state")
     private void afterFindByNameAndState(String name, State state)
     {
         logger.error("Inside CityRepositoryLogger  afterFindByNameAndState()");

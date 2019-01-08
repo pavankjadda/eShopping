@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name ="product")
+@Table(name = "product")
 public class Product implements Serializable
 {
     @Id
@@ -21,24 +21,26 @@ public class Product implements Serializable
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToMany
     @JoinTable(
-        name = "product_price",
-        joinColumns = @JoinColumn(name = "product_id",referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "price_id",referencedColumnName = "id")
-        )
+            name = "product_price",
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "price_id", referencedColumnName = "id")
+    )
     @JsonManagedReference
-    private List<Price> priceList=new ArrayList<>();
+    private List<Price> priceList = new ArrayList<>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "productList")
-    private List<OrderDetail> ordersList =new ArrayList<OrderDetail>();
+    private List<OrderDetail> ordersList = new ArrayList<OrderDetail>();
 
 
-    public Product() {}
+    public Product()
+    {
+    }
 
     public Product(String id, String name, Category category)
     {

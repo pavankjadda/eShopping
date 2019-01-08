@@ -15,7 +15,7 @@ public class OrderDetailController
 
     public OrderDetailController(OrderDetailRepository OrderDetailRepository)
     {
-        this.OrderDetailRepository=OrderDetailRepository;
+        this.OrderDetailRepository = OrderDetailRepository;
     }
 
     @PostMapping(path = "/create")

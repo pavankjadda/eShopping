@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PersonRepository   extends JpaRepository<Person,String>
+public interface PersonRepository extends JpaRepository<Person, String>
 {
     List<Person> findAll();
 
@@ -16,6 +16,6 @@ public interface PersonRepository   extends JpaRepository<Person,String>
     Person findByLastNameContains(String lastName);
 
     @SuppressWarnings("unchecked")
-    Person  saveAndFlush(Person person);
+    Person saveAndFlush(Person person);
 
 }
