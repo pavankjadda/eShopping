@@ -1,12 +1,19 @@
 package com.springtesting.session;
 
-import javax.servlet.http.HttpSessionBindingListener;
+import com.springtesting.model.SessionHistory;
+import com.springtesting.repo.SessionHistoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-//@Component
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+import java.time.LocalDateTime;
+
+@Component
 public class CustomHttpSessionBindingListener implements HttpSessionBindingListener
 {
 
-   /* private SessionHistoryRepository sessionHistoryRepository;
+    private SessionHistoryRepository sessionHistoryRepository;
     private String username;
 
     public CustomHttpSessionBindingListener() {}
@@ -44,5 +51,5 @@ public class CustomHttpSessionBindingListener implements HttpSessionBindingListe
     public void setUsername(String username)
     {
         this.username = username;
-    }*/
+    }
 }
