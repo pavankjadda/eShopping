@@ -13,4 +13,5 @@ public class ApplicationConfig implements WebMvcConfigurer
     {
         return new BCryptPasswordEncoder();
     }
+
 }

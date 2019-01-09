@@ -10,6 +10,7 @@ import com.springtesting.repo.OrderDetailRepository;
 import com.springtesting.repo.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class ApiController
     }
 
     @GetMapping(value = "/category/{id}")
-    public Optional<Category> getCategory(@PathVariable String id)
+    public Optional<Category> getCategory(@PathVariable Long id)
     {
         return categoryRepository.findById(id);
     }

@@ -1,12 +1,11 @@
 package com.springtesting.security.handlers;
 
 import com.springtesting.model.SessionHistory;
-import com.springtesting.repo.SessionHistoryRepository;
 import com.springtesting.security.MyUserDetails;
 import com.springtesting.session.SessionHistoryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -27,6 +26,7 @@ import java.util.Collection;
 @Component("customAuthenticationSuccessHandler")
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
+
     private SessionHistoryService sessionHistoryService;
     private Log logger = LogFactory.getLog(this.getClass());
 
@@ -34,15 +34,15 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     public CustomAuthenticationSuccessHandler()
     {
-
+        this.sessionHistoryService=getSessionHistoryService();
     }
 
-    @Autowired
-    public CustomAuthenticationSuccessHandler(SessionHistoryService sessionHistoryService)
+    @Bean
+    private SessionHistoryService getSessionHistoryService()
     {
-        this.sessionHistoryService=sessionHistoryService;
+        return new SessionHistoryService();
     }
-    
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
@@ -62,9 +62,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         sessionHistory.setUsername(myUserDetails.getUsername());
         sessionHistory.setSessionId(request.getSession(false).getId());
         sessionHistory.setLoginDateTime(loginDateTime);
-
+        sessionHistory.setLogoutDateTime(loginDateTime);
         sessionHistoryService.saveSuccessLogin(sessionHistory);
-
     }
 
     public void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException

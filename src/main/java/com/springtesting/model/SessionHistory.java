@@ -1,6 +1,7 @@
 package com.springtesting.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "session_history")
@@ -44,15 +46,8 @@ public class SessionHistory extends AbstractAuditingEntity implements Serializab
         this.sessionId=sessionId;
     }
 
-    public SessionHistory(String username)
-    {
-        this.username = username;
-    }
-
     public SessionHistory(String username, String id, long creationTime)
     {
-        this.username = username;
-        this.loginDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(creationTime), ZoneId.systemDefault());
-        this.sessionId=id;
+        super();
     }
 }
