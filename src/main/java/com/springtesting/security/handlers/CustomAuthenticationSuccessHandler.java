@@ -27,14 +27,14 @@ import java.util.Collection;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
 
-    private SessionHistoryService sessionHistoryService;
+    //private SessionHistoryService sessionHistoryService;
     private Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public CustomAuthenticationSuccessHandler()
     {
-        this.sessionHistoryService=getSessionHistoryService();
+        //this.sessionHistoryService=getSessionHistoryService();
     }
 
     @Bean
@@ -49,7 +49,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
         //Save Login History in DB
-        saveSuccessLogin(request,response,authentication);
+        //saveSuccessLogin(request,response,authentication);
     }
 
     private void saveSuccessLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -63,10 +63,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         sessionHistory.setSessionId(request.getSession(false).getId());
         sessionHistory.setLoginDateTime(loginDateTime);
         sessionHistory.setLogoutDateTime(loginDateTime);
-        sessionHistoryService.saveSuccessLogin(sessionHistory);
+        //sessionHistoryService.saveSuccessLogin(sessionHistory);
     }
 
-    public void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
+    private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted())

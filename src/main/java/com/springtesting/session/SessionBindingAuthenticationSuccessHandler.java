@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Component("sessionBindingAuthenticationSuccessHandler")
+//@Component("sessionBindingAuthenticationSuccessHandler")
 public class SessionBindingAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
     @Override
