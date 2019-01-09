@@ -12,10 +12,12 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "product")
-public class Product implements Serializable
+public class Product extends AbstractAuditingEntity implements Serializable
 {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -30,11 +32,11 @@ public class Product implements Serializable
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "price_id", referencedColumnName = "id")
     )
-    @JsonManagedReference
     private List<Price> priceList = new ArrayList<>();
 
-    @JsonIgnore
+
     @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
     private List<OrderDetail> ordersList = new ArrayList<OrderDetail>();
 
 
@@ -42,10 +44,20 @@ public class Product implements Serializable
     {
     }
 
-    public Product(String id, String name, Category category)
+    public Product(Long id, String name, Category category)
     {
         this.id = id;
         this.name = name;
         this.category = category;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

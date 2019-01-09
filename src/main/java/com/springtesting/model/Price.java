@@ -1,6 +1,7 @@
 package com.springtesting.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,10 +11,11 @@ import java.util.List;
 @Entity
 @Table(name = "price")
 @Data
-public class Price
+public class Price extends AbstractAuditingEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @OneToOne
@@ -24,7 +26,7 @@ public class Price
     private Double amount;
 
     @ManyToMany
-    @JsonBackReference
+    @JsonIgnore
     private List<Product> productList = new ArrayList<>();
 
 

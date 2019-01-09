@@ -1,9 +1,7 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.session.SessionHistoryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -30,19 +28,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     {
     }
 
-    @Bean
-    private SessionHistoryService getSessionHistoryService()
-    {
-        return new SessionHistoryService();
-    }
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
     {
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
-        //Save Login History in DB
-        //saveSuccessLogin(request,response,authentication);
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException

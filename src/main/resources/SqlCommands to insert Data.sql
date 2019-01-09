@@ -1,23 +1,23 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 /* Insert Data into Category Table */
-INSERT INTO springsecuritydb.category VALUES('1002','Grocery');
-INSERT INTO springsecuritydb.category VALUES('1003','Electronics');
-INSERT INTO springsecuritydb.category VALUES('1001','Books');
+INSERT INTO springsecuritydb.category VALUES(1002,'Grocery');
+INSERT INTO springsecuritydb.category VALUES(1003,'Electronics');
+INSERT INTO springsecuritydb.category VALUES(1001,'Books');
 
 
 /* Insert Data into Product Table  */
-INSERT INTO springsecuritydb.product VALUES('p1001','iPhoneX',1003);
-INSERT INTO springsecuritydb.product VALUES('p1002','GalaxyS10',1003);
-INSERT INTO springsecuritydb.product VALUES('p1003','Google Pixel',1003);
+INSERT INTO springsecuritydb.product VALUES(2001,'iPhoneX',1003);
+INSERT INTO springsecuritydb.product VALUES(2002,'GalaxyS10',1003);
+INSERT INTO springsecuritydb.product VALUES(2003,'Google Pixel',1003);
 
 /* Insert Data into Order Detail Table  */
-INSERT INTO springsecuritydb.order_detail VALUES('ORD1001','1001');
+INSERT INTO springsecuritydb.order_detail VALUES(1,1001);
 
 /* Insert Data into Order Detail Products Table  */
-INSERT INTO springsecuritydb.order_detail_productlist VALUES(1,'ord1001','p1001');
-INSERT INTO springsecuritydb.order_detail_productlist VALUES(2,'ord1001','p1002');
-INSERT INTO springsecuritydb.order_detail_productlist VALUES(3,'ord1001','p1003');
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(1,1001,2001);
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(2,1001,2002);
+INSERT INTO springsecuritydb.order_detail_productlist VALUES(3,1001,2002);
 
 
 

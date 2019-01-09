@@ -1,4 +1,4 @@
-package com.springtesting.web;
+package com.springtesting.web.auth;
 
 import com.springtesting.model.User;
 import com.springtesting.repo.UserRepository;

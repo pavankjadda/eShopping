@@ -12,11 +12,12 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user_profile")
-public class UserProfile
+public class UserProfile extends AbstractAuditingEntity
 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
 

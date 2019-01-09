@@ -1,4 +1,4 @@
-package com.springtesting.web;
+package com.springtesting.web.order;
 
 import com.springtesting.model.Product;
 import com.springtesting.repo.ProductRepository;
@@ -31,7 +31,7 @@ public class ProductController
     }
 
     @GetMapping(value = "/find/{id}")
-    public Optional<Product> getProductById(@PathVariable String id)
+    public Optional<Product> getProductById(@PathVariable Long id)
     {
         return productRepository.findById(id);
     }

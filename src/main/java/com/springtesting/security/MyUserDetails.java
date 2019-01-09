@@ -50,7 +50,7 @@ public class MyUserDetails implements UserDetails
 
     /**
      * Indicates whether the user's credentials (password) has expired. Expired
-     * credentials prevent authentication.
+     * credentials prevent auth.
      *
      * @return <code>true</code> if the user's credentials are valid (ie non-expired),
      * <code>false</code> if no longer valid (ie expired)

@@ -1,4 +1,4 @@
-package com.springtesting.web;
+package com.springtesting.web.order;
 
 public class OrderProductsController
 {

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "address_type")
-public class AddressType
+public class AddressType extends AbstractAuditingEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
