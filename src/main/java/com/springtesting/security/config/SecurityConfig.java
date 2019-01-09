@@ -20,7 +20,6 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.Session;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -32,16 +31,14 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 
-public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdapter
+public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
-
 
     @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService)
     {
         this.userDetailsService = userDetailsService;
-        //this.sessionRepository = sessionRepository;
     }
 
     @Override
@@ -53,7 +50,7 @@ public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdap
     @Bean
     public CustomDaoAuthenticationProvider getDaoAuthenticationProvider()
     {
-        CustomDaoAuthenticationProvider daoAuthenticationProvider = new CustomDaoAuthenticationProvider();
+        CustomDaoAuthenticationProvider daoAuthenticationProvider=new CustomDaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
         return daoAuthenticationProvider;
@@ -69,45 +66,45 @@ public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdap
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.authorizeRequests()
-                .antMatchers("/anonymous*").anonymous()
-                //.antMatchers("/users/**").permitAll()
-                .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
-                .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
-                .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
-                .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser, AuthorityConstants.Admin)
-                .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successHandler(new CustomAuthenticationSuccessHandler())
-                .failureHandler(new CustomAuthenticationFailureHandler())
-                .permitAll()
-                .and()
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-                .permitAll()
-                .and()
-                .rememberMe().rememberMeServices(springSessionRememberMeServices());
+            http.authorizeRequests()
+                    .antMatchers("/anonymous*").anonymous()
+                    //.antMatchers("/users/**").permitAll()
+                    .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
+                    .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
+                    .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
+                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser,AuthorityConstants.Admin)
+                    .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
+                    .anyRequest().authenticated()
+            .and()
+                    .httpBasic()
+            .and()
+                    .formLogin()
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .successHandler(new CustomAuthenticationSuccessHandler())
+                        .failureHandler(new CustomAuthenticationFailureHandler())
+                        .permitAll()
+            .and()
+                    .logout()
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+                        .permitAll()
+            .and()
+                    .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
-
+        // Uses CorsConfigurationSource bean defined below
         http.cors();
 
         http.sessionManagement()
-                //.invalidSessionUrl("/login.html")
-                //.invalidSessionStrategy((request, response) -> request.logout())
-                .sessionFixation().migrateSession()
-                .maximumSessions(1)
-                .maxSessionsPreventsLogin(false)
-                .sessionRegistry(sessionRegistry());
+                        //.invalidSessionUrl("/login.html")
+                        //.invalidSessionStrategy((request, response) -> request.logout())
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
+                        .sessionRegistry(sessionRegistry());
 
         http.csrf()
-                .disable();
+            .disable();
 
     }
 
@@ -121,28 +118,7 @@ public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdap
         return rememberMeServices;
     }
 
-    /*
-    @Bean
-    public WebMvcConfigurer corsConfigurer()
-    {
-        return new WebMvcConfigurer()
-        {
-            @Override
-            public void addCorsMappings(CorsRegistry registry)
-            {
-                registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
-            }
-        };
-        return new WebMvcConfigurerAdapter()
-        {
-            @Override
-            public void addCorsMappings(CorsRegistry registry)
-            {
-                registry.addMapping("**").allowedOrigins("http://localhost:4200");
-            }
-        };
-    }*/
-    @Bean
+   @Bean
     CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -155,25 +131,13 @@ public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdap
         return source;
     }
 
-    @Bean
-    public SessionRegistry sessionRegistry()
-    {
-        return new SessionRegistryImpl();
-    }
-
-
-    /*@Bean
-    public SpringSessionBackedSessionRegistry<S> sessionRegistry()
-    {
-        return (SpringSessionBackedSessionRegistry<S>) new ParameterizedConsumer<S>().getSessionRepository();
-    }*/
 
     @Override
     public void configure(WebSecurity web) throws Exception
     {
         web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+            .ignoring()
+            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 
     @Bean
@@ -188,4 +152,39 @@ public class SecurityConfig<S extends Session> extends WebSecurityConfigurerAdap
     {
         return super.authenticationManagerBean();
     }
+
+    @Bean
+    public SessionRegistry sessionRegistry()
+    {
+        return new SessionRegistryImpl();
+    }
+
+
+   /* @Bean
+    SpringSessionBackedSessionRegistry sessionRegistry()
+    {
+        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
+    }*/
+
+    /*
+ @Bean
+ public WebMvcConfigurer corsConfigurer()
+ {
+     return new WebMvcConfigurer()
+     {
+         @Override
+         public void addCorsMappings(CorsRegistry registry)
+         {
+             registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
+         }
+     };
+     return new WebMvcConfigurerAdapter()
+     {
+         @Override
+         public void addCorsMappings(CorsRegistry registry)
+         {
+             registry.addMapping("**").allowedOrigins("http://localhost:4200");
+         }
+     };
+ }*/
 }
