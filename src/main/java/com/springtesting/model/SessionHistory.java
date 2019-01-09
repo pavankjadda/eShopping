@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

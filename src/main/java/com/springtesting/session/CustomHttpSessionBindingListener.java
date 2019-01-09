@@ -1,13 +1,6 @@
 package com.springtesting.session;
 
-import com.springtesting.model.SessionHistory;
-import com.springtesting.repo.SessionHistoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
-import java.time.LocalDateTime;
 
 //@Component
 public class CustomHttpSessionBindingListener implements HttpSessionBindingListener

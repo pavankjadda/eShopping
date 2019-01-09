@@ -1,7 +1,5 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.model.SessionHistory;
-import com.springtesting.security.MyUserDetails;
 import com.springtesting.session.SessionHistoryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,23 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Collection;
 
 @Component("customAuthenticationSuccessHandler")
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
 
-    //private SessionHistoryService sessionHistoryService;
     private Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public CustomAuthenticationSuccessHandler()
     {
-        //this.sessionHistoryService=getSessionHistoryService();
     }
 
     @Bean
@@ -50,20 +43,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         clearAuthenticationAttributes(request);
         //Save Login History in DB
         //saveSuccessLogin(request,response,authentication);
-    }
-
-    private void saveSuccessLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-    {
-        MyUserDetails myUserDetails=(MyUserDetails)authentication.getPrincipal();
-        Long creationTime=request.getSession(false).getCreationTime();
-        LocalDateTime loginDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(creationTime), ZoneId.systemDefault());
-
-        SessionHistory sessionHistory=new SessionHistory();
-        sessionHistory.setUsername(myUserDetails.getUsername());
-        sessionHistory.setSessionId(request.getSession(false).getId());
-        sessionHistory.setLoginDateTime(loginDateTime);
-        sessionHistory.setLogoutDateTime(loginDateTime);
-        //sessionHistoryService.saveSuccessLogin(sessionHistory);
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
