@@ -39,14 +39,16 @@ public class OrderDetail
     private List<Product> productList = new ArrayList<>();
 
 
-    public OrderDetail() {}
+    public OrderDetail()
+    {
+    }
 
 
-    public OrderDetail(String id, UserProfile purchasedBy, LocalDateTime localDateTime,Address address,OrderStatus orderStatus)
+    public OrderDetail(String id, UserProfile purchasedBy, LocalDateTime localDateTime, Address address, OrderStatus orderStatus)
     {
         this.id = id;
-        this.orderStatus=orderStatus;
-        this.localDateTime=localDateTime;
+        this.orderStatus = orderStatus;
+        this.localDateTime = localDateTime;
         this.purchasedBy = purchasedBy;
         this.address = address;
     }

@@ -41,7 +41,9 @@ public class OrderHistoryAddress
     @Column(name = "address_type_id")
     private String addressType;
 
-    public OrderHistoryAddress() { }
+    public OrderHistoryAddress()
+    {
+    }
 
     public OrderHistoryAddress(String streetName, String apartment, String city, String state, String country, String region, String zipCode, String addressType)
     {

@@ -40,10 +40,12 @@ public class Address extends AbstractAuditingEntity
     private String zipCode;
 
     @ManyToOne
-    @JoinColumn(name = "address_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
 
-    public Address() { }
+    public Address()
+    {
+    }
 
     public Address(String streetName, String apartment, City city, State state, Country country, String zipCode, AddressType addressType)
     {

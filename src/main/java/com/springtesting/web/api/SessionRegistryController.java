@@ -34,21 +34,21 @@ public class SessionRegistryController
 
     private List<ActiveSessionDto> convertToSessionRegistryUserDto(List<Object> allPrincipals)
     {
-        List<ActiveSessionDto> activeSessionDtoList=new ArrayList<>();
-        for(Object object:allPrincipals)
+        List<ActiveSessionDto> activeSessionDtoList = new ArrayList<>();
+        for (Object object : allPrincipals)
         {
-            MyUserDetails myUserDetails= (MyUserDetails) object;
-            List<SessionInformation> sessionInformationList=sessionRegistry.getAllSessions(object,false);
-            getActiveSessions(sessionInformationList,activeSessionDtoList,myUserDetails.getUsername());
+            MyUserDetails myUserDetails = (MyUserDetails) object;
+            List<SessionInformation> sessionInformationList = sessionRegistry.getAllSessions(object, false);
+            getActiveSessions(sessionInformationList, activeSessionDtoList, myUserDetails.getUsername());
         }
         return activeSessionDtoList;
     }
 
     private void getActiveSessions(List<SessionInformation> sessionInformationList, List<ActiveSessionDto> activeSessionDtoList, String username)
     {
-        for(SessionInformation sessionInformation:sessionInformationList)
+        for (SessionInformation sessionInformation : sessionInformationList)
         {
-            ActiveSessionDto activeSessionDto=new ActiveSessionDto();
+            ActiveSessionDto activeSessionDto = new ActiveSessionDto();
             activeSessionDto.setExpired(sessionInformation.isExpired());
             activeSessionDto.setSessionId(sessionInformation.getSessionId());
             activeSessionDto.setLastRequest(sessionInformation.getLastRequest());

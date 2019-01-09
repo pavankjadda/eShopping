@@ -14,10 +14,10 @@ public class UsersAccessDecisionManager implements AccessDecisionManager
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException
     {
-        Collection<? extends GrantedAuthority> grantedAuthorities=authentication.getAuthorities();
-        for(GrantedAuthority grantedAuthority:grantedAuthorities)
+        Collection<? extends GrantedAuthority> grantedAuthorities = authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority : grantedAuthorities)
         {
-            if(!grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
+            if (!grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
                 throw new AccessDeniedException("You are not allowed to access this page");
         }
 

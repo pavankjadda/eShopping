@@ -20,12 +20,12 @@ public class Price
     @JoinColumn(name = "currency_id")
     private Currency currency;
 
-    @Column(name = "amount",nullable = false)
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     @ManyToMany
     @JsonBackReference
-    private List<Product> productList=new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
 
 
     public Price()

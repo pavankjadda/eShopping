@@ -56,5 +56,4 @@ public class CategoryController
         categoryRepository.deleteById(id);
     }
 
-
 }

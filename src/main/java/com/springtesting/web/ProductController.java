@@ -15,7 +15,7 @@ public class ProductController
 
     public ProductController(ProductRepository productRepository)
     {
-        this.productRepository=productRepository;
+        this.productRepository = productRepository;
     }
 
     @PostMapping(path = "/create")

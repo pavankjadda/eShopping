@@ -25,22 +25,22 @@ public class MyUserDetailsService implements UserDetailsService
     @Autowired
     public MyUserDetailsService(UserRepository userRepository)
     {
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        User user=userRepository.findByUsername(username);
-        if(user == null)
+        User user = userRepository.findByUsername(username);
+        if (user == null)
             throw new UsernameNotFoundException("Could not find Username");
-        return new MyUserDetails(user,getGrantedAuthorities(user.getRoles()));
+        return new MyUserDetails(user, getGrantedAuthorities(user.getRoles()));
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(Collection<Role> roles)
     {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role  : roles)
+        for (Role role : roles)
         {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }

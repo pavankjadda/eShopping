@@ -16,7 +16,9 @@ public class OrderStatus
     @Column(name = "status")
     private String status;
 
-    public OrderStatus() {}
+    public OrderStatus()
+    {
+    }
 
     public OrderStatus(String status)
     {

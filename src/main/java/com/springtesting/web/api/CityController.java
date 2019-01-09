@@ -40,9 +40,9 @@ public class CityController
     {
         if (pageNumber == null)
             pageNumber = 0;
-        if(limit == null)
-            limit=10;
-        return cityRepository.findAll(PageRequest.of(pageNumber,limit, Sort.by(Sort.Direction.ASC,"name")));
+        if (limit == null)
+            limit = 10;
+        return cityRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "name")));
     }
 
     @GetMapping(value = "/{id}")
@@ -54,6 +54,6 @@ public class CityController
     @GetMapping(value = "/find")
     public Optional<City> getCityByNameAndState(@RequestParam(value = "name") String cityName, @RequestParam(value = "state") String stateName)
     {
-        return cityRepository.findByNameAndState(cityName,null);
+        return cityRepository.findByNameAndState(cityName, null);
     }
 }

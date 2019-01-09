@@ -16,7 +16,7 @@ public class Currency extends AbstractAuditingEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "symbol")
@@ -26,7 +26,9 @@ public class Currency extends AbstractAuditingEntity
     private String isoCode;
 
 
-    public Currency() {}
+    public Currency()
+    {
+    }
 
     public Currency(String name, String symbol, String isoCode)
     {

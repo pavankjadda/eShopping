@@ -14,13 +14,15 @@ public class ProductPrice
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "product_id",nullable = false)
+    @Column(name = "product_id", nullable = false)
     private String productId;
 
-    @Column(name = "price_id",nullable = false)
+    @Column(name = "price_id", nullable = false)
     private Long priceId;
 
-    public ProductPrice() {}
+    public ProductPrice()
+    {
+    }
 
     public ProductPrice(String productId, Long priceId)
     {
