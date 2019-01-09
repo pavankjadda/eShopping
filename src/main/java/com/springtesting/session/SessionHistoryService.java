@@ -5,15 +5,18 @@ import com.springtesting.repo.SessionHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class SessionHistoryService
 {
+    @Autowired
     private SessionHistoryRepository sessionHistoryRepository;
 
-    @Autowired
-    public SessionHistoryService(SessionHistoryRepository sessionHistoryRepository)
+    public SessionHistoryService()
     {
-        this.sessionHistoryRepository = sessionHistoryRepository;
+
     }
 
     public void saveSuccessLogin(SessionHistory sessionHistory)

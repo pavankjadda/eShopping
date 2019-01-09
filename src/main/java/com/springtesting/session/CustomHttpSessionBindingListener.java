@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class CustomHttpSessionBindingListener implements HttpSessionBindingListener
 {
+
     private SessionHistoryRepository sessionHistoryRepository;
     private String username;
 
