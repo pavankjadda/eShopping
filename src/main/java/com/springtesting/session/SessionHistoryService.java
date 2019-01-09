@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class SessionHistoryService
 {
-    @Autowired
+   /* @Autowired
     private SessionHistoryRepository sessionHistoryRepository;
 
     public SessionHistoryService()
@@ -27,5 +27,5 @@ public class SessionHistoryService
     public void saveFailureLogin(SessionHistory sessionHistory)
     {
         sessionHistoryRepository.saveAndFlush(sessionHistory);
-    }
+    }*/
 }

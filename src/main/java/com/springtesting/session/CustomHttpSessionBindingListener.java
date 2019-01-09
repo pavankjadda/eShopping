@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import java.time.LocalDateTime;
 
-@Component
+//@Component
 public class CustomHttpSessionBindingListener implements HttpSessionBindingListener
 {
 
-    private SessionHistoryRepository sessionHistoryRepository;
+   /* private SessionHistoryRepository sessionHistoryRepository;
     private String username;
 
     public CustomHttpSessionBindingListener() {}
@@ -51,5 +51,5 @@ public class CustomHttpSessionBindingListener implements HttpSessionBindingListe
     public void setUsername(String username)
     {
         this.username = username;
-    }
+    }*/
 }
