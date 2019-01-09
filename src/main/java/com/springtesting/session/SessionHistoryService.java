@@ -1,10 +1,17 @@
 package com.springtesting.session;
 
-//@Service
-//@Transactional
+import com.springtesting.model.SessionHistory;
+import com.springtesting.repo.SessionHistoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class SessionHistoryService
 {
-   /* @Autowired
+    @Autowired
     private SessionHistoryRepository sessionHistoryRepository;
 
     public SessionHistoryService()
@@ -20,5 +27,5 @@ public class SessionHistoryService
     public void saveFailureLogin(SessionHistory sessionHistory)
     {
         sessionHistoryRepository.saveAndFlush(sessionHistory);
-    }*/
+    }
 }
