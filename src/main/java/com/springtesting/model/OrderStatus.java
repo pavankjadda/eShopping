@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "order_status")
-public class OrderStatus
+public class OrderStatus extends AbstractAuditingEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

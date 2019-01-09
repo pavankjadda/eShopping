@@ -70,22 +70,22 @@ public class AuthenticationSuccessLogger
     }
 
        /*
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.onAuthenticationSuccess(..)) && args(request,response,authentication,..)",
-            argNames = "request,response,authentication")
-    private void getOnAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {};
+    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.onAuthenticationSuccess(..)) && args(request,response,auth,..)",
+            argNames = "request,response,auth")
+    private void getOnAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) {};
 
-    @After(value = "getOnAuthenticationSuccess(request,response,authentication)",argNames = "joinPoint,request,response,authentication")
-    private void afterOnAuthenticationSuccess( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    @After(value = "getOnAuthenticationSuccess(request,response,auth)",argNames = "joinPoint,request,response,auth")
+    private void afterOnAuthenticationSuccess( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication auth)
     {
         logger.error("User Loggedin Successfull");
     }
 
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.handle(..)) && args(request,response,authentication,..)",
-            argNames = "request,response,authentication")
-    private void getHandle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {};
+    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.handle(..)) && args(request,response,auth,..)",
+            argNames = "request,response,auth")
+    private void getHandle(HttpServletRequest request, HttpServletResponse response, Authentication auth) {};
 
-    @After(value = "getHandle(request,response,authentication)",argNames = "joinPoint,request,response,authentication")
-    private void afterHandle( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    @After(value = "getHandle(request,response,auth)",argNames = "joinPoint,request,response,auth")
+    private void afterHandle( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication auth)
     {
         logger.error("Inside: AuthenticationSuccessLogger afterHandle()");
     }

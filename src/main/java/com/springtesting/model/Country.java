@@ -1,5 +1,6 @@
 package com.springtesting.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -32,7 +33,7 @@ public class Country
 
     @ManyToOne
     @JoinColumn(name = "region_id")
-    @JsonManagedReference
+    @JsonIgnore
     private Region region;
 
     public Country()

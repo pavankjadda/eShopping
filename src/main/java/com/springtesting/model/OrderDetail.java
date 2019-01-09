@@ -1,20 +1,25 @@
 package com.springtesting.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "order_detail")
-public class OrderDetail
+public class OrderDetail extends AbstractAuditingEntity
 {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_status")
@@ -26,16 +31,16 @@ public class OrderDetail
 
     @ManyToOne
     @JoinColumn(name = "shipping_address")
-    private Address address;
+    private Address shippingAddress;
 
     @Column(name = "order_created_date_time")
-    private LocalDateTime localDateTime;
+    private LocalDateTime orderCreatedDateTime;
 
     @ManyToMany
     @JoinTable(
-            name = "order_detail_productlist",
+            name = "order_detail_products",
             joinColumns = @JoinColumn(name = "order_detail_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "productlist_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> productList = new ArrayList<>();
 
 
@@ -44,22 +49,24 @@ public class OrderDetail
     }
 
 
-    public OrderDetail(String id, UserProfile purchasedBy, LocalDateTime localDateTime, Address address, OrderStatus orderStatus)
+    public OrderDetail(Long id, UserProfile purchasedBy, LocalDateTime orderCreatedDateTime, Address shippingAddress, OrderStatus orderStatus)
     {
         this.id = id;
         this.orderStatus = orderStatus;
-        this.localDateTime = localDateTime;
+        this.orderCreatedDateTime = orderCreatedDateTime;
         this.purchasedBy = purchasedBy;
-        this.address = address;
+        this.shippingAddress = shippingAddress;
     }
 
-    public OrderDetail(String id, OrderStatus orderStatus, UserProfile purchasedBy, Address address, LocalDateTime localDateTime, List<Product> productList)
+    @Override
+    public String toString()
     {
-        this.id = id;
-        this.orderStatus = orderStatus;
-        this.purchasedBy = purchasedBy;
-        this.address = address;
-        this.localDateTime = localDateTime;
-        this.productList = productList;
+        return "OrderDetail{" +
+                "id=" + id +
+                ", orderStatus=" + orderStatus +
+                ", purchasedBy=" + purchasedBy +
+                ", shippingAddress=" + shippingAddress +
+                ", orderCreatedDateTime=" + orderCreatedDateTime +
+                '}';
     }
 }

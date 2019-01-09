@@ -71,7 +71,6 @@ public class InsertDataTest
         currency.setIsoCode("USD");
         currency.setName("USD");
         currency.setSymbol("$");
-
         currencyRepository.saveAndFlush(currency);
     }
 

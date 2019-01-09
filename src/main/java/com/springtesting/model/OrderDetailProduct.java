@@ -6,27 +6,30 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "order_detail_productlist")
-public class OrderDetailProduct
+@Table(name = "order_detail_products")
+public class OrderDetailProduct extends AbstractAuditingEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "order_detail_id")
-    private String orderDetailId;
+    private Long orderDetailId;
 
-    @Column(name = "productlist_id")
-    private String productListId;
+    @Column(name = "product_id")
+    private Long productId;
 
 
     public OrderDetailProduct()
     {
     }
 
-    public OrderDetailProduct(String orderDetailId, String productListId)
+    public OrderDetailProduct(Long orderDetailId, Long productId)
     {
         this.orderDetailId = orderDetailId;
-        this.productListId = productListId;
+        this.productId = productId;
     }
+
+
 }
