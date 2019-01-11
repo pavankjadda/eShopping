@@ -9,6 +9,7 @@ import com.springtesting.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,12 +20,14 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
 
@@ -76,6 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
+
             .and()
                     .formLogin()
                         .loginPage("/login")
@@ -85,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         .permitAll()
             .and()
                     .logout()
-                        .deleteCookies("JSESSIONID")
+                        .deleteCookies("X-Auth-Token")
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                         .permitAll()
             .and()

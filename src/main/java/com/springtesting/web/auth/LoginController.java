@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController
@@ -23,20 +25,20 @@ public class LoginController
 
     private UserRepository userRepository;
 
+    private final SessionRegistry sessionRegistry;
+
     @Autowired
-    public LoginController(UserRepository userRepository)
+    public LoginController(UserRepository userRepository, SessionRegistry sessionRegistry)
     {
         this.userRepository = userRepository;
+        this.sessionRegistry = sessionRegistry;
     }
 
     @GetMapping(value = {"/login","/authenticate"})
-    public UserDto loginUser()
+    public UserDto loginUser(HttpServletRequest request, HttpSession httpSession)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
-        User user=userRepository.findByUsername(myUserDetails.getUsername());
-
-        return copyUser(user);
+        return copyUser(authentication,request);
     }
 
 
@@ -47,22 +49,37 @@ public class LoginController
         // If NOT anonymous user, get user info
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
-            MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
-            User user=userRepository.findByUsername(myUserDetails.getUsername());
-            return copyUser(user);
+            return copyUser(authentication,request);
+        }
+        return null;
+    }
+
+    @GetMapping(value = {"/isvalidsession"})
+    public UserDto isValidSession(HttpServletRequest request)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // If NOT anonymous user, get user info
+        if (!(authentication instanceof AnonymousAuthenticationToken))
+        {
+            return copyUser(authentication,request);
         }
         return null;
     }
 
 
-    private UserDto copyUser(User user)
+    private UserDto copyUser(Authentication authentication, HttpServletRequest request)
     {
+        MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
+        User user=userRepository.findByUsername(myUserDetails.getUsername());
+        String token=request.getSession(false).getId();
+
         UserDto userDto=new UserDto();
         userDto.setId(user.getId());
         userDto.setFirstName(user.getUserProfile().getFirstName());
         userDto.setLastName(user.getUserProfile().getLastName());
         userDto.setUsername(user.getUsername());
         userDto.setRoles(user.getRoles());
+        userDto.setToken(token);
         return userDto;
     }
 

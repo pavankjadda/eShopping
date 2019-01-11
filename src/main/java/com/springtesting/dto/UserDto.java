@@ -20,6 +20,7 @@ public class UserDto
 
     private Collection<Role> roles;
 
+
     public UserDto() {};
 
     public UserDto(Long id, String username, String firstName, String lastName, String token)
