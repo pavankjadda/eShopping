@@ -1,7 +1,6 @@
 package com.springtesting.web.session;
 
 import com.springtesting.security.MyUserDetails;
-import com.springtesting.security.MyUserDetailsService;
 import com.springtesting.security.config.AuthorityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

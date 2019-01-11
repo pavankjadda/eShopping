@@ -1,33 +1,33 @@
 package com.springtesting.dto;
 
-import com.springtesting.model.UserProfile;
+import com.springtesting.model.Role;
+import lombok.Data;
 
+import java.util.Collection;
+
+@Data
 public class UserDto
 {
     private Long id;
 
     private String username;
 
-    private Boolean active;
+    private String firstName;
 
-    private Boolean credentialsNonExpired;
+    private String lastName;
 
-    private Boolean accountNonLocked;
+    private String token;
 
-    private Boolean accountNonExpired;
-
-    private UserProfile userProfile;
+    private Collection<Role> roles;
 
     public UserDto() {};
-    public UserDto(Long id, String username, Boolean active, Boolean credentialsNonExpired, Boolean accountNonLocked, Boolean accountNonExpired, UserProfile userProfile)
+
+    public UserDto(Long id, String username, String firstName, String lastName, String token)
     {
         this.id = id;
         this.username = username;
-        this.active = active;
-        this.credentialsNonExpired = credentialsNonExpired;
-        this.accountNonLocked = accountNonLocked;
-        this.accountNonExpired = accountNonExpired;
-        this.userProfile = userProfile;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.token = token;
     }
-
 }
