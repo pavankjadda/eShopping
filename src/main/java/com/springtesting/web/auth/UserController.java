@@ -47,9 +47,10 @@ public class UserController
         return userRepository.findById(id);
     }
 
-    @GetMapping(value = "/user/{username}")
+    @GetMapping(value = "/user/username/{username}")
     public User findByUsername(@PathVariable String username)
     {
         return userRepository.findByUsername(username);
     }
+
 }

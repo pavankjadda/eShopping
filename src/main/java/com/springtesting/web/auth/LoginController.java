@@ -1,32 +1,72 @@
 package com.springtesting.web.auth;
 
+import com.springtesting.dto.UserDto;
+import com.springtesting.model.User;
+import com.springtesting.repo.UserRepository;
+import com.springtesting.security.MyUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
-@Controller
+@RestController
 public class LoginController
 {
-    private Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @Resource(name = "authenticationManager")
-    private AuthenticationManager authManager;
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    private UserRepository userRepository;
+
+    @Autowired
+    public LoginController(UserRepository userRepository)
+    {
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping(value = {"/login","/authenticate"})
+    public UserDto loginUser()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
+        User user=userRepository.findByUsername(myUserDetails.getUsername());
+
+        return copyUser(user);
+    }
 
 
+    @GetMapping(value = {"/","/home"})
+    public UserDto validateUserSession(HttpServletRequest request)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // If NOT anonymous user, get user info
+        if (!(authentication instanceof AnonymousAuthenticationToken))
+        {
+            MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
+            User user=userRepository.findByUsername(myUserDetails.getUsername());
+            return copyUser(user);
+        }
+        return null;
+    }
+
+
+    private UserDto copyUser(User user)
+    {
+        UserDto userDto=new UserDto();
+        userDto.setId(user.getId());
+        userDto.setFirstName(user.getUserProfile().getFirstName());
+        userDto.setLastName(user.getUserProfile().getLastName());
+        userDto.setUsername(user.getUsername());
+        userDto.setRoles(user.getRoles());
+        return userDto;
+    }
+
+    /*
     @GetMapping(value = {"/", "/login"})
     public ModelAndView getLoginPage(HttpServletRequest request)
     {
@@ -56,6 +96,7 @@ public class LoginController
     {
         String sessionValue = null;
         Cookie[] cookies = request.getCookies();
+        if(cookies!=null)
         for (Cookie cookie : cookies)
         {
             if (cookie.getName().equals("JSESSIONID"))
@@ -73,7 +114,7 @@ public class LoginController
         //This is not being executed as Authentication Success Handler redirects page
         System.out.println("Inside validateLoginDetails() method");
 
-        /*
+        *//*
          System.out.println("Inside validateLoginDetails() method");
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(username, password);
         Authentication auth = authManager.authenticate(authReq);
@@ -86,25 +127,17 @@ public class LoginController
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("home");
         return modelAndView;
-         */
+         *//*
 
     }
 
 
-    @GetMapping(value = {"/home", "/home.html"})
-    public ModelAndView loadHomePage(HttpServletRequest request)
+    @RequestMapping("/user")
+    public Principal returnPrincipal(Principal user)
     {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken)
-        {
-            modelAndView.setViewName("redirect:login");
-            return modelAndView;
-        }
-
-        modelAndView.setViewName("home");
-        return modelAndView;
+        return user;
     }
+
 
     @GetMapping(value = {"/admin", "/admin.html"})
     public ModelAndView loadAdminHomePage(HttpServletRequest request)
@@ -135,5 +168,5 @@ public class LoginController
             }
         }
         return false;
-    }
+    }*/
 }

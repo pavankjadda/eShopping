@@ -11,8 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.util.Collections;
-import java.util.concurrent.Callable;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
