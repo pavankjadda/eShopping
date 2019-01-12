@@ -94,6 +94,30 @@ public class UserController
 
     }
 
+
+
+    @GetMapping(value = "/users/list")
+    public Page<User> findAll(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit)
+    {
+        if (pageNumber == null)
+            pageNumber = 0;
+        if (limit == null)
+            limit = 10;
+        return userRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "id")));
+    }
+
+    @GetMapping(value = "/user/{id}")
+    public Optional<User> findById(@PathVariable Long id)
+    {
+        return userRepository.findById(id);
+    }
+
+    @GetMapping(value = "/user/username/{username}")
+    public User findByUsername(@PathVariable String username)
+    {
+        return userRepository.findByUsername(username);
+    }
+
     private UserProfile createUserProfileObject(User newUser, RegisterUserDto registerUserDto)
     {
         UserProfile userProfile=new UserProfile();
@@ -120,29 +144,6 @@ public class UserController
         user.setCreatedDate(Instant.now());
         user.setLastModifiedDate(Instant.now());
         return user;
-    }
-
-
-    @GetMapping(value = "/users/list")
-    public Page<User> findAll(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit)
-    {
-        if (pageNumber == null)
-            pageNumber = 0;
-        if (limit == null)
-            limit = 10;
-        return userRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "id")));
-    }
-
-    @GetMapping(value = "/user/{id}")
-    public Optional<User> findById(@PathVariable Long id)
-    {
-        return userRepository.findById(id);
-    }
-
-    @GetMapping(value = "/user/username/{username}")
-    public User findByUsername(@PathVariable String username)
-    {
-        return userRepository.findByUsername(username);
     }
 
 }
