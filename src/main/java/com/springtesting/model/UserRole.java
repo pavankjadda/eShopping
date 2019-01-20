@@ -15,18 +15,13 @@ public class UserRole
     private Long id;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     @Column(name = "role_id")
-    private String roleId;
+    private Long roleId;
 
     public UserRole()
     {
     }
 
-    public UserRole(String userId, String roleId)
-    {
-        this.userId = userId;
-        this.roleId = roleId;
-    }
 }
