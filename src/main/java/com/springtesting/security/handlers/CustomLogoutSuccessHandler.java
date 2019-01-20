@@ -19,7 +19,6 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
     {
