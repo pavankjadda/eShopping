@@ -1,5 +1,7 @@
 package com.springtesting.security.handlers;
 
+import com.springtesting.model.security.SessionHistory;
+import com.springtesting.repo.SessionHistoryRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -8,24 +10,29 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collection;
 
-@Component("customAuthenticationSuccessHandler")
+
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
-
     private Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-    public CustomAuthenticationSuccessHandler()
+    private SessionHistoryRepository sessionHistoryRepository;
+
+
+    public CustomAuthenticationSuccessHandler(SessionHistoryRepository sessionHistoryRepository)
     {
+        this.sessionHistoryRepository = sessionHistoryRepository;
     }
 
     @Override
@@ -33,6 +40,36 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     {
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
+        saveRequesterInformation(request, response, authentication);
+    }
+
+    private void saveRequesterInformation(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    {
+        SessionHistory sessionHistory = new SessionHistory();
+        sessionHistory.setSessionId(request.getSession(false).getId());
+        sessionHistory.setCreationTime(convertLongTime(request.getSession(false).getCreationTime()));
+        sessionHistory.setLastAccessTime(convertLongTime(request.getSession(false).getLastAccessedTime()));
+        sessionHistory.setMaxInactiveInterval(request.getSession(false).getMaxInactiveInterval());
+        sessionHistory.setLoggedDataTime(LocalDateTime.now());
+        sessionHistory.setUsername(authentication.getName());
+        sessionHistory.setRequesterIpAddress(request.getRemoteAddr());
+        sessionHistory.setRequesterPort(request.getRemotePort());
+        sessionHistory.setRequestedMethod(request.getMethod());
+        sessionHistory.setLocalIpAddress(request.getLocalAddr());
+        sessionHistory.setLocalPort(request.getLocalPort());
+        sessionHistory.setServerName(request.getServerName());
+        sessionHistory.setServerPort(request.getServerPort());
+        sessionHistory.setBrowserInformation(request.getAuthType());
+        sessionHistory.setAuthType(request.getAuthType());
+
+        try
+        {
+            sessionHistoryRepository.saveAndFlush(sessionHistory);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
@@ -81,5 +118,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void setRedirectStrategy(RedirectStrategy redirectStrategy)
     {
         this.redirectStrategy = redirectStrategy;
+    }
+
+    public LocalDateTime convertLongTime(long longValue)
+    {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
     }
 }

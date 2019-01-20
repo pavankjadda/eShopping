@@ -1,6 +1,6 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.model.UnauthorizedRequest;
+import com.springtesting.model.security.UnauthorizedRequest;
 import com.springtesting.repo.UnauthorizedRequestRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -16,13 +16,13 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler
 
     public CustomAccessDeniedHandler(UnauthorizedRequestRepository unauthorizedRequestRepository)
     {
-        this.unauthorizedRequestRepository=unauthorizedRequestRepository;
+        this.unauthorizedRequestRepository = unauthorizedRequestRepository;
     }
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException )
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
     {
-        UnauthorizedRequest unauthorizedRequest=new UnauthorizedRequest();
+        UnauthorizedRequest unauthorizedRequest = new UnauthorizedRequest();
         unauthorizedRequest.setRequesterIpAddress(request.getRemoteAddr());
         unauthorizedRequest.setRequesterPort(request.getRemotePort());
         unauthorizedRequest.setRequestedMethod(request.getMethod());
