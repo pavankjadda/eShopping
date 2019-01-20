@@ -19,7 +19,10 @@ Spring Security implementation with Spring Session, Spring Data and Spring Boot.
 5. Logback (Structured logging)
 6. Zipkin, Spring Cloud Sleuth, Splunk and ELK for logging system
 7. Spring Config Server for Config
-8. Mysql (Included configuration for PostGres deployment)
+8. Liquibase
+9. Mysql (Included configuration for PostgreSQL deployment)
+10. JUnit & Mockito
+11. Cucumber 
 
 
 ### Frontend
