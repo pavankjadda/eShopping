@@ -1,13 +1,8 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.SessionHistory;
+import com.springtesting.model.security.SessionHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface SessionHistoryRepository extends JpaRepository<SessionHistory,Long>
+public interface SessionHistoryRepository extends JpaRepository<SessionHistory, Long>
 {
-    List<SessionHistory> findAllBySessionId(String sessionId);
-
-    List<SessionHistory> findAllByUsername(String username);
 }
