@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+
+<h1>Access Denied</h1>
+
+<h4>Forbidden: HTTP 403 error</h4>
+<h4>You do not have authority access this page, Click <a href="/home"> here </a>to go home</h4>
+
+
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<form method="get" th:action="@{/home}">
+    <input type="submit" value="Go Home"/>
+</form>
+</body>
+</html>
