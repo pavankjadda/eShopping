@@ -5,6 +5,7 @@ import com.springtesting.repo.FailedLoginRepository;
 import com.springtesting.repo.SessionHistoryRepository;
 import com.springtesting.repo.UnauthorizedRequestRepository;
 import com.springtesting.security.MyUserDetailsService;
+import com.springtesting.security.entrypoints.MyBasicAuthenticationEntryPoint;
 import com.springtesting.security.handlers.CustomAccessDeniedHandler;
 import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
 import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
@@ -43,13 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
 
+    private final MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint;
+
     @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository)
+    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository, MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint)
     {
         this.userDetailsService = userDetailsService;
         this.sessionHistoryRepository = sessionHistoryRepository;
         this.failedLoginRepository=failedLoginRepository;
         this.unauthorizedRequestRepository = unauthorizedRequestRepository;
+        this.myBasicAuthenticationEntryPoint = myBasicAuthenticationEntryPoint;
     }
 
     @Override
@@ -78,33 +82,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-                .antMatchers("/anonymous*").anonymous()
-                //.antMatchers("/users/**").permitAll()
-                .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
-                .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
-                .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
-                .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser, AuthorityConstants.Admin)
-                .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
-                .anyRequest().authenticated()
+                    .antMatchers("/anonymous*").anonymous()
+                    .antMatchers("/register").permitAll()
+                    .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
+                    .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
+                    .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
+                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser, AuthorityConstants.Admin)
+                    .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
+                    .anyRequest().authenticated()
                 .and()
-                .httpBasic()
+                    .httpBasic().authenticationEntryPoint(myBasicAuthenticationEntryPoint)
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
-                .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
+                    .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
+                    .permitAll()
                 .and()
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-                .permitAll()
+                    .logout()
+                    .deleteCookies("token")
+                    .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+                    .permitAll()
                 .and()
-                .exceptionHandling()
-                .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
+                    .exceptionHandling()
+                    .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
                 .and()
-                .rememberMe().rememberMeServices(springSessionRememberMeServices());
+                    .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
 
         http.cors();
