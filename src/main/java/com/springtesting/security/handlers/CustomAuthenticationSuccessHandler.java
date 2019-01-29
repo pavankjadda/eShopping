@@ -61,7 +61,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         sessionHistory.setServerPort(request.getServerPort());
         sessionHistory.setBrowserInformation(request.getAuthType());
         sessionHistory.setAuthType(request.getAuthType());
-        
+
         try
         {
             sessionHistoryRepository.saveAndFlush(sessionHistory);

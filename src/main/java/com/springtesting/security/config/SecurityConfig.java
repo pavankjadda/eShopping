@@ -5,11 +5,7 @@ import com.springtesting.repo.FailedLoginRepository;
 import com.springtesting.repo.SessionHistoryRepository;
 import com.springtesting.repo.UnauthorizedRequestRepository;
 import com.springtesting.security.MyUserDetailsService;
-import com.springtesting.security.entrypoints.MyBasicAuthenticationEntryPoint;
-import com.springtesting.security.handlers.CustomAccessDeniedHandler;
-import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
-import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
-import com.springtesting.security.handlers.CustomLogoutSuccessHandler;
+import com.springtesting.security.handlers.*;
 import com.springtesting.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +20,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -44,16 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
 
-    private final MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint;
+    private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
 
     @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository, MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint)
+    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
     {
         this.userDetailsService = userDetailsService;
         this.sessionHistoryRepository = sessionHistoryRepository;
-        this.failedLoginRepository=failedLoginRepository;
+        this.failedLoginRepository = failedLoginRepository;
         this.unauthorizedRequestRepository = unauthorizedRequestRepository;
-        this.myBasicAuthenticationEntryPoint = myBasicAuthenticationEntryPoint;
+        this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
     }
 
     @Override
@@ -65,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public CustomDaoAuthenticationProvider getDaoAuthenticationProvider()
     {
-        CustomDaoAuthenticationProvider daoAuthenticationProvider = new CustomDaoAuthenticationProvider();
+        CustomDaoAuthenticationProvider daoAuthenticationProvider=new CustomDaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
         return daoAuthenticationProvider;
@@ -81,59 +78,63 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.authorizeRequests()
+            http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/register").permitAll()
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
-                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser, AuthorityConstants.Admin)
+                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ApiUser,AuthorityConstants.Admin)
                     .antMatchers("/dba/**").hasAuthority(AuthorityConstants.Dba)
                     .anyRequest().authenticated()
-                .and()
-                    .httpBasic().authenticationEntryPoint(myBasicAuthenticationEntryPoint)
-                .and()
+            .and()
+                    .httpBasic()
+                    .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
+            .and()
                     .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
                     .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
                     .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
-                    .permitAll()
-                .and()
+                        .permitAll()
+            .and()
                     .logout()
-                    .deleteCookies("token")
-                    .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-                    .permitAll()
-                .and()
+                        .deleteCookies("X-Auth-Token")
+                        .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+                        .permitAll()
+             .and()
                     .exceptionHandling()
                     .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
-                .and()
+            .and()
                     .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
-
+        // Uses CorsConfigurationSource bean defined below
         http.cors();
 
         http.sessionManagement()
-                .sessionFixation().migrateSession()
-                .maximumSessions(1)
-                .maxSessionsPreventsLogin(false)
-                .sessionRegistry(sessionRegistry());
+                        //.invalidSessionUrl("/login.html")
+                        //.invalidSessionStrategy((request, response) -> request.logout())
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
+                        .sessionRegistry(sessionRegistry());
 
         http.csrf()
-                .disable();
+            .disable();
+
     }
 
     @Bean
     public SpringSessionRememberMeServices springSessionRememberMeServices()
     {
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-        // optionally customize
         rememberMeServices.setRememberMeParameterName("remember-me");
         rememberMeServices.setValiditySeconds(ApplicationConstants.rememberMeTimeOut);
         return rememberMeServices;
     }
 
-    @Bean
+    //Cors filter to accept incoming requests
+   @Bean
     CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -146,21 +147,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
 
-    @Bean
-    SessionRegistry sessionRegistry()
-    {
-        return new SessionRegistryImpl();
-    }
-
-
     @Override
-    public void configure(WebSecurity web)
+    public void configure(WebSecurity web) throws Exception
     {
-        web.ignoring()
-                .antMatchers( "/static/**","/resources/**", "/js/**", "/css/**", "/images/**");
-
+        web
+            .ignoring()
+            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher()
+    {
+        return new HttpSessionEventPublisher();
+    }
 
     @Bean("authenticationManager")
     @Override
@@ -168,4 +167,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         return super.authenticationManagerBean();
     }
+
+    @Bean
+    public SessionRegistry sessionRegistry()
+    {
+        return new SessionRegistryImpl();
+    }
+
+
+   /* @Bean
+    SpringSessionBackedSessionRegistry sessionRegistry()
+    {
+        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
+    }*/
+
+    /*
+ @Bean
+ public WebMvcConfigurer corsConfigurer()
+ {
+     return new WebMvcConfigurer()
+     {
+         @Override
+         public void addCorsMappings(CorsRegistry registry)
+         {
+             registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
+         }
+     };
+     return new WebMvcConfigurerAdapter()
+     {
+         @Override
+         public void addCorsMappings(CorsRegistry registry)
+         {
+             registry.addMapping("**").allowedOrigins("http://localhost:4200");
+         }
+     };
+ }*/
 }

@@ -38,8 +38,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         System.out.println("Exception: " + exception.toString());
         handle(request, response, exception);
         clearAuthenticationAttributes(request);
-
         saveRequesterInformation(request);
+
     }
 
     private void handle(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException
