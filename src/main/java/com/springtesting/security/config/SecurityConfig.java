@@ -20,7 +20,6 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -155,11 +154,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher()
-    {
-        return new HttpSessionEventPublisher();
-    }
 
     @Bean("authenticationManager")
     @Override
@@ -174,32 +168,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         return new SessionRegistryImpl();
     }
 
-
-   /* @Bean
-    SpringSessionBackedSessionRegistry sessionRegistry()
-    {
-        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
-    }*/
-
-    /*
- @Bean
- public WebMvcConfigurer corsConfigurer()
- {
-     return new WebMvcConfigurer()
-     {
-         @Override
-         public void addCorsMappings(CorsRegistry registry)
-         {
-             registry.addMapping("**").allowedOrigins("http://localhost:4200/*");
-         }
-     };
-     return new WebMvcConfigurerAdapter()
-     {
-         @Override
-         public void addCorsMappings(CorsRegistry registry)
-         {
-             registry.addMapping("**").allowedOrigins("http://localhost:4200");
-         }
-     };
- }*/
 }
