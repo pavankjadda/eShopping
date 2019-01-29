@@ -3,12 +3,13 @@ package com.springtesting.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "session_history")
-public class SessionHistory
+@Table(name = "unauthorized_request")
+public class UnauthorizedRequest implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
@@ -17,23 +18,8 @@ public class SessionHistory
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "logged_date_time")
     private LocalDateTime loggedDataTime;
-
-    @Column(name = "session_id")
-    private String sessionId ;
-
-    @Column(name = "creation_time")
-    private LocalDateTime creationTime;
-
-    @Column(name = "last_access_time")
-    private LocalDateTime lastAccessTime;
-
-    @Column(name = "max_inactive_interval")
-    private long maxInactiveInterval;
 
     @Column(name = "requester_ip_address")
     private String requesterIpAddress ;
@@ -65,7 +51,8 @@ public class SessionHistory
     @Column(name = "auth_type")
     private String authType;
 
-    @Column(name = "raw_information",length = 10000)
-    private String rawInformation;
+    @Column(name = "exception_message",length = 10000)
+    private String exceptionMessage;
+
 
 }

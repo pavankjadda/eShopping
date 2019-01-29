@@ -1,7 +1,11 @@
 package com.springtesting.security.config;
 
 
+import com.springtesting.repo.FailedLoginRepository;
+import com.springtesting.repo.SessionHistoryRepository;
+import com.springtesting.repo.UnauthorizedRequestRepository;
 import com.springtesting.security.MyUserDetailsService;
+import com.springtesting.security.handlers.CustomAccessDeniedHandler;
 import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
 import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
 import com.springtesting.security.handlers.CustomLogoutSuccessHandler;
@@ -34,10 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
+    private final SessionHistoryRepository sessionHistoryRepository;
+
+    private final FailedLoginRepository failedLoginRepository;
+
+    private final UnauthorizedRequestRepository unauthorizedRequestRepository;
+
     @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService)
+    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository)
     {
         this.userDetailsService = userDetailsService;
+        this.sessionHistoryRepository = sessionHistoryRepository;
+        this.failedLoginRepository = failedLoginRepository;
+        this.unauthorizedRequestRepository = unauthorizedRequestRepository;
     }
 
     @Override
@@ -80,14 +93,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .successHandler(new CustomAuthenticationSuccessHandler())
-                        .failureHandler(new CustomAuthenticationFailureHandler())
+                    .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
+                    .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
                         .permitAll()
             .and()
                     .logout()
                         .deleteCookies("X-Auth-Token")
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                         .permitAll()
+             .and()
+                    .exceptionHandling()
+                    .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
             .and()
                     .rememberMe().rememberMeServices(springSessionRememberMeServices());
 
@@ -111,7 +127,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     public SpringSessionRememberMeServices springSessionRememberMeServices()
     {
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-        // optionally customize
         rememberMeServices.setRememberMeParameterName("remember-me");
         rememberMeServices.setValiditySeconds(ApplicationConstants.rememberMeTimeOut);
         return rememberMeServices;
@@ -123,7 +138,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.applyPermitDefaultValues();
-        //configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
