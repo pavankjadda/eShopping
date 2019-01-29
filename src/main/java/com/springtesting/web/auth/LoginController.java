@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +25,10 @@ public class LoginController
 
     private UserRepository userRepository;
 
-    private final SessionRegistry sessionRegistry;
-
     @Autowired
-    public LoginController(UserRepository userRepository, SessionRegistry sessionRegistry)
+    public LoginController(UserRepository userRepository)
     {
         this.userRepository = userRepository;
-        this.sessionRegistry = sessionRegistry;
     }
 
     @GetMapping(value = {"/login","/authenticate"})
@@ -41,6 +38,12 @@ public class LoginController
         return copyUser(authentication,request);
     }
 
+    @PostMapping(value = {"/login"})
+    public UserDto loginUserPost(HttpServletRequest request)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return copyUser(authentication,request);
+    }
 
     @GetMapping(value = {"/","/home"})
     public UserDto validateUserSession(HttpServletRequest request)
@@ -69,18 +72,26 @@ public class LoginController
 
     private UserDto copyUser(Authentication authentication, HttpServletRequest request)
     {
-        MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
-        User user=userRepository.findByUsername(myUserDetails.getUsername());
-        String token=request.getSession(false).getId();
+        try
+        {
+            MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
+            User user=userRepository.findByUsername(myUserDetails.getUsername());
+            String token=request.getSession(false).getId();
 
-        UserDto userDto=new UserDto();
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getUserProfile().getFirstName());
-        userDto.setLastName(user.getUserProfile().getLastName());
-        userDto.setUsername(user.getUsername());
-        userDto.setRoles(user.getRoles());
-        userDto.setToken(token);
-        return userDto;
+            UserDto userDto=new UserDto();
+            userDto.setId(user.getId());
+            userDto.setFirstName(user.getUserProfile().getFirstName());
+            userDto.setLastName(user.getUserProfile().getLastName());
+            userDto.setUsername(user.getUsername());
+            userDto.setRoles(user.getRoles());
+            userDto.setToken(token);
+            return userDto;
+        }
+        catch (Exception e)
+        {
+            logger.warn("Exception: Failed to get Authentication Object=> "+e.getMessage());
+        }
+        return null;
     }
 
 }
