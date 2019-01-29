@@ -11,6 +11,5 @@ public class SpringSecurityDataApplication
         SpringApplication.run(SpringSecurityDataApplication.class, args);
     }
 
-
 }
 
