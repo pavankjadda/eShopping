@@ -5,10 +5,7 @@ import com.springtesting.repo.FailedLoginRepository;
 import com.springtesting.repo.SessionHistoryRepository;
 import com.springtesting.repo.UnauthorizedRequestRepository;
 import com.springtesting.security.MyUserDetailsService;
-import com.springtesting.security.handlers.CustomAccessDeniedHandler;
-import com.springtesting.security.handlers.CustomAuthenticationFailureHandler;
-import com.springtesting.security.handlers.CustomAuthenticationSuccessHandler;
-import com.springtesting.security.handlers.CustomLogoutSuccessHandler;
+import com.springtesting.security.handlers.*;
 import com.springtesting.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,13 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
 
+    private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
+
     @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository)
+    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
     {
         this.userDetailsService = userDetailsService;
         this.sessionHistoryRepository = sessionHistoryRepository;
         this.failedLoginRepository = failedLoginRepository;
         this.unauthorizedRequestRepository = unauthorizedRequestRepository;
+        this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
     }
 
     @Override
@@ -89,6 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
+                    .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
             .and()
                     .formLogin()
                         .loginPage("/login")
