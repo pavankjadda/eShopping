@@ -88,6 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
+            .and()
+                    .exceptionHandling()
                     .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
             .and()
                     .formLogin()
