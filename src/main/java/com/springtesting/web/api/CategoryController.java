@@ -62,11 +62,6 @@ public class CategoryController
     @DeleteMapping(value = "/delete/{id}")
     public void deleteCategoryById(@PathVariable Long id)
     {
-
-        if(!categoryRepository.findById(id).isPresent())
-        {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
-        }
         categoryRepository.deleteById(id);
     }
 
