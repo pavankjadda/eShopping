@@ -4,7 +4,11 @@ import com.springtesting.exceptions.exceptions.CategoryException;
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +32,14 @@ public class CategoryController
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Category> findCategoryById(@PathVariable Long id)
+    public ResponseEntity<Category> findCategoryById(@PathVariable Long id)
     {
         Optional<Category> category=categoryRepository.findById(id);
         if(!category.isPresent())
-            throw new CategoryException("Category is not Found");
-        return category;
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
+        }
+        return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/create")

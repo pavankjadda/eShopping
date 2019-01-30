@@ -1,7 +1,7 @@
 package com.springtesting.aop.api;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import com.springtesting.exceptions.exceptions.CategoryException;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -21,20 +21,9 @@ public class CategoryLogger
     }
 
 
-    @Around("categoryControllerPointcut()")
-    public Object logCategoryRequests(ProceedingJoinPoint proceedingJoinPoint)
+    @AfterThrowing(value = "execution(* com.springtesting.web.api.CategoryController.*(..))",throwing = "exception")
+    public void categoryExceptionClass(CategoryException exception)
     {
-        Object result = null;
-        try
-        {
-            result = proceedingJoinPoint.proceed();
-        }
-        catch (Throwable throwable)
-        {
-            throwable.printStackTrace();
-        }
-        logger.info("Log {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
-                proceedingJoinPoint.getSignature().getName(), result);
-        return result;
+        logger.info("Log: "+exception.getMessage());
     }
 }
