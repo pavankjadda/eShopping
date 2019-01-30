@@ -1,6 +1,5 @@
 package com.springtesting.web.api;
 
-import com.springtesting.exceptions.exceptions.CategoryException;
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +62,11 @@ public class CategoryController
     @DeleteMapping(value = "/delete/{id}")
     public void deleteCategoryById(@PathVariable Long id)
     {
+
         if(!categoryRepository.findById(id).isPresent())
-            throw new CategoryException("Category is not Found");
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
+        }
         categoryRepository.deleteById(id);
     }
 
