@@ -1,4 +1,4 @@
-package com.springtesting.exceptions;
+package com.springtesting.exceptions.handlers;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

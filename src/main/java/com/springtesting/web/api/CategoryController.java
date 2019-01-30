@@ -1,5 +1,6 @@
 package com.springtesting.web.api;
 
+import com.springtesting.exceptions.exceptions.CategoryException;
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,10 @@ public class CategoryController
     @GetMapping(path = "/{id}")
     public Optional<Category> findCategoryById(@PathVariable Long id)
     {
-        return categoryRepository.findById(id);
+        Optional<Category> category=categoryRepository.findById(id);
+        if(!category.isPresent())
+            throw new CategoryException("Category is not Found");
+        return category;
     }
 
     @PostMapping(value = "/create")
@@ -53,6 +57,8 @@ public class CategoryController
     @DeleteMapping(value = "/delete/{id}")
     public void deleteCategoryById(@PathVariable Long id)
     {
+        if(!categoryRepository.findById(id).isPresent())
+            throw new CategoryException("Category is not Found");
         categoryRepository.deleteById(id);
     }
 
