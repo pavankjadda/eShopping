@@ -17,14 +17,5 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     {
         return new ResponseEntity<>("Authentication Failed", new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
-
-    /*@ExceptionHandler({CategoryException.class})
-    public ResponseEntity<Object> handleCategoryException(CategoryException exception, WebRequest webRequest)
-    {
-        return new ResponseEntity<>(exception.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
-    }
-*/
-
-
 }
 

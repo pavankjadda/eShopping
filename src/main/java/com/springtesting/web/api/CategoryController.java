@@ -1,5 +1,6 @@
 package com.springtesting.web.api;
 
+import com.springtesting.exceptions.exceptions.CategoryException;
 import com.springtesting.model.Category;
 import com.springtesting.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +36,8 @@ public class CategoryController
         Optional<Category> category=categoryRepository.findById(id);
         if(!category.isPresent())
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
+            //throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
+            throw new CategoryException("Category is not Found");
         }
         return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);
     }
@@ -64,7 +65,7 @@ public class CategoryController
     {
         if(!categoryRepository.findById(id).isPresent())
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
+            throw new CategoryException("Category is not Found");
         }
         categoryRepository.deleteById(id);
     }
