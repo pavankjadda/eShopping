@@ -38,5 +38,7 @@ management:
     auditevents:
       enabled: true
 
-
+# Logging
+logging:
+  file: /Users/pjadda/ELK-Stack/logback/springsecuritydata.log
 
