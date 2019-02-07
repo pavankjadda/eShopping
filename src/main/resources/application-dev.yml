@@ -42,3 +42,14 @@ management:
 logging:
   file: /Users/pjadda/ELK-Stack/logback/springsecuritydata.log
 
+# Bucket4J properties
+bucket4j:
+  enabled: true
+  filters:
+    - cache-name: buckets
+      url: /*
+      rate-limits:
+        - bandwidths:
+            - capacity: 5
+              time: 10
+              unit: seconds
