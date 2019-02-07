@@ -1,5 +1,6 @@
 # Spring Security implementation with Spring Session, Spring Data and Spring Boot
 
+## What's this?
 Spring Security implementation with Spring Session, Spring Data and Spring Boot. Following usecases covered
 1. Register new user
 2. Login with credentials and persist session between calls until user closes browser
@@ -10,4 +11,15 @@ Spring Security implementation with Spring Session, Spring Data and Spring Boot.
 7. Provide role management and restrict users from accessing unauthorized content i.e. Users trying to access Admin data
 8. Provide Stateless authentication for atleast one REST API
 
-
+## Technologies 
+1. Java 8
+2. Spring Boot and listed Spring modules 
+    - Spring Data 
+    - Spring Security 
+    - Spring AOP
+    - Spring Session
+    - Spring Cache
+3. Logback and ELK Stack for log management
+4. Bucket4J for rate limiting
+5. Jackson for Data binding
+6. MySql for database
