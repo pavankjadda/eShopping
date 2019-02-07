@@ -55,7 +55,7 @@ bucket4j:
             expression: getRemoteAddr()
             types: REJECTED_COUNTER # for data privacy reasons the IP should only be collected on bucket rejections
           - key: USERNAME
-            expression: "@securityService.username() != null ? @securityService.username() : 'anonym'"
+            expression: "@bucket4jSecurityService.username() != null ? @bucket4jSecurityService.username() : 'anonymous'"
           - key: URL
             expression: request.getRequestURI()
       rate-limits:
