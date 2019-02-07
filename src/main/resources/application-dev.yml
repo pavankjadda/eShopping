@@ -22,8 +22,7 @@ spring:
     restart:
       enabled: true
   liquibase:
-    enabled: true
-
+    contexts: dev
 
 ## Server Properties
 server:

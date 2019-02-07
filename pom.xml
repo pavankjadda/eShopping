@@ -107,6 +107,7 @@
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>${liquibase-maven-plugin.version}</version>
         </dependency>
+
         <!--<dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -165,8 +166,16 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase-maven-plugin.version}</version>
                 <configuration>
-                    <propertyFile>src/main/resources/application-dev.yml</propertyFile>
+                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
