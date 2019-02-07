@@ -45,9 +45,19 @@ logging:
 # Bucket4J properties
 bucket4j:
   enabled: true
+
   filters:
     - cache-name: buckets
       url: /*
+      metrics:
+        tags:
+          - key: IP
+            expression: getRemoteAddr()
+            types: REJECTED_COUNTER # for data privacy reasons the IP should only be collected on bucket rejections
+          - key: USERNAME
+            expression: "@securityService.username() != null ? @securityService.username() : 'anonym'"
+          - key: URL
+            expression: request.getRequestURI()
       rate-limits:
         - bandwidths:
             - capacity: 5
