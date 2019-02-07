@@ -10,7 +10,7 @@ spring:
     password: ${spring.datasource.password}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 
   # Spring Session properties
   session:
@@ -20,6 +20,8 @@ spring:
   devtools:
     restart:
       enabled: true
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
 
 ## Server Properties
 server:
@@ -42,6 +44,10 @@ management:
 # Logging
 logging:
   file: /Users/pjadda/ELK-Stack/logback/springsecuritydata.log
+
+# Liquibase
+liquibase:
+
 
 # Bucket4J properties
 bucket4j:
