@@ -80,6 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/register").permitAll()
+                    .antMatchers("/h2-console").permitAll()
+                    .antMatchers("/console/*").permitAll()
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
@@ -153,7 +155,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         web
             .ignoring()
-            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/h2-console");
     }
 
 
