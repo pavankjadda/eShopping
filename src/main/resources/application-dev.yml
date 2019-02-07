@@ -8,6 +8,7 @@ spring:
     url: ${spring.datasource.url}
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
+    driver-class-name: ${spring.datasource.driver-class-name}
   jpa:
     hibernate:
       ddl-auto: none
@@ -21,7 +22,8 @@ spring:
     restart:
       enabled: true
   liquibase:
-    change-log: classpath:db/liquibase-changelog.xml
+    enabled: true
+
 
 ## Server Properties
 server:
@@ -44,10 +46,6 @@ management:
 # Logging
 logging:
   file: /Users/pjadda/ELK-Stack/logback/springsecuritydata.log
-
-# Liquibase
-liquibase:
-
 
 # Bucket4J properties
 bucket4j:

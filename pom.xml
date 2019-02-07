@@ -24,7 +24,8 @@
         <java.version>1.8</java.version>
         <hibernate.version>5.4.0.Final</hibernate.version>
         <bucket4j-spring-boot.version>0.1.15</bucket4j-spring-boot.version>
-        <javax.interceptor-api.verion>1.2.2</javax.interceptor-api.verion>
+        <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
+        <liquibase-maven-plugin.version>3.6.3</liquibase-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -101,6 +102,11 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase-maven-plugin.version}</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -131,7 +137,7 @@
         <dependency>
             <groupId>javax.interceptor</groupId>
             <artifactId>javax.interceptor-api</artifactId>
-            <version>${javax.interceptor-api.verion}</version>
+            <version>${javax.interceptor-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -152,6 +158,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase-maven-plugin.version}</version>
+                <configuration>
+                    <propertyFile>src/main/resources/application-dev.yml</propertyFile>
                 </configuration>
             </plugin>
         </plugins>
