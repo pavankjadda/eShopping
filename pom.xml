@@ -23,6 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <hibernate.version>5.4.0.Final</hibernate.version>
+        <bucket4j-spring-boot.version>0.1.15</bucket4j-spring-boot.version>
     </properties>
 
     <dependencies>
@@ -105,6 +106,7 @@
         <dependency>
             <groupId>com.giffing.bucket4j.spring.boot.starter</groupId>
             <artifactId>bucket4j-spring-boot-starter</artifactId>
+            <version>${bucket4j-spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
