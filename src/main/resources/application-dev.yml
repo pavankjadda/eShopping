@@ -8,7 +8,6 @@ spring:
     url: ${spring.datasource.url}
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    driver-class-name: ${spring.datasource.driver-class-name}
   jpa:
     hibernate:
       ddl-auto: none
@@ -23,6 +22,7 @@ spring:
       enabled: true
   liquibase:
     contexts: dev
+    change-log: classpath:db/changelog/db.changelog-master.xml
 
 ## Server Properties
 server:

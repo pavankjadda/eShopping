@@ -39,6 +39,9 @@ public class Address extends AbstractAuditingEntity
     @Column(name = "zip_code")
     private String zipCode;
 
+    @Column(name = "test")
+    private String test;
+
     @ManyToOne
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;

@@ -93,11 +93,11 @@
             <scope>runtime</scope>
         </dependency>
 
-    <!--     <dependency>
+         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -108,10 +108,10 @@
             <version>${liquibase-maven-plugin.version}</version>
         </dependency>
 
-        <dependency>
+  <!--      <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
