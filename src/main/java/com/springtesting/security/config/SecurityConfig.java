@@ -80,8 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/register").permitAll()
-                    .antMatchers("/h2-console").permitAll()
-                    .antMatchers("/console/*").permitAll()
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.Admin)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.User)
@@ -100,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
                     .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
                         .permitAll()
-            .and()
+                    .and()
                     .logout()
                         .deleteCookies("X-Auth-Token")
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
@@ -124,6 +122,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
         http.csrf()
             .disable();
+        http.authorizeRequests()
+            .antMatchers("/").permitAll()
+                .and()
+            .authorizeRequests().antMatchers("/console/**","/h2-console/**").permitAll();
+        http.headers()
+             .frameOptions().disable();
 
     }
 
@@ -155,7 +159,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         web
             .ignoring()
-            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/h2-console");
+            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/h2-console/**","/console/**");
     }
 
 
