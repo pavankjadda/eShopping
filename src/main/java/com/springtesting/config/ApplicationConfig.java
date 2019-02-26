@@ -24,6 +24,7 @@ public class ApplicationConfig implements WebMvcConfigurer
         registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder()
     {

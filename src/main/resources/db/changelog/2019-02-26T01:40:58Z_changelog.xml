@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="pjadda (generated)" id="1551145266492-1">
+        <addColumn tableName="city">
+            <column name="test" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-2">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="product" constraintName="FK1mtsbur82frn64de7balymq9s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-3">
+        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="price_product_list" constraintName="FK2qkbv9ws15bw8eedxqynpr32s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-4">
+        <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="address" constraintName="FK4cx5jughttw4h3qfxrcitbtxl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="state"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-5">
+        <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="address" constraintName="FK4ljdc68rnke4txup1jlf1il4l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-6">
+        <addForeignKeyConstraint baseColumnNames="order_status" baseTableName="order_detail" constraintName="FK61lcojablhugx52yjs8e1aa31" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_status"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-7">
+        <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="city" constraintName="FK6p2u50v8fg2y0js6djc6xanit" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="state"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-8">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="address" constraintName="FK8ftovogl7u9uud2od9ypy0o0e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_profile"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-9">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FKa68196081fvovjhkek5m97n3y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-10">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="order_history_detail_productlist" constraintName="FKdjnsagq3gapft9wevb12wpihe" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-11">
+        <addForeignKeyConstraint baseColumnNames="privilege_id" baseTableName="role_privilege" constraintName="FKdkwbrwb5r8h74m1v7dqmhp99c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="privilege"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-12">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="address" constraintName="FKe54x81nmccsk5569hsjg1a6ka" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="country"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-13">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_history_detail_productlist" constraintName="FKebca63pw7j58l71p2n0e6pl9m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_product"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-14">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_price" constraintName="FKeupemu63ifqfc4txkskyy1hyi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-15">
+        <addForeignKeyConstraint baseColumnNames="shipping_address" baseTableName="order_detail" constraintName="FKff406vhs3jmf2my5q15c5dbck" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-16">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="FKfgsgxvihks805qcq8sq26ab7c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-17">
+        <addForeignKeyConstraint baseColumnNames="product_list_id" baseTableName="price_product_list" constraintName="FKg0e474nntn9opxdss96kiyah9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-18">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="state" constraintName="FKghic7mqjt6qb9vq7up7awu0er" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="country"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-19">
+        <addForeignKeyConstraint baseColumnNames="order_history_address_id" baseTableName="order_history" constraintName="FKh793ojwenjmi27owbenrt0lfx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_address"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-20">
+        <addForeignKeyConstraint baseColumnNames="purchased_by" baseTableName="order_detail" constraintName="FKj4sfqlf6gxnjdxrgx6dguphmb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_profile"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-21">
+        <addForeignKeyConstraint baseColumnNames="order_history_user_profile" baseTableName="order_history" constraintName="FKja4kxl09wd3fhg1vmpqu6edgh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_user_profile"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-22">
+        <addForeignKeyConstraint baseColumnNames="currency_id" baseTableName="price" constraintName="FKjufxmhfbykaua4p43u87udfqq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="currency"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-23">
+        <addForeignKeyConstraint baseColumnNames="address_type_id" baseTableName="address" constraintName="FKkkjn52mg1vha4yjpm0douso7f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address_type"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-24">
+        <addForeignKeyConstraint baseColumnNames="order_detail_id" baseTableName="order_detail_products" constraintName="FKksyb0gwkixy72i1uhwgube3ye" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_detail"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-25">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="address" constraintName="FKpo044ng5x4gynb291cv24vtea" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="city"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-26">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_profile" constraintName="FKqcd5nmg7d7ement27tt9sf3bi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-27">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_detail_products" constraintName="FKrqasr5oeilutkupy5hxkih5tc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-28">
+        <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="country" constraintName="FKs3bda8801uhqtttuaur9r6eic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-29">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_privilege" constraintName="FKsykrtrdngu5iexmbti7lu9xa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1551145266492-30">
+        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="product_price" constraintName="FKxfgbtbbrfa24m2881bw2k0rv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price"/>
+    </changeSet>
+</databaseChangeLog>
