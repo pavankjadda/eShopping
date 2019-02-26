@@ -19,6 +19,7 @@ public class City extends AbstractAuditingEntity
     //@Length(max = 100,min = 2)
     private String name;
 
+
     @ManyToOne
     @JoinColumn(name = "state_id")
     @JsonIgnore
