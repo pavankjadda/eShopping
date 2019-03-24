@@ -30,7 +30,7 @@ server:
   servlet:
     session:
       cookie:
-        secure: false
+        secure: true
         http-only: true
 
 management:
