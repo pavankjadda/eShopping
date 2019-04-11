@@ -1,6 +1,6 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.model.UnauthorizedRequest;
+import com.springtesting.model.security.UnauthorizedRequest;
 import com.springtesting.repo.UnauthorizedRequestRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

@@ -14,7 +14,7 @@ public class OrderDetailLogger
 {
     private Logger logger=LoggerFactory.getLogger(OrderDetailLogger.class);
 
-    @Pointcut("within(com.springtesting.web.order.OrderDetailController)")
+    @Pointcut("within(com.springtesting.web.api.order.OrderDetailController)")
     public void orderDetailControllerPointcut() {}
 
     @Around("orderDetailControllerPointcut()")

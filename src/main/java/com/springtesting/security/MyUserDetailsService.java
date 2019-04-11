@@ -1,7 +1,7 @@
 package com.springtesting.security;
 
-import com.springtesting.model.Role;
-import com.springtesting.model.User;
+import com.springtesting.model.user.Role;
+import com.springtesting.model.user.User;
 import com.springtesting.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

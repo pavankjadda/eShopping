@@ -1,7 +1,7 @@
 package com.springtesting.web.api;
 
 import com.springtesting.exceptions.exceptions.CategoryException;
-import com.springtesting.model.Category;
+import com.springtesting.model.order.Category;
 import com.springtesting.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

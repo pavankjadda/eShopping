@@ -1,6 +1,6 @@
 package com.springtesting.web.auth;
 
-import com.springtesting.model.UserProfile;
+import com.springtesting.model.user.UserProfile;
 import com.springtesting.repo.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

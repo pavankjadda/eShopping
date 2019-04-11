@@ -1,6 +1,6 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.model.SessionHistory;
+import com.springtesting.model.security.SessionHistory;
 import com.springtesting.repo.SessionHistoryRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

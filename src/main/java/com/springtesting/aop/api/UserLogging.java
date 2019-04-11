@@ -12,7 +12,7 @@ public class UserLogging
 {
     private Logger logger = LoggerFactory.getLogger(UserLogging.class);
 
-    @Pointcut("execution(* com.springtesting.model.User.*(..))")
+    @Pointcut("execution(* com.springtesting.model.user.User.*(..))")
     public void getUserPointCut()
     {
     }

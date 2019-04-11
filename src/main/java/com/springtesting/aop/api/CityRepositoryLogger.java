@@ -1,6 +1,6 @@
 package com.springtesting.aop.api;
 
-import com.springtesting.model.State;
+import com.springtesting.model.user.State;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

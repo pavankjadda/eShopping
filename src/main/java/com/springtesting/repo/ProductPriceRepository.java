@@ -1,6 +1,6 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.ProductPrice;
+import com.springtesting.model.order.ProductPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

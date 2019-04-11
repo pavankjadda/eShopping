@@ -1,7 +1,7 @@
 package com.springtesting.security.handlers;
 
 import com.springtesting.constants.SecurityConstants;
-import com.springtesting.model.FailedLogin;
+import com.springtesting.model.user.FailedLogin;
 import com.springtesting.repo.FailedLoginRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

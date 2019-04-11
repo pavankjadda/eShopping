@@ -1,6 +1,6 @@
 package com.springtesting.mockito;
 
-import com.springtesting.model.*;
+import com.springtesting.model.order.*;
 import com.springtesting.repo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

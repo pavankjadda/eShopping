@@ -1,6 +1,6 @@
 package com.springtesting.aop.api;
 
-import com.springtesting.model.User;
+import com.springtesting.model.user.User;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

@@ -1,6 +1,10 @@
 package com.springtesting.mockito;
 
-import com.springtesting.model.*;
+import com.springtesting.model.order.OrderDetail;
+import com.springtesting.model.order.OrderStatus;
+import com.springtesting.model.user.Address;
+import com.springtesting.model.user.AddressType;
+import com.springtesting.model.user.UserProfile;
 import com.springtesting.repo.*;
 import org.junit.Before;
 import org.junit.Test;

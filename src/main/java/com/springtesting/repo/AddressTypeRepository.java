@@ -1,6 +1,6 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.AddressType;
+import com.springtesting.model.user.AddressType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

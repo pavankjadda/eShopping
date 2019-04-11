@@ -1,6 +1,6 @@
 package com.springtesting.security;
 
-import com.springtesting.model.User;
+import com.springtesting.model.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

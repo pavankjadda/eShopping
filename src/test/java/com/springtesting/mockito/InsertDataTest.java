@@ -3,8 +3,12 @@ package com.springtesting.mockito;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springtesting.model.Currency;
-import com.springtesting.model.*;
+import com.springtesting.model.order.Category;
+import com.springtesting.model.order.Currency;
+import com.springtesting.model.user.City;
+import com.springtesting.model.user.Country;
+import com.springtesting.model.user.Region;
+import com.springtesting.model.user.State;
 import com.springtesting.repo.*;
 import org.junit.Before;
 import org.junit.Test;

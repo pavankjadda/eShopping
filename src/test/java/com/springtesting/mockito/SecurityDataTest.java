@@ -1,7 +1,7 @@
 package com.springtesting.mockito;
 
-import com.springtesting.model.Role;
-import com.springtesting.model.User;
+import com.springtesting.model.user.Role;
+import com.springtesting.model.user.User;
 import com.springtesting.repo.PrivilegeRepository;
 import com.springtesting.repo.RoleRepository;
 import com.springtesting.repo.UserRepository;

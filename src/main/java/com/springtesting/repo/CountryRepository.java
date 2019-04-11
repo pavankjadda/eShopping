@@ -1,7 +1,7 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.Country;
-import com.springtesting.model.Region;
+import com.springtesting.model.user.Country;
+import com.springtesting.model.user.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

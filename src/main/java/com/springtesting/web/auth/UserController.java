@@ -2,8 +2,8 @@ package com.springtesting.web.auth;
 
 import com.springtesting.dto.GenericResponseDto;
 import com.springtesting.dto.RegisterUserDto;
-import com.springtesting.model.User;
-import com.springtesting.model.UserProfile;
+import com.springtesting.model.user.User;
+import com.springtesting.model.user.UserProfile;
 import com.springtesting.repo.UserProfileRepository;
 import com.springtesting.repo.UserRepository;
 import org.slf4j.Logger;
@@ -53,17 +53,17 @@ public class UserController
     @PostMapping(value = "/register")
     public ResponseEntity<GenericResponseDto> createNewUserFromObject(@RequestBody RegisterUserDto registerUserDto)
     {
-        logger.info("RegisterUserDto =>"+registerUserDto.toString());
+        logger.info("RegisterUserDto =>{}",registerUserDto);
         GenericResponseDto genericResponseDto=new GenericResponseDto();
         User newUser=createUserObject(registerUserDto);
         try
         {
             newUser=userRepository.saveAndFlush(newUser);
-            logger.info("User account created  with Id=>"+newUser.getId());
+            logger.info("User account created  with Id=>{}",newUser.getId());
 
             UserProfile userProfile=createUserProfileObject(newUser,registerUserDto);
             userProfileRepository.saveAndFlush(userProfile);
-            logger.info("User Account Profile created  with Id=> "+userProfile.getId());
+            logger.info("User Account Profile created  with Id=> {}",userProfile.getId());
 
             genericResponseDto.setHttpStatusCode("201");
             genericResponseDto.setHttpStatus("Success");

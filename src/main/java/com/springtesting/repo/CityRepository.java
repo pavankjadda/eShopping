@@ -1,7 +1,7 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.City;
-import com.springtesting.model.State;
+import com.springtesting.model.user.City;
+import com.springtesting.model.user.State;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

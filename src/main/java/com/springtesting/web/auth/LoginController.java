@@ -1,7 +1,7 @@
 package com.springtesting.web.auth;
 
 import com.springtesting.dto.UserDto;
-import com.springtesting.model.User;
+import com.springtesting.model.user.User;
 import com.springtesting.repo.UserRepository;
 import com.springtesting.security.MyUserDetails;
 import org.slf4j.Logger;
@@ -57,11 +57,10 @@ public class LoginController
         return null;
     }
 
-    @GetMapping(value = {"/isvalidsession"})
+    @GetMapping(value = {"/isValidSession"})
     public UserDto isValidSession(HttpServletRequest request)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // If NOT anonymous user, get user info
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
             return copyUser(authentication,request);
@@ -89,7 +88,7 @@ public class LoginController
         }
         catch (Exception e)
         {
-            logger.warn("Exception: Failed to get Authentication Object=> "+e.getMessage());
+            logger.warn("Exception: Failed to get Authentication Object=> {}",e.getMessage());
         }
         return null;
     }

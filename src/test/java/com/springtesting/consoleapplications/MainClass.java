@@ -1,6 +1,6 @@
 package com.springtesting.consoleapplications;
 
-import com.springtesting.model.User;
+import com.springtesting.model.user.User;
 
 public class MainClass
 {

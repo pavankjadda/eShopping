@@ -1,6 +1,6 @@
 package com.springtesting.repo;
 
-import com.springtesting.model.OrderStatus;
+import com.springtesting.model.order.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
