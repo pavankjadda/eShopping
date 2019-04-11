@@ -1,4 +1,4 @@
-package com.springtesting.mockito;
+package com.springtesting.insertdata;
 
 import com.springtesting.model.order.Currency;
 import com.springtesting.model.order.OrderDetailProduct;

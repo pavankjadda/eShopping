@@ -30,6 +30,13 @@ public class LoginController
         this.userRepository = userRepository;
     }
 
+    @GetMapping(value = {"/login"})
+    public UserDto getUserLoginDetails(HttpServletRequest request)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return copyUser(authentication,request);
+    }
+
     @PostMapping(value = {"/login"})
     public UserDto loginUserPost(HttpServletRequest request)
     {

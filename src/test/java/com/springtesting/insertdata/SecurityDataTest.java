@@ -1,4 +1,4 @@
-package com.springtesting.mockito;
+package com.springtesting.insertdata;
 
 import com.springtesting.model.user.Role;
 import com.springtesting.model.user.User;
