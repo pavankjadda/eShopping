@@ -1,13 +1,16 @@
-package com.springtesting.model.order;
+package com.springtesting.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springtesting.model.AbstractAuditingEntity;
+import com.springtesting.model.order.Currency;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "price")
 @Data

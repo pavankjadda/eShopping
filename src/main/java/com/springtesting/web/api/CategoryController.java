@@ -36,7 +36,6 @@ public class CategoryController
         Optional<Category> category=categoryRepository.findById(id);
         if(!category.isPresent())
         {
-            //throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category is not Found");
             throw new CategoryException("Category is not Found");
         }
         return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);

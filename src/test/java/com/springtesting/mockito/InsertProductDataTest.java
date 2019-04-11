@@ -1,6 +1,10 @@
 package com.springtesting.mockito;
 
-import com.springtesting.model.order.*;
+import com.springtesting.model.order.Currency;
+import com.springtesting.model.order.OrderDetailProduct;
+import com.springtesting.model.product.Price;
+import com.springtesting.model.product.Product;
+import com.springtesting.model.product.ProductPrice;
 import com.springtesting.repo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

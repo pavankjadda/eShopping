@@ -1,6 +1,7 @@
 package com.springtesting.model.order;
 
 import com.springtesting.model.AbstractAuditingEntity;
+import com.springtesting.model.product.Product;
 import com.springtesting.model.user.Address;
 import com.springtesting.model.user.UserProfile;
 import lombok.Data;

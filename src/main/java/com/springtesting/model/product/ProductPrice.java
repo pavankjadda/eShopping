@@ -1,11 +1,13 @@
-package com.springtesting.model.order;
+package com.springtesting.model.product;
 
 
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "product_price")
 @Data

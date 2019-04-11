@@ -8,32 +8,32 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/v2/category")
 public class OrderDetailController
 {
-    private OrderDetailRepository OrderDetailRepository;
+    private OrderDetailRepository orderDetailRepository;
 
-    public OrderDetailController(OrderDetailRepository OrderDetailRepository)
+    public OrderDetailController(OrderDetailRepository orderDetailRepository)
     {
-        this.OrderDetailRepository = OrderDetailRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     @PostMapping(path = "/create")
-    public void createOrderDetail(@RequestBody OrderDetail OrderDetail)
+    public void createOrderDetail(@RequestBody OrderDetail orderDetail)
     {
-        OrderDetailRepository.saveAndFlush(OrderDetail);
+        orderDetailRepository.saveAndFlush(orderDetail);
     }
 
     @GetMapping(value = "/list")
     public List<OrderDetail> getOrderDetails()
     {
-        return OrderDetailRepository.findAll();
+        return orderDetailRepository.findAll();
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<OrderDetail> getOrderDetailById(@PathVariable Long id)
     {
-        return OrderDetailRepository.findById(id);
+        return orderDetailRepository.findById(id);
     }
 
 }

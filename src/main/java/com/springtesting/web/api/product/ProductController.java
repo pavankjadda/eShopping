@@ -1,6 +1,6 @@
-package com.springtesting.web.api.order;
+package com.springtesting.web.api.product;
 
-import com.springtesting.model.order.Product;
+import com.springtesting.model.product.Product;
 import com.springtesting.repo.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/v2/product")
 public class ProductController
 {
     private ProductRepository productRepository;
@@ -19,9 +19,9 @@ public class ProductController
     }
 
     @PostMapping(path = "/create")
-    public void createProduct(@RequestBody Product Product)
+    public void createProduct(@RequestBody Product product)
     {
-        productRepository.saveAndFlush(Product);
+        productRepository.saveAndFlush(product);
     }
 
     @GetMapping(value = "/list")
