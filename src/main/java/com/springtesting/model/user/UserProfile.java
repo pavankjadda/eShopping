@@ -3,6 +3,7 @@ package com.springtesting.model.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,11 +11,14 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "user_profile")
 public class UserProfile extends AbstractAuditingEntity
 {
+
+    private static final long serialVersionUID = -5481697743705747733L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

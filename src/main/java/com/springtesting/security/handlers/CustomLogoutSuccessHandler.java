@@ -25,14 +25,16 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler
     {
         try
         {
-            authentication.setAuthenticated(false);
+            if(authentication!= null)
+                authentication.setAuthenticated(false);
             request.logout();
             String targetUrl = "/login";
             redirectStrategy.sendRedirect(request, response, targetUrl);
         }
-        finally
+        catch (Exception e)
         {
             logger.debug("Exception thrown while logging out");
         }
+
     }
 }

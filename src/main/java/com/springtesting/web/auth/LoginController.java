@@ -79,13 +79,17 @@ public class LoginController
 
             UserDto userDto=new UserDto();
             userDto.setId(user.getId());
-            userDto.setFirstName(user.getUserProfile().getFirstName());
-            userDto.setLastName(user.getUserProfile().getLastName());
+            if(user.getUserProfile() == null)
+            {
+                userDto.setFirstName("");
+                userDto.setLastName("");
+            }
             userDto.setUsername(user.getUsername());
             userDto.setRoles(user.getRoles());
             userDto.setToken(token);
             return userDto;
         }
+
         catch (Exception e)
         {
             logger.warn("Exception: Failed to get Authentication Object=> {}",e.getMessage());

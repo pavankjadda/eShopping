@@ -3,12 +3,14 @@ package com.springtesting.model.user;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "`user`")
@@ -34,7 +36,7 @@ public class User extends AbstractAuditingEntity implements Serializable
     private Boolean accountNonLocked;
 
     @Column(name = "account_non_expired")
-    private Boolean AccountNonExpired;
+    private Boolean accountNonExpired;
 
     @Column(name = "password", nullable = false)
     private String password;
