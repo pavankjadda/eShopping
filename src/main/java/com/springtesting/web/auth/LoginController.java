@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController
@@ -29,13 +28,6 @@ public class LoginController
     public LoginController(UserRepository userRepository)
     {
         this.userRepository = userRepository;
-    }
-
-    @GetMapping(value = {"/login","/authenticate"})
-    public UserDto loginUser(HttpServletRequest request, HttpSession httpSession)
-    {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return copyUser(authentication,request);
     }
 
     @PostMapping(value = {"/login"})
@@ -57,16 +49,6 @@ public class LoginController
         return null;
     }
 
-    @GetMapping(value = {"/isValidSession"})
-    public UserDto isValidSession(HttpServletRequest request)
-    {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken))
-        {
-            return copyUser(authentication,request);
-        }
-        return null;
-    }
 
 
     private UserDto copyUser(Authentication authentication, HttpServletRequest request)

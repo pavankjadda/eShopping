@@ -101,6 +101,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .and()
                     .logout()
                         .deleteCookies("X-Auth-Token")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                         .permitAll()
              .and()

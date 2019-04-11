@@ -7,6 +7,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -14,7 +15,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 {
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS =
             {
-                    "classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/resources/templates"
+                    "classpath:/META-INF/resources/", "classpath:/resources/"
             };
 
     @Override
@@ -23,6 +24,11 @@ public class ApplicationConfig implements WebMvcConfigurer
         registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry)
+    {
+        registry.addViewController("/").setViewName("/login.html");
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder()
