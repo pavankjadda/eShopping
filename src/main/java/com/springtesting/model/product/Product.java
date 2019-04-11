@@ -28,9 +28,20 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description",length = 10000)
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_photo",
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "photo_id", referencedColumnName = "id")
+    )
+    private List<Photo> photoList=new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -45,24 +56,13 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @JsonIgnore
     private List<OrderDetail> ordersList = new ArrayList<>();
 
-
-    public Product()
-    {
-    }
-
-    public Product(Long id, String name, Category category)
-    {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-    }
-
     @Override
     public String toString()
     {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", category=" + category +
                 '}';
     }

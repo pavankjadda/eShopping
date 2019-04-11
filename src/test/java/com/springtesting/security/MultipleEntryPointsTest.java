@@ -35,7 +35,7 @@ public class MultipleEntryPointsTest
     @Test
     public void whenTestAdminCredentials_thenOk() throws Exception
     {
-        //mockMvc.perform(get("/api/v2/category/list")).andExpect(status().isUnauthorized());
+        //mockMvc.perform(get("/api/v1/category/list")).andExpect(status().isUnauthorized());
         mockMvc.perform(get("/admin/myAdminPage")).andExpect(status().isNotFound());
     }
 }

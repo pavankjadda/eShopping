@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/v2/state")
+@RequestMapping(path = "/api/v1/state")
 public class StateController
 {
     private StateRepository stateRepository;

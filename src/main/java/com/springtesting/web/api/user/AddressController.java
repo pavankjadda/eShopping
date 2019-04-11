@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/v2/address")
+@RequestMapping(path = "/api/v1/address")
 public class AddressController
 {
 

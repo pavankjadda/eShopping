@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v2/session-registry")
+@RequestMapping("/api/v1/session-registry")
 public class SessionRegistryController
 {
     /*

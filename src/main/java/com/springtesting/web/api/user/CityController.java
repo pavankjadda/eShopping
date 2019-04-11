@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/v2/city")
+@RequestMapping(path = "/api/v1/city")
 public class CityController
 {
     private final CityRepository cityRepository;
