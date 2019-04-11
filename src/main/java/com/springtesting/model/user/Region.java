@@ -5,17 +5,19 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "region")
 @Data
-public class Region
+public class Region implements Serializable
 {
+    private static final long serialVersionUID = 7515965324996283939L;
+
     @Id
     @Column(name = "id")
-    //@ColumnDefault(value = "0")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "name")
     @Length(max = 20, min = 2)

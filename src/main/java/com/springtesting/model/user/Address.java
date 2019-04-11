@@ -2,14 +2,17 @@ package com.springtesting.model.user;
 
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "address")
 public class Address extends AbstractAuditingEntity
 {
+    private static final long serialVersionUID = -1540126888782313444L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -40,8 +43,6 @@ public class Address extends AbstractAuditingEntity
     @Column(name = "zip_code")
     private String zipCode;
 
-    @Column(name = "test")
-    private String test;
 
     @ManyToOne
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")

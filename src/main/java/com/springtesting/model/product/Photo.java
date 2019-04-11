@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "product")
+@Table(name = "photo")
 public class Photo extends AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = 3373277677411648585L;

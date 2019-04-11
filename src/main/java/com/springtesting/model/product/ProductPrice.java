@@ -13,6 +13,8 @@ import javax.persistence.*;
 @Data
 public class ProductPrice extends AbstractAuditingEntity
 {
+    private static final long serialVersionUID = 2677217467401857039L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,14 +25,4 @@ public class ProductPrice extends AbstractAuditingEntity
 
     @Column(name = "price_id", nullable = false)
     private Long priceId;
-
-    public ProductPrice()
-    {
-    }
-
-    public ProductPrice(Long productId, Long priceId)
-    {
-        this.productId = productId;
-        this.priceId = priceId;
-    }
 }

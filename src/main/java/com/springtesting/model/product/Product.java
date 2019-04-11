@@ -32,10 +32,10 @@ public class Product extends AbstractAuditingEntity implements Serializable
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "product_photo",
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
@@ -43,7 +43,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
     )
     private List<Photo> photoList=new ArrayList<>();
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "product_price",
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),

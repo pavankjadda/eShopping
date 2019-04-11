@@ -5,16 +5,19 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "state")
 @Data
-public class State
+public class State implements Serializable
 {
+    private static final long serialVersionUID = 5553856435782266275L;
+
     @javax.persistence.Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "code")
     private String code;
