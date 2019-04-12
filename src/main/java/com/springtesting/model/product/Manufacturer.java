@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "product")
+@Table(name = "manufacturer")
 public class Manufacturer  extends AbstractAuditingEntity implements Serializable
 {
     @Id

@@ -84,7 +84,7 @@ public class InsertOrderDetailDataTest
         address.setState(stateRepository.findByName("Virginia").get());
         address.setCountry(countryRepository.findByName("United States").get());
         address.setZipCode("22042");
-        address.setAddressType(addressTypeRepository.findAddressTypeByType("Home").get());
+        address.setAddressType(addressTypeRepository.findAddressTypeByType("Business").get());
         address.setCreatedBy("admin");
         address.setLastModifiedBy("admin");
         address.setCreatedDate(Instant.now());
