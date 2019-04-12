@@ -23,13 +23,11 @@ import java.util.Optional;
 @RestController
 public class UserController
 {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final UserRepository userRepository;
 
     private final UserProfileRepository userProfileRepository;
-
-
-    private Logger logger=LoggerFactory.getLogger(UserController.class);
-
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -79,7 +77,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.warn("Exception: ",e);
 
             genericResponseDto.setHttpStatusCode("400");
             genericResponseDto.setHttpStatus("Failure");
