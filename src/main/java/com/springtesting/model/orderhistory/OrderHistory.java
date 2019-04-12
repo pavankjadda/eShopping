@@ -3,34 +3,35 @@ package com.springtesting.model.orderhistory;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "order_history")
 @Data
-public class OrderHistory
+public class OrderHistory implements Serializable
 {
+    private static final long serialVersionUID = -6699432774798518217L;
+
+
     @Id
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "order_id")
     private String orderId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "order_history_address_id")
     private OrderHistoryAddress orderHistoryAddress;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "order_history_user_profile")
     private OrderHistoryUserProfile orderHistoryUserProfile;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_history_detail_productlist",
-            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private Set<OrderHistoryProduct> productlist = new HashSet<OrderHistoryProduct>();
-
+    @OneToMany
+    @JoinColumn(name = "order_history_id", referencedColumnName = "id")
+    private List<OrderHistoryProduct> products = new ArrayList<>();
 
 }

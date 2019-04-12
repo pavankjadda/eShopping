@@ -1,7 +1,6 @@
 package com.springtesting.insertdata;
 
 import com.springtesting.model.order.Currency;
-import com.springtesting.model.order.OrderDetailProduct;
 import com.springtesting.model.product.Price;
 import com.springtesting.model.product.Product;
 import com.springtesting.model.product.ProductPrice;
@@ -37,8 +36,7 @@ public class InsertProductDataTest
     @Autowired
     private ProductPriceRepository productPriceRepository;
 
-    @Autowired
-    private OrderDetailProductRepository orderDetailProductRepository;
+
 
     @Test
     public void insertCurrency()
@@ -102,19 +100,5 @@ public class InsertProductDataTest
         productPriceRepository.saveAndFlush(productPrice);
     }
 
-    @Test
-    public void insertOrderProduct()
-    {
-        OrderDetailProduct orderDetailProduct=new OrderDetailProduct();
-        orderDetailProduct.setOrderDetailId(1L);
-        orderDetailProduct.setProductId(1L);
-
-        orderDetailProduct.setCreatedBy("admin");
-        orderDetailProduct.setLastModifiedBy("admin");
-        orderDetailProduct.setCreatedDate(Instant.now());
-        orderDetailProduct.setLastModifiedDate(Instant.now());
-
-        orderDetailProductRepository.saveAndFlush(orderDetailProduct);
-    }
 
 }

@@ -3,12 +3,15 @@ package com.springtesting.model.orderhistory;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "order_history_user_profile")
-public class OrderHistoryUserProfile
+public class OrderHistoryUserProfile implements Serializable
 {
+    private static final long serialVersionUID = -6699422774798518217L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

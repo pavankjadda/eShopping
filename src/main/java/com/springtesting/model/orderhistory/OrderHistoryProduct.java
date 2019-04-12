@@ -2,30 +2,33 @@ package com.springtesting.model.orderhistory;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Data
 @Table(name = "order_history_product")
-public class OrderHistoryProduct
+public class OrderHistoryProduct implements Serializable
 {
+    private static final long serialVersionUID = -6699422774898518217L;
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "product_id")
-    private String productId;
+    private Long productId;
 
-
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "product_name")
+    private String productName;
 
     @Column(name = "category_id")
-    private String category;
+    private Long categoryId;
+
+    @Column(name = "category_name")
+    private String categoryName;
 
     @Column(name = "price")
-    private String price;
+    private Double price;
 }

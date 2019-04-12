@@ -3,12 +3,13 @@ package com.springtesting.model.orderhistory;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Data
 @Table(name = "order_history_address")
-public class OrderHistoryAddress
+public class OrderHistoryAddress implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,20 +41,4 @@ public class OrderHistoryAddress
 
     @Column(name = "address_type_id")
     private String addressType;
-
-    public OrderHistoryAddress()
-    {
-    }
-
-    public OrderHistoryAddress(String streetName, String apartment, String city, String state, String country, String region, String zipCode, String addressType)
-    {
-        this.streetName = streetName;
-        this.apartment = apartment;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.region = region;
-        this.zipCode = zipCode;
-        this.addressType = addressType;
-    }
 }
