@@ -2,9 +2,11 @@ package com.springtesting.model.user;
 
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "address_type")

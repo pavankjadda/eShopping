@@ -2,9 +2,11 @@ package com.springtesting.model.order;
 
 import com.springtesting.model.AbstractAuditingEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "order_detail_products")
