@@ -44,7 +44,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
     private List<Photo> photoList=new ArrayList<>();
 
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "price_id")
     private Price price;
 

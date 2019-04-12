@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="pjadda (generated)" id="1555002395117-1">
+    <changeSet author="pjadda (generated)" id="1555033933227-1">
         <createTable tableName="address">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="addressPK"/>
@@ -22,7 +22,7 @@
             <column name="address_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-2">
+    <changeSet author="pjadda (generated)" id="1555033933227-2">
         <createTable tableName="address_type">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="address_typePK"/>
@@ -36,7 +36,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-3">
+    <changeSet author="pjadda (generated)" id="1555033933227-3">
         <createTable tableName="category">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="categoryPK"/>
@@ -50,7 +50,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-4">
+    <changeSet author="pjadda (generated)" id="1555033933227-4">
         <createTable tableName="city">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="cityPK"/>
@@ -63,7 +63,7 @@
             <column name="state_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-5">
+    <changeSet author="pjadda (generated)" id="1555033933227-5">
         <createTable tableName="country">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="countryPK"/>
@@ -74,7 +74,7 @@
             <column name="region_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-6">
+    <changeSet author="pjadda (generated)" id="1555033933227-6">
         <createTable tableName="currency">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="currencyPK"/>
@@ -90,7 +90,7 @@
             <column name="symbol" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-7">
+    <changeSet author="pjadda (generated)" id="1555033933227-7">
         <createTable tableName="failed_login">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="failed_loginPK"/>
@@ -109,7 +109,7 @@
             <column name="server_port" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-8">
+    <changeSet author="pjadda (generated)" id="1555033933227-8">
         <createTable tableName="order_detail">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="order_detailPK"/>
@@ -124,7 +124,7 @@
             <column name="shipping_address" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-9">
+    <changeSet author="pjadda (generated)" id="1555033933227-9">
         <createTable tableName="order_detail_products">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true" primaryKeyName="order_detail_productsPK"/>
@@ -137,7 +137,7 @@
             <column name="product_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-10">
+    <changeSet author="pjadda (generated)" id="1555033933227-10">
         <createTable tableName="order_history">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -147,7 +147,7 @@
             <column name="order_history_user_profile" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-11">
+    <changeSet author="pjadda (generated)" id="1555033933227-11">
         <createTable tableName="order_history_address">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="order_history_addressPK"/>
@@ -163,7 +163,7 @@
             <column name="zip_code" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-12">
+    <changeSet author="pjadda (generated)" id="1555033933227-12">
         <createTable tableName="order_history_detail_productlist">
             <column name="order_id" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -173,7 +173,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-13">
+    <changeSet author="pjadda (generated)" id="1555033933227-13">
         <createTable tableName="order_history_product">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -186,7 +186,7 @@
             <column name="product_id" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-14">
+    <changeSet author="pjadda (generated)" id="1555033933227-14">
         <createTable tableName="order_history_user_profile">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="order_history_user_profilePK"/>
@@ -203,7 +203,7 @@
             <column name="user_profile_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-15">
+    <changeSet author="pjadda (generated)" id="1555033933227-15">
         <createTable tableName="order_status">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="order_statusPK"/>
@@ -215,7 +215,7 @@
             <column name="status" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-16">
+    <changeSet author="pjadda (generated)" id="1555033933227-16">
         <createTable tableName="photo">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="photoPK"/>
@@ -231,7 +231,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-17">
+    <changeSet author="pjadda (generated)" id="1555033933227-17">
         <createTable tableName="price">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="pricePK"/>
@@ -244,19 +244,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="currency_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-18">
-        <createTable tableName="price_product_list">
-            <column name="price_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="product_list_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-19">
+    <changeSet author="pjadda (generated)" id="1555033933227-18">
         <createTable tableName="privilege">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="privilegePK"/>
@@ -264,7 +255,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-20">
+    <changeSet author="pjadda (generated)" id="1555033933227-19">
         <createTable tableName="product">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="productPK"/>
@@ -280,7 +271,7 @@
             <column name="category_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-21">
+    <changeSet author="pjadda (generated)" id="1555033933227-20">
         <createTable tableName="product_photo">
             <column name="product_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -290,7 +281,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-22">
+    <changeSet author="pjadda (generated)" id="1555033933227-21">
         <createTable tableName="product_price">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="product_pricePK"/>
@@ -307,7 +298,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-23">
+    <changeSet author="pjadda (generated)" id="1555033933227-22">
         <createTable tableName="region">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="regionPK"/>
@@ -315,7 +306,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-24">
+    <changeSet author="pjadda (generated)" id="1555033933227-23">
         <createTable tableName="role">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="rolePK"/>
@@ -325,7 +316,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-25">
+    <changeSet author="pjadda (generated)" id="1555033933227-24">
         <createTable tableName="role_privilege">
             <column name="role_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -335,7 +326,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-26">
+    <changeSet author="pjadda (generated)" id="1555033933227-25">
         <createTable tableName="session_history">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="session_historyPK"/>
@@ -359,7 +350,7 @@
             <column name="username" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-27">
+    <changeSet author="pjadda (generated)" id="1555033933227-26">
         <createTable tableName="state">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="statePK"/>
@@ -369,7 +360,7 @@
             <column name="country_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-28">
+    <changeSet author="pjadda (generated)" id="1555033933227-27">
         <createTable tableName="unauthorized_request">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="unauthorized_requestPK"/>
@@ -388,7 +379,7 @@
             <column name="server_port" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-29">
+    <changeSet author="pjadda (generated)" id="1555033933227-28">
         <createTable tableName="user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="userPK"/>
@@ -407,7 +398,7 @@
             <column name="username" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-30">
+    <changeSet author="pjadda (generated)" id="1555033933227-29">
         <createTable tableName="user_profile">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="user_profilePK"/>
@@ -428,7 +419,7 @@
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-31">
+    <changeSet author="pjadda (generated)" id="1555033933227-30">
         <createTable tableName="user_role">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="user_rolePK"/>
@@ -437,112 +428,100 @@
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-32">
+    <changeSet author="pjadda (generated)" id="1555033933227-31">
         <addPrimaryKey columnNames="order_id, product_id" tableName="order_history_detail_productlist"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-33">
+    <changeSet author="pjadda (generated)" id="1555033933227-32">
         <addPrimaryKey columnNames="id" constraintName="order_historyPK" tableName="order_history"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-34">
+    <changeSet author="pjadda (generated)" id="1555033933227-33">
         <addPrimaryKey columnNames="id" constraintName="order_history_productPK" tableName="order_history_product"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-35">
-        <addUniqueConstraint columnNames="price_id" constraintName="UK_1wkhsq2dogphcbnm6hl6dhqq8" tableName="product_price"/>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-36">
+    <changeSet author="pjadda (generated)" id="1555033933227-34">
         <addUniqueConstraint columnNames="photo_id" constraintName="UK_8qvigvritbjygo4ifwnj5pfw4" tableName="product_photo"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-37">
+    <changeSet author="pjadda (generated)" id="1555033933227-35">
         <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="product" constraintName="FK1mtsbur82frn64de7balymq9s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-38">
+    <changeSet author="pjadda (generated)" id="1555033933227-36">
         <addForeignKeyConstraint baseColumnNames="photo_id" baseTableName="product_photo" constraintName="FK25eglbgctfnpi5mge7uq7pa1d" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="photo"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-39">
-        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="price_product_list" constraintName="FK2qkbv9ws15bw8eedxqynpr32s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price"/>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-40">
+    <changeSet author="pjadda (generated)" id="1555033933227-37">
         <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="address" constraintName="FK4cx5jughttw4h3qfxrcitbtxl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="state"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-41">
+    <changeSet author="pjadda (generated)" id="1555033933227-38">
         <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="address" constraintName="FK4ljdc68rnke4txup1jlf1il4l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-42">
+    <changeSet author="pjadda (generated)" id="1555033933227-39">
         <addForeignKeyConstraint baseColumnNames="order_status" baseTableName="order_detail" constraintName="FK61lcojablhugx52yjs8e1aa31" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_status"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-43">
+    <changeSet author="pjadda (generated)" id="1555033933227-40">
         <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="city" constraintName="FK6p2u50v8fg2y0js6djc6xanit" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="state"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-44">
+    <changeSet author="pjadda (generated)" id="1555033933227-41">
         <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="address" constraintName="FK8ftovogl7u9uud2od9ypy0o0e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_profile"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-45">
+    <changeSet author="pjadda (generated)" id="1555033933227-42">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FKa68196081fvovjhkek5m97n3y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-46">
+    <changeSet author="pjadda (generated)" id="1555033933227-43">
         <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="order_history_detail_productlist" constraintName="FKdjnsagq3gapft9wevb12wpihe" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-47">
+    <changeSet author="pjadda (generated)" id="1555033933227-44">
         <addForeignKeyConstraint baseColumnNames="privilege_id" baseTableName="role_privilege" constraintName="FKdkwbrwb5r8h74m1v7dqmhp99c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="privilege"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-48">
+    <changeSet author="pjadda (generated)" id="1555033933227-45">
         <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="address" constraintName="FKe54x81nmccsk5569hsjg1a6ka" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="country"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-49">
+    <changeSet author="pjadda (generated)" id="1555033933227-46">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_history_detail_productlist" constraintName="FKebca63pw7j58l71p2n0e6pl9m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_product"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-50">
-        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_price" constraintName="FKeupemu63ifqfc4txkskyy1hyi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-51">
+    <changeSet author="pjadda (generated)" id="1555033933227-47">
         <addForeignKeyConstraint baseColumnNames="shipping_address" baseTableName="order_detail" constraintName="FKff406vhs3jmf2my5q15c5dbck" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-52">
+    <changeSet author="pjadda (generated)" id="1555033933227-48">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="FKfgsgxvihks805qcq8sq26ab7c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-53">
-        <addForeignKeyConstraint baseColumnNames="product_list_id" baseTableName="price_product_list" constraintName="FKg0e474nntn9opxdss96kiyah9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-54">
+    <changeSet author="pjadda (generated)" id="1555033933227-49">
         <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="state" constraintName="FKghic7mqjt6qb9vq7up7awu0er" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="country"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-55">
+    <changeSet author="pjadda (generated)" id="1555033933227-50">
         <addForeignKeyConstraint baseColumnNames="order_history_address_id" baseTableName="order_history" constraintName="FKh793ojwenjmi27owbenrt0lfx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_address"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-56">
+    <changeSet author="pjadda (generated)" id="1555033933227-51">
         <addForeignKeyConstraint baseColumnNames="purchased_by" baseTableName="order_detail" constraintName="FKj4sfqlf6gxnjdxrgx6dguphmb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_profile"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-57">
+    <changeSet author="pjadda (generated)" id="1555033933227-52">
         <addForeignKeyConstraint baseColumnNames="order_history_user_profile" baseTableName="order_history" constraintName="FKja4kxl09wd3fhg1vmpqu6edgh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_history_user_profile"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-58">
+    <changeSet author="pjadda (generated)" id="1555033933227-53">
         <addForeignKeyConstraint baseColumnNames="currency_id" baseTableName="price" constraintName="FKjufxmhfbykaua4p43u87udfqq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="currency"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-59">
+    <changeSet author="pjadda (generated)" id="1555033933227-54">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="price" constraintName="FKk4mbgqf5yru5ib5b6w5l6ukkj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1555033933227-55">
         <addForeignKeyConstraint baseColumnNames="address_type_id" baseTableName="address" constraintName="FKkkjn52mg1vha4yjpm0douso7f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address_type"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-60">
+    <changeSet author="pjadda (generated)" id="1555033933227-56">
         <addForeignKeyConstraint baseColumnNames="order_detail_id" baseTableName="order_detail_products" constraintName="FKksyb0gwkixy72i1uhwgube3ye" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_detail"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-61">
+    <changeSet author="pjadda (generated)" id="1555033933227-57">
         <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="address" constraintName="FKpo044ng5x4gynb291cv24vtea" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="city"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-62">
+    <changeSet author="pjadda (generated)" id="1555033933227-58">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_profile" constraintName="FKqcd5nmg7d7ement27tt9sf3bi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-63">
+    <changeSet author="pjadda (generated)" id="1555033933227-59">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_detail_products" constraintName="FKrqasr5oeilutkupy5hxkih5tc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-64">
+    <changeSet author="pjadda (generated)" id="1555033933227-60">
         <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="country" constraintName="FKs3bda8801uhqtttuaur9r6eic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-65">
+    <changeSet author="pjadda (generated)" id="1555033933227-61">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_photo" constraintName="FKsgi4krgb65fktq55a5xw6seqq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
     </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-66">
+    <changeSet author="pjadda (generated)" id="1555033933227-62">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_privilege" constraintName="FKsykrtrdngu5iexmbti7lu9xa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
-    </changeSet>
-    <changeSet author="pjadda (generated)" id="1555002395117-67">
-        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="product_price" constraintName="FKxfgbtbbrfa24m2881bw2k0rv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="price"/>
     </changeSet>
 </databaseChangeLog>

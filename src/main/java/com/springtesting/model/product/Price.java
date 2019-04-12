@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Data
 public class Price extends AbstractAuditingEntity
 {
+    private static final long serialVersionUID = -7104464402987718881L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,8 +28,7 @@ public class Price extends AbstractAuditingEntity
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "price")
     @JsonIgnore
     private Product product;
 
