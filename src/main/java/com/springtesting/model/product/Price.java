@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -28,10 +26,10 @@ public class Price extends AbstractAuditingEntity
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @ManyToMany
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     @JsonIgnore
-    private List<Product> productList = new ArrayList<>();
-
+    private Product product;
 
     public Price()
     {

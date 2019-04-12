@@ -43,13 +43,10 @@ public class Product extends AbstractAuditingEntity implements Serializable
     )
     private List<Photo> photoList=new ArrayList<>();
 
-    @OneToMany
-    @JoinTable(
-            name = "product_price",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "price_id", referencedColumnName = "id")
-    )
-    private List<Price> priceList = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    @JoinColumn(name = "price_id")
+    private Price price;
 
 
     @ManyToMany(mappedBy = "productList")
