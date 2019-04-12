@@ -72,6 +72,22 @@ public class InsertOrderDetailDataTest
         addressType.setCreatedDate(Instant.now());
         addressType.setLastModifiedDate(Instant.now());
         addressTypeRepository.saveAndFlush(addressType);
+
+        addressType=new AddressType();
+        addressType.setType("Business");
+        addressType.setCreatedBy("admin");
+        addressType.setLastModifiedBy("admin");
+        addressType.setCreatedDate(Instant.now());
+        addressType.setLastModifiedDate(Instant.now());
+        addressTypeRepository.saveAndFlush(addressType);
+
+        addressType=new AddressType();
+        addressType.setType("Work");
+        addressType.setCreatedBy("admin");
+        addressType.setLastModifiedBy("admin");
+        addressType.setCreatedDate(Instant.now());
+        addressType.setLastModifiedDate(Instant.now());
+        addressTypeRepository.saveAndFlush(addressType);
     }
 
     @Test
@@ -84,13 +100,26 @@ public class InsertOrderDetailDataTest
         address.setState(stateRepository.findByName("Virginia").get());
         address.setCountry(countryRepository.findByName("United States").get());
         address.setZipCode("22042");
+        address.setAddressType(addressTypeRepository.findAddressTypeByType("Home").get());
+        address.setCreatedBy("admin");
+        address.setLastModifiedBy("admin");
+        address.setCreatedDate(Instant.now());
+        address.setLastModifiedDate(Instant.now());
+        addressRepository.saveAndFlush(address);
+
+        address.setStreetName("3130 FAIRVIEW PARK DR");
+        address.setApartment("STE 350");
+        address.setCity(cityRepository.findByName("Falls Church").get());
+        address.setState(stateRepository.findByName("Virginia").get());
+        address.setCountry(countryRepository.findByName("United States").get());
+        address.setZipCode("22042");
         address.setAddressType(addressTypeRepository.findAddressTypeByType("Business").get());
         address.setCreatedBy("admin");
         address.setLastModifiedBy("admin");
         address.setCreatedDate(Instant.now());
         address.setLastModifiedDate(Instant.now());
-
         addressRepository.saveAndFlush(address);
+
     }
 
     @Test

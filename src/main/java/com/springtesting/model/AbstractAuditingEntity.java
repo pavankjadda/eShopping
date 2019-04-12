@@ -19,10 +19,10 @@ import java.time.Instant;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity implements Serializable
 {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = -1773219999574011842L;
 
     @CreatedBy
-    //@Column(name = "created_by", nullable = false, length = 255, updatable = false)
     @Column(name = "created_by",length = 100)
     @JsonIgnore
     private String createdBy;

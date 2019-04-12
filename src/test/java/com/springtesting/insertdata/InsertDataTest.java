@@ -120,12 +120,12 @@ public class InsertDataTest
 
 
     @Test
-    public void insertCitisData() throws IOException
+    public void insertCitiesData() throws IOException
     {
-        HashMap<String, List<String>> citisMap = new HashMap<>();
-        citisMap = readCitisDataFromJsonFile(citisMap); //Ignore this message
+        HashMap<String, List<String>> citiesMap = new HashMap<>();
+        citiesMap = readCitisDataFromJsonFile(citiesMap); //Ignore this message
 
-        for (HashMap.Entry<String, List<String>> mapEntry : citisMap.entrySet())
+        for (HashMap.Entry<String, List<String>> mapEntry : citiesMap.entrySet())
         {
             State state = findState(mapEntry.getKey());
             List<String> citiesInState = mapEntry.getValue();
@@ -153,14 +153,14 @@ public class InsertDataTest
         return stateRepository.findByName(stateName).orElse(null);
     }
 
-    public HashMap readCitisDataFromJsonFile(HashMap citisMap) throws IOException
+    public HashMap readCitisDataFromJsonFile(HashMap citiesMap) throws IOException
     {
         File file = new ClassPathResource("data/citis-data.json").getFile();
         byte[] mapByteData = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        citisMap = objectMapper.readValue(mapByteData, HashMap.class);
-        return citisMap;
+        citiesMap = objectMapper.readValue(mapByteData, HashMap.class);
+        return citiesMap;
     }
 
 
