@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/apt/v1/manufacturer/")
+@RequestMapping(value = "/api/v1/manufacturer")
 public class ManufacturerController
 {
     private final ManufacturerRepository manufacturerRepository;
