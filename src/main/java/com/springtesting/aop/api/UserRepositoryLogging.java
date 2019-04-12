@@ -15,27 +15,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRepositoryLogging
 {
-    private Logger log = LoggerFactory.getLogger(UserRepositoryLogging.class);
+    private Logger logger = LoggerFactory.getLogger(UserRepositoryLogging.class);
 
 
     @Pointcut(value = "execution(* com.springtesting.repo.UserRepository.findAll(..)) && args(pageable,..)")
     public void getUserRepositoryFindAll(Pageable pageable)
     {
+        //Pointcut for getUserRepositoryFindAll
     }
 
     @After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
     public void findAll(Pageable pageable)
     {
-        log.error("Log Message: Inside UserRepositoryLogging findAll() advice");
-        log.error(pageable.toString());
+        logger.error("Log Message: Inside UserRepositoryLogging findAll() advice");
     }
 
 
-    @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(..))", returning = "returnValue")
-    public void logReturningUsers(Object returnValue)
+    @AfterReturning(pointcut = "execution(* com.springtesting.repo.UserRepository.findAll(..))", returning = "pageUsers")
+    public void logReturningUsers(Page<User> pageUsers)
     {
-        Page<User> pageUsers = (Page<User>) returnValue;
-        for (User user : pageUsers)
-            System.out.println("Log: " + user.toString());
+        if(pageUsers.getSize() > 0)
+            logger.info("After returning from logReturningUsers() method");
     }
 }

@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/session-registry")
-@Secured(value = AuthorityConstants.Admin)
+@Secured(value = AuthorityConstants.ADMIN)
 public class SessionRegistryImplController
 {
 
@@ -29,7 +30,7 @@ public class SessionRegistryImplController
     }
 
     @GetMapping(value = {"/users"})
-    @Secured(value = AuthorityConstants.Admin)
+    @Secured(value = AuthorityConstants.ADMIN)
     public List<String> getAllUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
@@ -39,7 +40,7 @@ public class SessionRegistryImplController
     }
 
     @GetMapping(value = {"/active-users"})
-    @Secured(value = AuthorityConstants.Admin)
+    @Secured(value = AuthorityConstants.ADMIN)
     public List<String> getActiveUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
@@ -50,14 +51,12 @@ public class SessionRegistryImplController
 
 
     @GetMapping(value = {"/active-users/{username}"})
-    @Secured(value = AuthorityConstants.Admin)
+    @Secured(value = AuthorityConstants.ADMIN)
     public List<SessionInformation> getUserSessions(@PathVariable String username)
     {
-        //return sessionRegistry.getAllSessions(myUserDetailsService.loadUserByUsername(username),false);
-
         MyUserDetails myUserDetails = (MyUserDetails) sessionRegistry.getAllPrincipals().get(0);
         if (myUserDetails.getUsername().equals(username))
             return sessionRegistry.getAllSessions(myUserDetails, false);
-        return null;
+        return Collections.emptyList();
     }
 }

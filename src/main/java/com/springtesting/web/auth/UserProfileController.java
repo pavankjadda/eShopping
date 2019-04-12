@@ -20,9 +20,9 @@ public class UserProfileController
     }
 
     @PostMapping(value = "/userprofile/create")
-    public UserProfile createNewUserProfile(@RequestBody UserProfile UserProfile)
+    public UserProfile createNewUserProfile(@RequestBody UserProfile userProfile)
     {
-        return userProfileRepository.saveAndFlush(UserProfile);
+        return userProfileRepository.saveAndFlush(userProfile);
     }
 
     @GetMapping(value = "/userprofiles")

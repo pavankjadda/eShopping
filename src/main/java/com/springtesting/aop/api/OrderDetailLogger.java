@@ -15,7 +15,10 @@ public class OrderDetailLogger
     private Logger logger=LoggerFactory.getLogger(OrderDetailLogger.class);
 
     @Pointcut("within(com.springtesting.web.api.order.OrderDetailController)")
-    public void orderDetailControllerPointcut() {}
+    public void orderDetailControllerPointcut()
+    {
+        //Point cut orderDetailControllerPointcut
+    }
 
     @Around("orderDetailControllerPointcut()")
     public Object logOrderDetailControllerRequests(ProceedingJoinPoint proceedingJoinPoint)
@@ -27,7 +30,7 @@ public class OrderDetailLogger
         }
         catch (Throwable throwable)
         {
-            throwable.printStackTrace();
+            logger.warn("Exception: ",throwable);
         }
         logger.info("Log {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), result);

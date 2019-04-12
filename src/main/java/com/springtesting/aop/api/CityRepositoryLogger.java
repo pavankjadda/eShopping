@@ -18,12 +18,14 @@ public class CityRepositoryLogger
     @Pointcut("execution(* com.springtesting.repo.CityRepository.findAll(..))")
     private void getFindAll()
     {
+        //PointCut getFindAll
     }
 
     @Pointcut(value = "execution(* com.springtesting.repo.CityRepository.findByNameAndState(..)) && args(name,state,..)",
             argNames = "name,state")
     private void getFindByNameAndState(String name, State state)
     {
+        //PointCut getFindByNameAndState
     }
 
     @After(value = "getFindAll()")

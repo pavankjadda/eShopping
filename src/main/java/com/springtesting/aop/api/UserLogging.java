@@ -15,6 +15,7 @@ public class UserLogging
     @Pointcut("execution(* com.springtesting.model.user.User.*(..))")
     public void getUserPointCut()
     {
+        //Pointcut
     }
 
 
@@ -27,7 +28,7 @@ public class UserLogging
     @After("getUserPointCut()")
     public void afterAdvice()
     {
-        System.out.println("Inside UserLogging.afterAdvice() method");
+        logger.info("Inside UserLogging.afterAdvice() method");
     }
 
 }

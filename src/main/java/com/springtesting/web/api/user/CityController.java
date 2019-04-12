@@ -29,12 +29,6 @@ public class CityController
         cityRepository.save(city);
     }
 
-    /*@GetMapping(value = "/list")
-    public List<City> getCities()
-    {
-        return cityRepository.findAll();
-    }*/
-
     @GetMapping(value = "/list")
     public Page<City> getCities(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit)
     {

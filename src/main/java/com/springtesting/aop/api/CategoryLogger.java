@@ -24,6 +24,6 @@ public class CategoryLogger
     @AfterThrowing(value = "execution(* com.springtesting.web.api.CategoryController.*(..))",throwing = "exception")
     public void categoryExceptionClass(CategoryException exception)
     {
-        logger.info("Log: "+exception.getMessage());
+        logger.info("Category Exception: {}",exception.getMessage());
     }
 }

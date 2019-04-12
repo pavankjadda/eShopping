@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public class JsonUtil
 {
+    private JsonUtil() {}
+
     public static byte[] toJson(Object object) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();

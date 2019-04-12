@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 @Aspect
 @Component
 public class AuthenticationSuccessLogger
@@ -25,29 +23,27 @@ public class AuthenticationSuccessLogger
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
-    /**
-     * Pointcut that matches all Spring beans in the application's main packages.
-     */
-    @Pointcut("within(com.springtesting.repo..*) || within(com.springtesting.service..*) || within(com.springtesting.web..*)")
+    @Pointcut("within(com.springtesting.repo..*) || within(com.springtesting.web..*)")
     public void applicationPackagePointcut()
     {
+        //Inside applicationPackagePointcut
     }
 
     @Around("applicationPackagePointcut() && customAuthenticationSuccessHandlerPointcut()")
     public Object logCustomAuthenticationSuccessHandlerPointcut(ProceedingJoinPoint proceedingJoinPoint)
     {
         logger.info("Enter: {}.{}() with argument[s] = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
-                proceedingJoinPoint.getSignature().getName(), Arrays.toString(proceedingJoinPoint.getArgs()));
+        proceedingJoinPoint.getSignature().getName(), proceedingJoinPoint.getArgs());
 
         Object result = null;
         try
         {
             result = proceedingJoinPoint.proceed();
-            System.out.println("proceedingJoinPoint.proceed() result: " + result);
+            logger.info("proceedingJoinPoint.proceed() result: {}", result);
         }
         catch (Throwable throwable)
         {
-            throwable.printStackTrace();
+            logger.warn("throwable: ",throwable);
         }
 
         logger.info("Exit: {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
@@ -55,12 +51,7 @@ public class AuthenticationSuccessLogger
         return result;
     }
 
-    /**
-     * Advice that logs methods throwing exceptions.
-     *
-     * @param joinPoint join point for advice
-     * @param e         exception
-     */
+
     @AfterThrowing(pointcut = "applicationPackagePointcut() && customAuthenticationSuccessHandlerPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e)
     {
@@ -69,39 +60,4 @@ public class AuthenticationSuccessLogger
 
     }
 
-       /*
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.onAuthenticationSuccess(..)) && args(request,response,auth,..)",
-            argNames = "request,response,auth")
-    private void getOnAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) {};
-
-    @After(value = "getOnAuthenticationSuccess(request,response,auth)",argNames = "joinPoint,request,response,auth")
-    private void afterOnAuthenticationSuccess( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication auth)
-    {
-        logger.error("User Loggedin Successfull");
-    }
-
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.handle(..)) && args(request,response,auth,..)",
-            argNames = "request,response,auth")
-    private void getHandle(HttpServletRequest request, HttpServletResponse response, Authentication auth) {};
-
-    @After(value = "getHandle(request,response,auth)",argNames = "joinPoint,request,response,auth")
-    private void afterHandle( JoinPoint joinPoint,HttpServletRequest request, HttpServletResponse response, Authentication auth)
-    {
-        logger.error("Inside: AuthenticationSuccessLogger afterHandle()");
-    }
-
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.*(..))")
-    private void getCustomAuthenticationSuccessHandler() {};
-
-    @After(value = "getCustomAuthenticationSuccessHandler()")
-    private void afterCustomAuthenticationSuccessHandler( JoinPoint joinPoint)
-    {
-        logger.error("Inside: AuthenticationSuccessLogger afterCustomAuthenticationSuccessHandler()");
-    }
-
-
-    @Pointcut(value = "execution(* com.springtesting.security.handlers.CustomAuthenticationSuccessHandler.*(..))")
-    private void customAuthenticationSuccessHandlerPointcut() {};
-
-    */
 }
