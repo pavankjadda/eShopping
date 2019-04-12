@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="pjadda (generated)" id="1555039523240-1">
+        <addColumn tableName="category">
+            <column name="description" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1555039523240-2">
+        <dropForeignKeyConstraint baseTableName="SPRING_SESSION_ATTRIBUTES" constraintName="SPRING_SESSION_ATTRIBUTES_FK"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1555039523240-3">
+        <dropUniqueConstraint constraintName="SPRING_SESSION_IX1" tableName="SPRING_SESSION"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1555039523240-4">
+        <dropTable tableName="SPRING_SESSION"/>
+    </changeSet>
+    <changeSet author="pjadda (generated)" id="1555039523240-5">
+        <dropTable tableName="SPRING_SESSION_ATTRIBUTES"/>
+    </changeSet>
+</databaseChangeLog>
