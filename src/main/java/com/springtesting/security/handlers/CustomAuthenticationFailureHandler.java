@@ -34,8 +34,9 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException
     {
-        System.out.println("Inside onAuthenticationFailure() method: Login Failed, redirecting to Login Page");
-        System.out.println("Exception: " + exception.toString());
+        logger.warn("Inside onAuthenticationFailure() method: Login Failed, redirecting to Login Page");
+        logger.warn("Exception: {}", exception);
+
         handle(request, response, exception);
         clearAuthenticationAttributes(request);
         saveRequesterInformation(request);
@@ -50,7 +51,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
     private String determineTargetUrl(AuthenticationException authenticationException)
     {
-        return SecurityConstants.formFailureLoginUrl;
+        logger.warn("AuthenticationException occurred, message: {}",authenticationException);
+        return SecurityConstants.FORMLOGINFAILUREURL;
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request)
@@ -81,7 +83,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.warn("Failed to save requester information. Exception message: {}",e);
         }
     }
 

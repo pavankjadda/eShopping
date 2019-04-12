@@ -1,8 +1,5 @@
 package com.springtesting.security.handlers;
 
-import com.springtesting.repo.FailedLoginRepository;
-import com.springtesting.repo.UnauthorizedRequestRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -15,16 +12,6 @@ import java.io.PrintWriter;
 @Component
 public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint
 {
-    private final FailedLoginRepository failedLoginRepository;
-
-    private final UnauthorizedRequestRepository unauthorizedRequestRepository;
-
-    @Autowired
-    public CustomBasicAuthenticationEntryPoint(FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository)
-    {
-        this.failedLoginRepository = failedLoginRepository;
-        this.unauthorizedRequestRepository = unauthorizedRequestRepository;
-    }
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx) throws IOException

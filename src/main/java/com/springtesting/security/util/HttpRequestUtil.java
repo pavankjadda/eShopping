@@ -4,9 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HttpRequestUtil
 {
+    private HttpRequestUtil()
+    {
+
+    }
+
     public static String getClientIpAddr(HttpServletRequest request)
     {
         String ip = request.getHeader("X-Forwarded-For");
+
         if (ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown"))
         {
             ip = request.getHeader("Proxy-Client-IP");

@@ -3,15 +3,19 @@ package com.springtesting.security.config;
 
 public class AuthorityConstants
 {
-    public static final String Admin = "ROLE_ADMIN";
+    public static final String ADMIN = "ROLE_ADMIN";
 
-    public static final String User = "ROLE_USER";
+    public static final String USER = "ROLE_USER";
 
-    public static final String Dba = "ROLE_DBA";
+    public static final String DBA = "ROLE_DBA";
 
-    public static final String ApiUser = "ROLE_APIUSER";
+    public static final String API_USER = "ROLE_APIUSER";
 
-    public static final String Seller = "ROLE_SELLER";
+    public static final String SELLER = "ROLE_SELLER";
 
-    public static final String Buyer = "ROLE_Buyer";
+    public static final String BUYER = "ROLE_Buyer";
+
+    private AuthorityConstants()
+    {
+    }
 }

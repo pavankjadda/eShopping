@@ -2,6 +2,10 @@ package com.springtesting.security.config;
 
 public class ApplicationConstants
 {
-    public static final int rememberMeTimeOut = 300;
+    static final int REMEMBERMETIMEOUT = 300;
 
+    private ApplicationConstants()
+    {
+
+    }
 }

@@ -2,6 +2,8 @@ package com.springtesting.security.handlers;
 
 import com.springtesting.model.security.UnauthorizedRequest;
 import com.springtesting.repo.UnauthorizedRequestRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -11,6 +13,8 @@ import java.time.LocalDateTime;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler
 {
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private UnauthorizedRequestRepository unauthorizedRequestRepository;
 
 
@@ -41,7 +45,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.warn("Exception occurred while handling Access Denied Error. Exception message: ",e);
         }
 
     }

@@ -5,7 +5,6 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +15,7 @@ import org.springframework.util.Assert;
 
 public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider
 {
-    private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
+    private static final String USER_NOT_FOUND_MESSAGE = "userNotFoundPassword";
 
     private volatile String userNotFoundEncodedPassword;
 
@@ -33,7 +32,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     }
 
     /* Validate Password against Database */
-    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException
+    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication)
     {
         if (authentication.getCredentials() == null)
         {
@@ -55,12 +54,13 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         }
     }
 
-    protected void doAfterPropertiesSet() throws Exception
+    @Override
+    protected void doAfterPropertiesSet()
     {
         Assert.notNull(myUserDetailsService, "A UserDetailsService must be set");
     }
 
-    protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException
+    protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
     {
         prepareTimingAttackProtection();
         try
@@ -110,7 +110,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     {
         if (this.userNotFoundEncodedPassword == null)
         {
-            this.userNotFoundEncodedPassword = this.passwordEncoder.encode(USER_NOT_FOUND_PASSWORD);
+            this.userNotFoundEncodedPassword = this.passwordEncoder.encode(USER_NOT_FOUND_MESSAGE);
         }
     }
 

@@ -20,8 +20,4 @@ public class UserRole
     @Column(name = "role_id")
     private Long roleId;
 
-    public UserRole()
-    {
-    }
-
 }

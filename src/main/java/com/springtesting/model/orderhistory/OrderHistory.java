@@ -14,7 +14,6 @@ public class OrderHistory implements Serializable
 {
     private static final long serialVersionUID = -6699432774798518217L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

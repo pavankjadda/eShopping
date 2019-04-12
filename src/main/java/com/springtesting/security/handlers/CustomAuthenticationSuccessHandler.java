@@ -40,10 +40,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     {
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
-        saveRequesterInformation(request,response,authentication);
+        saveRequesterInformation(request,authentication);
     }
 
-    private void saveRequesterInformation(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    private void saveRequesterInformation(HttpServletRequest request, Authentication authentication)
     {
         SessionHistory sessionHistory=new SessionHistory();
         sessionHistory.setSessionId(request.getSession(false).getId());
@@ -68,7 +68,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.info("Failed to save requester information. Exception message " ,e);
         }
     }
 
@@ -120,7 +120,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         this.redirectStrategy = redirectStrategy;
     }
 
-    public LocalDateTime convertLongTime(long longValue)
+    private LocalDateTime convertLongTime(long longValue)
     {
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
     }
