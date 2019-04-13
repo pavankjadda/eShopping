@@ -24,6 +24,12 @@ public class ProductController
         productRepository.saveAndFlush(product);
     }
 
+    @PutMapping(path = "/update")
+    public void updateProduct(@RequestBody Product product)
+    {
+        productRepository.saveAndFlush(product);
+    }
+
     @GetMapping(value = "/list")
     public List<Product> getProducts()
     {
