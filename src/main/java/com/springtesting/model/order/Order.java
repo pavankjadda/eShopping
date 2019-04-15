@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "order")
+@Table(name = "`order`")
 public class Order extends AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = -6699422774799518237L;
@@ -49,12 +49,8 @@ public class Order extends AbstractAuditingEntity implements Serializable
     @Column(name = "order_created_date_time")
     private LocalDateTime orderCreatedDateTime;
 
-
     @OneToMany
-    @JoinTable(
-            name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "order_product_detail_id", referencedColumnName = "id"))
+    @JoinColumn(name = "order_id")
     private List<OrderProductDetail> orderProductDetails = new ArrayList<>();
 
     @Override

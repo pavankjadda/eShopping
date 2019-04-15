@@ -18,11 +18,6 @@ public class OrderController
         this.orderRepository = orderRepository;
     }
 
-    @PostMapping(path = "/create")
-    public void createOrder(@RequestBody Order order)
-    {
-        orderRepository.saveAndFlush(order);
-    }
 
     @GetMapping(value = "/list")
     public List<Order> getOrder()
@@ -36,4 +31,15 @@ public class OrderController
         return orderRepository.findById(id);
     }
 
+    @PostMapping(path = "/create")
+    public Order createOrder(@RequestBody Order order)
+    {
+        return orderRepository.saveAndFlush(order);
+    }
+
+    @PutMapping(path = "/update")
+    public Order updateOrder(@RequestBody Order order)
+    {
+        return orderRepository.saveAndFlush(order);
+    }
 }

@@ -1,7 +1,5 @@
 package com.springtesting.aop.api;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -14,14 +12,14 @@ public class OrderDetailLogger
 {
     private Logger logger=LoggerFactory.getLogger(OrderDetailLogger.class);
 
-    @Pointcut("within(com.springtesting.web.api.order.OrderDetailController)")
-    public void orderDetailControllerPointcut()
+    @Pointcut("within(com.springtesting.web.api.order.OrderController)")
+    public void orderControllerPointcut()
     {
         //Point cut orderDetailControllerPointcut
     }
-
-    @Around("orderDetailControllerPointcut()")
-    public Object logOrderDetailControllerRequests(ProceedingJoinPoint proceedingJoinPoint)
+/*
+    @Around("orderControllerPointcut()")
+    public Object logOrderControllerRequests(ProceedingJoinPoint proceedingJoinPoint)
     {
         Object result=null;
         try
@@ -35,5 +33,5 @@ public class OrderDetailLogger
         logger.info("Log {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), result);
         return result;
-    }
+    }*/
 }
