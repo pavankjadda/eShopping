@@ -1,6 +1,5 @@
 package com.springtesting.insertdata;
 
-import com.springtesting.model.order.OrderDetail;
 import com.springtesting.model.order.OrderStatus;
 import com.springtesting.model.user.Address;
 import com.springtesting.model.user.AddressType;
@@ -17,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
@@ -36,8 +34,6 @@ public class InsertOrderDetailDataTest
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
-    @Autowired
-    private OrderDetailRepository orderDetailRepository;
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -152,24 +148,6 @@ public class InsertOrderDetailDataTest
         orderStatusRepository.saveAndFlush(orderStatus);
     }
 
-    @Test
-    public void insertOrderDetail()
-    {
-        OrderDetail orderDetail=new OrderDetail();
-        orderDetail.setId(1L);
-        orderDetail.setOrderCreatedDateTime(LocalDateTime.now());
-        orderDetail.setOrderStatus(orderStatusRepository.findByStatus("Created"));
-        orderDetail.setPurchasedBy(userProfileRepository.findById(1L).get());
-        orderDetail.setShippingAddress(addressRepository.findById(1L).get());
-
-        orderDetail.setCreatedBy("admin");
-        orderDetail.setLastModifiedBy("admin");
-        orderDetail.setCreatedDate(Instant.now());
-        orderDetail.setLastModifiedDate(Instant.now());
-
-        orderDetailRepository.saveAndFlush(orderDetail);
-
-    }
 
 
 }

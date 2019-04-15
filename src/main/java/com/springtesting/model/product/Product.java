@@ -1,9 +1,7 @@
 package com.springtesting.model.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springtesting.model.AbstractAuditingEntity;
 import com.springtesting.model.order.Category;
-import com.springtesting.model.order.OrderDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -51,11 +49,6 @@ public class Product extends AbstractAuditingEntity implements Serializable
             inverseJoinColumns = @JoinColumn(name = "photo_id", referencedColumnName = "id")
     )
     private List<Photo> photoList=new ArrayList<>();
-
-
-    @ManyToMany(mappedBy = "productList")
-    @JsonIgnore
-    private List<OrderDetail> ordersList = new ArrayList<>();
 
 
     @Override
