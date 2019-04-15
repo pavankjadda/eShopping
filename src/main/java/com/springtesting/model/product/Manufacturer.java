@@ -28,6 +28,9 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "display_name")
+    private String displayName;
+
     @Column(name = "description",length = 10000)
     private String description;
 
