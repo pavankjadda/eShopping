@@ -35,4 +35,16 @@ public class ManufacturerController
     {
         return manufacturerRepository.saveAndFlush(manufacturer);
     }
+
+    @PutMapping(path = "/update")
+    public Manufacturer updateManufacturer(@RequestBody Manufacturer manufacturer)
+    {
+        return manufacturerRepository.saveAndFlush(manufacturer);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public void updateManufacturer(@PathVariable Long id)
+    {
+        manufacturerRepository.deleteById(id);
+    }
 }

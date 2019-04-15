@@ -19,11 +19,7 @@ public class AddressController
         this.addressRepository = addressRepository;
     }
 
-    @PostMapping(path = "/create")
-    public Address createAddress(@RequestBody Address address)
-    {
-        return addressRepository.saveAndFlush(address);
-    }
+
 
     @GetMapping(value = "/list")
     public List<Address> getAddresses()
@@ -35,6 +31,17 @@ public class AddressController
     public Optional<Address> getAddressById(@PathVariable Long id)
     {
         return addressRepository.findById(id);
+    }
+    @PostMapping(path = "/create")
+    public Address createAddress(@RequestBody Address address)
+    {
+        return addressRepository.saveAndFlush(address);
+    }
+
+    @PutMapping(path = "/update")
+    public Address updateAddress(@RequestBody Address address)
+    {
+        return addressRepository.saveAndFlush(address);
     }
 
 }

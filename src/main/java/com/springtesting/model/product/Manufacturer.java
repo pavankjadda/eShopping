@@ -34,7 +34,7 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
     @Column(name = "description",length = 10000)
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
