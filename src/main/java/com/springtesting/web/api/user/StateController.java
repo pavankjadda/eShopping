@@ -39,4 +39,10 @@ public class StateController
     }
 
 
+    @GetMapping(value = "/find/country/{id}")
+    public List<State> getStatesFilterByCountryId(@PathVariable Long id)
+    {
+        return stateRepository.findAllByCountryIdOrderByNameAsc(id);
+    }
+
 }

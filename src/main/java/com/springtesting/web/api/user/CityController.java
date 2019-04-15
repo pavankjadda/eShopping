@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,6 +44,12 @@ public class CityController
     public Optional<City> getCityById(@PathVariable Long id)
     {
         return cityRepository.findById(id);
+    }
+
+    @GetMapping(value = "/find/state/{id}")
+    public List<City> getCityByBasedOnStateId(@PathVariable Long id)
+    {
+        return cityRepository.findAllByStateIdOrderByNameAsc(id);
     }
 
     @GetMapping(value = "/find")

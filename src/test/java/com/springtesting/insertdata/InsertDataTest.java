@@ -123,29 +123,39 @@ public class InsertDataTest
     public void insertCitiesData() throws IOException
     {
         HashMap<String, List<String>> citiesMap = new HashMap<>();
-        citiesMap = readCitisDataFromJsonFile(citiesMap); //Ignore this message
+        citiesMap = readCitiesDataFromJsonFile(citiesMap); //Ignore this message
+        List<City> cityList = new ArrayList<>();
 
         for (HashMap.Entry<String, List<String>> mapEntry : citiesMap.entrySet())
         {
             State state = findState(mapEntry.getKey());
             List<String> citiesInState = mapEntry.getValue();
-            List<City> cityList = new ArrayList<>();
+
             for (String cityName : citiesInState)
             {
                 try
                 {
+                    City city = cityRepository.findByNameAndNameIsNotNull(cityName).get(0);
+                    if(city !=null)
+                    {
+                        city.setState(state);
+                        //System.out.println("City: "+cityName+" state: "+state.getName());
+                        //cityRepository.saveAndFlush(city);
+                        cityList.add(city);
+                    }
                     //Check if City name exists in Database
                     //if(!cityRepository.findByNameAndState(cityName,state).isPresent())
-                    cityList.add(new City(cityName, state));
+                    //cityList.add(new City(cityName, state));
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
                 }
             }
-            cityRepository.saveAll(cityList);
-            cityRepository.flush(); //Flush changes to DB
+
         }
+        cityRepository.saveAll(cityList);
+        cityRepository.flush(); //Flush changes to DB
     }
 
     private State findState(String stateName)
@@ -153,7 +163,7 @@ public class InsertDataTest
         return stateRepository.findByName(stateName).orElse(null);
     }
 
-    public HashMap readCitisDataFromJsonFile(HashMap citiesMap) throws IOException
+    public HashMap readCitiesDataFromJsonFile(HashMap citiesMap) throws IOException
     {
         File file = new ClassPathResource("data/citis-data.json").getFile();
         byte[] mapByteData = Files.readAllBytes(Paths.get(file.getAbsolutePath()));

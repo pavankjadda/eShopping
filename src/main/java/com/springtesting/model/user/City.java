@@ -13,6 +13,8 @@ import javax.persistence.*;
 @Data
 public class City extends AbstractAuditingEntity
 {
+    private static final long serialVersionUID = -8825045541258851493L;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
