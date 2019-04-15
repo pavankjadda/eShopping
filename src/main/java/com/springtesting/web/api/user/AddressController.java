@@ -20,9 +20,9 @@ public class AddressController
     }
 
     @PostMapping(path = "/create")
-    public void createAddress(@RequestBody Address address)
+    public Address createAddress(@RequestBody Address address)
     {
-        addressRepository.save(address);
+        return addressRepository.saveAndFlush(address);
     }
 
     @GetMapping(value = "/list")

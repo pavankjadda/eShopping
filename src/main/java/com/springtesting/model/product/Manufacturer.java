@@ -18,6 +18,8 @@ import java.util.List;
 @Table(name = "manufacturer")
 public class Manufacturer  extends AbstractAuditingEntity implements Serializable
 {
+    private static final long serialVersionUID = 2518838979579289918L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,7 +31,8 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
     @Column(name = "description",length = 10000)
     private String description;
 
-    @Column(name = "address")
+    @OneToOne
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "contact_email")

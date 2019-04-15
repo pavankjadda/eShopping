@@ -1,5 +1,6 @@
 package com.springtesting.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -27,7 +28,7 @@ public class State implements Serializable
 
     @ManyToOne
     @JoinColumn(name = "country_id")
-    //@JsonIgnore
+    @JsonIgnore
     private Country country;
 
 
