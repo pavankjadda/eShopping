@@ -13,6 +13,8 @@ import javax.persistence.*;
 @Table(name = "order_status")
 public class OrderStatus extends AbstractAuditingEntity
 {
+    private static final long serialVersionUID = 3679844999486153457L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
