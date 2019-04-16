@@ -1,6 +1,7 @@
 package com.springtesting.dto;
 
 import com.springtesting.model.user.Role;
+import com.springtesting.model.user.UserProfile;
 import lombok.Data;
 
 import java.util.Collection;
@@ -19,6 +20,8 @@ public class UserDto
     private String token;
 
     private Collection<Role> roles;
+
+    private UserProfile userProfile;
 
 
     public UserDto() {}

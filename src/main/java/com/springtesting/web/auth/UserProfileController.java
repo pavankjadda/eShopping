@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/v1/user_profile")
 public class UserProfileController
 {
     private UserProfileRepository userProfileRepository;
@@ -19,23 +20,28 @@ public class UserProfileController
         this.userProfileRepository = userProfileRepository;
     }
 
-    @PostMapping(value = "/userprofile/create")
+    @PostMapping(value = "/create")
     public UserProfile createNewUserProfile(@RequestBody UserProfile userProfile)
     {
         return userProfileRepository.saveAndFlush(userProfile);
     }
 
-    @GetMapping(value = "/userprofiles")
+    @GetMapping(value = "/list")
     public List<UserProfile> findAll()
     {
         return userProfileRepository.findAll();
     }
 
-    @GetMapping(value = "/userprofile/{id}")
+    @GetMapping(value = "/{id}")
     public Optional<UserProfile> findById(@PathVariable Long id)
     {
         return userProfileRepository.findById(id);
     }
 
+    @GetMapping(value = "/user/{id}")
+    public Optional<UserProfile> findByUserId(@PathVariable Long id)
+    {
+        return userProfileRepository.findAllByUserId(id);
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.springtesting.model.user;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -25,8 +25,8 @@ public class Role implements Serializable
     @Column(name = "name", nullable = false)
     private String name;
 
-    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Collection<User> users;
 
     @ManyToMany

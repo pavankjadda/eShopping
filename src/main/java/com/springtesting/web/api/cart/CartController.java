@@ -2,10 +2,7 @@ package com.springtesting.web.api.cart;
 
 import com.springtesting.model.cart.Cart;
 import com.springtesting.repo.CartRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,5 +28,17 @@ public class CartController
     public Optional<Cart> getCartBasedOnUserId(@PathVariable Long id)
     {
         return cartRepository.findAllByUserProfileUserId(id);
+    }
+
+    @PutMapping(path = "/product/add")
+    public Cart addProductToCart(@RequestBody Cart cart)
+    {
+        return cartRepository.saveAndFlush(cart);
+    }
+
+    @PostMapping(path = "/create/empty")
+    public Cart createEmptyCart(@RequestBody Cart cart)
+    {
+        return cartRepository.saveAndFlush(cart);
     }
 }

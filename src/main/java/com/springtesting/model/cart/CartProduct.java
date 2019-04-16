@@ -1,5 +1,6 @@
 package com.springtesting.model.cart;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.springtesting.model.AbstractAuditingEntity;
 import com.springtesting.model.product.Product;
 import lombok.Data;
@@ -22,10 +23,14 @@ public class CartProduct extends AbstractAuditingEntity
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
+    @JsonIgnoreProperties(value = {"userProfile","cartStatus","cartProducts"})
     private Cart cart;
 
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 
 }

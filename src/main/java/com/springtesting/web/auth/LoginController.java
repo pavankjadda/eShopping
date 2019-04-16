@@ -76,6 +76,7 @@ public class LoginController
             userDto.setUsername(user.getUsername());
             userDto.setRoles(user.getRoles());
             userDto.setToken(token);
+            userDto.setUserProfile(user.getUserProfile());
             return userDto;
         }
 

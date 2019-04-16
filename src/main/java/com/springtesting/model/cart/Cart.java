@@ -1,5 +1,6 @@
 package com.springtesting.model.cart;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.springtesting.model.AbstractAuditingEntity;
 import com.springtesting.model.user.UserProfile;
 import lombok.Data;
@@ -24,14 +25,15 @@ public class Cart  extends AbstractAuditingEntity
 
     @OneToOne
     @JoinColumn(name = "user_profile_id")
+    @JsonIgnoreProperties(value = {"addresses"})
     private UserProfile userProfile;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_status")
     private CartStatus cartStatus;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection(targetClass = CartProduct.class)
     private List<CartProduct> cartProducts=new ArrayList<>();
-
 
 }
