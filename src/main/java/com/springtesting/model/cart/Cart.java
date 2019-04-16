@@ -1,6 +1,7 @@
 package com.springtesting.model.cart;
 
 import com.springtesting.model.AbstractAuditingEntity;
+import com.springtesting.model.user.UserProfile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +21,10 @@ public class Cart  extends AbstractAuditingEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfile;
 
     @ManyToOne
     @JoinColumn(name = "cart_status")
