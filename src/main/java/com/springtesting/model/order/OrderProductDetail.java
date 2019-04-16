@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "order_product_detail")
-public class OrderProductDetail extends AbstractAuditingEntity implements Serializable
+public class OrderProductDetail extends AbstractAuditingEntity
 {
     private static final long serialVersionUID = -7153423452702053909L;
 

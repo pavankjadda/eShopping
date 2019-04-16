@@ -1,11 +1,12 @@
 package com.springtesting.model.cart;
 
 import com.springtesting.model.AbstractAuditingEntity;
-import com.springtesting.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -24,9 +25,8 @@ public class Cart  extends AbstractAuditingEntity
     @JoinColumn(name = "cart_status")
     private CartStatus cartStatus;
 
-    @OneToMany
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartProduct> cartProducts=new ArrayList<>();
 
 
 }
