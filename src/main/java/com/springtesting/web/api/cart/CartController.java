@@ -30,7 +30,7 @@ public class CartController
         return cartRepository.findAllByUserProfileUserId(id);
     }
 
-    @PutMapping(path = "/product/add")
+    @PostMapping(path = "/product/add")
     public Cart addProductToCart(@RequestBody Cart cart)
     {
         return cartRepository.saveAndFlush(cart);

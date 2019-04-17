@@ -45,7 +45,7 @@ public class UserProfile extends AbstractAuditingEntity
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "user_profile_id")
     private List<Address> addresses = new ArrayList<>();
 
 

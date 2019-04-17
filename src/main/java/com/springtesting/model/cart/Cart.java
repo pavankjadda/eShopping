@@ -28,12 +28,12 @@ public class Cart  extends AbstractAuditingEntity
     @JsonIgnoreProperties(value = {"addresses"})
     private UserProfile userProfile;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cart_status")
     private CartStatus cartStatus;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ElementCollection(targetClass = CartProduct.class)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    //@ElementCollection(targetClass = CartProduct.class)
     private List<CartProduct> cartProducts=new ArrayList<>();
 
 }

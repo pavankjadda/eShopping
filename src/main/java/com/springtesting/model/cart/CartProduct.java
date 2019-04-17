@@ -21,16 +21,17 @@ public class CartProduct extends AbstractAuditingEntity
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    @JsonIgnoreProperties(value = {"userProfile","cartStatus","cartProducts"})
-    private Cart cart;
-
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "quantity")
     private Integer quantity;
+
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id",referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"userProfile","cartStatus","cartProducts"})
+    private Cart cart;
 
 }
