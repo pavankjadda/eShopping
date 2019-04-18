@@ -1,4 +1,4 @@
-package com.pj.springsecurity.web.api.user;
+package com.pj.springsecurity.web.api.address;
 
 import com.pj.springsecurity.model.user.State;
 import com.pj.springsecurity.repo.StateRepository;

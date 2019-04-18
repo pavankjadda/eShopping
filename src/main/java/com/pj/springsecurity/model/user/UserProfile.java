@@ -44,6 +44,10 @@ public class UserProfile extends AbstractAuditingEntity
     private String email;
 
 
+    @Column(name = "phone")
+    private String phone;
+
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_profile_id")
     private List<Address> addresses = new ArrayList<>();

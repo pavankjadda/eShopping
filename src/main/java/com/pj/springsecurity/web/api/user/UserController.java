@@ -1,4 +1,4 @@
-package com.pj.springsecurity.web.auth;
+package com.pj.springsecurity.web.api.user;
 
 import com.pj.springsecurity.dto.GenericResponseDto;
 import com.pj.springsecurity.dto.RegisterUserDto;

@@ -10,7 +10,7 @@ spring:
     password: bcmc1234
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
   # Spring Session properties
   session:
