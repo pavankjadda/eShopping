@@ -2,7 +2,6 @@ package com.pj.springsecurity.model.user;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -35,7 +34,6 @@ public class Role implements Serializable
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
     )
-    @JsonManagedReference
     private Collection<Privilege> privileges;
 
 

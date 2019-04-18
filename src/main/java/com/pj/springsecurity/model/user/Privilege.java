@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,8 +21,8 @@ public class Privilege implements Serializable
 
     private String name;
 
-    @JsonBackReference
     @ManyToMany(mappedBy = "privileges")
+    @JsonIgnore
     private Collection<Role> roles;
 
     public Privilege()

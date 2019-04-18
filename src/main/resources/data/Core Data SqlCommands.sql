@@ -13,3 +13,6 @@ INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20003,'Wor
     3. insertCitiesData()
  */
 
+/* Insert Data into Currency  Table  */
+
+INSERT INTO `spring_security_data`.`currency`(`id`,`iso_code`,`name`,`symbol`) VALUES(1,'USD','USD','$');

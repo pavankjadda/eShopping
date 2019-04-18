@@ -1,12 +1,10 @@
 package com.pj.springsecurity.model.user;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 
@@ -14,7 +12,7 @@ import java.util.Collection;
 @Entity
 @Data
 @Table(name = "`user`")
-public class User extends AbstractAuditingEntity implements Serializable
+public class User extends AbstractAuditingEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -51,7 +49,6 @@ public class User extends AbstractAuditingEntity implements Serializable
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    @JsonManagedReference
     private Collection<Role> roles;
 
     public User()

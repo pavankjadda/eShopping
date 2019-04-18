@@ -20,11 +20,6 @@ public class UserProfileController
         this.userProfileRepository = userProfileRepository;
     }
 
-    @PostMapping(value = "/create")
-    public UserProfile createNewUserProfile(@RequestBody UserProfile userProfile)
-    {
-        return userProfileRepository.saveAndFlush(userProfile);
-    }
 
     @GetMapping(value = "/list")
     public List<UserProfile> findAll()
@@ -44,4 +39,15 @@ public class UserProfileController
         return userProfileRepository.findAllByUserId(id);
     }
 
+    @PostMapping(value = "/create")
+    public UserProfile createNewUserProfile(@RequestBody UserProfile userProfile)
+    {
+        return userProfileRepository.saveAndFlush(userProfile);
+    }
+
+    @PutMapping(value = "/update")
+    public UserProfile updateUserProfile(@RequestBody UserProfile userProfile)
+    {
+        return userProfileRepository.saveAndFlush(userProfile);
+    }
 }

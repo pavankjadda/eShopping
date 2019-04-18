@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,9 +52,9 @@ public class UserProfile extends AbstractAuditingEntity
     @JoinColumn(name = "user_profile_id")
     private List<Address> addresses = new ArrayList<>();
 
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    /*  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"}) can be replaced with FetchType.EAGER  */
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"})
     private User user;
 }
