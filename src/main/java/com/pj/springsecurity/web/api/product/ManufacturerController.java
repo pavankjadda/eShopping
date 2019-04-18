@@ -2,6 +2,7 @@ package com.pj.springsecurity.web.api.product;
 
 import com.pj.springsecurity.model.product.Manufacturer;
 import com.pj.springsecurity.repo.ManufacturerRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ManufacturerController
     @GetMapping(value = "/list")
     public List<Manufacturer> getManufacturers()
     {
-        return manufacturerRepository.findAll();
+        return manufacturerRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
     }
 
     @GetMapping(value = "/find/{id}")

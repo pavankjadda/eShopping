@@ -135,14 +135,12 @@ public class InsertDataTest
             {
                 try
                 {
-                    City city = cityRepository.findByNameAndNameIsNotNull(cityName).get(0);
-                    if(city !=null)
-                    {
-                        city.setState(state);
-                        //System.out.println("City: "+cityName+" state: "+state.getName());
-                        //cityRepository.saveAndFlush(city);
-                        cityList.add(city);
-                    }
+                    //City city = cityRepository.findByNameAndNameIsNotNull(cityName).get(0);
+                    City city=new City();
+                    city.setState(state);
+                    city.setName(cityName);
+                    cityList.add(city);
+
                     //Check if City name exists in Database
                     //if(!cityRepository.findByNameAndState(cityName,state).isPresent())
                     //cityList.add(new City(cityName, state));

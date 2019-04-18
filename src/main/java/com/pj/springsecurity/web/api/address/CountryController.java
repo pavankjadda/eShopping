@@ -3,6 +3,7 @@ package com.pj.springsecurity.web.api.address;
 import com.pj.springsecurity.model.user.Country;
 import com.pj.springsecurity.repo.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class CountryController
     @GetMapping(value = "/list")
     public List<Country> getCountries()
     {
-        return countryRepository.findAll();
+        return countryRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
     }
 
     @GetMapping(value = "/find/{id}")
