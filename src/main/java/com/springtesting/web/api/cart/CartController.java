@@ -1,6 +1,7 @@
 package com.springtesting.web.api.cart;
 
 import com.springtesting.model.cart.Cart;
+import com.springtesting.model.cart.CartProduct;
 import com.springtesting.repo.CartProductRepository;
 import com.springtesting.repo.CartRepository;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,25 @@ public class CartController
     @PostMapping(path = "/product/add")
     public Cart addProductToCart(@RequestBody Cart cart)
     {
-        return cartRepository.saveAndFlush(cart);
+        Cart savedCart=cartRepository.saveAndFlush(cart);
+        updateCartProductWithNewCartId(savedCart);
+        return savedCart;
+    }
+
+    /*
+       Update CartProducts with Cart Id
+     */
+    private void updateCartProductWithNewCartId(Cart savedCart)
+    {
+        List<CartProduct> cartProducts=savedCart.getCartProducts();
+        for(CartProduct cartProduct: cartProducts)
+        {
+            if(cartProduct.getCart() == null)
+            {
+                cartProduct.setCart(savedCart);
+                cartProductRepository.saveAndFlush(cartProduct);
+            }
+        }
     }
 
 
