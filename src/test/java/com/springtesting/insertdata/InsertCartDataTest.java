@@ -2,10 +2,8 @@ package com.springtesting.insertdata;
 
 import com.springtesting.model.cart.Cart;
 import com.springtesting.model.cart.CartProduct;
-import com.springtesting.repo.CartRepository;
-import com.springtesting.repo.CartStatusRepository;
-import com.springtesting.repo.ProductRepository;
-import com.springtesting.repo.UserProfileRepository;
+import com.springtesting.repo.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class InsertCartDataTest
     private CartRepository cartRepository;
 
     @Autowired
+    private CartProductRepository cartProductRepository;
+
+    @Autowired
     private CartStatusRepository cartStatusRepository;
 
     @Autowired
@@ -38,6 +39,13 @@ public class InsertCartDataTest
     @Autowired
     private ProductRepository productRepository;
 
+
+    @Before
+    public void setUp()
+    {
+        cartProductRepository.deleteAll();
+        cartRepository.deleteAll();
+    }
     @Test
     public void insertCart()
     {
@@ -49,11 +57,13 @@ public class InsertCartDataTest
         CartProduct cartProduct=new CartProduct();
         cartProduct.setProduct(productRepository.findById(1L).get());
         cartProduct.setQuantity(2);
+        cartProduct.setCart(cart);
         cartProducts.add(cartProduct);
 
         cartProduct=new CartProduct();
         cartProduct.setProduct(productRepository.findById(2L).get());
         cartProduct.setQuantity(1);
+        cartProduct.setCart(cart);
         cartProducts.add(cartProduct);
 
         cart.setCartProducts(cartProducts);

@@ -32,8 +32,16 @@ public class Cart  extends AbstractAuditingEntity
     @JoinColumn(name = "cart_status")
     private CartStatus cartStatus;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    //@ElementCollection(targetClass = CartProduct.class)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private List<CartProduct> cartProducts=new ArrayList<>();
 
+    @Override
+    public String toString()
+    {
+        return "Cart{" +
+                "id=" + id +
+                ", userProfile=" + userProfile +
+                ", cartStatus=" + cartStatus +
+                '}';
+    }
 }

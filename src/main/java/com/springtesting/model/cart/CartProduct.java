@@ -34,4 +34,12 @@ public class CartProduct extends AbstractAuditingEntity
     @JsonIgnoreProperties(value = {"userProfile","cartStatus","cartProducts"})
     private Cart cart;
 
+    @Override
+    public String toString()
+    {
+        return "CartProduct{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
