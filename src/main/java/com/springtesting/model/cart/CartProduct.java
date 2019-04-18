@@ -28,7 +28,6 @@ public class CartProduct extends AbstractAuditingEntity
     @Column(name = "quantity")
     private Integer quantity;
 
-
     @ManyToOne
     @JoinColumn(name = "cart_id",referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"userProfile","cartStatus","cartProducts"})
