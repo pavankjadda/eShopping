@@ -44,4 +44,16 @@ public class Cart  extends AbstractAuditingEntity
                 ", cartStatus=" + cartStatus +
                 '}';
     }
+
+    public void addCartProduct(CartProduct cartProduct)
+    {
+        cartProducts.add(cartProduct);
+        cartProduct.setCart(this);
+    }
+    public void removeCartProduct(CartProduct cartProduct)
+    {
+        cartProducts.remove(cartProduct);
+        cartProduct.setCart(null);
+    }
+
 }

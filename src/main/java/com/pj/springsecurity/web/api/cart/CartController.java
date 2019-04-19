@@ -38,25 +38,12 @@ public class CartController
     @PostMapping(path = "/product/add")
     public Cart addProductToCart(@RequestBody Cart cart)
     {
-        Cart savedCart=cartRepository.saveAndFlush(cart);
-        updateCartProductWithNewCartId(savedCart);
-        return savedCart;
-    }
-
-    /*
-       Update CartProducts with Cart Id
-     */
-    private void updateCartProductWithNewCartId(Cart savedCart)
-    {
-        List<CartProduct> cartProducts=savedCart.getCartProducts();
+        List<CartProduct> cartProducts=cart.getCartProducts();
         for(CartProduct cartProduct: cartProducts)
         {
-            if(cartProduct.getCart() == null)
-            {
-                cartProduct.setCart(savedCart);
-                cartProductRepository.saveAndFlush(cartProduct);
-            }
+            cartProduct.setCart(cart);
         }
+        return cartRepository.saveAndFlush(cart);
     }
 
 
