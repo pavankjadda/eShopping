@@ -47,9 +47,27 @@ public class CartController
     }
 
 
-    @PostMapping(path = "/create/empty")
+    @PutMapping(path = "/update")
+    public Cart updateCart(@RequestBody Cart cart)
+    {
+        return cartRepository.saveAndFlush(cart);
+    }
+
+    @DeleteMapping(path = "/delete")
     public Cart createEmptyCart(@RequestBody Cart cart)
     {
         return cartRepository.saveAndFlush(cart);
     }
+
+    @DeleteMapping(path = "/product/delete")
+    public void deleteProductFromCart(@RequestBody Cart cart)
+    {
+        List<CartProduct> cartProducts=cart.getCartProducts();
+        for(CartProduct cartProduct: cartProducts)
+        {
+            cartProduct.setCart(null);
+        }
+        cartRepository.delete(cart);
+    }
+
 }
