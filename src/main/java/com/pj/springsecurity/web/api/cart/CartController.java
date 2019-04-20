@@ -2,7 +2,6 @@ package com.pj.springsecurity.web.api.cart;
 
 import com.pj.springsecurity.model.cart.Cart;
 import com.pj.springsecurity.model.cart.CartProduct;
-import com.pj.springsecurity.repo.CartProductRepository;
 import com.pj.springsecurity.repo.CartRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +14,9 @@ public class CartController
 {
     private final CartRepository cartRepository;
 
-    private final CartProductRepository cartProductRepository;
-
-    public CartController(CartRepository cartRepository, CartProductRepository cartProductRepository)
+    public CartController(CartRepository cartRepository)
     {
         this.cartRepository = cartRepository;
-        this.cartProductRepository=cartProductRepository;
     }
 
     @GetMapping(path = "/list")
@@ -69,5 +65,4 @@ public class CartController
         }
         cartRepository.delete(cart);
     }
-
 }
