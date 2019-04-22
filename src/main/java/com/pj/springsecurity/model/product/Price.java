@@ -5,12 +5,14 @@ import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.order.Currency;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "price")
+@org.hibernate.annotations.Cache(region = "priceCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Data
 public class Price extends AbstractAuditingEntity
 {

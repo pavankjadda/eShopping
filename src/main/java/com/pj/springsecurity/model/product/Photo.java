@@ -3,6 +3,7 @@ package com.pj.springsecurity.model.product;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
+@org.hibernate.annotations.Cache(region = "photoCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "photo")
 public class Photo extends AbstractAuditingEntity implements Serializable
 {

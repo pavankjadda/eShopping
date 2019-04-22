@@ -44,6 +44,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-jdbc</artifactId>
             <version>2.1.2.RELEASE</version>
@@ -78,6 +82,24 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <!-- Caching Solution-->
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-hibernate53</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-client</artifactId>
+        </dependency>
 
         <!-- DB, Utility, Log and Metrics Tools -->
         <dependency>
@@ -124,10 +146,6 @@
             <groupId>com.giffing.bucket4j.spring.boot.starter</groupId>
             <artifactId>bucket4j-spring-boot-starter</artifactId>
             <version>${bucket4j-spring-boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>

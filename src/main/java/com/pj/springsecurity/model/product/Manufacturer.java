@@ -5,6 +5,7 @@ import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.Address;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@org.hibernate.annotations.Cache(region = "manufacturerCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "manufacturer")
 public class Manufacturer  extends AbstractAuditingEntity implements Serializable
 {

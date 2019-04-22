@@ -3,6 +3,7 @@ package com.pj.springsecurity.model.order;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
+@org.hibernate.annotations.Cache(region = "categoryCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "category")
 public class Category extends AbstractAuditingEntity implements Serializable
 {
