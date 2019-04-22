@@ -42,7 +42,6 @@ public class CartController
         return cartRepository.saveAndFlush(cart);
     }
 
-
     @PutMapping(path = "/update")
     public Cart updateCart(@RequestBody Cart cart)
     {

@@ -31,16 +31,16 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @Column(name = "description",length = 10000)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id",referencedColumnName = "id")
     private Manufacturer manufacturer;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     private Price price;
 

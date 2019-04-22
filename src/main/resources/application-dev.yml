@@ -1,5 +1,11 @@
 # Application Properties
+
+
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
   application:
     name: SpringSecurity-Data-Application
   # Jpa Properties
