@@ -5,6 +5,7 @@ import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@org.hibernate.annotations.Cache(region = "cartCache",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "cartCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "cart")
 public class Cart  extends AbstractAuditingEntity
 {

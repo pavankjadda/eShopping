@@ -4,6 +4,7 @@ import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.order.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@org.hibernate.annotations.Cache(region = "productCache",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "productCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "product")
 public class Product extends AbstractAuditingEntity implements Serializable
 {

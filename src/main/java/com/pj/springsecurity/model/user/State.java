@@ -26,7 +26,7 @@ public class State implements Serializable
     @Length(max = 200, min = 2)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     @JsonIgnore
     private Country country;

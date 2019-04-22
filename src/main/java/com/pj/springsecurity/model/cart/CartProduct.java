@@ -5,12 +5,15 @@ import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@Cache(region = "cartCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "cart_product")
 public class CartProduct extends AbstractAuditingEntity
 {

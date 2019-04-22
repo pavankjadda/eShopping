@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "city")
+@Cache(region = "cartCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Data
 public class City extends AbstractAuditingEntity
 {
@@ -25,7 +28,7 @@ public class City extends AbstractAuditingEntity
     private String name;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id")
     @JsonIgnore
     private State state;

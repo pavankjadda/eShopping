@@ -3,12 +3,16 @@ package com.pj.springsecurity.web.api.address;
 
 import com.pj.springsecurity.model.user.City;
 import com.pj.springsecurity.repo.CityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,8 @@ import java.util.Optional;
 public class CityController
 {
     private final CityRepository cityRepository;
+
+    private Logger logger=LoggerFactory.getLogger(CityController.class);
 
     @Autowired
     public CityController(CityRepository cityRepository)
@@ -38,6 +44,17 @@ public class CityController
         if (limit == null)
             limit = 10;
         return cityRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "name")));
+    }
+
+    @GetMapping(value = "/list/all")
+    public List<City> getCitiesAll()
+    {
+        Instant start = Instant.now();
+        List<City> cities=cityRepository.findAll();
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        logger.info("Total Execution time: {}",timeElapsed);
+        return cities;
     }
 
     @GetMapping(value = "/{id}")
