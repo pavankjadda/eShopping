@@ -31,12 +31,12 @@ public class CityRepositoryLogger
     @After(value = "getFindAll()")
     private void afterFindAll(JoinPoint joinPoint)
     {
-        logger.error("Inside CityRepositoryLogger  afterFindAll()");
+        logger.info("Inside CityRepositoryLogger  afterFindAll()");
     }
 
     @After(value = "getFindByNameAndState(name,state)", argNames = "name,state")
     private void afterFindByNameAndState(String name, State state)
     {
-        logger.error("Inside CityRepositoryLogger  afterFindByNameAndState()");
+        logger.info("Inside CityRepositoryLogger  afterFindByNameAndState()");
     }
 }

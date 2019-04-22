@@ -11,8 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,17 +42,6 @@ public class CityController
         if (limit == null)
             limit = 10;
         return cityRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "name")));
-    }
-
-    @GetMapping(value = "/list/all")
-    public List<City> getCitiesAll()
-    {
-        Instant start = Instant.now();
-        List<City> cities=cityRepository.findAll();
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Total Execution time: {}",timeElapsed);
-        return cities;
     }
 
     @GetMapping(value = "/{id}")
