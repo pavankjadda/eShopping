@@ -1,8 +1,10 @@
 package com.pj.springsecurity.web.api.cart;
 
+import com.pj.springsecurity.dto.CartDTO;
 import com.pj.springsecurity.model.cart.Cart;
 import com.pj.springsecurity.model.cart.CartProduct;
 import com.pj.springsecurity.repo.CartRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class CartController
 {
     private final CartRepository cartRepository;
+    private final ModelMapper modelMapper;
 
-    public CartController(CartRepository cartRepository)
+    public CartController(CartRepository cartRepository, ModelMapper modelMapper)
     {
         this.cartRepository = cartRepository;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping(path = "/list")
@@ -32,8 +36,9 @@ public class CartController
     }
 
     @PostMapping(path = "/product/add")
-    public Cart addProductToCart(@RequestBody Cart cart)
+    public Cart addProductToCart(@RequestBody CartDTO cartDTO)
     {
+        Cart cart=modelMapper.map(cartDTO,Cart.class);
         List<CartProduct> cartProducts=cart.getCartProducts();
         for(CartProduct cartProduct: cartProducts)
         {
@@ -43,20 +48,16 @@ public class CartController
     }
 
     @PutMapping(path = "/update")
-    public Cart updateCart(@RequestBody Cart cart)
+    public Cart updateCart(@RequestBody CartDTO cartDTO)
     {
-        return cartRepository.saveAndFlush(cart);
-    }
-
-    @DeleteMapping(path = "/delete")
-    public Cart createEmptyCart(@RequestBody Cart cart)
-    {
+        Cart cart=modelMapper.map(cartDTO,Cart.class);
         return cartRepository.saveAndFlush(cart);
     }
 
     @DeleteMapping(path = "/product/delete")
-    public void deleteProductFromCart(@RequestBody Cart cart)
+    public void deleteProductFromCart(@RequestBody CartDTO cartDTO)
     {
+        Cart cart=modelMapper.map(cartDTO,Cart.class);
         List<CartProduct> cartProducts=cart.getCartProducts();
         for(CartProduct cartProduct: cartProducts)
         {

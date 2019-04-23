@@ -1,5 +1,6 @@
 package com.pj.springsecurity.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,4 +48,11 @@ public class ApplicationConfig implements WebMvcConfigurer
     {
         return HeaderHttpSessionIdResolver.xAuthToken();
     }
+
+    @Bean
+    public ModelMapper modelMapper()
+    {
+        return new ModelMapper();
+    }
 }
+

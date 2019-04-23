@@ -19,6 +19,7 @@ spring:
       hibernate:
         ddl-auto: update
         show_sql: true
+
         cache:
           use_query_cache: true
           use_second_level_cache: true
