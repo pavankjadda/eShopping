@@ -1,9 +1,6 @@
 package com.pj.springsecurity.config;
 
-import com.hazelcast.config.Config;
-import com.hazelcast.config.EvictionPolicy;
-import com.hazelcast.config.MapConfig;
-import com.hazelcast.config.MaxSizeConfig;
+import com.hazelcast.config.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +16,7 @@ public class HazelcastConfiguration
                 .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
                 .setEvictionPolicy(EvictionPolicy.LRU)
                 .setTimeToLiveSeconds(-1));
-        config.getGroupConfig().setName("dev").setPassword("dev-pass");
+        config.setGroupConfig(new GroupConfig("dev","dev-pass"));
         config.getNetworkConfig().setPublicAddress("192.168.1.100");
         config.getNetworkConfig().setPort(5701);
         return config;
