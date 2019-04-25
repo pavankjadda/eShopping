@@ -26,6 +26,4 @@ public class CartStatusController
     {
         return cartStatusRepository.findAll();
     }
-
-
 }
