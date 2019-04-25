@@ -1,13 +1,15 @@
 package com.pj.springsecurity.web.api.cart;
 
-import com.pj.springsecurity.dto.CartDTO;
+import com.pj.springsecurity.dto.CartProductDTO;
+import com.pj.springsecurity.dto.UserProfileDTO;
 import com.pj.springsecurity.model.cart.Cart;
 import com.pj.springsecurity.model.cart.CartProduct;
+import com.pj.springsecurity.model.user.UserProfile;
+import com.pj.springsecurity.repo.CartProductRepository;
 import com.pj.springsecurity.repo.CartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -15,18 +17,15 @@ import java.util.Optional;
 public class CartController
 {
     private final CartRepository cartRepository;
+    private final CartProductRepository cartProductRepository;
+
     private final ModelMapper modelMapper;
 
-    public CartController(CartRepository cartRepository, ModelMapper modelMapper)
+    public CartController(CartRepository cartRepository, ModelMapper modelMapper, CartProductRepository cartProductRepository)
     {
         this.cartRepository = cartRepository;
         this.modelMapper = modelMapper;
-    }
-
-    @GetMapping(path = "/list")
-    public List<Cart> getAllCarts()
-    {
-        return cartRepository.findAll();
+        this.cartProductRepository = cartProductRepository;
     }
 
     @GetMapping(path = "/find/user/{id}")
@@ -35,35 +34,42 @@ public class CartController
         return cartRepository.findAllByUserProfileUserId(id);
     }
 
+    @PostMapping(path = "/initialize")
+    public Cart initializeCart(@RequestBody UserProfileDTO userProfileDTO)
+    {
+        UserProfile userProfile=modelMapper.map(userProfileDTO,UserProfile.class);
+
+        Cart cart=new Cart();
+        cart.setUserProfile(userProfile);
+        return cartRepository.saveAndFlush(cart);
+    }
+
     @PostMapping(path = "/product/add")
-    public Cart addProductToCart(@RequestBody CartDTO cartDTO)
+    public Cart addProductToCart(@RequestBody CartProductDTO cartProductDTO)
     {
-        Cart cart=modelMapper.map(cartDTO,Cart.class);
-        List<CartProduct> cartProducts=cart.getCartProducts();
-        for(CartProduct cartProduct: cartProducts)
-        {
-            cartProduct.setCart(cart);
-        }
-        return cartRepository.saveAndFlush(cart);
+        CartProduct cartProduct=modelMapper.map(cartProductDTO,CartProduct.class);
+        return cartProductRepository.saveAndFlush(cartProduct).getCart();
     }
 
-    @PutMapping(path = "/update")
-    public Cart updateCart(@RequestBody CartDTO cartDTO)
+    @PostMapping(path = "/product/update")
+    public Cart updateCartProduct(@RequestBody CartProductDTO cartProductDTO)
     {
-        Cart cart=modelMapper.map(cartDTO,Cart.class);
-        return cartRepository.saveAndFlush(cart);
+        CartProduct cartProduct=modelMapper.map(cartProductDTO,CartProduct.class);
+        if(cartProduct.getQuantity() == 0)
+        {
+            cartProductRepository.delete(cartProduct);
+        }
+        else
+        {
+            cartProductRepository.saveAndFlush(cartProduct);
+        }
+        return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
     }
 
 
-    @DeleteMapping(path = "/product/delete")
-    public void deleteProductFromCart(@RequestBody CartDTO cartDTO)
+    @DeleteMapping(path = "/delete")
+    public void deleteCart(@PathVariable Long cartId)
     {
-        Cart cart=modelMapper.map(cartDTO,Cart.class);
-        List<CartProduct> cartProducts=cart.getCartProducts();
-        for(CartProduct cartProduct: cartProducts)
-        {
-            cartProduct.setCart(null);
-        }
-        cartRepository.delete(cart);
+        cartRepository.deleteById(cartId);
     }
 }
