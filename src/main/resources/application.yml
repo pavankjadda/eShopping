@@ -1,15 +1,36 @@
 # Application Properties
+
+
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
   application:
     name: SpringSecurity-Data-Application
   # Jpa Properties
   datasource:
-    url: ${spring.datasource.url}
-    username: ${spring.datasource.username}
-    password: ${spring.datasource.password}
+    #spring.datasource.url=jdbc:mysql://localhost:3306/springsecuritydb?useSSL=false
+    url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
+    username: root
+    password: bcmc1234
   jpa:
-    hibernate:
-      ddl-auto: update
+    properties:
+      hibernate:
+        ddl-auto: update
+        show_sql: true
+
+        cache:
+          use_query_cache: true
+          use_second_level_cache: true
+          hazelcast:
+            use_native_client: true
+            #native_client_address: 192.168.99.100:5701
+            #native_client_group: dev
+            #native_client_password: dev-pass
+          region:
+            factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+
 
   # Spring Session properties
   session:
@@ -19,14 +40,17 @@ spring:
   devtools:
     restart:
       enabled: true
+  liquibase:
+    contexts: dev
+    change-log: classpath:db/db.changelog-master.xml
 
 ## Server Properties
 server:
-  port: ${server.port}
+  port: 8080
   servlet:
     session:
       cookie:
-        secure: false
+        secure: true
         http-only: true
 
 management:
@@ -38,5 +62,28 @@ management:
     auditevents:
       enabled: true
 
+# Logging
+logging:
+  file: /Users/pjadda/ELK-Stack/logback/springsecuritydata.log
 
+# Bucket4J properties
+bucket4j:
+  enabled: true
 
+  filters:
+    - cache-name: buckets
+      url: /*
+      metrics:
+        tags:
+          - key: IP
+            expression: getRemoteAddr()
+            types: REJECTED_COUNTER # for data privacy reasons the IP should only be collected on bucket rejections
+          - key: USERNAME
+            expression: "@bucket4jSecurityService.username() != null ? @bucket4jSecurityService.username() : 'anonymous'"
+          - key: URL
+            expression: request.getRequestURI()
+      rate-limits:
+        - bandwidths:
+            - capacity: 5
+              time: 10
+              unit: seconds
