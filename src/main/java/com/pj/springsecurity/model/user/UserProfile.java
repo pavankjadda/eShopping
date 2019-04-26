@@ -55,6 +55,6 @@ public class UserProfile extends AbstractAuditingEntity
     /*  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"}) can be replaced with FetchType.EAGER  */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"})
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles","password"})
     private User user;
 }

@@ -14,7 +14,7 @@ Spring Security implementation with Spring Session, Spring Data and Spring Boot.
 ## Technologies 
 1. Java 8
 2. Spring Boot and listed Spring modules 
-    - Spring Data 
+    - Spring Data JPA
     - Spring Security 
     - Spring AOP
     - Spring Session

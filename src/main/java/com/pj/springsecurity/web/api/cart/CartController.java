@@ -71,9 +71,18 @@ public class CartController
     }
 
 
-    @DeleteMapping(path = "/delete")
-    public void deleteCart(@PathVariable Long cartId)
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteCart(@PathVariable Long id)
     {
-        cartRepository.deleteById(cartId);
+        Optional<Cart> cartOptional=cartRepository.findById(id);
+        if(cartOptional.isPresent())
+        {
+            Cart cart=cartOptional.get();
+            for(CartProduct cartProduct: cart.getCartProducts())
+            {
+                cartProductRepository.delete(cartProduct);
+            }
+            cartRepository.delete(cart);
+        }
     }
 }

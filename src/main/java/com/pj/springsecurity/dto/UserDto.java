@@ -4,11 +4,14 @@ import com.pj.springsecurity.model.user.Role;
 import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
-public class UserDto
+public class UserDto implements Serializable
 {
+    private static final long serialVersionUID = -7294904497247619478L;
+
     private Long id;
 
     private String username;
@@ -26,12 +29,4 @@ public class UserDto
 
     public UserDto() {}
 
-    public UserDto(Long id, String username, String firstName, String lastName, String token)
-    {
-        this.id = id;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.token = token;
-    }
 }
