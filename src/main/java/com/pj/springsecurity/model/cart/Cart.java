@@ -28,7 +28,7 @@ public class Cart  extends AbstractAuditingEntity
 
     @OneToOne
     @JoinColumn(name = "user_profile_id")
-    @JsonIgnoreProperties(value = {"addresses"})
+    @JsonIgnoreProperties(value = {"addresses","user"})
     private UserProfile userProfile;
 
     @ManyToOne

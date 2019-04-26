@@ -39,7 +39,7 @@ public class User extends AbstractAuditingEntity
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
     @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
 
