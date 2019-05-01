@@ -61,13 +61,20 @@ public class CartController
         CartProduct cartProduct=modelMapper.map(cartProductDTO,CartProduct.class);
         if(cartProduct.getQuantity() == 0)
         {
-            cartProductRepository.delete(cartProduct);
+            deleteCartProduct(cartProduct.getId());
         }
         else
         {
             cartProductRepository.saveAndFlush(cartProduct);
         }
         return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
+    }
+
+    @DeleteMapping(path = "/product/delete/{id}")
+    public void deleteCartProduct(@PathVariable Long id)
+    {
+        Optional<CartProduct> optionalCartProduct=cartProductRepository.findById(id);
+        optionalCartProduct.ifPresent(cartProductRepository::delete);
     }
 
 
