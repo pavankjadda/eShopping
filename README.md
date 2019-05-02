@@ -1,7 +1,7 @@
-# Spring Security implementation with Spring Session, Spring Data and Spring Boot
+# eShopping Application
 
 ## What's this?
-Spring Security implementation with Spring Session, Spring Data and Spring Boot. Following usecases covered
+eShopping Application implemented with Spring Boot, Spring Security, Spring Data and Spring Session
 1. Register new user
 2. Login with credentials and persist session between calls until user closes browser
 3. Implement 'Remember Me' checkbox and provide session management between sessions (Show homepage or requested page despite closing the browser)
