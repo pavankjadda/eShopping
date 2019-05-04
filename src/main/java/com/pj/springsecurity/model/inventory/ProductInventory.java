@@ -1,5 +1,6 @@
 package com.pj.springsecurity.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.model.AbstractAuditingEntity;
 import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class ProductInventory extends AbstractAuditingEntity
 
     @OneToOne
     @JoinColumn(name = "product_id")
+    @JsonIgnoreProperties(value = {"category","manufacturer","price","photoList"})
     private Product product;
 
 }

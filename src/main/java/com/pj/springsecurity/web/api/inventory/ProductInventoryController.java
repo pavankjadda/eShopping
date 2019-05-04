@@ -2,11 +2,9 @@ package com.pj.springsecurity.web.api.inventory;
 
 import com.pj.springsecurity.model.inventory.ProductInventory;
 import com.pj.springsecurity.repo.ProductInventoryRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,5 +29,17 @@ public class ProductInventoryController
     public Optional<ProductInventory> getProductInventoryByProductId(@PathVariable Long id)
     {
         return productInventoryRepository.findAllByProductId(id);
+    }
+
+    @PostMapping(path = "/product/ids")
+    public List<ProductInventory> getProductInventoryByProductIds(@RequestBody List<Long> productIdList)
+    {
+        List<ProductInventory> productInventories=new ArrayList<>();
+        for (Long id :productIdList)
+        {
+            Optional<ProductInventory> productInventoryOptional=productInventoryRepository.findAllByProductId(id);
+            productInventoryOptional.ifPresent(productInventories::add);
+        }
+        return productInventories;
     }
 }
