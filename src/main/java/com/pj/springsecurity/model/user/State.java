@@ -14,7 +14,7 @@ public class State implements Serializable
 {
     private static final long serialVersionUID = 5553856435782266275L;
 
-    @javax.persistence.Id
+    @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
