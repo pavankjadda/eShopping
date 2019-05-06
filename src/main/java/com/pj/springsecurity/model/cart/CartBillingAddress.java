@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Table(name = "cart_billing_address")
 public class CartBillingAddress extends AbstractAuditingEntity
 {
-
     private static final long serialVersionUID = 5015149636428611585L;
 
     @Id
@@ -53,5 +52,4 @@ public class CartBillingAddress extends AbstractAuditingEntity
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Cart cart;
-
 }

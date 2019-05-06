@@ -38,6 +38,14 @@ public class Cart  extends AbstractAuditingEntity
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private List<CartProduct> cartProducts=new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cart", cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_shipping_address")
+    private CartShippingAddress cartShippingAddress;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cart", cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_billing_address")
+    private CartBillingAddress cartBillingAddress ;
+
     @Override
     public String toString()
     {
