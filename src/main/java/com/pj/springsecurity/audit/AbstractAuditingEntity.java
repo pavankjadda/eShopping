@@ -1,5 +1,6 @@
 package com.pj.springsecurity.audit;
 
+import lombok.Data;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Audited
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public abstract class AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = -1773219999574011842L;
@@ -37,43 +39,4 @@ public abstract class AbstractAuditingEntity implements Serializable
     private LocalDateTime lastModifiedDate;
 
 
-    public String getCreatedBy()
-    {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy)
-    {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedDate()
-    {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate)
-    {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy()
-    {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy)
-    {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public LocalDateTime getLastModifiedDate()
-    {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(LocalDateTime lastModifiedDate)
-    {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 }
