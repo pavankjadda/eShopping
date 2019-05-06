@@ -51,15 +51,4 @@ public class Address extends AbstractAuditingEntity
     public Address()
     {
     }
-
-    public Address(String streetName, String apartment, City city, State state, Country country, String zipCode, AddressType addressType)
-    {
-        this.streetName = streetName;
-        this.apartment = apartment;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.zipCode = zipCode;
-        this.addressType = addressType;
-    }
 }

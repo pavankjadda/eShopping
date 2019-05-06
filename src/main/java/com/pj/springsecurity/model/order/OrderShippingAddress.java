@@ -49,4 +49,8 @@ public class OrderShippingAddress extends AbstractAuditingEntity
     @ManyToOne
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 }
