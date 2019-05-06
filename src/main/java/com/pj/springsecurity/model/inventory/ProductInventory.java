@@ -1,7 +1,7 @@
 package com.pj.springsecurity.model.inventory;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

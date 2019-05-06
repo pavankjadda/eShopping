@@ -1,7 +1,7 @@
 package com.pj.springsecurity.model.product;
 
 
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;

@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -48,8 +48,8 @@ public class InsertProductDataTest
 
         currency.setCreatedBy("admin");
         currency.setLastModifiedBy("admin");
-        currency.setCreatedDate(Instant.now());
-        currency.setLastModifiedDate(Instant.now());
+        currency.setCreatedDate(LocalDateTime.now());
+        currency.setLastModifiedDate(LocalDateTime.now());
 
         currencyRepository.saveAndFlush(currency);
     }
@@ -63,8 +63,8 @@ public class InsertProductDataTest
 
         price.setCreatedBy("admin");
         price.setLastModifiedBy("admin");
-        price.setCreatedDate(Instant.now());
-        price.setLastModifiedDate(Instant.now());
+        price.setCreatedDate(LocalDateTime.now());
+        price.setLastModifiedDate(LocalDateTime.now());
 
         priceRepository.saveAndFlush(price);
     }
@@ -79,8 +79,8 @@ public class InsertProductDataTest
 
         product.setCreatedBy("admin");
         product.setLastModifiedBy("admin");
-        product.setCreatedDate(Instant.now());
-        product.setLastModifiedDate(Instant.now());
+        product.setCreatedDate(LocalDateTime.now());
+        product.setLastModifiedDate(LocalDateTime.now());
 
         productRepository.saveAndFlush(product);
     }
@@ -94,8 +94,8 @@ public class InsertProductDataTest
 
         productPrice.setCreatedBy("admin");
         productPrice.setLastModifiedBy("admin");
-        productPrice.setCreatedDate(Instant.now());
-        productPrice.setLastModifiedDate(Instant.now());
+        productPrice.setCreatedDate(LocalDateTime.now());
+        productPrice.setLastModifiedDate(LocalDateTime.now());
 
         productPriceRepository.saveAndFlush(productPrice);
     }

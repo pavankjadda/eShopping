@@ -15,7 +15,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
@@ -65,24 +65,24 @@ public class InsertOrderDetailDataTest
         addressType.setType("Home");
         addressType.setCreatedBy("admin");
         addressType.setLastModifiedBy("admin");
-        addressType.setCreatedDate(Instant.now());
-        addressType.setLastModifiedDate(Instant.now());
+        addressType.setCreatedDate(LocalDateTime.now());
+        addressType.setLastModifiedDate(LocalDateTime.now());
         addressTypeRepository.saveAndFlush(addressType);
 
         addressType=new AddressType();
         addressType.setType("Business");
         addressType.setCreatedBy("admin");
         addressType.setLastModifiedBy("admin");
-        addressType.setCreatedDate(Instant.now());
-        addressType.setLastModifiedDate(Instant.now());
+        addressType.setCreatedDate(LocalDateTime.now());
+        addressType.setLastModifiedDate(LocalDateTime.now());
         addressTypeRepository.saveAndFlush(addressType);
 
         addressType=new AddressType();
         addressType.setType("Work");
         addressType.setCreatedBy("admin");
         addressType.setLastModifiedBy("admin");
-        addressType.setCreatedDate(Instant.now());
-        addressType.setLastModifiedDate(Instant.now());
+        addressType.setCreatedDate(LocalDateTime.now());
+        addressType.setLastModifiedDate(LocalDateTime.now());
         addressTypeRepository.saveAndFlush(addressType);
     }
 
@@ -99,8 +99,9 @@ public class InsertOrderDetailDataTest
         address.setAddressType(addressTypeRepository.findAddressTypeByType("Home").get());
         address.setCreatedBy("admin");
         address.setLastModifiedBy("admin");
-        address.setCreatedDate(Instant.now());
-        address.setLastModifiedDate(Instant.now());
+        address.setCreatedDate(LocalDateTime.now());
+        
+        address.setLastModifiedDate(LocalDateTime.now());
         addressRepository.saveAndFlush(address);
 
         address.setStreetName("3130 FAIRVIEW PARK DR");
@@ -112,8 +113,8 @@ public class InsertOrderDetailDataTest
         address.setAddressType(addressTypeRepository.findAddressTypeByType("Business").get());
         address.setCreatedBy("admin");
         address.setLastModifiedBy("admin");
-        address.setCreatedDate(Instant.now());
-        address.setLastModifiedDate(Instant.now());
+        address.setCreatedDate(LocalDateTime.now());
+        address.setLastModifiedDate(LocalDateTime.now());
         addressRepository.saveAndFlush(address);
 
     }
@@ -129,8 +130,8 @@ public class InsertOrderDetailDataTest
         userProfile.setUser(userRepository.findByUsername("admin"));
         userProfile.setCreatedBy("admin");
         userProfile.setLastModifiedBy("admin");
-        userProfile.setCreatedDate(Instant.now());
-        userProfile.setLastModifiedDate(Instant.now());
+        userProfile.setCreatedDate(LocalDateTime.now());
+        userProfile.setLastModifiedDate(LocalDateTime.now());
 
         userProfileRepository.saveAndFlush(userProfile);
     }
@@ -142,8 +143,8 @@ public class InsertOrderDetailDataTest
         orderStatus.setStatus("Created");
         orderStatus.setCreatedBy("admin");
         orderStatus.setLastModifiedBy("admin");
-        orderStatus.setCreatedDate(Instant.now());
-        orderStatus.setLastModifiedDate(Instant.now());
+        orderStatus.setCreatedDate(LocalDateTime.now());
+        orderStatus.setLastModifiedDate(LocalDateTime.now());
 
         orderStatusRepository.saveAndFlush(orderStatus);
     }

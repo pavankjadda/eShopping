@@ -1,7 +1,7 @@
 package com.pj.springsecurity.model.cart;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

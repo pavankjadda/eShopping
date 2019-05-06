@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.order;
 
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.Address;
 import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;

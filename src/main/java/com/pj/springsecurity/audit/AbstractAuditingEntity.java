@@ -1,6 +1,5 @@
-package com.pj.springsecurity.model;
+package com.pj.springsecurity.audit;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,7 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Audited
@@ -23,23 +22,19 @@ public abstract class AbstractAuditingEntity implements Serializable
 
     @CreatedBy
     @Column(name = "created_by",length = 100)
-    @JsonIgnore
     private String createdBy;
 
     @CreatedDate
     @Column(name = "created_date")
-    @JsonIgnore
-    private Instant createdDate = Instant.now();
+    private LocalDateTime createdDate;
 
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 100)
-    @JsonIgnore
     private String lastModifiedBy;
 
     @LastModifiedDate
     @Column(name = "last_modified_date")
-    @JsonIgnore
-    private Instant lastModifiedDate = Instant.now();
+    private LocalDateTime lastModifiedDate;
 
 
     public String getCreatedBy()
@@ -52,12 +47,12 @@ public abstract class AbstractAuditingEntity implements Serializable
         this.createdBy = createdBy;
     }
 
-    public Instant getCreatedDate()
+    public LocalDateTime getCreatedDate()
     {
         return createdDate;
     }
 
-    public void setCreatedDate(Instant createdDate)
+    public void setCreatedDate(LocalDateTime createdDate)
     {
         this.createdDate = createdDate;
     }
@@ -72,12 +67,12 @@ public abstract class AbstractAuditingEntity implements Serializable
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Instant getLastModifiedDate()
+    public LocalDateTime getLastModifiedDate()
     {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Instant lastModifiedDate)
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate)
     {
         this.lastModifiedDate = lastModifiedDate;
     }

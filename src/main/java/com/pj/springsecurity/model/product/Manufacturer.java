@@ -1,7 +1,7 @@
 package com.pj.springsecurity.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.Address;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

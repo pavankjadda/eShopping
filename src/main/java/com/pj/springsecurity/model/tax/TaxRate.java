@@ -1,7 +1,7 @@
 package com.pj.springsecurity.model.tax;
 
 
-import com.pj.springsecurity.model.AbstractAuditingEntity;
+import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

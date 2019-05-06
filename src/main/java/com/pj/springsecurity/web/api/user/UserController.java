@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -139,8 +140,8 @@ public class UserController
         user.setAccountNonLocked(true);
         user.setCreatedBy("System");
         user.setLastModifiedBy("System");
-        user.setCreatedDate(Instant.now());
-        user.setLastModifiedDate(Instant.now());
+        user.setCreatedDate(LocalDateTime.from(Instant.now()));
+        user.setLastModifiedDate(LocalDateTime.from(Instant.now()));
         return user;
     }
 

@@ -25,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -66,7 +66,7 @@ public class InsertDataTest
         category.setId(1001L);
         category.setName("Books");
         category.setCreatedBy("Pavan");
-        category.setCreatedDate(Instant.now());
+        category.setCreatedDate(LocalDateTime.now());
         categoryRepository.saveAndFlush(category);
     }
 
