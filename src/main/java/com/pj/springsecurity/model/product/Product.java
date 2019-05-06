@@ -45,7 +45,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @JoinColumn(name = "price_id")
     private Price price;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_photo",
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
