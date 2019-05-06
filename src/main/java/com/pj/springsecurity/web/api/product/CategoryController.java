@@ -1,4 +1,4 @@
-package com.pj.springsecurity.web.api;
+package com.pj.springsecurity.web.api.product;
 
 import com.pj.springsecurity.exceptions.exceptions.CategoryException;
 import com.pj.springsecurity.model.order.Category;
