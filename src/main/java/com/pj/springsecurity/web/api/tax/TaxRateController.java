@@ -1,7 +1,9 @@
 package com.pj.springsecurity.web.api.tax;
 
+import com.pj.springsecurity.dto.TaxRateDTO;
 import com.pj.springsecurity.model.tax.TaxRate;
 import com.pj.springsecurity.repo.TaxRateRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,9 +15,12 @@ public class TaxRateController
 {
     private final TaxRateRepository taxRateRepository;
 
-    public TaxRateController(TaxRateRepository taxRateRepository)
+    private final ModelMapper modelMapper;
+
+    public TaxRateController(TaxRateRepository taxRateRepository, ModelMapper modelMapper)
     {
         this.taxRateRepository = taxRateRepository;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping(value = "/list")
@@ -31,15 +36,16 @@ public class TaxRateController
     }
 
     @PostMapping(path = "/create")
-    public TaxRate createTaxRate(@RequestBody TaxRate taxRate)
+    public TaxRate createTaxRate(@RequestBody TaxRateDTO taxRateDTO)
     {
+        TaxRate taxRate=modelMapper.map(taxRateDTO,TaxRate.class);
         return taxRateRepository.saveAndFlush(taxRate);
     }
 
     @PutMapping(path = "/update")
-    public TaxRate updateTaxRate(@RequestBody TaxRate taxRate)
+    public TaxRate updateTaxRate(@RequestBody TaxRateDTO taxRateDTO)
     {
+        TaxRate taxRate=modelMapper.map(taxRateDTO,TaxRate.class);
         return taxRateRepository.saveAndFlush(taxRate);
     }
-
 }
