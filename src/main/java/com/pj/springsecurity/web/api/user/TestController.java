@@ -1,10 +1,7 @@
-package com.pj.springsecurity.insertdata;
-
+package com.pj.springsecurity.web.api.user;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
 import com.pj.springsecurity.model.order.Category;
 import com.pj.springsecurity.model.order.Currency;
 import com.pj.springsecurity.model.user.City;
@@ -12,17 +9,10 @@ import com.pj.springsecurity.model.user.Country;
 import com.pj.springsecurity.model.user.Region;
 import com.pj.springsecurity.model.user.State;
 import com.pj.springsecurity.repo.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,47 +21,33 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-@ActiveProfiles(value = "dev")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(value = false)
-public class InsertDataTest
+@RestController
+@RequestMapping(path = "test")
+public class TestController
 {
-    @Autowired
-    private CountryRepository countryRepository;
+    private final CountryRepository countryRepository;
 
-    @Autowired
-    private RegionRepository regionRepository;
+    private final RegionRepository regionRepository;
 
-    @Autowired
-    private StateRepository stateRepository;
+    private final StateRepository stateRepository;
 
-    @Autowired
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
-    @Autowired
-    private CurrencyRepository currencyRepository;
+    private final CurrencyRepository currencyRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    static Config config;
-
-    @BeforeClass
-    public static void onlyOnce()
+    public TestController(CountryRepository countryRepository, RegionRepository regionRepository, StateRepository stateRepository, CityRepository cityRepository, CurrencyRepository currencyRepository, CategoryRepository categoryRepository)
     {
-        Hazelcast.newHazelcastInstance(config);
+        this.countryRepository = countryRepository;
+        this.regionRepository = regionRepository;
+        this.stateRepository = stateRepository;
+        this.cityRepository = cityRepository;
+        this.currencyRepository = currencyRepository;
+        this.categoryRepository = categoryRepository;
     }
 
-    @Before
-    public void setUp()
-    {
-
-    }
-
-    @Test
+    @GetMapping(value = "/insert_category")
     public void insertCategory()
     {
         Category category = new Category();
@@ -82,19 +58,17 @@ public class InsertDataTest
         categoryRepository.saveAndFlush(category);
     }
 
-    @Test
+    @GetMapping(value = "/insert_currency")
     public void insertCurrency()
     {
         com.pj.springsecurity.model.order.Currency currency = new Currency();
         currency.setIsoCode("USD");
         currency.setName("USD");
         currency.setSymbol("$");
-        currency.setCreatedDate(LocalDateTime.now());
-        currency.setLastModifiedDate(LocalDateTime.now());
         currencyRepository.saveAndFlush(currency);
     }
 
-    @Test
+    @GetMapping(value = "/insert_countries")
     public void insertCountryData()
     {
         try
@@ -121,7 +95,7 @@ public class InsertDataTest
     }
 
 
-    @Test
+    @GetMapping(value = "/insert_states")
     public void insertStateData() throws IOException
     {
         Map<String, String> statesMap = new HashMap<>();
@@ -133,7 +107,7 @@ public class InsertDataTest
     }
 
 
-    @Test
+    @GetMapping(value = "/insert_cities")
     public void insertCitiesData() throws IOException
     {
         HashMap<String, List<String>> citiesMap = new HashMap<>();

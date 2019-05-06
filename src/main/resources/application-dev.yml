@@ -13,7 +13,10 @@ spring:
     url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
     username: root
     password: bcmc1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
+    generate-ddl: true
     properties:
       hibernate:
         ddl-auto: update
@@ -22,7 +25,9 @@ spring:
         cache:
           use_query_cache: true
           use_second_level_cache: true
+
           hazelcast:
+
             use_native_client: true
             #native_client_address: 192.168.99.100:5701
             #native_client_group: dev
@@ -39,9 +44,10 @@ spring:
   devtools:
     restart:
       enabled: true
-  liquibase:
-    contexts: dev
-    change-log: classpath:db/db.changelog-master.xml
+  #liquibase:
+    #contexts: dev
+    #change-log: classpath:db/db.changelog-master.xml
+    #enabled: false
 
 ## Server Properties
 server:
