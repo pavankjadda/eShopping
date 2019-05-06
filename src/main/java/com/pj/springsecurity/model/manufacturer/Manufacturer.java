@@ -1,7 +1,8 @@
-package com.pj.springsecurity.model.product;
+package com.pj.springsecurity.model.manufacturer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
+import com.pj.springsecurity.model.product.Product;
 import com.pj.springsecurity.model.user.Address;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -53,6 +54,5 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
     @OneToMany(mappedBy = "manufacturer")
     @JsonIgnore
     private List<Product> products=new ArrayList<>();
-
 
 }

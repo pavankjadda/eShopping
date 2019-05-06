@@ -1,6 +1,6 @@
 package com.pj.springsecurity.repo;
 
-import com.pj.springsecurity.model.product.Manufacturer;
+import com.pj.springsecurity.model.manufacturer.Manufacturer;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
