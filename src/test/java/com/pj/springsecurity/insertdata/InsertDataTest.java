@@ -7,6 +7,7 @@ import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.pj.springsecurity.model.order.Category;
 import com.pj.springsecurity.model.order.Currency;
+import com.pj.springsecurity.model.tax.TaxRate;
 import com.pj.springsecurity.model.user.City;
 import com.pj.springsecurity.model.user.Country;
 import com.pj.springsecurity.model.user.Region;
@@ -57,6 +58,9 @@ public class InsertDataTest
     private CategoryRepository categoryRepository;
 
     @Autowired
+    private TaxRateRepository taxRateRepository;
+
+    @Autowired
     static Config config;
 
     @BeforeClass
@@ -69,6 +73,22 @@ public class InsertDataTest
     public void setUp()
     {
 
+    }
+
+    @Test
+    public void insertTaxRate()
+    {
+        stateRepository.findAll().forEach(state ->
+        {
+            TaxRate taxRate=new TaxRate();
+            taxRate.setRate(5.5);
+            taxRate.setState(state);
+            taxRate.setCreatedBy("admin");
+            taxRate.setLastModifiedBy("admin");
+            taxRate.setCreatedDate(LocalDateTime.now());
+            taxRate.setLastModifiedDate(LocalDateTime.now());
+            taxRateRepository.save(taxRate);
+        });
     }
 
     @Test
