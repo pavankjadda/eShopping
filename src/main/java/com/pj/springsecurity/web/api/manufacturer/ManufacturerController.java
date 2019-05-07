@@ -1,4 +1,4 @@
-package com.pj.springsecurity.web.api.product;
+package com.pj.springsecurity.web.api.manufacturer;
 
 import com.pj.springsecurity.model.manufacturer.Manufacturer;
 import com.pj.springsecurity.repo.ManufacturerRepository;

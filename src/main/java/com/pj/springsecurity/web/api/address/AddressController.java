@@ -19,8 +19,6 @@ public class AddressController
         this.addressRepository = addressRepository;
     }
 
-
-
     @GetMapping(value = "/list")
     public List<Address> getAddresses()
     {
