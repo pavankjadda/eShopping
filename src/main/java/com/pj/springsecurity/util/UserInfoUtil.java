@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class UserInfoUtil
 {
@@ -22,5 +24,10 @@ public class UserInfoUtil
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails myUserDetails= (MyUserDetails) authentication.getPrincipal();
         return userRepository.findByUsername(myUserDetails.getUsername()).getUserProfile();
+    }
+
+    public boolean isValidUpdate(UserProfile newUserProfile)
+    {
+        return Objects.equals(getCurrentUserProfile().getId(), newUserProfile.getId());
     }
 }
