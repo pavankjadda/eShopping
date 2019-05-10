@@ -48,8 +48,7 @@ public class UserProfile extends AbstractAuditingEntity
     private String phone;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_profile_id")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "userProfile")
     private List<Address> addresses = new ArrayList<>();
 
     /*  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"}) can be replaced with FetchType.EAGER  */

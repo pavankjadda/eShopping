@@ -1,5 +1,6 @@
 package com.pj.springsecurity.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,12 +44,13 @@ public class Address extends AbstractAuditingEntity
     @Column(name = "zip_code")
     private String zipCode;
 
-
     @ManyToOne
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
 
-    public Address()
-    {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_profile_id")
+    @JsonIgnore
+    private UserProfile userProfile;
+
 }
