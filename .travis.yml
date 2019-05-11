@@ -11,35 +11,35 @@ cache:
   directories:
   - $HOME/.m2
   
-install: true
-script: mvn clean package -DskipTests=true
 
 branches:
   only:
     - /.*/
 before_install:
   - sudo apt-get update
+
+install: true
+script: mvn clean package -DskipTests=true
   
 jobs:
   include:
       ## Test Stage  ##
     - stage: Build App
-      if: branch = master
+      #if: branch = master
       script:
       - mvn clean install -DskipTests=true
       
     ## Build Stage  ##
     - stage: Build App
-      if: branch = master
+      #if: branch = master
       script:
-      - mvn clean install
+      - mvn clean install  -DskipTests=true
 
     ## Deploy Stage ##
     - stage: Deploy App
       if: branch = master
       script: 
-      - mvn clean
-      - mvn package
+      - mvn clean package
 
 
 notifications:
