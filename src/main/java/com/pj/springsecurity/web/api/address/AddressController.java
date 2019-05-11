@@ -38,7 +38,7 @@ public class AddressController
         return addressRepository.findById(id);
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping(path = {"/create"})
     public Address createAddress(@RequestBody AddressDTO addressDTO)
     {
         Address address=modelMapper.map(addressDTO,Address.class);
