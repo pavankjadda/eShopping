@@ -67,7 +67,10 @@ public class UserProfileController
         if(userInfoUtil.isValidUpdate(newUserProfile))
         {
             newUserProfile.setUser(userInfoUtil.getCurrentUserProfile().getUser());
-            newUserProfile.getAddresses().forEach(address -> address.setUserProfile(newUserProfile));
+            if(newUserProfile.getAddresses()!= null && !newUserProfile.getAddresses().isEmpty())
+            {
+                newUserProfile.getAddresses().forEach(address -> address.setUserProfile(newUserProfile));
+            }
             return userProfileRepository.saveAndFlush(newUserProfile);
         }
         return null;
