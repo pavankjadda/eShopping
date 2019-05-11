@@ -1,6 +1,48 @@
+os: linux
+dist: trusty
+sudo: required
+
 language: java
 jdk:
   - openjdk8
   - openjdk11
   - oraclejdk8
   - oraclejdk11
+
+cache:
+  directories:
+  - $HOME/.m2
+  
+
+branches:
+  only:
+    - /.*/
+before_install:
+  - sudo apt-get update
+  
+jobs:
+  include:
+      ## Test Stage  ##
+    - stage: Build App
+      if: branch = master
+      script:
+      - mvn clean install -DskipTests=true
+      
+    ## Build Stage  ##
+    - stage: Build App
+      if: branch = master
+      script:
+      - mvn clean install
+
+    ## Deploy Stage ##
+    - stage: Deploy App
+      if: branch = master
+      script: 
+      - mvn clean
+      - mvn package
+
+
+notifications:
+  email:
+    on_failure: never
+    on_success: never  
