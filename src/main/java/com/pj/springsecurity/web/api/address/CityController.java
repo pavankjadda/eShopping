@@ -3,8 +3,6 @@ package com.pj.springsecurity.web.api.address;
 
 import com.pj.springsecurity.model.user.City;
 import com.pj.springsecurity.repo.CityRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,8 +18,6 @@ public class CityController
 {
     private final CityRepository cityRepository;
 
-    private Logger logger=LoggerFactory.getLogger(CityController.class);
-
     @Autowired
     public CityController(CityRepository cityRepository)
     {
@@ -35,13 +31,13 @@ public class CityController
     }
 
     @GetMapping(value = "/list")
-    public Page<City> getCities(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit)
+    public Page<City> getCities(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer pageSize)
     {
         if (pageNumber == null)
             pageNumber = 0;
-        if (limit == null)
-            limit = 10;
-        return cityRepository.findAll(PageRequest.of(pageNumber, limit, Sort.by(Sort.Direction.ASC, "name")));
+        if (pageSize == null)
+            pageSize = 10;
+        return cityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     @GetMapping(value = "/{id}")

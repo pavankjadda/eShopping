@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -28,7 +28,7 @@ public class State implements Serializable
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"region"})
     private Country country;
 
 
