@@ -38,17 +38,8 @@ public class AddressController
         return addressRepository.findById(id);
     }
 
-    @PostMapping(path = {"/create"})
+    @PostMapping(path = {"/create","/update"})
     public Address createAddress(@RequestBody AddressDTO addressDTO)
-    {
-        Address address=modelMapper.map(addressDTO,Address.class);
-        address.setUserProfile(userInfoUtil.getCurrentUserProfile());
-
-        return addressRepository.saveAndFlush(address);
-    }
-
-    @PutMapping(path = "/update")
-    public Address updateAddress(@RequestBody AddressDTO addressDTO)
     {
         Address address=modelMapper.map(addressDTO,Address.class);
         address.setUserProfile(userInfoUtil.getCurrentUserProfile());
