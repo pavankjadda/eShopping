@@ -56,7 +56,6 @@ public class AddressController
         return addressRepository.saveAndFlush(address);
     }
 
-
     @DeleteMapping(path = "/delete/{id}")
     public void deleteAddress(@PathVariable Long id)
     {
