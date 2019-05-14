@@ -1,8 +1,10 @@
 package com.pj.springsecurity.web.api.product;
 
+import com.pj.springsecurity.dto.CategoryDTO;
 import com.pj.springsecurity.exceptions.exceptions.CategoryException;
 import com.pj.springsecurity.model.order.Category;
 import com.pj.springsecurity.repo.CategoryRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,11 +19,13 @@ import java.util.Optional;
 public class CategoryController
 {
     private final CategoryRepository categoryRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CategoryController(CategoryRepository categoryRepository)
+    public CategoryController(CategoryRepository categoryRepository, ModelMapper modelMapper)
     {
         this.categoryRepository = categoryRepository;
+        this.modelMapper=modelMapper;
     }
 
     @GetMapping(path = "/list")
@@ -42,21 +46,17 @@ public class CategoryController
     }
 
     @PostMapping(value = "/create")
-    public Category createNewCategory(@RequestBody Category category)
+    public Category createNewCategory(@RequestBody CategoryDTO categoryDTO)
     {
+        Category category=modelMapper.map(categoryDTO,Category.class);
         return categoryRepository.saveAndFlush(category);
     }
 
     @PutMapping(value = "/update")
-    public Category updateCategory(@RequestBody Category category)
+    public Category updateCategory(@RequestBody CategoryDTO categoryDTO)
     {
+        Category category=modelMapper.map(categoryDTO,Category.class);
         return categoryRepository.saveAndFlush(category);
-    }
-
-    @PostMapping(path = "/create-categories")
-    public List<Category> createNewCategoriesInBatch(@RequestBody List<Category> categories)
-    {
-        return categoryRepository.saveAll(categories);
     }
 
     @DeleteMapping(value = "/delete/{id}")
