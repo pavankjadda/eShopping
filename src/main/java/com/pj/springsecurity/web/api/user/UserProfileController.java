@@ -27,7 +27,6 @@ public class UserProfileController
         this.modelMapper=modelMapper;
     }
 
-
     @GetMapping(value = "/list")
     public List<UserProfile> findAll()
     {
