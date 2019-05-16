@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class City extends AbstractAuditingEntity
 
     @ManyToOne
     @JoinColumn(name = "state_id")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"country"})
     private State state;
 
     public City()

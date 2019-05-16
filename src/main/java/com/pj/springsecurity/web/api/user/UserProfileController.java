@@ -1,10 +1,17 @@
 package com.pj.springsecurity.web.api.user;
 
+import com.pj.springsecurity.dto.UserProfileDTO;
+import com.pj.springsecurity.exceptions.exceptions.GenericException;
 import com.pj.springsecurity.model.user.UserProfile;
 import com.pj.springsecurity.repo.UserProfileRepository;
+import com.pj.springsecurity.util.UserInfoUtil;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,18 +20,27 @@ import java.util.Optional;
 public class UserProfileController
 {
     private UserProfileRepository userProfileRepository;
+    private ModelMapper modelMapper;
+    private UserInfoUtil userInfoUtil;
 
     @Autowired
-    public UserProfileController(UserProfileRepository userProfileRepository)
+    public UserProfileController(UserProfileRepository userProfileRepository, UserInfoUtil userInfoUtil, ModelMapper modelMapper)
     {
         this.userProfileRepository = userProfileRepository;
+        this.userInfoUtil=userInfoUtil;
+        this.modelMapper=modelMapper;
     }
-
 
     @GetMapping(value = "/list")
     public List<UserProfile> findAll()
     {
         return userProfileRepository.findAll();
+    }
+
+    @GetMapping(value = "/my_profile")
+    public UserProfile getMyProfile()
+    {
+        return userInfoUtil.getCurrentUserProfile();
     }
 
     @GetMapping(value = "/{id}")
@@ -33,6 +49,7 @@ public class UserProfileController
         return userProfileRepository.findById(id);
     }
 
+
     @GetMapping(value = "/user/{id}")
     public Optional<UserProfile> findByUserId(@PathVariable Long id)
     {
@@ -40,14 +57,27 @@ public class UserProfileController
     }
 
     @PostMapping(value = "/create")
-    public UserProfile createNewUserProfile(@RequestBody UserProfile userProfile)
+    public UserProfile createNewUserProfile(@RequestBody UserProfileDTO userProfileDTO)
     {
+        UserProfile userProfile=modelMapper.map(userProfileDTO,UserProfile.class);
         return userProfileRepository.saveAndFlush(userProfile);
     }
 
-    @PutMapping(value = "/update")
-    public UserProfile updateUserProfile(@RequestBody UserProfile userProfile)
+    @PostMapping(value = "/update")
+    public UserProfile updateUserProfile(@RequestBody UserProfileDTO userProfileDTO, HttpServletRequest request)
     {
-        return userProfileRepository.saveAndFlush(userProfile);
+        UserProfile newUserProfile=modelMapper.map(userProfileDTO,UserProfile.class);
+        if(userInfoUtil.isValidUpdate(newUserProfile))
+        {
+            newUserProfile.setUser(userInfoUtil.getCurrentUserProfile().getUser());
+            if(newUserProfile.getAddresses()!= null && !newUserProfile.getAddresses().isEmpty())
+            {
+                newUserProfile.getAddresses().forEach(address -> address.setUserProfile(newUserProfile));
+            }
+            return userProfileRepository.saveAndFlush(newUserProfile);
+        }
+        else
+            throw new GenericException("Failed to Update UserProfile, You do not have access to update profile with id: "+userProfileDTO.getId()
+                    ,null, HttpStatus.NOT_FOUND, LocalDateTime.now(),null,request.getRequestURI());
     }
 }

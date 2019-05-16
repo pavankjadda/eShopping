@@ -1,7 +1,10 @@
-package com.pj.springsecurity.model.user;
+package com.pj.springsecurity.model.manufacturer;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
+import com.pj.springsecurity.model.user.City;
+import com.pj.springsecurity.model.user.Country;
+import com.pj.springsecurity.model.user.Region;
+import com.pj.springsecurity.model.user.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,10 +13,12 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "address")
-public class Address extends AbstractAuditingEntity
+@Table(name = "manufacturer_address")
+
+public class ManufacturerAddress extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = -1540126888782313444L;
+    private static final long serialVersionUID = 8733009552741603083L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -45,12 +50,6 @@ public class Address extends AbstractAuditingEntity
     private String zipCode;
 
     @ManyToOne
-    @JoinColumn(name = "address_type_id", referencedColumnName = "id")
-    private AddressType addressType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_profile_id")
-    @JsonIgnore
-    private UserProfile userProfile;
-
+    @JoinColumn(name = "manufacturer_address_type_id")
+    private ManufacturerAddressType manufacturerAddressType;
 }

@@ -1,6 +1,6 @@
-package com.pj.springsecurity.web.api.product;
+package com.pj.springsecurity.web.api.manufacturer;
 
-import com.pj.springsecurity.model.product.Manufacturer;
+import com.pj.springsecurity.model.manufacturer.Manufacturer;
 import com.pj.springsecurity.repo.ManufacturerRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;

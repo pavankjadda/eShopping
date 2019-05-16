@@ -1,8 +1,8 @@
-package com.pj.springsecurity.model.product;
+package com.pj.springsecurity.model.manufacturer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
-import com.pj.springsecurity.model.user.Address;
+import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;
@@ -39,7 +39,7 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private Address address;
+    private ManufacturerAddress manufacturerAddress;
 
     @Column(name = "contact_email")
     private String contactEmail;
@@ -53,6 +53,5 @@ public class Manufacturer  extends AbstractAuditingEntity implements Serializabl
     @OneToMany(mappedBy = "manufacturer")
     @JsonIgnore
     private List<Product> products=new ArrayList<>();
-
 
 }

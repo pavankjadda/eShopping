@@ -1,7 +1,6 @@
 package com.pj.springsecurity.model.order;
 
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
-import com.pj.springsecurity.model.user.Address;
 import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,9 +41,13 @@ public class Order extends AbstractAuditingEntity implements Serializable
     @JoinColumn(name = "purchased_By")
     private UserProfile purchasedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "shipping_address")
-    private Address shippingAddress;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "order_shipping_address")
+    private OrderShippingAddress orderShippingAddress;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "order_billing_address")
+    private OrderBillingAddress orderBillingAddress;
 
     @Column(name = "order_created_date_time")
     private LocalDateTime orderCreatedDateTime;

@@ -1,7 +1,7 @@
-package com.pj.springsecurity.model.user;
+package com.pj.springsecurity.model.order;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
+import com.pj.springsecurity.model.user.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,10 +10,11 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "address")
-public class Address extends AbstractAuditingEntity
+@Table(name = "order_billing_address")
+public class OrderBillingAddress extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = -1540126888782313444L;
+    private static final long serialVersionUID = -670201478701113253L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -48,9 +49,8 @@ public class Address extends AbstractAuditingEntity
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_profile_id")
-    @JsonIgnore
-    private UserProfile userProfile;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

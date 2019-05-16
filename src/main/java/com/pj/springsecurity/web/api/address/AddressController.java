@@ -1,7 +1,10 @@
 package com.pj.springsecurity.web.api.address;
 
+import com.pj.springsecurity.dto.AddressDTO;
 import com.pj.springsecurity.model.user.Address;
 import com.pj.springsecurity.repo.AddressRepository;
+import com.pj.springsecurity.util.UserInfoUtil;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,13 +16,15 @@ public class AddressController
 {
 
     private AddressRepository addressRepository;
+    private final ModelMapper modelMapper;
+    private UserInfoUtil userInfoUtil;
 
-    public AddressController(AddressRepository addressRepository)
+    public AddressController(AddressRepository addressRepository, ModelMapper modelMapper, UserInfoUtil userInfoUtil)
     {
         this.addressRepository = addressRepository;
+        this.modelMapper = modelMapper;
+        this.userInfoUtil=userInfoUtil;
     }
-
-
 
     @GetMapping(value = "/list")
     public List<Address> getAddresses()
@@ -33,16 +38,18 @@ public class AddressController
         return addressRepository.findById(id);
     }
 
-    @PostMapping(path = "/create")
-    public Address createAddress(@RequestBody Address address)
+    @PostMapping(path = {"/create","/update"})
+    public Address createAddress(@RequestBody AddressDTO addressDTO)
     {
+        Address address=modelMapper.map(addressDTO,Address.class);
+        address.setUserProfile(userInfoUtil.getCurrentUserProfile());
+
         return addressRepository.saveAndFlush(address);
     }
 
-    @PutMapping(path = "/update")
-    public Address updateAddress(@RequestBody Address address)
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteAddress(@PathVariable Long id)
     {
-        return addressRepository.saveAndFlush(address);
+        addressRepository.findById(id).ifPresent(address -> addressRepository.delete(address));
     }
-
 }

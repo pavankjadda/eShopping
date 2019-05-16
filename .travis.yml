@@ -18,8 +18,8 @@ branches:
 before_install:
   - sudo apt-get update
 
-install: 
-  - mvn clean package -DskipTests=true
+install: true
+script: mvn clean package -DskipTests=true
   
 jobs:
   include:
@@ -31,7 +31,7 @@ jobs:
       
     ## Build Stage  ##
     - stage: Build App
-      if: branch = master
+      #if: branch = master
       script:
       - mvn clean install  -DskipTests=true
 
@@ -39,7 +39,7 @@ jobs:
     - stage: Deploy App
       if: branch = master
       script: 
-      - mvn clean package  -DskipTests=true
+      - mvn clean package
 
 
 notifications:

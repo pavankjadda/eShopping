@@ -1,6 +1,7 @@
 package com.pj.springsecurity.model.product;
 
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
+import com.pj.springsecurity.model.manufacturer.Manufacturer;
 import com.pj.springsecurity.model.order.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,7 +46,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @JoinColumn(name = "price_id")
     private Price price;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_photo",
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
