@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,7 @@ public class UserProfileController
     }
 
     @PostMapping(value = "/update")
-    public UserProfile updateUserProfile(@RequestBody UserProfileDTO userProfileDTO)
+    public UserProfile updateUserProfile(@RequestBody UserProfileDTO userProfileDTO, HttpServletRequest request)
     {
         UserProfile newUserProfile=modelMapper.map(userProfileDTO,UserProfile.class);
         if(userInfoUtil.isValidUpdate(newUserProfile))
@@ -77,6 +78,6 @@ public class UserProfileController
         }
         else
             throw new GenericException("Failed to Update UserProfile, You do not have access to update profile with id: "+userProfileDTO.getId()
-                    ,"", HttpStatus.NOT_FOUND, LocalDateTime.now(),null,"/api/v1/user_profile/update");
+                    ,null, HttpStatus.NOT_FOUND, LocalDateTime.now(),null,request.getRequestURI());
     }
 }
