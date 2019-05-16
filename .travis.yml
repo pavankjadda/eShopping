@@ -25,13 +25,14 @@ jobs:
   include:
       ## Test Stage  ##
     - stage: Build App
-      #if: branch = master
+      if: branch = development OR branch = master
+
       script:
       - mvn clean install -DskipTests=true
       
     ## Build Stage  ##
     - stage: Build App
-      #if: branch = master
+      if: branch = master
       script:
       - mvn clean install  -DskipTests=true
 
