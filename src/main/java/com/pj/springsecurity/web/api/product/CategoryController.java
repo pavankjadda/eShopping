@@ -56,13 +56,13 @@ public class CategoryController
     }
 
     @PutMapping(value = "/update")
-    public Category updateCategory(@RequestBody CategoryDTO categoryDTO)
+    public Category updateCategory(@RequestBody CategoryDTO categoryDTO, HttpServletRequest request)
     {
         Category category=modelMapper.map(categoryDTO,Category.class);
         if(!categoryRepository.findById(category.getId()).isPresent())
         {
             throw new GenericException("Failed to update the Category. Category with id:"+category.getId()+" is not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,"/api/v1/category/"+category.getId());
+                    LocalDateTime.now(),null,request.getRequestURI());
         }
         return categoryRepository.saveAndFlush(category);
     }
