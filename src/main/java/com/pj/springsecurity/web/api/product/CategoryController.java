@@ -1,7 +1,6 @@
 package com.pj.springsecurity.web.api.product;
 
 import com.pj.springsecurity.dto.CategoryDTO;
-import com.pj.springsecurity.exceptions.exceptions.CategoryException;
 import com.pj.springsecurity.exceptions.exceptions.GenericException;
 import com.pj.springsecurity.model.order.Category;
 import com.pj.springsecurity.repo.CategoryRepository;
@@ -59,6 +58,11 @@ public class CategoryController
     public Category updateCategory(@RequestBody CategoryDTO categoryDTO)
     {
         Category category=modelMapper.map(categoryDTO,Category.class);
+        if(!categoryRepository.findById(category.getId()).isPresent())
+        {
+            throw new GenericException("Failed to update the Category. Category with id:"+category.getId()+" is not Found","",HttpStatus.NOT_FOUND,
+                    LocalDateTime.now(),null,"/api/v1/category/"+category.getId());
+        }
         return categoryRepository.saveAndFlush(category);
     }
 
@@ -67,7 +71,8 @@ public class CategoryController
     {
         if(!categoryRepository.findById(id).isPresent())
         {
-            throw new CategoryException("Category is not Found");
+            throw new GenericException("Failed to delete the Category. Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
+                    LocalDateTime.now(),null,"/api/v1/category/"+id);
         }
         categoryRepository.deleteById(id);
     }
