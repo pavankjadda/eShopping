@@ -19,7 +19,7 @@ public class ErrorMessage implements Serializable
     private Map<String,String> errors;
     private String path;
 
-    public ErrorMessage(String message, String errorCode, HttpStatus status, LocalDateTime timestamp, Map<String, String> errors, String path)
+ /*   public ErrorMessage(String message, String errorCode, HttpStatus status, LocalDateTime timestamp, Map<String, String> errors, String path)
     {
         super();
         this.message = message;
@@ -28,5 +28,5 @@ public class ErrorMessage implements Serializable
         this.timestamp = timestamp;
         this.errors = errors;
         this.path = path;
-    }
+    }*/
 }

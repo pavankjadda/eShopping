@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
-
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
 {
@@ -40,8 +38,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleAllExceptions(Exception exception, WebRequest webRequest)
     {
-        ErrorMessage errorMessage=new ErrorMessage(exception.getMessage(),"500",HttpStatus.INTERNAL_SERVER_ERROR,
-                LocalDateTime.now(), null,webRequest.getContextPath());
+        ErrorMessage errorMessage=modelMapper.map(exception,ErrorMessage.class);
         return new ResponseEntity<>(errorMessage,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

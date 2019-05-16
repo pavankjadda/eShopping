@@ -11,6 +11,8 @@ import java.util.Map;
 @Data
 public class GenericException extends RuntimeException
 {
+    private static final long serialVersionUID = -8249734656568496281L;
+
     private final String message;
     private final String errorCode;
     private final HttpStatus status;

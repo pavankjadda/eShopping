@@ -2,6 +2,7 @@ package com.pj.springsecurity.web.api.product;
 
 import com.pj.springsecurity.dto.CategoryDTO;
 import com.pj.springsecurity.exceptions.exceptions.CategoryException;
+import com.pj.springsecurity.exceptions.exceptions.GenericException;
 import com.pj.springsecurity.model.order.Category;
 import com.pj.springsecurity.repo.CategoryRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,8 @@ public class CategoryController
         Optional<Category> category=categoryRepository.findById(id);
         if(!category.isPresent())
         {
-            throw new CategoryException("Category is not Found");
+            throw new GenericException("Category with id:"+id+" not Found","",HttpStatus.NOT_FOUND,
+                    LocalDateTime.now(),null,"/api/v1/category/"+id);
         }
         return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);
     }
