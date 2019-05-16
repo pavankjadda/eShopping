@@ -1,13 +1,16 @@
 package com.pj.springsecurity.web.api.user;
 
 import com.pj.springsecurity.dto.UserProfileDTO;
+import com.pj.springsecurity.exceptions.exceptions.GenericException;
 import com.pj.springsecurity.model.user.UserProfile;
 import com.pj.springsecurity.repo.UserProfileRepository;
 import com.pj.springsecurity.util.UserInfoUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +75,8 @@ public class UserProfileController
             }
             return userProfileRepository.saveAndFlush(newUserProfile);
         }
-        return null;
+        else
+            throw new GenericException("Failed to Update UserProfile, You do not have access to update profile with id: "+userProfileDTO.getId()
+                    ,"", HttpStatus.NOT_FOUND, LocalDateTime.now(),null,"/api/v1/user_profile/update");
     }
 }
