@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -36,13 +37,13 @@ public class CategoryController
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Category> findCategoryById(@PathVariable Long id)
+    public ResponseEntity<Category> findCategoryById(@PathVariable Long id,HttpServletRequest request)
     {
         Optional<Category> category=categoryRepository.findById(id);
         if(!category.isPresent())
         {
-            throw new GenericException("Category with id:"+id+" not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,"/api/v1/category/"+id);
+            throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
+                    LocalDateTime.now(),null,request.getRequestURI());
         }
         return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);
     }
@@ -67,12 +68,12 @@ public class CategoryController
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public void deleteCategoryById(@PathVariable Long id)
+    public void deleteCategoryById(@PathVariable Long id, HttpServletRequest request)
     {
         if(!categoryRepository.findById(id).isPresent())
         {
             throw new GenericException("Failed to delete the Category. Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,"/api/v1/category/"+id);
+                    LocalDateTime.now(),null,request.getRequestURI());
         }
         categoryRepository.deleteById(id);
     }

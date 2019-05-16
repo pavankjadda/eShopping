@@ -20,10 +20,8 @@ public class GenericException extends RuntimeException
     private final Map<String,String> errors;
     private final String path;
 
-
     public GenericException(String message, String errorCode, HttpStatus status, LocalDateTime timestamp, Map<String, String> errors, String path)
     {
-        super(message);
         this.message = message;
         this.errorCode = errorCode;
         this.status = status;

@@ -32,7 +32,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     public ResponseEntity<ErrorMessage> handleGenericExceptions(GenericException genericException, WebRequest webRequest)
     {
         ErrorMessage errorMessage=modelMapper.map(genericException,ErrorMessage.class);
-        errorMessage.setPath(webRequest.getContextPath());
+        errorMessage.setStatusCode(errorMessage.getStatus().value());
         return new ResponseEntity<>(errorMessage,errorMessage.getStatus());
     }
 

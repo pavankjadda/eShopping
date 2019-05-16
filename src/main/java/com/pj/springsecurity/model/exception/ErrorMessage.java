@@ -15,18 +15,9 @@ public class ErrorMessage implements Serializable
     private String message;
     private String errorCode;
     private HttpStatus status;
+    private Integer statusCode;
     private LocalDateTime timestamp;
     private Map<String,String> errors;
     private String path;
 
- /*   public ErrorMessage(String message, String errorCode, HttpStatus status, LocalDateTime timestamp, Map<String, String> errors, String path)
-    {
-        super();
-        this.message = message;
-        this.errorCode = errorCode;
-        this.status = status;
-        this.timestamp = timestamp;
-        this.errors = errors;
-        this.path = path;
-    }*/
 }
