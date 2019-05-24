@@ -5,6 +5,11 @@ INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20002,'Bus
 INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20003,'Work');
 
 
+INSERT INTO `spring_security_data`.`manufacturer_address`(`id`,`type`) VALUES(20001,'Home');
+INSERT INTO `spring_security_data`.`manufacturer_address`(`id`,`type`) VALUES(20002,'Business');
+INSERT INTO `spring_security_data`.`manufacturer_address`(`id`,`type`) VALUES(20003,'Work');
+
+
 /*
    Execute InsertDataTest class test cases to insert data in the following order (mandatory)
 
