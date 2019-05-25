@@ -15,8 +15,19 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 7. Provide role management and restrict users from accessing unauthorized content i.e. Users trying to access Admin data
 8. Provide Stateless authentication for atleast one REST API
 
+## How to Run?
+1. Create database named 'spring_security_data' on Mysql or MariaDb
+2. Import the project on IntelliJ and Run it. It will create all the tables required. Stop the project
+3. Go to [User Data Sql Commands](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
+4. Repeat similar steps fpr [](https://raw.githubusercontent.com/pavankjadda/SpringSecurity-SpringData/master/src/main/resources/data/Core%20Data%20SqlCommands.sql)
+5. Go to [Test Class](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/test/java/com/pj/springsecurity/insertdata/InsertDataTest.java) and execute the following test cases in order
+    * insertCountryData()
+    * insertStateData()
+    * insertCitiesData()
+6. Run the project again
+
 ## Technologies 
-1. Java 8
+1. Java 11
 2. Spring Boot and listed Spring modules 
     - Spring Data JPA
     - Spring Security 
