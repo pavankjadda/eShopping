@@ -13,7 +13,7 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 3. Go to [User Data Sql Commands](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 4. Repeat similar steps for [Core Data insertion](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Core%20Data%20SqlCommands.sql)
    * Insert address_type and manufacturer_address_type through given SQL commands
-   * Go to [Test Class](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/test/java/com/pj/springsecurity/insertdata/InsertDataTest.java) and execute the following test cases in order
+   * Go to [Test Class](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/test/java/com/pj/springsecurity/insertdata/InsertDataTest.java) and execute the following test cases in order to create core data. This data is large in size, so using Test class to do that
       * insertCountryData()
       * insertStateData()
       * insertCitiesData()
