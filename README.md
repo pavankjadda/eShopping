@@ -16,7 +16,7 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
     * insertCountryData()
     * insertStateData()
     * insertCitiesData()
-6. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy encrypted password. 
+6. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy generated encrypted password. 
 7. Go to Mysql workbench and get admin user data through mysql select statement. Update the user password field with new encrypted password you just created
 6. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
 
