@@ -6,14 +6,6 @@ Development: [![Build Status](https://travis-ci.com/pavankjadda/SpringSecurity-S
 
 ## What's this?
 eShopping Application implemented with Spring Boot, Spring Security, Spring Data and Spring Session
-1. Register new user
-2. Login with credentials and persist session between calls until user closes browser
-3. Implement 'Remember Me' checkbox and provide session management between sessions (Show homepage or requested page despite closing the browser)
-4. Enrypt the password in database and store credentials in MySql Database
-5. Restrict users from accessing orders, products without authentication
-6. Deal with invalidating session, authorized user trying to authenticate again etc. 
-7. Provide role management and restrict users from accessing unauthorized content i.e. Users trying to access Admin data
-8. Provide Stateless authentication for atleast one REST API
 
 ## How to Run?
 1. Create database named 'spring_security_data' on Mysql or MariaDb
@@ -24,7 +16,10 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
     * insertCountryData()
     * insertStateData()
     * insertCitiesData()
-6. Run the project again
+6. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password ex.admin and select rounds 12 and copy encrypted password. 
+7. Go to Mysql workbench and get admin user data through mysql select statement. Update the user password field with new one created from online website
+6. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
+
 
 ## Technologies 
 1. Java 11
