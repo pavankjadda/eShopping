@@ -1,5 +1,6 @@
 package com.pj.springsecurity.model.cart;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.*;
 import lombok.Data;
@@ -53,6 +54,7 @@ public class CartShippingAddress extends AbstractAuditingEntity
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private Cart cart;
 
 }

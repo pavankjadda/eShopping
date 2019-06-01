@@ -1,6 +1,7 @@
 package com.pj.springsecurity.model.tax;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.State;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class TaxRate extends AbstractAuditingEntity
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,optional = false,fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id",referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"country"})
     private State state;
 
     @Column(name = "rate")

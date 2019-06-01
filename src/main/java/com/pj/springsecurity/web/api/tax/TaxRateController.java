@@ -29,6 +29,12 @@ public class TaxRateController
         return taxRateRepository.findAll();
     }
 
+    @GetMapping(value = "/find/state/{id}")
+    public Optional<TaxRate> getTaxRateByState(@PathVariable Long id)
+    {
+        return taxRateRepository.findByStateId(id);
+    }
+
     @GetMapping(value = "/find/{id}")
     public Optional<TaxRate> getTaxRateById(@PathVariable Long id)
     {
@@ -46,6 +52,11 @@ public class TaxRateController
     public TaxRate updateTaxRate(@RequestBody TaxRateDTO taxRateDTO)
     {
         TaxRate taxRate=modelMapper.map(taxRateDTO,TaxRate.class);
-        return taxRateRepository.saveAndFlush(taxRate);
+        Optional<TaxRate> taxRateOptional=taxRateRepository.findById(taxRate.getId());
+        if(taxRateOptional.isPresent())
+        {
+            taxRate=taxRateRepository.saveAndFlush(taxRate);
+        }
+        return taxRate;
     }
 }

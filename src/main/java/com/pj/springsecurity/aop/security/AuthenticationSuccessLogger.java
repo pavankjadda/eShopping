@@ -23,7 +23,7 @@ public class AuthenticationSuccessLogger
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
-    @Pointcut("within(com.springtesting.repo..*) || within(com.springtesting.web..*)")
+    @Pointcut("within(com.pj.springsecurity.repo..*) || within(com.pj.springsecurity.web..*)")
     public void applicationPackagePointcut()
     {
         //Inside applicationPackagePointcut
