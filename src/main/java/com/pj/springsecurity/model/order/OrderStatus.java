@@ -22,12 +22,4 @@ public class OrderStatus extends AbstractAuditingEntity
     @Column(name = "status")
     private String status;
 
-    public OrderStatus()
-    {
-    }
-
-    public OrderStatus(String status)
-    {
-        this.status = status;
-    }
 }
