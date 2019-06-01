@@ -1,6 +1,7 @@
 package com.pj.springsecurity.model.order;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.user.*;
 import lombok.Data;
@@ -52,5 +53,6 @@ public class OrderShippingAddress extends AbstractAuditingEntity
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 }

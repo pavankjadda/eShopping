@@ -74,6 +74,7 @@ public class OrderController
             order.setOrderStatus(orderStatusRepository.findByStatus("Created"));
             order.setShippingCharge((double) 0);
             order.setOrderCreatedDateTime(LocalDateTime.now());
+
             OrderShippingAddress orderShippingAddress=modelMapper.map(cart.getCartShippingAddress(),OrderShippingAddress.class);
             orderShippingAddress.setId(null);
             orderShippingAddress.setOrder(order);
@@ -86,7 +87,10 @@ public class OrderController
             order.setOrderBillingAddress(orderBillingAddress);
 
             order.setOrderProductDetails(copyCartProducts(cart));
-            return orderRepository.saveAndFlush(order);
+            order=orderRepository.saveAndFlush(order);
+            cartRepository.delete(cart);
+
+            return order;
         }
         return null;
     }
