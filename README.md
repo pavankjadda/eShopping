@@ -19,7 +19,7 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 UPDATE `spring_security_data`.`user` SET `password`=<encrypted password> WHERE `username`='admin';
 ```
 8. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
-
+9. For better experience go to my Angular8 project [SpringSecurity-SpringData-UI](https://github.com/pavankjadda/SpringSecurity-SpringData-UI) and run it see nice UI
 
 ## Technologies 
 1. Java 11
