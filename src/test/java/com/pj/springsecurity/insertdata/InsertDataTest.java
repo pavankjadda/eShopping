@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
@@ -85,6 +86,7 @@ public class InsertDataTest
 
 
     @Test
+    @Order(1)
     public void insertCountryData()
     {
         try
@@ -112,6 +114,7 @@ public class InsertDataTest
 
 
     @Test
+    @Order(2)
     public void insertStateData() throws IOException
     {
         Map<String, String> statesMap = new HashMap<>();
@@ -124,6 +127,7 @@ public class InsertDataTest
 
 
     @Test
+    @Order(3)
     public void insertCitiesData() throws IOException
     {
         HashMap<String, List<String>> citiesMap = new HashMap<>();
