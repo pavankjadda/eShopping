@@ -13,12 +13,12 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 3. Go to [User Data Sql Commands](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 4. Go to [Insert Country State CityTaxRate Data.sql](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Country%20State%20CityTaxRate%20Data.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 5. Go to [Insert Category, Manufacturer, Product Data SqlCommands.sql](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Category%2C%20Manufacturer%2C%20Product%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
-5. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy generated encrypted password. 
-6. Go to Mysql workbench and update admin user password with the following SQL statement. 
+6. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy generated encrypted password. 
+7. Go to Mysql workbench and update admin user password with the following SQL statement. Replace **<encrypted password>** with the password created in step 6
 ```
 UPDATE `spring_security_data`.`user` SET `password`=<encrypted password> WHERE `username`='admin';
 ```
-7. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
+8. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
 
 
 ## Technologies 
