@@ -13,12 +13,13 @@ import com.pj.springsecurity.model.user.State;
 import com.pj.springsecurity.repo.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
@@ -36,6 +37,7 @@ import java.util.*;
 @ActiveProfiles(value = "dev")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InsertDataTest
 {
     @Autowired
@@ -69,25 +71,49 @@ public class InsertDataTest
     }
 
     @Test
-    public void insertTaxRate()
+    //insertTaxRates
+    public void test4()
     {
-        stateRepository.findAll().forEach(state ->
+        try
         {
-            TaxRate taxRate=new TaxRate();
-            taxRate.setRate(5.5);
-            taxRate.setState(state);
-            taxRate.setCreatedBy("admin");
-            taxRate.setLastModifiedBy("admin");
-            taxRate.setCreatedDate(LocalDateTime.now());
-            taxRate.setLastModifiedDate(LocalDateTime.now());
-            taxRateRepository.save(taxRate);
-        });
+            File file = new ClassPathResource("data/us-states-tax-rate.json").getFile();
+            String jsonString=Files.readString(Paths.get(file.getAbsolutePath()));
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ArrayList taxRatesList=objectMapper.readValue(jsonString, ArrayList.class);
+            Map<String,Double> taxRatesMap=new HashMap<>();
+
+            taxRatesList.forEach(taxRateObject ->
+            {
+                System.out.println(taxRateObject.toString());
+                String stateName= String.valueOf(((LinkedHashMap) taxRateObject).get("state")).toLowerCase();
+                Double taxRate= Double.valueOf(String.valueOf(((LinkedHashMap) taxRateObject).get("tax_rate")));
+                taxRatesMap.put(stateName,taxRate);
+            });
+
+            stateRepository.findAll().forEach(state ->
+            {
+                TaxRate taxRate=new TaxRate();
+                taxRate.setRate(taxRatesMap.get(state.getName().toLowerCase()));
+                taxRate.setState(state);
+                taxRate.setCreatedBy("admin");
+                taxRate.setLastModifiedBy("admin");
+                taxRate.setCreatedDate(LocalDateTime.now());
+                taxRate.setLastModifiedDate(LocalDateTime.now());
+                taxRateRepository.save(taxRate);
+            });
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception Occurred: "+e.getMessage());
+        }
+
     }
 
 
     @Test
-    @Order(1)
-    public void insertCountryData()
+    //insertCountryData
+    public void test1()
     {
         try
         {
@@ -114,8 +140,8 @@ public class InsertDataTest
 
 
     @Test
-    @Order(2)
-    public void insertStateData() throws IOException
+    //insertStateData
+    public void test2() throws IOException
     {
         Map<String, String> statesMap = new HashMap<>();
         readStatesDataFromJsonFile(statesMap);
@@ -127,11 +153,11 @@ public class InsertDataTest
 
 
     @Test
-    @Order(3)
-    public void insertCitiesData() throws IOException
+    //insertCitiesData
+    public void test3() throws IOException
     {
         HashMap<String, List<String>> citiesMap = new HashMap<>();
-        citiesMap = readCitiesDataFromJsonFile(citiesMap); //Ignore this message
+        citiesMap = readCitiesDataFromJsonFile(); //Ignore this message
         List<City> cityList = new ArrayList<>();
 
         for (HashMap.Entry<String, List<String>> mapEntry : citiesMap.entrySet())
@@ -169,14 +195,13 @@ public class InsertDataTest
         return stateRepository.findByName(stateName).orElse(null);
     }
 
-    public HashMap readCitiesDataFromJsonFile(HashMap citiesMap) throws IOException
+    public HashMap readCitiesDataFromJsonFile() throws IOException
     {
         File file = new ClassPathResource("data/citis-data.json").getFile();
         byte[] mapByteData = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        citiesMap = objectMapper.readValue(mapByteData, HashMap.class);
-        return citiesMap;
+        return objectMapper.readValue(mapByteData, HashMap.class);
     }
 
 

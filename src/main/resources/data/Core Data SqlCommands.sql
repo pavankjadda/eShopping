@@ -10,14 +10,13 @@ INSERT INTO `spring_security_data`.`manufacturer_address_type`(`id`,`type`) VALU
 INSERT INTO `spring_security_data`.`manufacturer_address_type`(`id`,`type`) VALUES(20003,'Work');
 
 
-/*
-   Execute InsertDataTest class test cases to insert data in the following order (mandatory)
-
-    1. insertCountryData()
-    2. insertStateData()
-    3. insertCitiesData()
- */
-
 /* Insert Data into Currency  Table  */
 
 INSERT INTO `spring_security_data`.`currency`(`id`,`iso_code`,`name`,`symbol`) VALUES(1,'USD','USD','$');
+
+
+/*
+
+   Execute InsertDataTest class test cases to insert Countries, States, City and Tax Rates data
+
+*/
