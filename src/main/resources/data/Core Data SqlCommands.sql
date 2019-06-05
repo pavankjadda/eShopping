@@ -1,11 +1,10 @@
-/* Insert Data into Currency Table  */
 
-INSERT INTO `spring_security_data`.`currency`(`id`,`iso_code`,`name`,`symbol`) VALUES(1,'USD','USD','$');
 /*
 
-   Execute InsertDataTest class test cases to insert Countries, States, City and Tax Rates data
-
+Run Insert Country State CityTaxRate Data.sql file before running this
 */
+
+
 
 /* Insert Data into Address Type Table  */
 INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20001,'Home');
@@ -48,6 +47,10 @@ VALUES(80002,'Books','Books');
 
 INSERT INTO `spring_security_data`.`category`(`id`,`description`,`name`)
 VALUES(80003,'Tablets','Tablets');
+
+/* Insert Data into Currency Table  */
+
+INSERT INTO `spring_security_data`.`currency`(`id`,`iso_code`,`name`,`symbol`) VALUES(1,'USD','USD','$');
 
 /* Insert Price*/
 INSERT INTO `spring_security_data`.`price`(`id`,`amount`,`currency_id`) VALUES(90001,899.99,1);
