@@ -11,15 +11,13 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 1. Create database named **spring_security_data** on Mysql or MariaDb
 2. Import the project on IntelliJ and Run it. It will create all the tables required. Stop the project
 3. Go to [User Data Sql Commands](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
-4. Repeat similar steps for [Core Data insertion](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Core%20Data%20SqlCommands.sql)
-   * Insert **address_type** and **manufacturer_address_type** through given SQL commands
-   * Go to [Test Class](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/test/java/com/pj/springsecurity/insertdata/InsertDataTest.java) and execute the following test cases in order to create core data. This data is large in size, so using Test class to do that
-      * insertCountryData()
-      * insertStateData()
-      * insertCitiesData()
-   * Insert currency data from the same file   
+4. Go to [Insert Country State CityTaxRate Data.sql](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Country%20State%20CityTaxRate%20Data.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
+5. Go to [Insert Category, Manufacturer, Product Data SqlCommands.sql](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Category%2C%20Manufacturer%2C%20Product%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 5. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy generated encrypted password. 
-6. Go to Mysql workbench and get admin user data through mysql select statement. Update the user password field with new encrypted password you just created
+6. Go to Mysql workbench and update admin user password with the following SQL statement. 
+```
+UPDATE `spring_security_data`.`user` SET `password`=<encrypted password> WHERE `username`='admin';
+```
 7. Run the project again and go to http://localhost:8080/api/v2/category/list and enter username and password
 
 
