@@ -30,3 +30,5 @@ insert into spring_security_data.role_privilege values(2,1);
 insert into spring_security_data.role_privilege values(2,2);
 insert into spring_security_data.role_privilege values(2,3);
 insert into spring_security_data.role_privilege values(1,1);
+
+
