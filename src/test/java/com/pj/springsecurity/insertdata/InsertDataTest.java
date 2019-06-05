@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
-import com.pj.springsecurity.model.order.Category;
-import com.pj.springsecurity.model.order.Currency;
 import com.pj.springsecurity.model.tax.TaxRate;
 import com.pj.springsecurity.model.user.City;
 import com.pj.springsecurity.model.user.Country;
@@ -52,12 +50,6 @@ public class InsertDataTest
     private CityRepository cityRepository;
 
     @Autowired
-    private CurrencyRepository currencyRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
     private TaxRateRepository taxRateRepository;
 
     @Autowired
@@ -91,28 +83,6 @@ public class InsertDataTest
         });
     }
 
-    @Test
-    public void insertCategory()
-    {
-        Category category = new Category();
-        category.setId(1001L);
-        category.setName("Books");
-        category.setCreatedBy("Pavan");
-        category.setCreatedDate(LocalDateTime.now());
-        categoryRepository.saveAndFlush(category);
-    }
-
-    @Test
-    public void insertCurrency()
-    {
-        com.pj.springsecurity.model.order.Currency currency = new Currency();
-        currency.setIsoCode("USD");
-        currency.setName("USD");
-        currency.setSymbol("$");
-        currency.setCreatedDate(LocalDateTime.now());
-        currency.setLastModifiedDate(LocalDateTime.now());
-        currencyRepository.saveAndFlush(currency);
-    }
 
     @Test
     public void insertCountryData()
