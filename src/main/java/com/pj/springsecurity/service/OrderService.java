@@ -1,7 +1,9 @@
 package com.pj.springsecurity.service;
 
+import com.pj.springsecurity.exceptions.exceptions.GenericException;
 import com.pj.springsecurity.model.cart.Cart;
 import com.pj.springsecurity.model.cart.CartProduct;
+import com.pj.springsecurity.model.inventory.ProductInventory;
 import com.pj.springsecurity.model.order.Order;
 import com.pj.springsecurity.model.order.OrderBillingAddress;
 import com.pj.springsecurity.model.order.OrderProductDetail;
@@ -10,6 +12,9 @@ import com.pj.springsecurity.model.tax.TaxRate;
 import com.pj.springsecurity.repo.*;
 import com.pj.springsecurity.util.UserInfoUtil;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +25,9 @@ import java.util.Optional;
 @Service
 public class OrderService
 {
+
+    Logger logger=LoggerFactory.getLogger(OrderService.class);
+
     private final OrderRepository orderRepository;
 
     private final OrderStatusRepository orderStatusRepository;
@@ -32,10 +40,12 @@ public class OrderService
 
     private final TaxRateRepository taxRateRepository;
 
+    private final ProductInventoryRepository productInventoryRepository;
+
     private final ModelMapper modelMapper;
 
 
-    public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository, TaxRateRepository taxRateRepository, ModelMapper modelMapper)
+    public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository, TaxRateRepository taxRateRepository, ProductInventoryRepository productInventoryRepository, ModelMapper modelMapper)
     {
         this.orderRepository = orderRepository;
         this.orderStatusRepository = orderStatusRepository;
@@ -43,6 +53,7 @@ public class OrderService
         this.userInfoUtil = userInfoUtil;
         this.cartRepository = cartRepository;
         this.taxRateRepository = taxRateRepository;
+        this.productInventoryRepository = productInventoryRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -50,37 +61,52 @@ public class OrderService
     public Order createOrder()
     {
         Cart cart=getMyCart();
-        if(cart!=null)
+        Order order = null;
+        try
         {
-            Order order=new Order();
-            order.setPurchasedBy(userInfoUtil.getCurrentUserProfile());
-            Double totalCostBeforeTax=calculateTotalCostBeforeTax(cart);
-            Double taxAmount=totalCostBeforeTax*getTaxRate(cart);
-            order.setTax(taxAmount);
-            order.setTotalCost(totalCostBeforeTax+taxAmount);
-            order.setOrderStatus(orderStatusRepository.findByStatus("Created"));
-            order.setShippingCharge((double) 0);
-            order.setOrderCreatedDateTime(LocalDateTime.now());
+            if(cart!=null)
+            {
+                order=new Order();
+                order.setPurchasedBy(userInfoUtil.getCurrentUserProfile());
+                Double totalCostBeforeTax=calculateTotalCostBeforeTax(cart);
+                Double taxAmount=totalCostBeforeTax*getTaxRate(cart);
 
-            OrderShippingAddress orderShippingAddress=modelMapper.map(cart.getCartShippingAddress(),OrderShippingAddress.class);
-            orderShippingAddress.setId(null);
-            orderShippingAddress.setOrder(order);
+                order.setTax(taxAmount);
+                order.setTotalCost(totalCostBeforeTax+taxAmount);
+                order.setOrderStatus(orderStatusRepository.findByStatus("Created"));
+                order.setShippingCharge((double) 0);
+                order.setOrderCreatedDateTime(LocalDateTime.now());
 
-            OrderBillingAddress orderBillingAddress=modelMapper.map(cart.getCartBillingAddress(),OrderBillingAddress.class);
-            orderBillingAddress.setId(null);
-            orderBillingAddress.setOrder(order);
+                OrderShippingAddress orderShippingAddress=modelMapper.map(cart.getCartShippingAddress(),OrderShippingAddress.class);
+                orderShippingAddress.setId(null);
+                orderShippingAddress.setOrder(order);
 
-            order.setOrderShippingAddress(orderShippingAddress);
-            order.setOrderBillingAddress(orderBillingAddress);
+                OrderBillingAddress orderBillingAddress=modelMapper.map(cart.getCartBillingAddress(),OrderBillingAddress.class);
+                orderBillingAddress.setId(null);
+                orderBillingAddress.setOrder(order);
 
-            order.setOrderProductDetails(copyCartProducts(cart));
-            order=orderRepository.saveAndFlush(order);
-            cartRepository.delete(cart);
+                order.setOrderShippingAddress(orderShippingAddress);
+                order.setOrderBillingAddress(orderBillingAddress);
 
-            return order;
+                order.setOrderProductDetails(copyCartProducts(cart));
+                order=orderRepository.saveAndFlush(order);
+                cartRepository.delete(cart);
+
+                return order;
+            }
         }
-        return null;
+        catch (Exception e)
+        {
+            logger.error("Exception occurred while creating the order. Rolling back the changes");
+            if(order!=null)
+            {
+                rollBackOrderChanges(order);
+            }
+
+        }
+        return order;
     }
+
 
     private Double getTaxRate(Cart cart)
     {
@@ -103,6 +129,15 @@ public class OrderService
         return orderRepository.saveAndFlush(order);
     }
 
+
+    private void rollBackOrderChanges(Order order)
+    {
+        if(order.getOrderProductDetails() !=null)
+        {
+            order.getOrderProductDetails().forEach(orderProductDetailRepository::delete);
+        }
+    }
+
     /*
         Copy cart products to Order
     */
@@ -116,10 +151,31 @@ public class OrderService
             orderProductDetail.setProduct(cartProduct.getProduct());
             orderProductDetail.setQuantity(cartProduct.getQuantity());
             orderProductDetail.setOriginalPrice(cartProduct.getProduct().getPrice().getAmount());
+
+            reserveQuantity(cartProduct);
             orderProductDetail=orderProductDetailRepository.saveAndFlush(orderProductDetail);
             orderProductDetailList.add(orderProductDetail);
         }
         return orderProductDetailList;
+    }
+
+    private void reserveQuantity(CartProduct cartProduct)
+    {
+        Optional<ProductInventory> productInventoryOptional=productInventoryRepository.findByProductId(cartProduct.getProduct().getId());
+        if(productInventoryOptional.isPresent())
+        {
+            ProductInventory productInventory=productInventoryOptional.get();
+            if(productInventory.getQuantity() >= cartProduct.getQuantity())
+            {
+                productInventory.setQuantity(productInventory.getQuantity()-cartProduct.getQuantity());
+            }
+            else
+                throw new GenericException("Requested product quantity of "+cartProduct.getProduct().getName()+" is not available. Failed to create the order",
+                        null, HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now(),null, null);
+        }
+        else
+            throw new GenericException("Requested product quantity of "+cartProduct.getProduct().getName()+" is not available. Failed to create the order",
+                    null, HttpStatus.BAD_REQUEST, LocalDateTime.now(),null, null);
     }
 
     private Double calculateTotalCostBeforeTax(Cart cart)

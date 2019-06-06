@@ -28,7 +28,7 @@ public class ProductInventoryController
     @GetMapping(path = "/product/{id}")
     public Optional<ProductInventory> getProductInventoryByProductId(@PathVariable Long id)
     {
-        return productInventoryRepository.findAllByProductId(id);
+        return productInventoryRepository.findByProductId(id);
     }
 
     @PostMapping(path = "/product/ids")
@@ -37,7 +37,7 @@ public class ProductInventoryController
         List<ProductInventory> productInventories=new ArrayList<>();
         for (Long id :productIdList)
         {
-            Optional<ProductInventory> productInventoryOptional=productInventoryRepository.findAllByProductId(id);
+            Optional<ProductInventory> productInventoryOptional=productInventoryRepository.findByProductId(id);
             productInventoryOptional.ifPresent(productInventories::add);
         }
         return productInventories;
