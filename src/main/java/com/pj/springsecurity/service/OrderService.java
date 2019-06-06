@@ -26,7 +26,7 @@ import java.util.Optional;
 public class OrderService
 {
 
-    Logger logger=LoggerFactory.getLogger(OrderService.class);
+    private Logger logger=LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
 

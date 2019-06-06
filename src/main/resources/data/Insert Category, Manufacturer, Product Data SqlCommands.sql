@@ -72,3 +72,14 @@ INSERT INTO `spring_security_data`.`product_price` (`id`, `price_id`, `product_i
 /* Insert Product Inventory*/
 INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`, `product_id`) VALUES ('110001', '1000', '60001');
 INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`, `product_id`) VALUES ('110002', '300', '60002');
+
+/* Insert Order Status */
+
+INSERT INTO `spring_security_data`.`order_status` (`id`, `created_by`, `last_modified_by`, `status`) VALUES ('1', 'Admin', 'Admin', 'Created');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('2', 'Processing');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('3', 'Processed');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('4', 'Shipped');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('5', 'Delivered');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('6', 'Completed');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('7', 'Refunded');
+INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('8', 'Exception Occurred');

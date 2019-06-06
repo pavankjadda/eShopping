@@ -1,7 +1,6 @@
 package com.pj.springsecurity.web.api.order;
 
 import com.pj.springsecurity.model.order.Order;
-import com.pj.springsecurity.repo.OrderRepository;
 import com.pj.springsecurity.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +11,12 @@ import java.util.Optional;
 @RequestMapping("/api/v1/order")
 public class OrderController
 {
-    private final OrderRepository orderRepository;
 
     private final OrderService orderService;
 
-
-    public OrderController(OrderRepository orderRepository, OrderService orderService)
+    public OrderController( OrderService orderService)
     {
-        this.orderRepository = orderRepository;
         this.orderService = orderService;
-
     }
 
     @GetMapping(value = "/list")
