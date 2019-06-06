@@ -1,7 +1,7 @@
 
 /*
 
-Run Insert Country State CityTaxRate Data.sql file before running this
+Run Insert Country State CityTaxRate Data.txt file before running this
 */
 
 
