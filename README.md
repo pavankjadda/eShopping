@@ -10,7 +10,7 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
 ## How to Run?
 1. Create database named **spring_security_data** on Mysql or MariaDb
 2. Import the project on IntelliJ and Run it. It will create all the tables required. Stop the project
-3. Execute steps 3,4 and 5 in same order. Go to [User Data Sql Commands](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
+3. Execute steps 3,4 and 5 in same order. Go to [User Data Sql Commands.txt](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/User%20Data%20SqlCommands.txt) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 4. Go to [Insert Country State CityTaxRate Data.txt](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Country%20State%20CityTaxRate%20Data.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 5. Go to [Insert Category, Manufacturer, Product Data SqlCommands.txt](https://github.com/pavankjadda/SpringSecurity-SpringData/blob/master/src/main/resources/data/Insert%20Category%2C%20Manufacturer%2C%20Product%20Data%20SqlCommands.sql) and copy all the commands and execute them in to Mysql Workbench or MySql shell
 6. Go to BCrypt online tools like https://www.browserling.com/tools/bcrypt and enter your admin password and select rounds: 12 and copy generated encrypted password. 
