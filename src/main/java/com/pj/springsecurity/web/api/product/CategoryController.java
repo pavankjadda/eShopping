@@ -33,7 +33,7 @@ public class CategoryController
     @GetMapping(path = "/list")
     public List<Category> getAllCategories()
     {
-        return categoryRepository.getAllCategoriesThroughStoredProcedure();
+        return categoryRepository.getAllCategoriesThroughStoredProcedureCustom();
     }
 
     @GetMapping(path = "/{id}")
