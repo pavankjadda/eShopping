@@ -29,8 +29,6 @@ public class Category extends AbstractAuditingEntity implements Serializable
     @Column(name = "name", nullable = false)
     private String name;
 
-
     @Column(name = "description")
     private String description;
-
 }
