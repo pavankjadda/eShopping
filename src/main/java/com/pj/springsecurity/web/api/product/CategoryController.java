@@ -39,13 +39,22 @@ public class CategoryController
     @GetMapping(path = "/{id}")
     public ResponseEntity<Category> findCategoryById(@PathVariable Long id,HttpServletRequest request)
     {
-        Optional<Category> category=categoryRepository.findById(id);
-        if(!category.isPresent())
+        Optional<Category> categoryOptional=categoryRepository.findById(id);
+        return Optional.ofNullable(categoryOptional)
+                .filter(Optional::isPresent)
+                .map(category -> new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK))
+                .orElseThrow(() ->
+                {
+                    throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
+                            LocalDateTime.now(),null,request.getRequestURI());
+                });
+
+        /*if(!categoryOptional.isPresent())
         {
             throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
                     LocalDateTime.now(),null,request.getRequestURI());
         }
-        return new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryOptional.get(), new HttpHeaders(), HttpStatus.OK);*/
     }
 
     @PostMapping(value = "/create")
