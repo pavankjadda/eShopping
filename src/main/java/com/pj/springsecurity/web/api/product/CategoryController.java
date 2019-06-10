@@ -40,21 +40,12 @@ public class CategoryController
     public ResponseEntity<Category> findCategoryById(@PathVariable Long id,HttpServletRequest request)
     {
         Optional<Category> categoryOptional=categoryRepository.findById(id);
-        return Optional.ofNullable(categoryOptional)
-                .filter(Optional::isPresent)
-                .map(category -> new ResponseEntity<>(category.get(), new HttpHeaders(), HttpStatus.OK))
-                .orElseThrow(() ->
-                {
-                    throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
-                            LocalDateTime.now(),null,request.getRequestURI());
-                });
-
-        /*if(!categoryOptional.isPresent())
+        if(categoryOptional.isPresent())
         {
-            throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,request.getRequestURI());
+            return new ResponseEntity<>(categoryOptional.get(), new HttpHeaders(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(categoryOptional.get(), new HttpHeaders(), HttpStatus.OK);*/
+        throw new GenericException(" Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
+                LocalDateTime.now(),null,request.getRequestURI());
     }
 
     @PostMapping(value = "/create")
@@ -68,22 +59,23 @@ public class CategoryController
     public Category updateCategory(@RequestBody CategoryDTO categoryDTO, HttpServletRequest request)
     {
         Category category=modelMapper.map(categoryDTO,Category.class);
-        if(!categoryRepository.findById(category.getId()).isPresent())
+        if(categoryRepository.findById(category.getId()).isPresent())
         {
-            throw new GenericException("Failed to update the Category. Category with id:"+category.getId()+" is not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,request.getRequestURI());
+            return categoryRepository.saveAndFlush(category);
+
         }
-        return categoryRepository.saveAndFlush(category);
+        throw new GenericException("Failed to update the Category. Category with id:"+category.getId()+" is not Found","",HttpStatus.NOT_FOUND,
+                LocalDateTime.now(),null,request.getRequestURI());
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public void deleteCategoryById(@PathVariable Long id, HttpServletRequest request)
     {
-        if(!categoryRepository.findById(id).isPresent())
+        if(categoryRepository.findById(id).isPresent())
         {
-            throw new GenericException("Failed to delete the Category. Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
-                    LocalDateTime.now(),null,request.getRequestURI());
+            categoryRepository.deleteById(id);
         }
-        categoryRepository.deleteById(id);
+        throw new GenericException("Failed to delete the Category. Category with id:"+id+" is not Found","",HttpStatus.NOT_FOUND,
+                LocalDateTime.now(),null,request.getRequestURI());
     }
 }
