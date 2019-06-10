@@ -1,4 +1,4 @@
-package com.pj.springsecurity.model.order;
+package com.pj.springsecurity.model.category;
 
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import lombok.Data;
@@ -15,6 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Cache(region = "categoryCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "category")
+//@NamedStoredProcedureQuery(name = "getAllCategoriesThroughStoredProcedure",procedureName = "get_all_categories",resultClasses = Category.class)
 public class Category extends AbstractAuditingEntity implements Serializable
 {
     private static final long serialVersionUID = -6699422774799518217L;

@@ -1,8 +1,8 @@
 package com.pj.springsecurity.model.product;
 
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
+import com.pj.springsecurity.model.category.Category;
 import com.pj.springsecurity.model.manufacturer.Manufacturer;
-import com.pj.springsecurity.model.order.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;

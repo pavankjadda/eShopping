@@ -2,7 +2,7 @@ package com.pj.springsecurity.web.api.product;
 
 import com.pj.springsecurity.dto.CategoryDTO;
 import com.pj.springsecurity.exceptions.exceptions.GenericException;
-import com.pj.springsecurity.model.order.Category;
+import com.pj.springsecurity.model.category.Category;
 import com.pj.springsecurity.repo.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class CategoryController
     @GetMapping(path = "/list")
     public List<Category> getAllCategories()
     {
-        return categoryRepository.findAll();
+        return categoryRepository.getAllCategoriesThroughStoredProcedure();
     }
 
     @GetMapping(path = "/{id}")
