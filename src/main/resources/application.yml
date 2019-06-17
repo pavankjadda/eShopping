@@ -92,3 +92,8 @@ bucket4j:
             - capacity: 5
               time: 10
               unit: seconds
+zuul:
+  routes:
+    category:
+      path: /test/**
+      url: http://localhost:8080/api/v1/category/list
