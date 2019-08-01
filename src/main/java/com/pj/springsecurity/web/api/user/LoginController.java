@@ -7,7 +7,6 @@ import com.pj.springsecurity.security.MyUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +43,7 @@ public class LoginController
         return copyUser(authentication,request);
     }
 
-    @GetMapping(value = {"/","/home"})
+/*    @GetMapping(value = {"/","/home"})
     public UserDto validateUserSession(HttpServletRequest request)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,7 +53,7 @@ public class LoginController
             return copyUser(authentication,request);
         }
         return null;
-    }
+    }*/
 
 
 
