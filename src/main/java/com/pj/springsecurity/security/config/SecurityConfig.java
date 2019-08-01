@@ -130,7 +130,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .authorizeRequests().antMatchers("/console/**","/h2-console/**").permitAll();
         http.headers()
              .frameOptions().disable();
-
     }
 
     @Bean
