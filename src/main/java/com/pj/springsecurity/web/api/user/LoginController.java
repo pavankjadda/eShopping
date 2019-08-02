@@ -11,15 +11,15 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@RequestMapping("/api/v1/login")
 public class LoginController
 {
-
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private UserRepository userRepository;
@@ -32,13 +32,6 @@ public class LoginController
 
     @GetMapping(value = {"/login"})
     public UserDto getUserLoginDetails(HttpServletRequest request)
-    {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return copyUser(authentication,request);
-    }
-
-    @PostMapping(value = {"/login"})
-    public UserDto loginUserPost(HttpServletRequest request)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return copyUser(authentication,request);

@@ -41,9 +41,7 @@ public class UserController
         this.userProfileRepository=userProfileRepository;
     }
 
-
     //Users Controller Methods
-
     @PostMapping(value = "/users/create")
     public User createNewUser(@RequestBody User user)
     {
@@ -93,7 +91,6 @@ public class UserController
 
 
     }
-
 
 
     @GetMapping(value = "/users/list")
