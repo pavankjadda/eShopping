@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/v1/user")
 public class UserController
 {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
