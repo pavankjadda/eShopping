@@ -56,4 +56,7 @@ management:
         auditevents:
             enabled: true
 logging:
-    level: ["debug","info"]
+    level:
+        org:
+            springframework:
+                web: DEBUG
