@@ -1,6 +1,6 @@
 ## Server Properties
 server:
-    port: 80
+    port: 8080
     servlet:
         session:
             cookie:
