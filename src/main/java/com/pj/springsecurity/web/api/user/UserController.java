@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/v1/user")
 public class UserController
 {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -40,9 +41,7 @@ public class UserController
         this.userProfileRepository=userProfileRepository;
     }
 
-
     //Users Controller Methods
-
     @PostMapping(value = "/users/create")
     public User createNewUser(@RequestBody User user)
     {
@@ -92,7 +91,6 @@ public class UserController
 
 
     }
-
 
 
     @GetMapping(value = "/users/list")

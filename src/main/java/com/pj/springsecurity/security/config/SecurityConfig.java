@@ -1,11 +1,11 @@
 package com.pj.springsecurity.security.config;
 
 
-import com.pj.springsecurity.repo.FailedLoginRepository;
-import com.pj.springsecurity.repo.SessionHistoryRepository;
 import com.pj.springsecurity.repo.UnauthorizedRequestRepository;
 import com.pj.springsecurity.security.MyUserDetailsService;
-import com.pj.springsecurity.security.handlers.*;
+import com.pj.springsecurity.security.handlers.CustomAccessDeniedHandler;
+import com.pj.springsecurity.security.handlers.CustomBasicAuthenticationEntryPoint;
+import com.pj.springsecurity.security.handlers.CustomLogoutSuccessHandler;
 import com.pj.springsecurity.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,20 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final MyUserDetailsService userDetailsService;
 
-    private final SessionHistoryRepository sessionHistoryRepository;
-
-    private final FailedLoginRepository failedLoginRepository;
-
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
 
     private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
 
     @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService, SessionHistoryRepository sessionHistoryRepository, FailedLoginRepository failedLoginRepository, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
+    public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
     {
         this.userDetailsService = userDetailsService;
-        this.sessionHistoryRepository = sessionHistoryRepository;
-        this.failedLoginRepository = failedLoginRepository;
         this.unauthorizedRequestRepository = unauthorizedRequestRepository;
         this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
     }
@@ -79,26 +73,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
-                    .antMatchers("/register").permitAll()
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.ADMIN)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.ADMIN)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.USER)
                     .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.API_USER,AuthorityConstants.ADMIN)
                     .antMatchers("/dba/**").hasAuthority(AuthorityConstants.DBA)
+                    .antMatchers("/login/**").permitAll()
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
             .and()
                     .exceptionHandling()
                     .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
-            .and()
-                    .formLogin()
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                    .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
-                    .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
-                        .permitAll()
-                    .and()
+             .and()
                     .logout()
                         .deleteCookies("X-Auth-Token")
                         .clearAuthentication(true)
