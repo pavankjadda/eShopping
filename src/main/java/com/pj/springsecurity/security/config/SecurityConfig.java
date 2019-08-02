@@ -113,8 +113,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .disable();
         http.authorizeRequests()
             .antMatchers("/").permitAll()
-                .and()
-            .authorizeRequests().antMatchers("/console/**","/h2-console/**").permitAll();
+         .and()
+            .authorizeRequests().antMatchers("/console/**","/h2-console/**","/static/**","/resources/static/**").permitAll();
         http.headers()
              .frameOptions().disable();
     }
@@ -147,7 +147,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         web
             .ignoring()
-            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/h2-console/**","/console/**");
+            .antMatchers("/resources/**", "/static/**","/resources/static/**", "/css/**", "/js/**", "/images/**","/h2-console/**","/console/**");
     }
 
 
