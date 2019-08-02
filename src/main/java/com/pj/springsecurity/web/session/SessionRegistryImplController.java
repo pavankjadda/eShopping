@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/session-registry")
-@Secured(value = AuthorityConstants.ADMIN)
+@Secured(value = AuthorityConstants.ROLE_ADMIN)
 public class SessionRegistryImplController
 {
 
@@ -30,7 +30,7 @@ public class SessionRegistryImplController
     }
 
     @GetMapping(value = {"/users"})
-    @Secured(value = AuthorityConstants.ADMIN)
+    @Secured(value = AuthorityConstants.ROLE_ADMIN)
     public List<String> getAllUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
@@ -40,7 +40,7 @@ public class SessionRegistryImplController
     }
 
     @GetMapping(value = {"/active-users"})
-    @Secured(value = AuthorityConstants.ADMIN)
+    @Secured(value = AuthorityConstants.ROLE_ADMIN)
     public List<String> getActiveUsers()
     {
         return sessionRegistry.getAllPrincipals().stream()
@@ -51,7 +51,7 @@ public class SessionRegistryImplController
 
 
     @GetMapping(value = {"/active-users/{username}"})
-    @Secured(value = AuthorityConstants.ADMIN)
+    @Secured(value = AuthorityConstants.ROLE_ADMIN)
     public List<SessionInformation> getUserSessions(@PathVariable String username)
     {
         MyUserDetails myUserDetails = (MyUserDetails) sessionRegistry.getAllPrincipals().get(0);

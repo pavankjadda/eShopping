@@ -73,11 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
-                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.USER,AuthorityConstants.API_USER,AuthorityConstants.ADMIN)
+                    .antMatchers("/api/**").hasAnyRole(AuthorityConstants.ROLE_USER,AuthorityConstants.ROLE_API_USER,AuthorityConstants.ROLE_ADMIN)
                     .antMatchers("/login/**").permitAll()
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
+
             .and()
                     .exceptionHandling()
                     .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
