@@ -7,8 +7,8 @@ server:
                 secure: true
                 http-only: true
 
-#Spring Properties
 
+#Spring Properties
 spring:
     jackson:
         serialization:
@@ -28,7 +28,7 @@ spring:
         properties:
             hibernate:
                 ddl-auto: update
-                show_sql: true
+                show_sql: false
 
                 cache:
                     use_query_cache: true
@@ -55,4 +55,5 @@ management:
     endpoint:
         auditevents:
             enabled: true
-
+logging:
+    level: ["debug","info"]
