@@ -4,6 +4,7 @@
 cd /home/ubuntu/SpringSecurity-SpringData-UI
 git pull
 ng build --prod
+rm -rf ../SpringSecurity-SpringData/src/main/resources/static/*
 cp -rf dist/SpringTestingUI/* ../SpringSecurity-SpringData/src/main/resources/static/
 
 cd /home/ubuntu/SpringSecurity-SpringData
