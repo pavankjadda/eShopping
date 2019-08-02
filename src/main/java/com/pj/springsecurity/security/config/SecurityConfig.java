@@ -5,7 +5,9 @@ import com.pj.springsecurity.repo.FailedLoginRepository;
 import com.pj.springsecurity.repo.SessionHistoryRepository;
 import com.pj.springsecurity.repo.UnauthorizedRequestRepository;
 import com.pj.springsecurity.security.MyUserDetailsService;
-import com.pj.springsecurity.security.handlers.*;
+import com.pj.springsecurity.security.handlers.CustomAccessDeniedHandler;
+import com.pj.springsecurity.security.handlers.CustomBasicAuthenticationEntryPoint;
+import com.pj.springsecurity.security.handlers.CustomLogoutSuccessHandler;
 import com.pj.springsecurity.security.providers.CustomDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -79,12 +81,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
-                    .antMatchers("/register").permitAll()
                     .antMatchers("/users/**").hasAuthority(AuthorityConstants.ADMIN)
                     .antMatchers("/admin**").hasAuthority(AuthorityConstants.ADMIN)
                     .antMatchers("/profile/**").hasAuthority(AuthorityConstants.USER)
                     .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.API_USER,AuthorityConstants.ADMIN)
                     .antMatchers("/dba/**").hasAuthority(AuthorityConstants.DBA)
+                    .antMatchers("/login/**").permitAll()
                     .anyRequest().authenticated()
             .and()
                     .httpBasic()
@@ -92,13 +94,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .exceptionHandling()
                     .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
             .and()
-                    .formLogin()
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                    .successHandler(new CustomAuthenticationSuccessHandler(sessionHistoryRepository))
-                    .failureHandler(new CustomAuthenticationFailureHandler(failedLoginRepository))
-                        .permitAll()
-                    .and()
                     .logout()
                         .deleteCookies("X-Auth-Token")
                         .clearAuthentication(true)
