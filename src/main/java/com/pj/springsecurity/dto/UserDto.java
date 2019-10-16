@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 
 @Data
 public class UserDto implements Serializable
@@ -26,7 +27,32 @@ public class UserDto implements Serializable
 
     private UserProfile userProfile;
 
+    @Override
+    public String toString()
+    {
+        return "UserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
-    public UserDto() {}
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        UserDto userDto = (UserDto) o;
+        return id.equals(userDto.id) &&
+                Objects.equals(username, userDto.username);
+    }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(id, username);
+    }
 }

@@ -24,7 +24,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    open-in-view: false
+    open-in-view: true
     generate-ddl: true
     properties:
       hibernate:

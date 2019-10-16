@@ -53,7 +53,6 @@ public class User extends AbstractAuditingEntity
 
     public User()
     {
-
     }
 
     public User(String username, String password, Boolean active, UserProfile userProfile)
