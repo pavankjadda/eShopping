@@ -18,8 +18,11 @@ spring:
     name: SpringSecurity-Data-Application
   # Jpa Properties
   datasource:
-    url: jdbc:mysql://bcmc.cy8obdina40j.us-east-1.rds.amazonaws.com:3306/spring_security_data?serverTimezone=UTC
-    username: admin
+#    url: jdbc:mysql://bcmc.cy8obdina40j.us-east-1.rds.amazonaws.com:3306/spring_security_data?serverTimezone=UTC
+#    username: admin
+#    password: MIURsO1WJd2oNFin6jju
+    url: jdbc:mysql://pjmysql2019.mysql.database.azure.com:3306/spring_security_data?serverTimezone=UTC
+    username: xadmin@pjmysql2019
     password: MIURsO1WJd2oNFin6jju
     driver-class-name: com.mysql.cj.jdbc.Driver
 
