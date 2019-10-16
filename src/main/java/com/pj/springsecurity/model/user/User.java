@@ -43,7 +43,7 @@ public class User extends AbstractAuditingEntity
     @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
