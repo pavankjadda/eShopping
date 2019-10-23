@@ -52,17 +52,3 @@ spring:
     #enabled: false
 
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: ["health","info"]
-  endpoint:
-    auditevents:
-      enabled: true
-
-zuul:
-  routes:
-    category:
-      path: /category/**
-      url: http://localhost:8080/api/v1/category
