@@ -2,7 +2,7 @@ package com.pj.springsecurity.security.config;
 
 public class ApplicationConstants
 {
-    static final int REMEMBERMETIMEOUT = 300;
+    static final int REMEMBER_ME_TIMEOUT = 300;
 
     private ApplicationConstants()
     {

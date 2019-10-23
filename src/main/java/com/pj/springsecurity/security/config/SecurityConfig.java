@@ -121,7 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
         rememberMeServices.setRememberMeParameterName("remember-me");
-        rememberMeServices.setValiditySeconds(ApplicationConstants.REMEMBERMETIMEOUT);
+        rememberMeServices.setValiditySeconds(ApplicationConstants.REMEMBER_ME_TIMEOUT);
         return rememberMeServices;
     }
 
@@ -137,7 +137,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception
@@ -160,5 +159,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         return new SessionRegistryImpl();
     }
-
 }
