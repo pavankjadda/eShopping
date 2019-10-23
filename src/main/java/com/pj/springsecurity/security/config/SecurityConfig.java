@@ -71,6 +71,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/console/**","/h2-console/**","/static/**","/resources/static/**").permitAll();
+
             http.authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ROLE_USER,AuthorityConstants.ROLE_API_USER,AuthorityConstants.ROLE_ADMIN)
@@ -108,10 +113,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
         http.csrf()
             .disable();
-        http.authorizeRequests()
-            .antMatchers("/").permitAll()
-         .and()
-            .authorizeRequests().antMatchers("/console/**","/h2-console/**","/static/**","/resources/static/**").permitAll();
         http.headers()
              .frameOptions().disable();
     }
@@ -139,7 +140,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception
+    public void configure(WebSecurity web)
     {
         web
             .ignoring()

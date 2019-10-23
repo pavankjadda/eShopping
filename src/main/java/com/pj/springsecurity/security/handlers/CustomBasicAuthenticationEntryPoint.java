@@ -23,7 +23,7 @@ public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntr
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception
+    public void afterPropertiesSet()
     {
         setRealmName("basic realm");
         super.afterPropertiesSet();

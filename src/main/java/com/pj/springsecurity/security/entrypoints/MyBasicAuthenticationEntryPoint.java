@@ -23,7 +23,7 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception
+    public void afterPropertiesSet()
     {
         setRealmName("SpringSecuritySpringData");
         super.afterPropertiesSet();
