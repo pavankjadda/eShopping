@@ -30,6 +30,4 @@ eShopping Application implemented with Spring Boot, Spring Security, Spring Data
     - Spring Session
     - Spring Cache
 3. Logback and ELK Stack for log management
-4. Bucket4J for rate limiting
-5. Jackson for Data binding
-6. MySql for database
+4. MySQL
