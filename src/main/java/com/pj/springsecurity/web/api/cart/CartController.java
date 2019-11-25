@@ -23,79 +23,79 @@ import java.util.Optional;
 @RequestMapping("/api/v1/cart")
 public class CartController
 {
-    private final CartRepository cartRepository;
-    private final CartProductRepository cartProductRepository;
-    private final CartStatusRepository cartStatusRepository;
+	private final CartRepository cartRepository;
+	private final CartProductRepository cartProductRepository;
+	private final CartStatusRepository cartStatusRepository;
 
-    private final ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
-    public CartController(CartRepository cartRepository, ModelMapper modelMapper, CartProductRepository cartProductRepository, CartStatusRepository cartStatusRepository)
-    {
-        this.cartRepository = cartRepository;
-        this.modelMapper = modelMapper;
-        this.cartProductRepository = cartProductRepository;
-        this.cartStatusRepository = cartStatusRepository;
-    }
+	public CartController(CartRepository cartRepository, ModelMapper modelMapper, CartProductRepository cartProductRepository, CartStatusRepository cartStatusRepository)
+	{
+		this.cartRepository = cartRepository;
+		this.modelMapper = modelMapper;
+		this.cartProductRepository = cartProductRepository;
+		this.cartStatusRepository = cartStatusRepository;
+	}
 
-    @GetMapping(path = "/find/user/{id}")
-    public Optional<Cart> getCartBasedOnUserId(@PathVariable Long id)
-    {
-        return cartRepository.findAllByUserProfileUserId(id);
-    }
+	@GetMapping(path = "/find/user/{id}")
+	public Optional<Cart> getCartBasedOnUserId(@PathVariable Long id)
+	{
+		return cartRepository.findAllByUserProfileUserId(id);
+	}
 
-    @PostMapping(path = "/initialize")
-    public Cart initializeCart(@RequestBody UserProfileDTO userProfileDTO)
-    {
-        UserProfile userProfile=modelMapper.map(userProfileDTO,UserProfile.class);
+	@PostMapping(path = "/initialize")
+	public Cart initializeCart(@RequestBody UserProfileDTO userProfileDTO)
+	{
+		UserProfile userProfile = modelMapper.map(userProfileDTO, UserProfile.class);
 
-        Cart cart=new Cart();
-        cart.setUserProfile(userProfile);
-        cart.setCartStatus(cartStatusRepository.findByStatus("Draft").orElse(null));
-        return cartRepository.saveAndFlush(cart);
-    }
+		Cart cart = new Cart();
+		cart.setUserProfile(userProfile);
+		cart.setCartStatus(cartStatusRepository.findByStatus("Draft").orElse(null));
+		return cartRepository.saveAndFlush(cart);
+	}
 
-    @PostMapping(path = "/product/add")
-    public Cart addProductToCart(@RequestBody CartProductDTO cartProductDTO)
-    {
-        CartProduct cartProduct=modelMapper.map(cartProductDTO,CartProduct.class);
-        return cartProductRepository.saveAndFlush(cartProduct).getCart();
-    }
+	@PostMapping(path = "/product/add")
+	public Cart addProductToCart(@RequestBody CartProductDTO cartProductDTO)
+	{
+		CartProduct cartProduct = modelMapper.map(cartProductDTO, CartProduct.class);
+		return cartProductRepository.saveAndFlush(cartProduct).getCart();
+	}
 
-    @PostMapping(path = "/product/update")
-    public Cart updateCartProduct(@RequestBody CartProductDTO cartProductDTO)
-    {
-        CartProduct cartProduct=modelMapper.map(cartProductDTO,CartProduct.class);
-        if(cartProduct.getQuantity() == 0)
-        {
-            deleteCartProduct(cartProduct.getId());
-        }
-        else
-        {
-            cartProductRepository.saveAndFlush(cartProduct);
-        }
-        return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
-    }
+	@PostMapping(path = "/product/update")
+	public Cart updateCartProduct(@RequestBody CartProductDTO cartProductDTO)
+	{
+		CartProduct cartProduct = modelMapper.map(cartProductDTO, CartProduct.class);
+		if (cartProduct.getQuantity() == 0)
+		{
+			deleteCartProduct(cartProduct.getId());
+		}
+		else
+		{
+			cartProductRepository.saveAndFlush(cartProduct);
+		}
+		return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
+	}
 
-    @DeleteMapping(path = "/product/delete/{id}")
-    public void deleteCartProduct(@PathVariable Long id)
-    {
-        Optional<CartProduct> optionalCartProduct=cartProductRepository.findById(id);
-        optionalCartProduct.ifPresent(cartProductRepository::delete);
-    }
+	@DeleteMapping(path = "/product/delete/{id}")
+	public void deleteCartProduct(@PathVariable Long id)
+	{
+		Optional<CartProduct> optionalCartProduct = cartProductRepository.findById(id);
+		optionalCartProduct.ifPresent(cartProductRepository::delete);
+	}
 
 
-    @DeleteMapping(path = "/delete/{id}")
-    public void deleteCart(@PathVariable Long id)
-    {
-        Optional<Cart> cartOptional=cartRepository.findById(id);
-        if(cartOptional.isPresent())
-        {
-            Cart cart=cartOptional.get();
-            for(CartProduct cartProduct: cart.getCartProducts())
-            {
-                cartProductRepository.delete(cartProduct);
-            }
-            cartRepository.delete(cart);
-        }
-    }
+	@DeleteMapping(path = "/delete/{id}")
+	public void deleteCart(@PathVariable Long id)
+	{
+		Optional<Cart> cartOptional = cartRepository.findById(id);
+		if (cartOptional.isPresent())
+		{
+			Cart cart = cartOptional.get();
+			for (CartProduct cartProduct : cart.getCartProducts())
+			{
+				cartProductRepository.delete(cartProduct);
+			}
+			cartRepository.delete(cart);
+		}
+	}
 }

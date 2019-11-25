@@ -18,31 +18,30 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/country")
 public class CountryController
 {
-    private final CountryRepository countryRepository;
+	private final CountryRepository countryRepository;
 
-    @Autowired
-    public CountryController(CountryRepository countryRepository)
-    {
-        this.countryRepository = countryRepository;
-    }
+	@Autowired
+	public CountryController(CountryRepository countryRepository)
+	{
+		this.countryRepository = countryRepository;
+	}
 
-    @PostMapping(path = "/create")
-    public void createCountry(@RequestBody Country country)
-    {
-        countryRepository.save(country);
-    }
+	@PostMapping(path = "/create")
+	public void createCountry(@RequestBody Country country)
+	{
+		countryRepository.save(country);
+	}
 
-    @GetMapping(value = "/list")
-    public List<Country> getCountries()
-    {
-        return countryRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
-    }
+	@GetMapping(value = "/list")
+	public List<Country> getCountries()
+	{
+		return countryRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<Country> getCountryById(@PathVariable Long id)
-    {
-        return countryRepository.findById(id);
-    }
-
+	@GetMapping(value = "/find/{id}")
+	public Optional<Country> getCountryById(@PathVariable Long id)
+	{
+		return countryRepository.findById(id);
+	}
 
 }

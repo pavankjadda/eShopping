@@ -16,29 +16,29 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/manufacturer_address_type")
 public class ManufacturerAddressTypeController
 {
-    private final ManufacturerAddressTypeRepository manufacturerAddressTypeRepository;
+	private final ManufacturerAddressTypeRepository manufacturerAddressTypeRepository;
 
-    public ManufacturerAddressTypeController(ManufacturerAddressTypeRepository manufacturerAddressTypeRepository)
-    {
-        this.manufacturerAddressTypeRepository = manufacturerAddressTypeRepository;
-    }
+	public ManufacturerAddressTypeController(ManufacturerAddressTypeRepository manufacturerAddressTypeRepository)
+	{
+		this.manufacturerAddressTypeRepository = manufacturerAddressTypeRepository;
+	}
 
-    @PostMapping(path = "/create")
-    public void createAddressType(@RequestBody ManufacturerAddressType manufacturerAddressType)
-    {
-        manufacturerAddressTypeRepository.save(manufacturerAddressType);
-    }
+	@PostMapping(path = "/create")
+	public void createAddressType(@RequestBody ManufacturerAddressType manufacturerAddressType)
+	{
+		manufacturerAddressTypeRepository.save(manufacturerAddressType);
+	}
 
-    @GetMapping(value = "/list")
-    public List<ManufacturerAddressType> getAddressTypes()
-    {
-        return manufacturerAddressTypeRepository.findAll();
-    }
+	@GetMapping(value = "/list")
+	public List<ManufacturerAddressType> getAddressTypes()
+	{
+		return manufacturerAddressTypeRepository.findAll();
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<ManufacturerAddressType> getAddressTypeById(@PathVariable Long id)
-    {
-        return manufacturerAddressTypeRepository.findById(id);
-    }
+	@GetMapping(value = "/find/{id}")
+	public Optional<ManufacturerAddressType> getAddressTypeById(@PathVariable Long id)
+	{
+		return manufacturerAddressTypeRepository.findById(id);
+	}
 
 }

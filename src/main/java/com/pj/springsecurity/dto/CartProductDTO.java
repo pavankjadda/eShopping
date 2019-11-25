@@ -9,13 +9,13 @@ import java.io.Serializable;
 @Data
 public class CartProductDTO implements Serializable
 {
-    private static final long serialVersionUID = -2831775607040245737L;
+	private static final long serialVersionUID = -2831775607040245737L;
 
-    private Long id;
+	private Long id;
 
-    private Product product;
+	private Product product;
 
-    private Integer quantity;
+	private Integer quantity;
 
-    private Cart cart;
+	private Cart cart;
 }

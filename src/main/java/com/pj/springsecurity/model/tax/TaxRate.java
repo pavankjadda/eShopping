@@ -24,18 +24,18 @@ import javax.persistence.Table;
 @Table(name = "tax_rate")
 public class TaxRate extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = 268817337183217083L;
+	private static final long serialVersionUID = 268817337183217083L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,optional = false,fetch = FetchType.LAZY)
-    @JoinColumn(name = "state_id",referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"country"})
-    private State state;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "state_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"country"})
+	private State state;
 
-    @Column(name = "rate")
-    private Double rate;
+	@Column(name = "rate")
+	private Double rate;
 }

@@ -10,25 +10,25 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class UserLogging
 {
-    private Logger logger = LoggerFactory.getLogger(UserLogging.class);
+	private Logger logger = LoggerFactory.getLogger(UserLogging.class);
 
-    @Pointcut("execution(* com.pj.springsecurity.model.user.User.*(..))")
-    public void getUserPointCut()
-    {
-        //Pointcut
-    }
+	@Pointcut("execution(* com.pj.springsecurity.model.user.User.*(..))")
+	public void getUserPointCut()
+	{
+		//Pointcut
+	}
 
 
-    @Before("getUserPointCut()")
-    public void beforeAdvice()
-    {
-        logger.error("Inside UserLogging.beforeAdvice() method");
-    }
+	@Before("getUserPointCut()")
+	public void beforeAdvice()
+	{
+		logger.error("Inside UserLogging.beforeAdvice() method");
+	}
 
-    @After("getUserPointCut()")
-    public void afterAdvice()
-    {
-        logger.info("Inside UserLogging.afterAdvice() method");
-    }
+	@After("getUserPointCut()")
+	public void afterAdvice()
+	{
+		logger.info("Inside UserLogging.afterAdvice() method");
+	}
 
 }

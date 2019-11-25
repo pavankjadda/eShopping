@@ -10,20 +10,20 @@ import java.util.Collection;
 @Data
 public class UserDto implements Serializable
 {
-    private static final long serialVersionUID = -7294904497247619478L;
+	private static final long serialVersionUID = -7294904497247619478L;
 
-    private Long id;
+	private Long id;
 
-    private String username;
+	private String username;
 
-    private String firstName;
+	private String firstName;
 
-    private String lastName;
+	private String lastName;
 
-    private String token;
+	private String token;
 
-    private Collection<Role> roles;
+	private Collection<Role> roles;
 
-    private UserProfile userProfile;
+	private UserProfile userProfile;
 
 }

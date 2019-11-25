@@ -21,17 +21,17 @@ import javax.persistence.Table;
 @Table(name = "product_inventory")
 public class ProductInventory extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = -909553162918092892L;
+	private static final long serialVersionUID = -909553162918092892L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "quantity")
-    private Long quantity;
+	@Column(name = "quantity")
+	private Long quantity;
 
-    @OneToOne(fetch = FetchType.EAGER,mappedBy = "productInventory")
-    @JsonIgnore
-    private Product product;
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "productInventory")
+	@JsonIgnore
+	private Product product;
 }

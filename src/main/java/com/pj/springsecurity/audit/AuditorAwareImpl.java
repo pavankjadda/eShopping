@@ -10,22 +10,22 @@ import java.util.Optional;
 
 public class AuditorAwareImpl implements AuditorAware<String>
 {
-    @Override
-    public Optional<String> getCurrentAuditor()
-    {
-        try
-        {
-            Optional<MyUserDetails> optionalMyUserDetails = Optional.ofNullable(SecurityContextHolder.getContext())
-                    .map(SecurityContext::getAuthentication)
-                    .filter(Authentication::isAuthenticated)
-                    .map(Authentication::getPrincipal)
-                    .map(MyUserDetails.class::cast);
-            return optionalMyUserDetails.map(myUserDetails -> Optional.ofNullable(myUserDetails.getUsername())).orElse(null);
-        }
-        catch (Exception e)
-        {
-            return Optional.of("System");
-        }
+	@Override
+	public Optional<String> getCurrentAuditor()
+	{
+		try
+		{
+			Optional<MyUserDetails> optionalMyUserDetails = Optional.ofNullable(SecurityContextHolder.getContext())
+					.map(SecurityContext::getAuthentication)
+					.filter(Authentication::isAuthenticated)
+					.map(Authentication::getPrincipal)
+					.map(MyUserDetails.class::cast);
+			return optionalMyUserDetails.map(myUserDetails -> Optional.ofNullable(myUserDetails.getUsername())).orElse(null);
+		}
+		catch (Exception e)
+		{
+			return Optional.of("System");
+		}
 
-    }
+	}
 }

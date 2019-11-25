@@ -23,35 +23,35 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequestMapping("/api/v1/product")
 public class ProductController
 {
-    private final ProductRepository productRepository;
-    private final ProductInventoryRepository productInventoryRepository;
+	private final ProductRepository productRepository;
+	private final ProductInventoryRepository productInventoryRepository;
 
-    public ProductController(ProductRepository productRepository, ProductInventoryRepository productInventoryRepository)
-    {
-        this.productRepository = productRepository;
-        this.productInventoryRepository = productInventoryRepository;
-    }
+	public ProductController(ProductRepository productRepository, ProductInventoryRepository productInventoryRepository)
+	{
+		this.productRepository = productRepository;
+		this.productInventoryRepository = productInventoryRepository;
+	}
 
-    @PostMapping(path = "/create")
-    public void createProduct(@RequestBody Product product)
-    {
-        productRepository.saveAndFlush(product);
-    }
+	@PostMapping(path = "/create")
+	public void createProduct(@RequestBody Product product)
+	{
+		productRepository.saveAndFlush(product);
+	}
 
-    @PutMapping(path = "/update")
-    public Product updateProduct(@RequestBody Product product)
-    {
-        AtomicReference<Product> savedObject=new AtomicReference<>();
-        productRepository.findById(product.getId()).ifPresentOrElse(retrievedProduct ->
-        {
-            saveProductInventory(product,retrievedProduct,savedObject);
-        }, () ->
-        {
-            //Throw error if
-            throw new GenericException("Failed to update Product. Provided product ID is invalid ",null, HttpStatus.NOT_FOUND, LocalDateTime.now(),null,null);
-        });
+	@PutMapping(path = "/update")
+	public Product updateProduct(@RequestBody Product product)
+	{
+		AtomicReference<Product> savedObject = new AtomicReference<>();
+		productRepository.findById(product.getId()).ifPresentOrElse(retrievedProduct ->
+		{
+			saveProductInventory(product, retrievedProduct, savedObject);
+		}, () ->
+		{
+			//Throw error if
+			throw new GenericException("Failed to update Product. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
+		});
 
-    return savedObject.get();
+		return savedObject.get();
 /*        Optional<Product> productOptional=productRepository.findById(product.getId());
         if(productOptional.isPresent())
         {
@@ -76,36 +76,36 @@ public class ProductController
             throw new GenericException("Failed to update Product. Provided product ID is invalid ",null, HttpStatus.NOT_FOUND, LocalDateTime.now(),null,null);
         }
         return null;*/
-    }
+	}
 
-    private void saveProductInventory(Product product, Product retrievedProduct, AtomicReference<Product> savedObject)
-    {
-        productInventoryRepository.findByProductId(retrievedProduct.getId()).ifPresentOrElse(retrievedProductInventory ->
-        {
-            //Update ProductInventory and Product
-            retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
-            retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
-            savedObject.set(productRepository.saveAndFlush(retrievedProduct));
-        }, () ->
-        {
-            //Create new ProductInventory if it does not exist
-            ProductInventory productInventory = new ProductInventory();
-            productInventory.setQuantity(product.getProductInventory().getQuantity());
-            productInventory.setProduct(retrievedProduct);
-            retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(productInventory));
-            savedObject.set(productRepository.saveAndFlush(product));
-        });
-    }
+	private void saveProductInventory(Product product, Product retrievedProduct, AtomicReference<Product> savedObject)
+	{
+		productInventoryRepository.findByProductId(retrievedProduct.getId()).ifPresentOrElse(retrievedProductInventory ->
+		{
+			//Update ProductInventory and Product
+			retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
+			retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
+			savedObject.set(productRepository.saveAndFlush(retrievedProduct));
+		}, () ->
+		{
+			//Create new ProductInventory if it does not exist
+			ProductInventory productInventory = new ProductInventory();
+			productInventory.setQuantity(product.getProductInventory().getQuantity());
+			productInventory.setProduct(retrievedProduct);
+			retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(productInventory));
+			savedObject.set(productRepository.saveAndFlush(product));
+		});
+	}
 
-    @GetMapping(value = "/list")
-    public List<Product> getProducts()
-    {
-        return productRepository.findAll();
-    }
+	@GetMapping(value = "/list")
+	public List<Product> getProducts()
+	{
+		return productRepository.findAll();
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<Product> getProductById(@PathVariable Long id)
-    {
-        return productRepository.findById(id);
-    }
+	@GetMapping(value = "/find/{id}")
+	public Optional<Product> getProductById(@PathVariable Long id)
+	{
+		return productRepository.findById(id);
+	}
 }

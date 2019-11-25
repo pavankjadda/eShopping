@@ -21,42 +21,42 @@ import java.util.stream.Collectors;
 public class SessionRegistryImplController
 {
 
-    private final SessionRegistry sessionRegistry;
+	private final SessionRegistry sessionRegistry;
 
-    @Autowired
-    public SessionRegistryImplController(SessionRegistry sessionRegistry)
-    {
-        this.sessionRegistry = sessionRegistry;
-    }
+	@Autowired
+	public SessionRegistryImplController(SessionRegistry sessionRegistry)
+	{
+		this.sessionRegistry = sessionRegistry;
+	}
 
-    @GetMapping(value = {"/users"})
-    @Secured(value = AuthorityConstants.ROLE_ADMIN)
-    public List<String> getAllUsers()
-    {
-        return sessionRegistry.getAllPrincipals().stream()
-                .filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
-                .map(Object::toString)
-                .collect(Collectors.toList());
-    }
+	@GetMapping(value = {"/users"})
+	@Secured(value = AuthorityConstants.ROLE_ADMIN)
+	public List<String> getAllUsers()
+	{
+		return sessionRegistry.getAllPrincipals().stream()
+				.filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
+				.map(Object::toString)
+				.collect(Collectors.toList());
+	}
 
-    @GetMapping(value = {"/active-users"})
-    @Secured(value = AuthorityConstants.ROLE_ADMIN)
-    public List<String> getActiveUsers()
-    {
-        return sessionRegistry.getAllPrincipals().stream()
-                .filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
-                .map(Object::toString)
-                .collect(Collectors.toList());
-    }
+	@GetMapping(value = {"/active-users"})
+	@Secured(value = AuthorityConstants.ROLE_ADMIN)
+	public List<String> getActiveUsers()
+	{
+		return sessionRegistry.getAllPrincipals().stream()
+				.filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty())
+				.map(Object::toString)
+				.collect(Collectors.toList());
+	}
 
 
-    @GetMapping(value = {"/active-users/{username}"})
-    @Secured(value = AuthorityConstants.ROLE_ADMIN)
-    public List<SessionInformation> getUserSessions(@PathVariable String username)
-    {
-        MyUserDetails myUserDetails = (MyUserDetails) sessionRegistry.getAllPrincipals().get(0);
-        if (myUserDetails.getUsername().equals(username))
-            return sessionRegistry.getAllSessions(myUserDetails, false);
-        return Collections.emptyList();
-    }
+	@GetMapping(value = {"/active-users/{username}"})
+	@Secured(value = AuthorityConstants.ROLE_ADMIN)
+	public List<SessionInformation> getUserSessions(@PathVariable String username)
+	{
+		MyUserDetails myUserDetails = (MyUserDetails) sessionRegistry.getAllPrincipals().get(0);
+		if (myUserDetails.getUsername().equals(username))
+			return sessionRegistry.getAllSessions(myUserDetails, false);
+		return Collections.emptyList();
+	}
 }

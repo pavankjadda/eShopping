@@ -14,23 +14,22 @@ import java.util.List;
 @Repository
 public class CategoryRepositoryCustomImpl implements CategoryRepositoryCustom
 {
-    @PersistenceContext
-    private EntityManager entityManager;
+	private final ModelMapper modelMapper;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-    private final ModelMapper modelMapper;
+	public CategoryRepositoryCustomImpl(ModelMapper modelMapper)
+	{
+		this.modelMapper = modelMapper;
+	}
 
-    public CategoryRepositoryCustomImpl(ModelMapper modelMapper)
-    {
-        this.modelMapper = modelMapper;
-    }
+	public List<Category> getAllCategoriesThroughStoredProcedureCustom()
+	{
+		List<Category> categories = new ArrayList<>();
+		StoredProcedureQuery storedProcedureQuery = entityManager.createNamedStoredProcedureQuery("getAllCategoriesThroughStoredProcedureCustom");
+		List<?> categoriesResult = storedProcedureQuery.getResultList();
 
-    public List<Category> getAllCategoriesThroughStoredProcedureCustom()
-    {
-        List<Category> categories=new ArrayList<>();
-        StoredProcedureQuery storedProcedureQuery=entityManager.createNamedStoredProcedureQuery("getAllCategoriesThroughStoredProcedureCustom");
-        List<?> categoriesResult=storedProcedureQuery.getResultList();
-
-        categoriesResult.forEach(category -> categories.add(modelMapper.map(category, Category.class)));
-        return categories;
-    }
+		categoriesResult.forEach(category -> categories.add(modelMapper.map(category, Category.class)));
+		return categories;
+	}
 }

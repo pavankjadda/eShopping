@@ -22,45 +22,45 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/city")
 public class CityController
 {
-    private final CityRepository cityRepository;
+	private final CityRepository cityRepository;
 
-    @Autowired
-    public CityController(CityRepository cityRepository)
-    {
-        this.cityRepository = cityRepository;
-    }
+	@Autowired
+	public CityController(CityRepository cityRepository)
+	{
+		this.cityRepository = cityRepository;
+	}
 
-    @PostMapping(path = "/create")
-    public void createCity(@RequestBody City city)
-    {
-        cityRepository.save(city);
-    }
+	@PostMapping(path = "/create")
+	public void createCity(@RequestBody City city)
+	{
+		cityRepository.save(city);
+	}
 
-    @GetMapping(value = "/list")
-    public Page<City> getCities(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer pageSize)
-    {
-        if (pageNumber == null)
-            pageNumber = 0;
-        if (pageSize == null)
-            pageSize = 10;
-        return cityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "id")));
-    }
+	@GetMapping(value = "/list")
+	public Page<City> getCities(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer pageSize)
+	{
+		if (pageNumber == null)
+			pageNumber = 0;
+		if (pageSize == null)
+			pageSize = 10;
+		return cityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "id")));
+	}
 
-    @GetMapping(value = "/{id}")
-    public Optional<City> getCityById(@PathVariable Long id)
-    {
-        return cityRepository.findById(id);
-    }
+	@GetMapping(value = "/{id}")
+	public Optional<City> getCityById(@PathVariable Long id)
+	{
+		return cityRepository.findById(id);
+	}
 
-    @GetMapping(value = "/find/state/{id}")
-    public List<City> getCityByBasedOnStateId(@PathVariable Long id)
-    {
-        return cityRepository.findAllByStateIdOrderByNameAsc(id);
-    }
+	@GetMapping(value = "/find/state/{id}")
+	public List<City> getCityByBasedOnStateId(@PathVariable Long id)
+	{
+		return cityRepository.findAllByStateIdOrderByNameAsc(id);
+	}
 
-    @GetMapping(value = "/find")
-    public Optional<City> getCityByNameAndState(@RequestParam(value = "name") String cityName, @RequestParam(value = "state") String stateName)
-    {
-        return cityRepository.findByNameAndState(cityName, null);
-    }
+	@GetMapping(value = "/find")
+	public Optional<City> getCityByNameAndState(@RequestParam(value = "name") String cityName, @RequestParam(value = "state") String stateName)
+	{
+		return cityRepository.findByNameAndState(cityName, null);
+	}
 }

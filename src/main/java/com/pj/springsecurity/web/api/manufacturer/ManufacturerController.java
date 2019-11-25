@@ -19,40 +19,40 @@ import java.util.Optional;
 @RequestMapping(value = "/api/v1/manufacturer")
 public class ManufacturerController
 {
-    private final ManufacturerRepository manufacturerRepository;
+	private final ManufacturerRepository manufacturerRepository;
 
-    public ManufacturerController(ManufacturerRepository manufacturerRepository)
-    {
-        this.manufacturerRepository = manufacturerRepository;
-    }
+	public ManufacturerController(ManufacturerRepository manufacturerRepository)
+	{
+		this.manufacturerRepository = manufacturerRepository;
+	}
 
-    @GetMapping(value = "/list")
-    public List<Manufacturer> getManufacturers()
-    {
-        return manufacturerRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
-    }
+	@GetMapping(value = "/list")
+	public List<Manufacturer> getManufacturers()
+	{
+		return manufacturerRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<Manufacturer> getManufacturerById(@PathVariable Long id)
-    {
-        return manufacturerRepository.findById(id);
-    }
+	@GetMapping(value = "/find/{id}")
+	public Optional<Manufacturer> getManufacturerById(@PathVariable Long id)
+	{
+		return manufacturerRepository.findById(id);
+	}
 
-    @PostMapping(path = "/create")
-    public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer)
-    {
-        return manufacturerRepository.saveAndFlush(manufacturer);
-    }
+	@PostMapping(path = "/create")
+	public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer)
+	{
+		return manufacturerRepository.saveAndFlush(manufacturer);
+	}
 
-    @PutMapping(path = "/update")
-    public Manufacturer updateManufacturer(@RequestBody Manufacturer manufacturer)
-    {
-        return manufacturerRepository.saveAndFlush(manufacturer);
-    }
+	@PutMapping(path = "/update")
+	public Manufacturer updateManufacturer(@RequestBody Manufacturer manufacturer)
+	{
+		return manufacturerRepository.saveAndFlush(manufacturer);
+	}
 
-    @DeleteMapping(path = "/delete/{id}")
-    public void updateManufacturer(@PathVariable Long id)
-    {
-        manufacturerRepository.deleteById(id);
-    }
+	@DeleteMapping(path = "/delete/{id}")
+	public void updateManufacturer(@PathVariable Long id)
+	{
+		manufacturerRepository.deleteById(id);
+	}
 }

@@ -21,28 +21,28 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Cache(region = "photoCache",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "photoCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "photo")
 public class Photo extends AbstractAuditingEntity implements Serializable
 {
-    private static final long serialVersionUID = 3373277677411648585L;
+	private static final long serialVersionUID = 3373277677411648585L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    @Column(name = "description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 
-    @Lob
-    @Column(name = "data")
-    private byte[] data;
+	@Lob
+	@Column(name = "data")
+	private byte[] data;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private Product product;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+	private Product product;
 }

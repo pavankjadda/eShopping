@@ -17,37 +17,37 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/state")
 public class StateController
 {
-    private StateRepository stateRepository;
+	private StateRepository stateRepository;
 
-    @Autowired
-    public StateController(StateRepository stateRepository)
-    {
-        this.stateRepository = stateRepository;
-    }
+	@Autowired
+	public StateController(StateRepository stateRepository)
+	{
+		this.stateRepository = stateRepository;
+	}
 
-    @PostMapping(path = "/create")
-    public void createState(@RequestBody State state)
-    {
-        stateRepository.save(state);
-    }
+	@PostMapping(path = "/create")
+	public void createState(@RequestBody State state)
+	{
+		stateRepository.save(state);
+	}
 
-    @GetMapping(value = "/list")
-    public List<State> getStates()
-    {
-        return stateRepository.findAll();
-    }
+	@GetMapping(value = "/list")
+	public List<State> getStates()
+	{
+		return stateRepository.findAll();
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<State> getStateById(@PathVariable Long id)
-    {
-        return stateRepository.findById(id);
-    }
+	@GetMapping(value = "/find/{id}")
+	public Optional<State> getStateById(@PathVariable Long id)
+	{
+		return stateRepository.findById(id);
+	}
 
 
-    @GetMapping(value = "/find/country/{id}")
-    public List<State> getStatesFilterByCountryId(@PathVariable Long id)
-    {
-        return stateRepository.findAllByCountryIdOrderByNameAsc(id);
-    }
+	@GetMapping(value = "/find/country/{id}")
+	public List<State> getStatesFilterByCountryId(@PathVariable Long id)
+	{
+		return stateRepository.findAllByCountryIdOrderByNameAsc(id);
+	}
 
 }

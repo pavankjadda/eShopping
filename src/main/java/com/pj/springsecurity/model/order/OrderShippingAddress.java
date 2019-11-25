@@ -28,44 +28,44 @@ import javax.persistence.Table;
 @Table(name = "order_shipping_address")
 public class OrderShippingAddress extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = 8733009552741603083L;
+	private static final long serialVersionUID = 8733009552741603083L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "street_name")
-    private String streetName;
+	@Column(name = "street_name")
+	private String streetName;
 
-    @Column(name = "apartment")
-    private String apartment;
+	@Column(name = "apartment")
+	private String apartment;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 
-    @ManyToOne
-    @JoinColumn(name = "state_id")
-    private State state;
+	@ManyToOne
+	@JoinColumn(name = "state_id")
+	private State state;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
 
-    @ManyToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+	@ManyToOne
+	@JoinColumn(name = "region_id")
+	private Region region;
 
-    @Column(name = "zip_code")
-    private String zipCode;
+	@Column(name = "zip_code")
+	private String zipCode;
 
-    @ManyToOne
-    @JoinColumn(name = "address_type_id", referencedColumnName = "id")
-    private AddressType addressType;
+	@ManyToOne
+	@JoinColumn(name = "address_type_id", referencedColumnName = "id")
+	private AddressType addressType;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    @JsonIgnore
-    private Order order;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	@JsonIgnore
+	private Order order;
 }

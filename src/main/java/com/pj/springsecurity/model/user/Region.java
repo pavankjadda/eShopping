@@ -17,23 +17,23 @@ import java.io.Serializable;
 @Data
 public class Region implements Serializable
 {
-    private static final long serialVersionUID = 7515965324996283939L;
+	private static final long serialVersionUID = 7515965324996283939L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "name")
-    @Length(max = 20, min = 2)
-    private String name;
+	@Column(name = "name")
+	@Length(max = 20, min = 2)
+	private String name;
 
-    public Region()
-    {
-    }
+	public Region()
+	{
+	}
 
-    public Region(@Length(max = 20, min = 2) String name)
-    {
-        this.name = name;
-    }
+	public Region(@Length(max = 20, min = 2) String name)
+	{
+		this.name = name;
+	}
 }

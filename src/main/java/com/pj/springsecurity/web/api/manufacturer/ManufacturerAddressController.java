@@ -17,35 +17,35 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/manufacturer_address")
 public class ManufacturerAddressController
 {
-    private final ManufacturerAddressRepository manufacturerAddressRepository;
+	private final ManufacturerAddressRepository manufacturerAddressRepository;
 
-    public ManufacturerAddressController(ManufacturerAddressRepository manufacturerAddressRepository)
-    {
-        this.manufacturerAddressRepository = manufacturerAddressRepository;
-    }
+	public ManufacturerAddressController(ManufacturerAddressRepository manufacturerAddressRepository)
+	{
+		this.manufacturerAddressRepository = manufacturerAddressRepository;
+	}
 
-    @GetMapping(value = "/list")
-    public List<ManufacturerAddress> getAddresses()
-    {
-        return manufacturerAddressRepository.findAll();
-    }
+	@GetMapping(value = "/list")
+	public List<ManufacturerAddress> getAddresses()
+	{
+		return manufacturerAddressRepository.findAll();
+	}
 
-    @GetMapping(value = "/find/{id}")
-    public Optional<ManufacturerAddress> getAddressById(@PathVariable Long id)
-    {
-        return manufacturerAddressRepository.findById(id);
-    }
+	@GetMapping(value = "/find/{id}")
+	public Optional<ManufacturerAddress> getAddressById(@PathVariable Long id)
+	{
+		return manufacturerAddressRepository.findById(id);
+	}
 
-    @PostMapping(path = "/create")
-    public ManufacturerAddress createAddress(@RequestBody ManufacturerAddress manufacturerAddress)
-    {
-        return manufacturerAddressRepository.saveAndFlush(manufacturerAddress);
-    }
+	@PostMapping(path = "/create")
+	public ManufacturerAddress createAddress(@RequestBody ManufacturerAddress manufacturerAddress)
+	{
+		return manufacturerAddressRepository.saveAndFlush(manufacturerAddress);
+	}
 
-    @PutMapping(path = "/update")
-    public ManufacturerAddress updateAddress(@RequestBody ManufacturerAddress manufacturerAddress)
-    {
-        return manufacturerAddressRepository.saveAndFlush(manufacturerAddress);
-    }
+	@PutMapping(path = "/update")
+	public ManufacturerAddress updateAddress(@RequestBody ManufacturerAddress manufacturerAddress)
+	{
+		return manufacturerAddressRepository.saveAndFlush(manufacturerAddress);
+	}
 
 }

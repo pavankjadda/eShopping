@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface TaxRateRepository extends JpaRepository<TaxRate,Long>
+public interface TaxRateRepository extends JpaRepository<TaxRate, Long>
 {
-    Optional<TaxRate> findByStateId(Long stateId);
+	Optional<TaxRate> findByStateId(Long stateId);
 }

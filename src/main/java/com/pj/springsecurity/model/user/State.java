@@ -20,34 +20,34 @@ import java.io.Serializable;
 @Data
 public class State implements Serializable
 {
-    private static final long serialVersionUID = 5553856435782266275L;
+	private static final long serialVersionUID = 5553856435782266275L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "code")
-    private String code;
+	@Column(name = "code")
+	private String code;
 
-    @Column(name = "name")
-    @Length(max = 200, min = 2)
-    private String name;
+	@Column(name = "name")
+	@Length(max = 200, min = 2)
+	private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    @JsonIgnoreProperties(value = {"region"})
-    private Country country;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country_id")
+	@JsonIgnoreProperties(value = {"region"})
+	private Country country;
 
 
-    public State()
-    {
-    }
+	public State()
+	{
+	}
 
-    public State(@Length(max = 100, min = 2) String name, String code, Country country)
-    {
-        this.name = name;
-        this.code = code;
-        this.country = country;
-    }
+	public State(@Length(max = 100, min = 2) String name, String code, Country country)
+	{
+		this.name = name;
+		this.code = code;
+		this.country = country;
+	}
 }

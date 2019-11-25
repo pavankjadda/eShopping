@@ -20,31 +20,31 @@ import java.util.List;
 @Transactional
 public class MyUserDetailsService implements UserDetailsService
 {
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
-    @Autowired
-    public MyUserDetailsService(UserRepository userRepository)
-    {
-        this.userRepository = userRepository;
-    }
+	@Autowired
+	public MyUserDetailsService(UserRepository userRepository)
+	{
+		this.userRepository = userRepository;
+	}
 
-    @Override
-    public UserDetails loadUserByUsername(String username)
-    {
-        User user = userRepository.findByUsername(username);
-        if (user == null)
-            throw new UsernameNotFoundException("Could not find Username");
-        return new MyUserDetails(user, getGrantedAuthorities(user.getRoles()));
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username)
+	{
+		User user = userRepository.findByUsername(username);
+		if (user == null)
+			throw new UsernameNotFoundException("Could not find Username");
+		return new MyUserDetails(user, getGrantedAuthorities(user.getRoles()));
+	}
 
-    private List<GrantedAuthority> getGrantedAuthorities(Collection<Role> roles)
-    {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles)
-        {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
-    }
+	private List<GrantedAuthority> getGrantedAuthorities(Collection<Role> roles)
+	{
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for (Role role : roles)
+		{
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+		return authorities;
+	}
 
 }

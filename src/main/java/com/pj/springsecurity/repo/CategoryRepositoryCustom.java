@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CategoryRepositoryCustom
 {
-    List<Category> getAllCategoriesThroughStoredProcedureCustom();
+	List<Category> getAllCategoriesThroughStoredProcedureCustom();
 }

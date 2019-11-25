@@ -3,10 +3,10 @@ package com.pj.springsecurity.constants;
 
 public class SecurityConstants
 {
-    public static final String FORMLOGINFAILUREURL="/login";
+	public static final String FORMLOGINFAILUREURL = "/login";
 
-    private SecurityConstants()
-    {
+	private SecurityConstants()
+	{
 
-    }
+	}
 }

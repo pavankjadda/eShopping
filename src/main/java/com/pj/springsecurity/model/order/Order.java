@@ -28,53 +28,53 @@ import java.util.List;
 @Table(name = "`order`")
 public class Order extends AbstractAuditingEntity implements Serializable
 {
-    private static final long serialVersionUID = -6699422774799518237L;
+	private static final long serialVersionUID = -6699422774799518237L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "tax")
-    private Double tax;
+	@Column(name = "tax")
+	private Double tax;
 
-    @Column(name = "shipping_charge")
-    private Double shippingCharge;
+	@Column(name = "shipping_charge")
+	private Double shippingCharge;
 
-    @Column(name = "total_cost")
-    private Double totalCost;
+	@Column(name = "total_cost")
+	private Double totalCost;
 
-    @ManyToOne
-    @JoinColumn(name = "order_status")
-    private OrderStatus orderStatus;
+	@ManyToOne
+	@JoinColumn(name = "order_status")
+	private OrderStatus orderStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "purchased_By")
-    private UserProfile purchasedBy;
+	@ManyToOne
+	@JoinColumn(name = "purchased_By")
+	private UserProfile purchasedBy;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "order_shipping_address")
-    private OrderShippingAddress orderShippingAddress;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "order_shipping_address")
+	private OrderShippingAddress orderShippingAddress;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "order_billing_address")
-    private OrderBillingAddress orderBillingAddress;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "order_billing_address")
+	private OrderBillingAddress orderBillingAddress;
 
-    @Column(name = "order_created_date_time")
-    private LocalDateTime orderCreatedDateTime;
+	@Column(name = "order_created_date_time")
+	private LocalDateTime orderCreatedDateTime;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
-    private List<OrderProductDetail> orderProductDetails = new ArrayList<>();
+	@OneToMany
+	@JoinColumn(name = "order_id")
+	private List<OrderProductDetail> orderProductDetails = new ArrayList<>();
 
-    @Override
-    public String toString()
-    {
-        return "Order{" +
-                "id=" + id +
-                ", tax=" + tax +
-                ", shippingCharge=" + shippingCharge +
-                ", totalCost=" + totalCost +
-                '}';
-    }
+	@Override
+	public String toString()
+	{
+		return "Order{" +
+				"id=" + id +
+				", tax=" + tax +
+				", shippingCharge=" + shippingCharge +
+				", totalCost=" + totalCost +
+				'}';
+	}
 }

@@ -19,22 +19,22 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Cache(region = "categoryCache",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "categoryCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "category")
-@NamedStoredProcedureQuery(name = "getAllCategoriesThroughStoredProcedureCustom",procedureName = "get_all_categories",resultClasses = Category.class)
+@NamedStoredProcedureQuery(name = "getAllCategoriesThroughStoredProcedureCustom", procedureName = "get_all_categories", resultClasses = Category.class)
 public class Category extends AbstractAuditingEntity implements Serializable
 {
-    private static final long serialVersionUID = -6699422774799518217L;
+	private static final long serialVersionUID = -6699422774799518217L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotEmpty
-    @Column(name = "name", nullable = false)
-    private String name;
+	@NotEmpty
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    @Column(name = "description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 }

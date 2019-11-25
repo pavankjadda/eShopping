@@ -10,11 +10,11 @@ import java.util.List;
 @Data
 public class CartDTO
 {
-    private Long id;
+	private Long id;
 
-    private UserProfile userProfile;
+	private UserProfile userProfile;
 
-    private CartStatus cartStatus;
+	private CartStatus cartStatus;
 
-    private List<CartProduct> cartProducts;
+	private List<CartProduct> cartProducts;
 }

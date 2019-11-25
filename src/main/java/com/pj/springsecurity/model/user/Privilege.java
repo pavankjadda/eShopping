@@ -18,41 +18,41 @@ import java.util.Collection;
 @Table(name = "privilege")
 public class Privilege implements Serializable
 {
-    private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 3L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
+	private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    @JsonIgnore
-    private Collection<Role> roles;
+	@ManyToMany(mappedBy = "privileges")
+	@JsonIgnore
+	private Collection<Role> roles;
 
-    public Privilege()
-    {
-    }
+	public Privilege()
+	{
+	}
 
-    public Privilege(String name)
-    {
-        this.name = name;
-    }
+	public Privilege(String name)
+	{
+		this.name = name;
+	}
 
 
-    public Privilege(String name, Collection<Role> roles)
-    {
-        this.name = name;
-        this.roles = roles;
-    }
+	public Privilege(String name, Collection<Role> roles)
+	{
+		this.name = name;
+		this.roles = roles;
+	}
 
-    @Override
-    public String toString()
-    {
-        return "Privilege{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+	@Override
+	public String toString()
+	{
+		return "Privilege{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
+	}
 }

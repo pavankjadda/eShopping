@@ -17,20 +17,20 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "product_price")
-@Cache(region = "productPriceCache",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "productPriceCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Data
 public class ProductPrice extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = 2677217467401857039L;
+	private static final long serialVersionUID = 2677217467401857039L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
+	@Column(name = "product_id", nullable = false)
+	private Long productId;
 
-    @Column(name = "price_id", nullable = false)
-    private Long priceId;
+	@Column(name = "price_id", nullable = false)
+	private Long priceId;
 }
