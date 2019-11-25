@@ -2,13 +2,25 @@ package com.pj.springsecurity.model.product;
 
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.category.Category;
+import com.pj.springsecurity.model.inventory.ProductInventory;
 import com.pj.springsecurity.model.manufacturer.Manufacturer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,19 +53,16 @@ public class Product extends AbstractAuditingEntity implements Serializable
     @JoinColumn(name = "manufacturer_id",referencedColumnName = "id")
     private Manufacturer manufacturer;
 
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_inventory_id")
+    private ProductInventory productInventory;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
     private Price price;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "product_photo",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "photo_id", referencedColumnName = "id")
-    )
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product")
     private List<Photo> photoList=new ArrayList<>();
-
 
     @Override
     public String toString()

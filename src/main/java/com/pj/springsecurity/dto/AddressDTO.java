@@ -1,6 +1,11 @@
 package com.pj.springsecurity.dto;
 
-import com.pj.springsecurity.model.user.*;
+import com.pj.springsecurity.model.user.AddressType;
+import com.pj.springsecurity.model.user.City;
+import com.pj.springsecurity.model.user.Country;
+import com.pj.springsecurity.model.user.Region;
+import com.pj.springsecurity.model.user.State;
+import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 
 @Data

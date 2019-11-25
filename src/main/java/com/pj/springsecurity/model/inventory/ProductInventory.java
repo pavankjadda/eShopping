@@ -1,12 +1,19 @@
 package com.pj.springsecurity.model.inventory;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -24,9 +31,7 @@ public class ProductInventory extends AbstractAuditingEntity
     @Column(name = "quantity")
     private Long quantity;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties(value = {"category","manufacturer","price","photoList"})
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "productInventory")
+    @JsonIgnore
     private Product product;
-
 }

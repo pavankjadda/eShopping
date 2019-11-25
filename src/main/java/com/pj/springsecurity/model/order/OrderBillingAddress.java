@@ -2,11 +2,24 @@ package com.pj.springsecurity.model.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
-import com.pj.springsecurity.model.user.*;
+import com.pj.springsecurity.model.user.AddressType;
+import com.pj.springsecurity.model.user.City;
+import com.pj.springsecurity.model.user.Country;
+import com.pj.springsecurity.model.user.Region;
+import com.pj.springsecurity.model.user.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
