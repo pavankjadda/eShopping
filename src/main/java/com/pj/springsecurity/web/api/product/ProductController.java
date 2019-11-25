@@ -52,30 +52,6 @@ public class ProductController
 		});
 
 		return savedObject.get();
-/*        Optional<Product> productOptional=productRepository.findById(product.getId());
-        if(productOptional.isPresent())
-        {
-            Optional<ProductInventory> productInventoryOptional=productInventoryRepository.findByProductId(productOptional.get().getId());
-            if(productInventoryOptional.isPresent())
-            {
-                ProductInventory retrievedProductInventory=productInventoryOptional.get();
-                retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
-                productInventoryRepository.saveAndFlush(retrievedProductInventory);
-            }
-            else
-            {
-                ProductInventory productInventory=new ProductInventory();
-                productInventory.setQuantity(product.getProductInventory().getQuantity());
-                Product retrievedProduct=productOptional.get();
-                retrievedProduct.setProductInventory(productInventory);
-                return productRepository.saveAndFlush(product);
-            }
-        }
-        else
-        {
-            throw new GenericException("Failed to update Product. Provided product ID is invalid ",null, HttpStatus.NOT_FOUND, LocalDateTime.now(),null,null);
-        }
-        return null;*/
 	}
 
 	private void saveProductInventory(Product product, Product retrievedProduct, AtomicReference<Product> savedObject)
