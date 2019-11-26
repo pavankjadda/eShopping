@@ -2,7 +2,11 @@ package com.pj.springsecurity.insertdata;
 
 import com.pj.springsecurity.model.cart.Cart;
 import com.pj.springsecurity.model.cart.CartProduct;
-import com.pj.springsecurity.repo.*;
+import com.pj.springsecurity.repo.CartProductRepository;
+import com.pj.springsecurity.repo.CartRepository;
+import com.pj.springsecurity.repo.CartStatusRepository;
+import com.pj.springsecurity.repo.ProductRepository;
+import com.pj.springsecurity.repo.UserProfileRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

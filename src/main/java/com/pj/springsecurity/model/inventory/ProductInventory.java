@@ -6,7 +6,14 @@ import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -14,19 +21,17 @@ import javax.persistence.*;
 @Table(name = "product_inventory")
 public class ProductInventory extends AbstractAuditingEntity
 {
-    private static final long serialVersionUID = -909553162918092892L;
+	private static final long serialVersionUID = -909553162918092892L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "quantity")
-    private Long quantity;
+	@Column(name = "quantity")
+	private Long quantity;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties(value = {"category","manufacturer","price","photoList"})
-    private Product product;
-
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "productInventory")
+	@JsonIgnoreProperties(value = {"productInventory"})
+	private Product product;
 }

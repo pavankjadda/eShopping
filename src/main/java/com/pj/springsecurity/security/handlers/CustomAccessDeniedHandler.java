@@ -13,40 +13,40 @@ import java.time.LocalDateTime;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler
 {
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private UnauthorizedRequestRepository unauthorizedRequestRepository;
+	private UnauthorizedRequestRepository unauthorizedRequestRepository;
 
 
-    public CustomAccessDeniedHandler(UnauthorizedRequestRepository unauthorizedRequestRepository)
-    {
-        this.unauthorizedRequestRepository=unauthorizedRequestRepository;
-    }
+	public CustomAccessDeniedHandler(UnauthorizedRequestRepository unauthorizedRequestRepository)
+	{
+		this.unauthorizedRequestRepository = unauthorizedRequestRepository;
+	}
 
-    @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException )
-    {
-        UnauthorizedRequest unauthorizedRequest=new UnauthorizedRequest();
-        unauthorizedRequest.setRequesterIpAddress(request.getRemoteAddr());
-        unauthorizedRequest.setRequesterPort(request.getRemotePort());
-        unauthorizedRequest.setRequestedMethod(request.getMethod());
-        unauthorizedRequest.setLocalIpAddress(request.getLocalAddr());
-        unauthorizedRequest.setLocalPort(request.getLocalPort());
-        unauthorizedRequest.setServerName(request.getServerName());
-        unauthorizedRequest.setServerPort(request.getServerPort());
-        unauthorizedRequest.setBrowserInformation(request.getAuthType());
-        unauthorizedRequest.setAuthType(request.getAuthType());
-        unauthorizedRequest.setExceptionMessage(accessDeniedException.getMessage());
-        unauthorizedRequest.setLoggedDataTime(LocalDateTime.now());
+	@Override
+	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
+	{
+		UnauthorizedRequest unauthorizedRequest = new UnauthorizedRequest();
+		unauthorizedRequest.setRequesterIpAddress(request.getRemoteAddr());
+		unauthorizedRequest.setRequesterPort(request.getRemotePort());
+		unauthorizedRequest.setRequestedMethod(request.getMethod());
+		unauthorizedRequest.setLocalIpAddress(request.getLocalAddr());
+		unauthorizedRequest.setLocalPort(request.getLocalPort());
+		unauthorizedRequest.setServerName(request.getServerName());
+		unauthorizedRequest.setServerPort(request.getServerPort());
+		unauthorizedRequest.setBrowserInformation(request.getAuthType());
+		unauthorizedRequest.setAuthType(request.getAuthType());
+		unauthorizedRequest.setExceptionMessage(accessDeniedException.getMessage());
+		unauthorizedRequest.setLoggedDataTime(LocalDateTime.now());
 
-        try
-        {
-            unauthorizedRequestRepository.saveAndFlush(unauthorizedRequest);
-        }
-        catch (Exception e)
-        {
-            logger.warn("Exception occurred while handling Access Denied Error. Exception message: ",e);
-        }
+		try
+		{
+			unauthorizedRequestRepository.saveAndFlush(unauthorizedRequest);
+		}
+		catch (Exception e)
+		{
+			logger.warn("Exception occurred while handling Access Denied Error. Exception message: ", e);
+		}
 
-    }
+	}
 }

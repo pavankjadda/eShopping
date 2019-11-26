@@ -7,5 +7,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AopConfig
 {
-    //Beans created through @Component annotation on Logger class
+	//Beans created through @Component annotation on Logger class
 }

@@ -8,15 +8,15 @@ import java.util.List;
 @Data
 public class ProductDTO
 {
-    private Long id;
+	private Long id;
 
-    private String name;
+	private String name;
 
-    private String description;
+	private String description;
 
-    private Long categoryId;
+	private Long categoryId;
 
-    private Long currencyId;
+	private Long currencyId;
 
-    private List<Photo> photoList;
+	private List<Photo> photoList;
 }

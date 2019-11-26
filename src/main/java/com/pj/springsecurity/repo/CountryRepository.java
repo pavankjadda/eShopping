@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public interface CountryRepository extends JpaRepository<Country, Long>
 {
-    Optional<Country> findByNameAndRegion(String name, Region region);
+	Optional<Country> findByNameAndRegion(String name, Region region);
 
-    Optional<Country> findByName(String name);
+	Optional<Country> findByName(String name);
 
-    @Override
-    List<Country> findAll(Sort sort);
+	@Override
+	List<Country> findAll(Sort sort);
 }

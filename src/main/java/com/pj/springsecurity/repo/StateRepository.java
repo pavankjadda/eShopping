@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface StateRepository extends JpaRepository<State, Long>
 {
-    Optional<State> findByName(String name);
+	Optional<State> findByName(String name);
 
-    List<State> findAllByCountryIdOrderByNameAsc(Long id);
+	List<State> findAllByCountryIdOrderByNameAsc(Long id);
 }

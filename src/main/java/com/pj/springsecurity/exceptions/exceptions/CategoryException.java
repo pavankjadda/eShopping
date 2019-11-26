@@ -2,18 +2,18 @@ package com.pj.springsecurity.exceptions.exceptions;
 
 public class CategoryException extends RuntimeException
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private final String message;
+	private final String message;
 
-    public CategoryException(String message)
-    {
-        this.message=message;
-    }
+	public CategoryException(String message)
+	{
+		this.message = message;
+	}
 
-    @Override
-    public String getMessage()
-    {
-        return message;
-    }
+	@Override
+	public String getMessage()
+	{
+		return message;
+	}
 }

@@ -9,17 +9,17 @@ import java.util.List;
 @Data
 public class UserProfileDTO
 {
-    private Long id;
+	private Long id;
 
-    private String firstName;
+	private String firstName;
 
-    private String lastName;
+	private String lastName;
 
-    private String email;
+	private String email;
 
-    private String phone;
+	private String phone;
 
-    private List<Address> addresses;
+	private List<Address> addresses;
 
-    private User user;
+	private User user;
 }

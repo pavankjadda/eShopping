@@ -1,28 +1,33 @@
 package com.pj.springsecurity.dto;
 
-import com.pj.springsecurity.model.user.*;
+import com.pj.springsecurity.model.user.AddressType;
+import com.pj.springsecurity.model.user.City;
+import com.pj.springsecurity.model.user.Country;
+import com.pj.springsecurity.model.user.Region;
+import com.pj.springsecurity.model.user.State;
+import com.pj.springsecurity.model.user.UserProfile;
 import lombok.Data;
 
 @Data
 public class AddressDTO
 {
-    private Long id;
+	private Long id;
 
-    private String streetName;
+	private String streetName;
 
-    private String apartment;
+	private String apartment;
 
-    private City city;
+	private City city;
 
-    private State state;
+	private State state;
 
-    private Country country;
+	private Country country;
 
-    private Region region;
+	private Region region;
 
-    private String zipCode;
+	private String zipCode;
 
-    private AddressType addressType;
+	private AddressType addressType;
 
-    private UserProfile userProfile;
+	private UserProfile userProfile;
 }

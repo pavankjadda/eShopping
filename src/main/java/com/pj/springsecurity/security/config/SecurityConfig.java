@@ -32,132 +32,132 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
-    private final MyUserDetailsService userDetailsService;
+	private final MyUserDetailsService userDetailsService;
 
-    private final UnauthorizedRequestRepository unauthorizedRequestRepository;
+	private final UnauthorizedRequestRepository unauthorizedRequestRepository;
 
-    private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
+	private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
 
-    @Autowired
-    public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
-    {
-        this.userDetailsService = userDetailsService;
-        this.unauthorizedRequestRepository = unauthorizedRequestRepository;
-        this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
-    }
+	@Autowired
+	public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository unauthorizedRequestRepository, CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint)
+	{
+		this.userDetailsService = userDetailsService;
+		this.unauthorizedRequestRepository = unauthorizedRequestRepository;
+		this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
+	}
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth)
-    {
-        auth.authenticationProvider(getDaoAuthenticationProvider());
-    }
+	@Override
+	public void configure(AuthenticationManagerBuilder auth)
+	{
+		auth.authenticationProvider(getDaoAuthenticationProvider());
+	}
 
-    @Bean
-    public CustomDaoAuthenticationProvider getDaoAuthenticationProvider()
-    {
-        CustomDaoAuthenticationProvider daoAuthenticationProvider=new CustomDaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
-        return daoAuthenticationProvider;
-    }
+	@Bean
+	public CustomDaoAuthenticationProvider getDaoAuthenticationProvider()
+	{
+		CustomDaoAuthenticationProvider daoAuthenticationProvider = new CustomDaoAuthenticationProvider();
+		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+		daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
+		return daoAuthenticationProvider;
+	}
 
-    /* BCrypt strength should 12 or more*/
-    @Bean
-    public PasswordEncoder getBCryptPasswordEncoder()
-    {
-        return new BCryptPasswordEncoder(12);
-    }
+	/* BCrypt strength should 12 or more*/
+	@Bean
+	public PasswordEncoder getBCryptPasswordEncoder()
+	{
+		return new BCryptPasswordEncoder(12);
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/console/**","/h2-console/**","/static/**","/resources/static/**").permitAll();
+	@Override
+	protected void configure(HttpSecurity http) throws Exception
+	{
+		http.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll();
 
-            http.authorizeRequests()
-                    .antMatchers("/anonymous*").anonymous()
-                    .antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ROLE_USER,AuthorityConstants.ROLE_API_USER,AuthorityConstants.ROLE_ADMIN)
-                    .antMatchers("/login/**").permitAll()
-                    .anyRequest().authenticated()
-            .and()
-                    .httpBasic()
+		http.authorizeRequests()
+				.antMatchers("/anonymous*").anonymous()
+				.antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ROLE_USER, AuthorityConstants.ROLE_API_USER, AuthorityConstants.ROLE_ADMIN)
+				.antMatchers("/login/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.httpBasic()
 
-            .and()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(customBasicAuthenticationEntryPoint)
-             .and()
-                    .logout()
-                        .deleteCookies("X-Auth-Token")
-                        .clearAuthentication(true)
-                        .invalidateHttpSession(true)
-                        .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-                        .permitAll()
-             .and()
-                    .exceptionHandling()
-                    .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
-            .and()
-                    .rememberMe().rememberMeServices(springSessionRememberMeServices());
+				.and()
+				.exceptionHandling()
+				.authenticationEntryPoint(customBasicAuthenticationEntryPoint)
+				.and()
+				.logout()
+				.deleteCookies("X-Auth-Token")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+				.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+				.permitAll()
+				.and()
+				.exceptionHandling()
+				.accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository))
+				.and()
+				.rememberMe().rememberMeServices(springSessionRememberMeServices());
 
-        // Uses CorsConfigurationSource bean defined below
-        http.cors();
+		// Uses CorsConfigurationSource bean defined below
+		http.cors();
 
-        http.sessionManagement()
-                        //.invalidSessionUrl("/login.html")
-                        //.invalidSessionStrategy((request, response) -> request.logout())
-                        .sessionFixation().migrateSession()
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
-                        .sessionRegistry(sessionRegistry());
+		http.sessionManagement()
+				//.invalidSessionUrl("/login.html")
+				//.invalidSessionStrategy((request, response) -> request.logout())
+				.sessionFixation().migrateSession()
+				.maximumSessions(1)
+				.maxSessionsPreventsLogin(false)
+				.sessionRegistry(sessionRegistry());
 
-        http.csrf()
-            .disable();
-        http.headers()
-             .frameOptions().disable();
-    }
+		http.csrf()
+				.disable();
+		http.headers()
+				.frameOptions().disable();
+	}
 
-    @Bean
-    public SpringSessionRememberMeServices springSessionRememberMeServices()
-    {
-        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-        rememberMeServices.setRememberMeParameterName("remember-me");
-        rememberMeServices.setValiditySeconds(ApplicationConstants.REMEMBER_ME_TIMEOUT);
-        return rememberMeServices;
-    }
+	@Bean
+	public SpringSessionRememberMeServices springSessionRememberMeServices()
+	{
+		SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+		rememberMeServices.setRememberMeParameterName("remember-me");
+		rememberMeServices.setValiditySeconds(ApplicationConstants.REMEMBER_ME_TIMEOUT);
+		return rememberMeServices;
+	}
 
-    //Cors filter to accept incoming requests
-   @Bean
-    CorsConfigurationSource corsConfigurationSource()
-    {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.applyPermitDefaultValues();
-        configuration.setAllowedMethods(Collections.singletonList("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+	//Cors filter to accept incoming requests
+	@Bean
+	CorsConfigurationSource corsConfigurationSource()
+	{
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.applyPermitDefaultValues();
+		configuration.setAllowedMethods(Collections.singletonList("*"));
+		configuration.setAllowCredentials(true);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 
-    @Override
-    public void configure(WebSecurity web)
-    {
-        web
-            .ignoring()
-            .antMatchers("/resources/**", "/static/**","/resources/static/**", "/css/**", "/js/**", "/images/**","/h2-console/**","/console/**");
-    }
+	@Override
+	public void configure(WebSecurity web)
+	{
+		web
+				.ignoring()
+				.antMatchers("/resources/**", "/static/**", "/resources/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/console/**");
+	}
 
 
-    @Bean("authenticationManager")
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception
-    {
-        return super.authenticationManagerBean();
-    }
+	@Bean("authenticationManager")
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception
+	{
+		return super.authenticationManagerBean();
+	}
 
-    @Bean
-    public SessionRegistry sessionRegistry()
-    {
-        return new SessionRegistryImpl();
-    }
+	@Bean
+	public SessionRegistry sessionRegistry()
+	{
+		return new SessionRegistryImpl();
+	}
 }

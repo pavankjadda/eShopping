@@ -10,14 +10,14 @@ import java.util.Map;
 @Data
 public class ErrorMessage implements Serializable
 {
-    private static final long serialVersionUID = 6330014835965189038L;
+	private static final long serialVersionUID = 6330014835965189038L;
 
-    private String message;
-    private String errorCode;
-    private HttpStatus status;
-    private Integer statusCode;
-    private LocalDateTime timestamp;
-    private Map<String,String> errors;
-    private String path;
+	private String message;
+	private String errorCode;
+	private HttpStatus status;
+	private Integer statusCode;
+	private LocalDateTime timestamp;
+	private Map<String, String> errors;
+	private String path;
 
 }

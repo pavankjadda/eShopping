@@ -15,31 +15,31 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
 {
-    private final ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
-    public RestResponseEntityExceptionHandler(ModelMapper modelMapper)
-    {
-        this.modelMapper = modelMapper;
-    }
+	public RestResponseEntityExceptionHandler(ModelMapper modelMapper)
+	{
+		this.modelMapper = modelMapper;
+	}
 
-    @ExceptionHandler({AuthenticationException.class})
-    public ResponseEntity<Object> handleAccessDeniedException(Exception exception, WebRequest webRequest)
-    {
-        return new ResponseEntity<>("Authentication Failed", new HttpHeaders(), HttpStatus.UNAUTHORIZED);
-    }
+	@ExceptionHandler({AuthenticationException.class})
+	public ResponseEntity<Object> handleAccessDeniedException(Exception exception, WebRequest webRequest)
+	{
+		return new ResponseEntity<>("Authentication Failed", new HttpHeaders(), HttpStatus.UNAUTHORIZED);
+	}
 
-    @ExceptionHandler(GenericException.class)
-    public ResponseEntity<ErrorMessage> handleGenericExceptions(GenericException genericException, WebRequest webRequest)
-    {
-        ErrorMessage errorMessage=modelMapper.map(genericException,ErrorMessage.class);
-        errorMessage.setStatusCode(errorMessage.getStatus().value());
-        return new ResponseEntity<>(errorMessage,errorMessage.getStatus());
-    }
+	@ExceptionHandler(GenericException.class)
+	public ResponseEntity<ErrorMessage> handleGenericExceptions(GenericException genericException, WebRequest webRequest)
+	{
+		ErrorMessage errorMessage = modelMapper.map(genericException, ErrorMessage.class);
+		errorMessage.setStatusCode(errorMessage.getStatus().value());
+		return new ResponseEntity<>(errorMessage, errorMessage.getStatus());
+	}
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessage> handleAllExceptions(Exception exception, WebRequest webRequest)
-    {
-        ErrorMessage errorMessage=modelMapper.map(exception,ErrorMessage.class);
-        return new ResponseEntity<>(errorMessage,HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorMessage> handleAllExceptions(Exception exception, WebRequest webRequest)
+	{
+		ErrorMessage errorMessage = modelMapper.map(exception, ErrorMessage.class);
+		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }
