@@ -35,7 +35,17 @@ public class ProductController
 	@PostMapping(path = "/create")
 	public void createProduct(@RequestBody Product product)
 	{
-		productRepository.saveAndFlush(product);
+		//Save ProductInventory object
+		ProductInventory productInventory=product.getProductInventory();
+		productInventory=productInventoryRepository.saveAndFlush(productInventory);
+
+		//Assign ProductInventory object to Product
+		product.setProductInventory(productInventory);
+		product=productRepository.saveAndFlush(product);
+
+		//Update ProductInventory with new Product object to update product Id
+		productInventory.getProduct().setId(product.getId());
+		productInventoryRepository.saveAndFlush(productInventory);
 	}
 
 	@PutMapping(path = "/update")
