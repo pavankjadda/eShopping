@@ -1,6 +1,6 @@
 package com.pj.springsecurity.model.inventory;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.product.Product;
 import lombok.Data;
@@ -32,6 +32,6 @@ public class ProductInventory extends AbstractAuditingEntity
 	private Long quantity;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "productInventory")
-	@JsonIgnore
+	@JsonIgnoreProperties(value = {"productInventory"})
 	private Product product;
 }

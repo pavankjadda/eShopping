@@ -1,5 +1,6 @@
 package com.pj.springsecurity.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.springsecurity.audit.AbstractAuditingEntity;
 import com.pj.springsecurity.model.category.Category;
 import com.pj.springsecurity.model.inventory.ProductInventory;
@@ -55,6 +56,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_inventory_id")
+	@JsonIgnoreProperties(value = {"product"})
 	private ProductInventory productInventory;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
