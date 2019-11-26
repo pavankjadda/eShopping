@@ -164,7 +164,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -178,6 +177,14 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>SpringSecurity-SpringData</name>
+            <url>https://maven.pkg.github.com/pavankjadda/SpringSecurity-SpringData</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
 
