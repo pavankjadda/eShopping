@@ -57,7 +57,7 @@ public class ProductController
 			saveProductInventory(product, retrievedProduct, savedObject);
 		}, () ->
 		{
-			//Throw error if
+			//Throw error if product ID is invalid
 			throw new GenericException("Failed to update Product. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
 		});
 
