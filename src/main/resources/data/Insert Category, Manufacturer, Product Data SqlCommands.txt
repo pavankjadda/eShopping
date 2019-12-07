@@ -69,9 +69,10 @@ VALUES(60002,'iPad WiFi 64Gb','iPad WiFi 64Gb ',80003,40001,90002);
 INSERT INTO `spring_security_data`.`product_price` (`id`, `price_id`, `product_id`) VALUES ('1', '90001', '60001');
 INSERT INTO `spring_security_data`.`product_price` (`id`, `price_id`, `product_id`) VALUES ('2', '90002', '60002');
 
+
 /* Insert Product Inventory*/
-INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`, `product_id`) VALUES ('110001', '1000', '60001');
-INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`, `product_id`) VALUES ('110002', '300', '60002');
+INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`) VALUES ('110001', '1000');
+INSERT INTO `spring_security_data`.`product_inventory` (`id`, `quantity`) VALUES ('110002', '300');
 
 /* Insert Order Status */
 
