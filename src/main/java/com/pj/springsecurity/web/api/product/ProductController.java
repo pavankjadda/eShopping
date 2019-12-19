@@ -71,7 +71,6 @@ public class ProductController
 			//Update ProductInventory and Product
 			retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
 			productInventoryRepository.saveAndFlush(retrievedProductInventory);
-			//retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
 			savedObject.set(productRepository.saveAndFlush(retrievedProduct));
 		}, () ->
 		{
