@@ -44,7 +44,7 @@ public class ProductController
 		product=productRepository.saveAndFlush(product);
 
 		//Update ProductInventory with new Product object to update product Id
-		productInventory.getProduct().setId(product.getId());
+		productInventory.setProduct(product);
 		productInventoryRepository.saveAndFlush(productInventory);
 	}
 
@@ -70,7 +70,8 @@ public class ProductController
 		{
 			//Update ProductInventory and Product
 			retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
-			retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
+			productInventoryRepository.saveAndFlush(retrievedProductInventory);
+			//retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
 			savedObject.set(productRepository.saveAndFlush(retrievedProduct));
 		}, () ->
 		{

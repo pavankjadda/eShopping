@@ -54,9 +54,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
 	@JoinColumn(name = "manufacturer_id", referencedColumnName = "id")
 	private Manufacturer manufacturer;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_inventory_id")
-	@JsonIgnoreProperties(value = {"product"})
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "product")
 	private ProductInventory productInventory;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

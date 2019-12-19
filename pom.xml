@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pj</groupId>
-    <artifactId>SpringSecurity-SpringData</artifactId>
-    <version>0.0.1</version>
+    <artifactId>eShopping</artifactId>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
-    <name>SpringSecurity-SpringData</name>
+    <name>eShopping</name>
     <description>Spring Security implementation with Spring Session, Spring Data and Spring Boot</description>
 
     <parent>
@@ -34,6 +34,7 @@
         <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
         <spring-cloud-starter-zuul.version>1.4.7.RELEASE</spring-cloud-starter-zuul.version>
     </properties>
+
 
     <dependencies>
         <dependency>
