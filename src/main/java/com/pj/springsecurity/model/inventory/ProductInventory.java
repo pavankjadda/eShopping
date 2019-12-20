@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,7 +32,8 @@ public class ProductInventory extends AbstractAuditingEntity
 	@Column(name = "quantity")
 	private Long quantity;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "productInventory")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
 	@JsonIgnoreProperties(value = {"productInventory"})
 	private Product product;
 }

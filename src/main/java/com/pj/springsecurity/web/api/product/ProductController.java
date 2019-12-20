@@ -44,7 +44,7 @@ public class ProductController
 		product=productRepository.saveAndFlush(product);
 
 		//Update ProductInventory with new Product object to update product Id
-		productInventory.getProduct().setId(product.getId());
+		productInventory.setProduct(product);
 		productInventoryRepository.saveAndFlush(productInventory);
 	}
 
@@ -57,7 +57,7 @@ public class ProductController
 			saveProductInventory(product, retrievedProduct, savedObject);
 		}, () ->
 		{
-			//Throw error if
+			//Throw error if product ID is invalid
 			throw new GenericException("Failed to update Product. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
 		});
 
@@ -70,7 +70,7 @@ public class ProductController
 		{
 			//Update ProductInventory and Product
 			retrievedProductInventory.setQuantity(product.getProductInventory().getQuantity());
-			retrievedProduct.setProductInventory(productInventoryRepository.saveAndFlush(retrievedProductInventory));
+			productInventoryRepository.saveAndFlush(retrievedProductInventory);
 			savedObject.set(productRepository.saveAndFlush(retrievedProduct));
 		}, () ->
 		{
