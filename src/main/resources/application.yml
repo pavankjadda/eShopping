@@ -18,7 +18,7 @@ spring:
     name: SpringSecurity-Data-Application
   # Jpa Properties
   datasource:
-    url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/spring_security_data
     username: root
     password: bcmc1234
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -77,13 +77,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.authorizeRequests().antMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll();
 
 		http.authorizeRequests()
-				.antMatchers("/anonymous*").anonymous()
+				//.antMatchers("/anonymous*").anonymous()
 				.antMatchers("/api/**").hasAnyAuthority(AuthorityConstants.ROLE_USER, AuthorityConstants.ROLE_API_USER, AuthorityConstants.ROLE_ADMIN)
 				.antMatchers("/login/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.httpBasic()
-
 				.and()
 				.exceptionHandling()
 				.authenticationEntryPoint(customBasicAuthenticationEntryPoint)
@@ -107,8 +106,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				//.invalidSessionUrl("/login.html")
 				//.invalidSessionStrategy((request, response) -> request.logout())
 				.sessionFixation().migrateSession()
-				.maximumSessions(1)
-				.maxSessionsPreventsLogin(false)
+				.maximumSessions(2)
+				.maxSessionsPreventsLogin(true)
 				.sessionRegistry(sessionRegistry());
 
 		http.csrf()
@@ -142,8 +141,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	public void configure(WebSecurity web)
 	{
-		web
-				.ignoring()
+		web.ignoring()
 				.antMatchers("/resources/**", "/static/**", "/resources/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/console/**");
 	}
 
