@@ -71,10 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.and()
-				.authorizeRequests().antMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll();
+		http.authorizeRequests().antMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll();
 
 		http.authorizeRequests()
 				//.antMatchers("/anonymous*").anonymous()
