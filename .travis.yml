@@ -1,5 +1,5 @@
 os: linux
-#dist: trusty
+dist: trusty
 sudo: required
 
 language: java
@@ -31,7 +31,7 @@ jobs:
     - stage: Deploy App
       if: branch = master
       script: 
-      - mvn clean package   -DskipTests=true
+      - mvn clean package -DskipTests=true
 
 
 notifications:
