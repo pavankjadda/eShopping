@@ -1,7 +1,9 @@
 package com.pj.eshopping.web.api.cart;
 
 import com.pj.eshopping.dto.CartProductDTO;
+import com.pj.eshopping.dto.CartProductSlim;
 import com.pj.eshopping.dto.UserProfileDTO;
+import com.pj.eshopping.exceptions.exceptions.GenericException;
 import com.pj.eshopping.model.cart.Cart;
 import com.pj.eshopping.model.cart.CartProduct;
 import com.pj.eshopping.model.user.UserProfile;
@@ -9,6 +11,7 @@ import com.pj.eshopping.repo.CartProductRepository;
 import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.CartStatusRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -62,18 +66,25 @@ public class CartController
 	}
 
 	@PostMapping(path = "/product/update")
-	public Cart updateCartProduct(@RequestBody CartProductDTO cartProductDTO)
+	public Cart updateCartProduct(@RequestBody CartProductSlim cartProductSlim)
 	{
-		CartProduct cartProduct = modelMapper.map(cartProductDTO, CartProduct.class);
-		if (cartProduct.getQuantity() == 0)
+		Optional<CartProduct> cartProductOptional=cartProductRepository.findById(cartProductSlim.getCartProductId());
+		if(cartProductOptional.isPresent())
 		{
-			deleteCartProduct(cartProduct.getId());
+			CartProduct cartProduct=cartProductOptional.get();
+			if (cartProductSlim.getQuantity() == 0)
+			{
+				deleteCartProduct(cartProduct.getId());
+			}
+			else
+			{
+				cartProduct.setQuantity(cartProductSlim.getQuantity());
+				cartProductRepository.saveAndFlush(cartProduct);
+			}
+			return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
 		}
 		else
-		{
-			cartProductRepository.saveAndFlush(cartProduct);
-		}
-		return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
+			throw new GenericException("Failed to update Cart. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
 	}
 
 	@DeleteMapping(path = "/product/delete/{id}")

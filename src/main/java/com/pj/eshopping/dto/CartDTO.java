@@ -11,10 +11,7 @@ import java.util.List;
 public class CartDTO
 {
 	private Long id;
-
 	private UserProfile userProfile;
-
 	private CartStatus cartStatus;
-
 	private List<CartProduct> cartProducts;
 }

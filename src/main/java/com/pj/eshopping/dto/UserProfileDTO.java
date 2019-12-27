@@ -10,16 +10,10 @@ import java.util.List;
 public class UserProfileDTO
 {
 	private Long id;
-
 	private String firstName;
-
 	private String lastName;
-
 	private String email;
-
 	private String phone;
-
 	private List<Address> addresses;
-
 	private User user;
 }

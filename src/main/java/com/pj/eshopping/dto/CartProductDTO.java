@@ -10,12 +10,8 @@ import java.io.Serializable;
 public class CartProductDTO implements Serializable
 {
 	private static final long serialVersionUID = -2831775607040245737L;
-
 	private Long id;
-
 	private Product product;
-
 	private Integer quantity;
-
 	private Cart cart;
 }
