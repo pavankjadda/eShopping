@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <hibernate.version>5.4.2.Final</hibernate.version>
+        <hibernate.version>5.4.9.Final</hibernate.version>
         <bucket4j-spring-boot.version>0.1.15</bucket4j-spring-boot.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
         <liquibase-maven-plugin.version>3.5.5</liquibase-maven-plugin.version>
@@ -32,7 +32,7 @@
         <hazelcast-hibernate53.version>1.3.0</hazelcast-hibernate53.version>
         <modelmapper.version>2.3.3</modelmapper.version>
         <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
-        <spring-cloud-starter-zuul.version>1.4.7.RELEASE</spring-cloud-starter-zuul.version>
+        <spring-cloud-starter-zuul.version>2.2.1.RELEASE</spring-cloud-starter-zuul.version>
     </properties>
 
 
@@ -43,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zuul</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
             <version>${spring-cloud-starter-zuul.version}</version>
         </dependency>
         <dependency>
@@ -127,17 +127,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--
-           <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>${liquibase-maven-plugin.version}</version>
-        </dependency>-->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -186,9 +175,9 @@
             <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
         </repository>
     </distributionManagement>
+
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -196,59 +185,14 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
-
-            <!--<plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>${liquibase-maven-plugin.version}</version>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                    <changeLogFile>src/main/resources/db/db.changelog-master.xml</changeLogFile>
-                    <diffChangeLogFile>src/main/resources/db/changelog/${maven.build.timestamp}_changelog.xml
-                    </diffChangeLogFile>
-                    <logging>info</logging>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
-
-                <executions>
-                    <execution>
-                        <id>update-profile</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>diff-profile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>diff</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.liquibase.ext</groupId>
-                        <artifactId>liquibase-hibernate5</artifactId>
-                        <version>${liquibase-hibernate5.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-data-jpa</artifactId>
-                        <version>${spring-boot.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>javax.validation</groupId>
-                        <artifactId>validation-api</artifactId>
-                        <version>${validation-api.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.javassist</groupId>
-                        <artifactId>javassist</artifactId>
-                        <version>${javassist.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
