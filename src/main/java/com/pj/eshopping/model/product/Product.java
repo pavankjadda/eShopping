@@ -1,11 +1,11 @@
 package com.pj.eshopping.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.model.category.Category;
 import com.pj.eshopping.model.inventory.ProductInventory;
 import com.pj.eshopping.model.manufacturer.Manufacturer;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,8 +24,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Entity
 @Data
 @Cache(region = "productCache", usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -54,6 +55,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
 	private Manufacturer manufacturer;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "product")
+	@JsonIgnoreProperties(value = {"product"})
 	private ProductInventory productInventory;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -61,6 +63,7 @@ public class Product extends AbstractAuditingEntity implements Serializable
 	private Price price;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+	@JsonIgnoreProperties(value = {"product"})
 	private List<Photo> photoList = new ArrayList<>();
 
 	@Override
@@ -72,5 +75,25 @@ public class Product extends AbstractAuditingEntity implements Serializable
 				", description='" + description + '\'' +
 				", category=" + category +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Product product = (Product) o;
+		return id.equals(product.id) &&
+				Objects.equals(name, product.name);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), id, name);
 	}
 }

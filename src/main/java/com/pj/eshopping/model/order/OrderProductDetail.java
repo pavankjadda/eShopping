@@ -1,5 +1,6 @@
 package com.pj.eshopping.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.model.product.Product;
 import lombok.Data;
@@ -7,12 +8,15 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -42,4 +46,39 @@ public class OrderProductDetail extends AbstractAuditingEntity
 
 	@Column(name = "quantity")
 	private Integer quantity;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	@JsonIgnoreProperties(value = {"orderProductDetails"})
+	private Order order;
+
+	@Override
+	public String toString()
+	{
+		return "OrderProductDetail{" +
+				"id=" + id +
+				", originalPrice=" + originalPrice +
+				", discount=" + discount +
+				", discountedPrice=" + discountedPrice +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		OrderProductDetail that = (OrderProductDetail) o;
+		return id.equals(that.id);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), id);
+	}
 }

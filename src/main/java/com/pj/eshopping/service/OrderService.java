@@ -10,8 +10,10 @@ import com.pj.eshopping.model.order.OrderProductDetail;
 import com.pj.eshopping.model.order.OrderShippingAddress;
 import com.pj.eshopping.model.tax.TaxRate;
 import com.pj.eshopping.repo.CartRepository;
+import com.pj.eshopping.repo.OrderBillingAddressRepository;
 import com.pj.eshopping.repo.OrderProductDetailRepository;
 import com.pj.eshopping.repo.OrderRepository;
+import com.pj.eshopping.repo.OrderShippingAddressRepository;
 import com.pj.eshopping.repo.OrderStatusRepository;
 import com.pj.eshopping.repo.ProductInventoryRepository;
 import com.pj.eshopping.repo.TaxRateRepository;
@@ -34,6 +36,8 @@ public class OrderService
 	private final OrderRepository orderRepository;
 	private final OrderStatusRepository orderStatusRepository;
 	private final OrderProductDetailRepository orderProductDetailRepository;
+	private final OrderBillingAddressRepository orderBillingAddressRepository;
+	private final OrderShippingAddressRepository orderShippingAddressRepository;
 	private final UserInfoUtil userInfoUtil;
 	private final CartRepository cartRepository;
 	private final TaxRateRepository taxRateRepository;
@@ -42,11 +46,13 @@ public class OrderService
 	private Logger logger = LoggerFactory.getLogger(OrderService.class);
 
 
-	public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository, TaxRateRepository taxRateRepository, ProductInventoryRepository productInventoryRepository, ModelMapper modelMapper)
+	public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, OrderBillingAddressRepository orderBillingAddressRepository, OrderShippingAddressRepository orderShippingAddressRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository, TaxRateRepository taxRateRepository, ProductInventoryRepository productInventoryRepository, ModelMapper modelMapper)
 	{
 		this.orderRepository = orderRepository;
 		this.orderStatusRepository = orderStatusRepository;
 		this.orderProductDetailRepository = orderProductDetailRepository;
+		this.orderBillingAddressRepository = orderBillingAddressRepository;
+		this.orderShippingAddressRepository = orderShippingAddressRepository;
 		this.userInfoUtil = userInfoUtil;
 		this.cartRepository = cartRepository;
 		this.taxRateRepository = taxRateRepository;
@@ -73,20 +79,22 @@ public class OrderService
 				order.setOrderStatus(orderStatusRepository.findByStatus("Created"));
 				order.setShippingCharge((double) 0);
 				order.setOrderCreatedDateTime(LocalDateTime.now());
+				order = orderRepository.saveAndFlush(order);
 
 				OrderShippingAddress orderShippingAddress = modelMapper.map(cart.getCartShippingAddress(), OrderShippingAddress.class);
-				orderShippingAddress.setId(null);
-				orderShippingAddress.setOrder(order);
-
+				orderShippingAddress=orderShippingAddressRepository.saveAndFlush(orderShippingAddress);
 				OrderBillingAddress orderBillingAddress = modelMapper.map(cart.getCartBillingAddress(), OrderBillingAddress.class);
-				orderBillingAddress.setId(null);
-				orderBillingAddress.setOrder(order);
+				orderBillingAddress=orderBillingAddressRepository.saveAndFlush(orderBillingAddress);
 
 				order.setOrderShippingAddress(orderShippingAddress);
 				order.setOrderBillingAddress(orderBillingAddress);
-
-				order.setOrderProductDetails(copyCartProducts(cart));
+				order.setOrderProductDetails(copyCartProducts(cart,order));
 				order = orderRepository.saveAndFlush(order);
+
+				orderBillingAddress.setOrder(order);
+				orderBillingAddressRepository.saveAndFlush(orderBillingAddress);
+				orderShippingAddress.setOrder(order);
+				orderShippingAddressRepository.saveAndFlush(orderShippingAddress);
 				cartRepository.delete(cart);
 
 				return order;
@@ -99,7 +107,6 @@ public class OrderService
 			{
 				rollBackOrderChanges(order);
 			}
-
 		}
 		return order;
 	}
@@ -138,7 +145,7 @@ public class OrderService
 	/*
 		Copy cart products to Order
 	*/
-	private List<OrderProductDetail> copyCartProducts(Cart cart)
+	private List<OrderProductDetail> copyCartProducts(Cart cart, Order order)
 	{
 		List<OrderProductDetail> orderProductDetailList = new ArrayList<>();
 		List<CartProduct> cartProductList = cart.getCartProducts();
@@ -148,6 +155,7 @@ public class OrderService
 			orderProductDetail.setProduct(cartProduct.getProduct());
 			orderProductDetail.setQuantity(cartProduct.getQuantity());
 			orderProductDetail.setOriginalPrice(cartProduct.getProduct().getPrice().getAmount());
+			orderProductDetail.setOrder(order);
 
 			reserveQuantity(cartProduct);
 			orderProductDetail = orderProductDetailRepository.saveAndFlush(orderProductDetail);
@@ -189,5 +197,10 @@ public class OrderService
 	private Cart getMyCart()
 	{
 		return cartRepository.findAllByUserProfileUserId(userInfoUtil.getCurrentUserProfile().getUser().getId()).orElse(null);
+	}
+
+	public void deleteOrder(Long id)
+	{
+		orderRepository.deleteById(id);
 	}
 }

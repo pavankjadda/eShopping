@@ -1,9 +1,9 @@
 package com.pj.eshopping.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.model.user.UserProfile;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,8 +21,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "`order`")
@@ -53,18 +53,18 @@ public class Order extends AbstractAuditingEntity implements Serializable
 	private UserProfile purchasedBy;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "order_shipping_address")
+	@JsonIgnoreProperties(value = {"order"})
 	private OrderShippingAddress orderShippingAddress;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "order_billing_address")
+	@JsonIgnoreProperties(value = {"order"})
 	private OrderBillingAddress orderBillingAddress;
 
 	@Column(name = "order_created_date_time")
 	private LocalDateTime orderCreatedDateTime;
 
-	@OneToMany
-	@JoinColumn(name = "order_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = {"order"})
 	private List<OrderProductDetail> orderProductDetails = new ArrayList<>();
 
 	@Override
@@ -76,5 +76,25 @@ public class Order extends AbstractAuditingEntity implements Serializable
 				", shippingCharge=" + shippingCharge +
 				", totalCost=" + totalCost +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Order order = (Order) o;
+		return id.equals(order.id) &&
+				Objects.equals(totalCost, order.totalCost);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), id, totalCost);
 	}
 }
