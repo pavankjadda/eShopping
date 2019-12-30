@@ -1,5 +1,6 @@
 package com.pj.eshopping.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.model.user.UserProfile;
 import lombok.Data;
@@ -53,11 +54,11 @@ public class Order extends AbstractAuditingEntity implements Serializable
 	private UserProfile purchasedBy;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "order_shipping_address")
+	@JsonIgnoreProperties(value = {"order"})
 	private OrderShippingAddress orderShippingAddress;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "order_billing_address")
+	@JsonIgnoreProperties(value = {"order"})
 	private OrderBillingAddress orderBillingAddress;
 
 	@Column(name = "order_created_date_time")
