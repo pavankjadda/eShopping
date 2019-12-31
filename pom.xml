@@ -5,7 +5,7 @@
 
     <groupId>com.pj</groupId>
     <artifactId>eShopping</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.4</version>
     <packaging>jar</packaging>
 
     <name>eShopping</name>
