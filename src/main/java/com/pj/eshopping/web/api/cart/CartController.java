@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.cart;
 
-import com.pj.eshopping.dto.CartProductDtoSlim;
+import com.pj.eshopping.dto.CartProductJson;
 import com.pj.eshopping.dto.UserProfileDTO;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
 import com.pj.eshopping.model.cart.Cart;
@@ -65,38 +65,34 @@ public class CartController
 	}
 
 	@PostMapping(path = "/product/add")
-	public Cart addProductToCart(@RequestBody CartProductDtoSlim cartProductDtoSlim)
+	public Cart addProductToCart(@RequestBody CartProductJson cartProductJson)
 	{
-		if(cartProductDtoSlim.getCartProductId() !=null)
+		if (cartProductJson.getCartProductId() != null)
 		{
-			Optional<CartProduct> cartProductOptional=cartProductRepository.findById(cartProductDtoSlim.getCartProductId());
-			if(cartProductOptional.isPresent())
+			Optional<CartProduct> cartProductOptional = cartProductRepository.findById(cartProductJson.getCartProductId());
+			if (cartProductOptional.isPresent())
 			{
-				CartProduct cartProduct=cartProductOptional.get();
-				cartProduct.setQuantity(cartProductDtoSlim.getQuantity());
+				CartProduct cartProduct = cartProductOptional.get();
+				cartProduct.setQuantity(cartProductJson.getQuantity());
 				cartProductRepository.saveAndFlush(cartProduct);
 				return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
 			}
-			return createCartProductAndSaveIt(cartProductDtoSlim);
 		}
-
-		else
-			return createCartProductAndSaveIt(cartProductDtoSlim);
+		return createCartProductAndSaveIt(cartProductJson);
 	}
 
-
-	private Cart createCartProductAndSaveIt(CartProductDtoSlim cartProductDtoSlim)
+	private Cart createCartProductAndSaveIt(CartProductJson cartProductJson)
 	{
-		CartProduct cartProduct=new CartProduct();
-		cartProduct.setQuantity(cartProductDtoSlim.getQuantity());
-		if(cartProductDtoSlim.getProductId() == null)
+		CartProduct cartProduct = new CartProduct();
+		cartProduct.setQuantity(cartProductJson.getQuantity());
+		if (cartProductJson.getProductId() == null)
 		{
 			throw new GenericException("Failed to add product to Cart. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
 		}
 
 		//Check if provided product id is valid
-		Optional<Product> productOptional =productRepository.findById(cartProductDtoSlim.getProductId());
-		if(productOptional.isPresent())
+		Optional<Product> productOptional = productRepository.findById(cartProductJson.getProductId());
+		if (productOptional.isPresent())
 		{
 			cartProduct.setProduct(productOptional.get());
 		}
@@ -124,19 +120,19 @@ public class CartController
 	}
 
 	@PostMapping(path = "/product/update")
-	public Cart updateCartProduct(@RequestBody CartProductDtoSlim cartProductDtoSlim)
+	public Cart updateCartProduct(@RequestBody CartProductJson cartProductJson)
 	{
-		Optional<CartProduct> cartProductOptional=cartProductRepository.findById(cartProductDtoSlim.getCartProductId());
-		if(cartProductOptional.isPresent())
+		Optional<CartProduct> cartProductOptional = cartProductRepository.findById(cartProductJson.getCartProductId());
+		if (cartProductOptional.isPresent())
 		{
-			CartProduct cartProduct=cartProductOptional.get();
-			if (cartProductDtoSlim.getQuantity() == 0)
+			CartProduct cartProduct = cartProductOptional.get();
+			if (cartProductJson.getQuantity() == 0)
 			{
 				deleteCartProduct(cartProduct.getId());
 			}
 			else
 			{
-				cartProduct.setQuantity(cartProductDtoSlim.getQuantity());
+				cartProduct.setQuantity(cartProductJson.getQuantity());
 				cartProductRepository.saveAndFlush(cartProduct);
 			}
 			return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
