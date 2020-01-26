@@ -1,7 +1,7 @@
 package com.pj.eshopping.exceptions.handlers;
 
+import com.pj.eshopping.domain.exception.ErrorMessage;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.exception.ErrorMessage;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

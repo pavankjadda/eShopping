@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.category.Category;
+import com.pj.eshopping.domain.category.Category;
 
 import java.util.List;
 

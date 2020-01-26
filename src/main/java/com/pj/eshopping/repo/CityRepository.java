@@ -1,7 +1,7 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.user.City;
-import com.pj.eshopping.model.user.State;
+import com.pj.eshopping.domain.user.City;
+import com.pj.eshopping.domain.user.State;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

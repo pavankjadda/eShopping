@@ -1,6 +1,6 @@
 package com.pj.eshopping.security;
 
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -12,7 +12,7 @@ public class UserLogging
 {
 	private Logger logger = LoggerFactory.getLogger(UserLogging.class);
 
-	@Pointcut("execution(* com.pj.eshopping.model.user.User.*(..))")
+	@Pointcut("execution(* com.pj.eshopping.domain.user.User.*(..))")
 	public void getUserPointCut()
 	{
 		//Pointcut

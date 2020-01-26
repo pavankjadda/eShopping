@@ -1,8 +1,8 @@
 package com.pj.eshopping.web.api.cart;
 
-import com.pj.eshopping.model.cart.Cart;
-import com.pj.eshopping.model.cart.CartBillingAddress;
-import com.pj.eshopping.model.cart.CartShippingAddress;
+import com.pj.eshopping.domain.cart.Cart;
+import com.pj.eshopping.domain.cart.CartBillingAddress;
+import com.pj.eshopping.domain.cart.CartShippingAddress;
 import com.pj.eshopping.repo.CartBillingAddressRepository;
 import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.CartShippingAddressRepository;

@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.address;
 
-import com.pj.eshopping.model.user.State;
+import com.pj.eshopping.domain.user.State;
 import com.pj.eshopping.repo.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

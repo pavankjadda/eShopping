@@ -1,6 +1,6 @@
 package com.pj.eshopping.aop.api;
 
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.User;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

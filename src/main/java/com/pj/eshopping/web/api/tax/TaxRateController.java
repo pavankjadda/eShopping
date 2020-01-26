@@ -1,7 +1,7 @@
 package com.pj.eshopping.web.api.tax;
 
+import com.pj.eshopping.domain.tax.TaxRate;
 import com.pj.eshopping.dto.TaxRateDTO;
-import com.pj.eshopping.model.tax.TaxRate;
 import com.pj.eshopping.repo.TaxRateRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;

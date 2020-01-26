@@ -1,14 +1,14 @@
 package com.pj.eshopping.service;
 
+import com.pj.eshopping.domain.cart.Cart;
+import com.pj.eshopping.domain.cart.CartProduct;
+import com.pj.eshopping.domain.inventory.ProductInventory;
+import com.pj.eshopping.domain.order.Order;
+import com.pj.eshopping.domain.order.OrderBillingAddress;
+import com.pj.eshopping.domain.order.OrderProductDetail;
+import com.pj.eshopping.domain.order.OrderShippingAddress;
+import com.pj.eshopping.domain.tax.TaxRate;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.cart.Cart;
-import com.pj.eshopping.model.cart.CartProduct;
-import com.pj.eshopping.model.inventory.ProductInventory;
-import com.pj.eshopping.model.order.Order;
-import com.pj.eshopping.model.order.OrderBillingAddress;
-import com.pj.eshopping.model.order.OrderProductDetail;
-import com.pj.eshopping.model.order.OrderShippingAddress;
-import com.pj.eshopping.model.tax.TaxRate;
 import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.OrderBillingAddressRepository;
 import com.pj.eshopping.repo.OrderProductDetailRepository;

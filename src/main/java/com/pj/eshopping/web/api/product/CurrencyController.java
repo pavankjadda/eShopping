@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.product;
 
-import com.pj.eshopping.model.order.Currency;
+import com.pj.eshopping.domain.order.Currency;
 import com.pj.eshopping.repo.CurrencyRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

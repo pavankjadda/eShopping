@@ -1,9 +1,9 @@
 package com.pj.eshopping.insertdata;
 
-import com.pj.eshopping.model.order.OrderStatus;
-import com.pj.eshopping.model.user.Address;
-import com.pj.eshopping.model.user.AddressType;
-import com.pj.eshopping.model.user.UserProfile;
+import com.pj.eshopping.domain.order.OrderStatus;
+import com.pj.eshopping.domain.user.Address;
+import com.pj.eshopping.domain.user.AddressType;
+import com.pj.eshopping.domain.user.UserProfile;
 import com.pj.eshopping.repo.AddressRepository;
 import com.pj.eshopping.repo.AddressTypeRepository;
 import com.pj.eshopping.repo.CityRepository;

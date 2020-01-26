@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.manufacturer;
 
-import com.pj.eshopping.model.manufacturer.Manufacturer;
+import com.pj.eshopping.domain.manufacturer.Manufacturer;
 import com.pj.eshopping.repo.ManufacturerRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;

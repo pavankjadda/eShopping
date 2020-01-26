@@ -1,6 +1,6 @@
 package com.pj.eshopping.dto;
 
-import com.pj.eshopping.model.user.State;
+import com.pj.eshopping.domain.user.State;
 import lombok.Data;
 
 import java.io.Serializable;

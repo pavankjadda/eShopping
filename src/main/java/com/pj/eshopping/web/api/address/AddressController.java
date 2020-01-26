@@ -1,7 +1,7 @@
 package com.pj.eshopping.web.api.address;
 
+import com.pj.eshopping.domain.user.Address;
 import com.pj.eshopping.dto.AddressDTO;
-import com.pj.eshopping.model.user.Address;
 import com.pj.eshopping.repo.AddressRepository;
 import com.pj.eshopping.util.UserInfoUtil;
 import org.modelmapper.ModelMapper;

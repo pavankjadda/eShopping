@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.order;
 
-import com.pj.eshopping.model.order.Order;
+import com.pj.eshopping.domain.order.Order;
 import com.pj.eshopping.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

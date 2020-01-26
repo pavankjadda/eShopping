@@ -1,12 +1,12 @@
 package com.pj.eshopping.web.api.cart;
 
+import com.pj.eshopping.domain.cart.Cart;
+import com.pj.eshopping.domain.cart.CartProduct;
+import com.pj.eshopping.domain.product.Product;
+import com.pj.eshopping.domain.user.UserProfile;
 import com.pj.eshopping.dto.CartProductJson;
 import com.pj.eshopping.dto.UserProfileDTO;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.cart.Cart;
-import com.pj.eshopping.model.cart.CartProduct;
-import com.pj.eshopping.model.product.Product;
-import com.pj.eshopping.model.user.UserProfile;
 import com.pj.eshopping.repo.CartProductRepository;
 import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.CartStatusRepository;

@@ -1,6 +1,6 @@
 package com.pj.eshopping.dto;
 
-import com.pj.eshopping.model.product.Photo;
+import com.pj.eshopping.domain.product.Photo;
 import lombok.Data;
 
 import java.util.List;

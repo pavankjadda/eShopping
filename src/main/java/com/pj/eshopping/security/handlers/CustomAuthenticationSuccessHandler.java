@@ -1,6 +1,6 @@
 package com.pj.eshopping.security.handlers;
 
-import com.pj.eshopping.model.security.SessionHistory;
+import com.pj.eshopping.domain.security.SessionHistory;
 import com.pj.eshopping.repo.SessionHistoryRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

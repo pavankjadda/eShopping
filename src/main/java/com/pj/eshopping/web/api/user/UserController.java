@@ -1,9 +1,9 @@
 package com.pj.eshopping.web.api.user;
 
+import com.pj.eshopping.domain.user.User;
+import com.pj.eshopping.domain.user.UserProfile;
 import com.pj.eshopping.dto.GenericResponseDto;
 import com.pj.eshopping.dto.RegisterUserDto;
-import com.pj.eshopping.model.user.User;
-import com.pj.eshopping.model.user.UserProfile;
 import com.pj.eshopping.repo.UserProfileRepository;
 import com.pj.eshopping.repo.UserRepository;
 import org.slf4j.Logger;

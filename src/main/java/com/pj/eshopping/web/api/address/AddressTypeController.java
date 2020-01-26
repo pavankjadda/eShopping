@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.address;
 
-import com.pj.eshopping.model.user.AddressType;
+import com.pj.eshopping.domain.user.AddressType;
 import com.pj.eshopping.repo.AddressTypeRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

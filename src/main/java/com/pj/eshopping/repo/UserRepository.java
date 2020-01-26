@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

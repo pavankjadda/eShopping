@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.manufacturer;
 
-import com.pj.eshopping.model.manufacturer.ManufacturerAddress;
+import com.pj.eshopping.domain.manufacturer.ManufacturerAddress;
 import com.pj.eshopping.repo.ManufacturerAddressRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.order.OrderStatus;
+import com.pj.eshopping.domain.order.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

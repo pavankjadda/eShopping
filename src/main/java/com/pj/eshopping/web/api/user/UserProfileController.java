@@ -1,8 +1,8 @@
 package com.pj.eshopping.web.api.user;
 
+import com.pj.eshopping.domain.user.UserProfile;
 import com.pj.eshopping.dto.UserProfileDTO;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.user.UserProfile;
 import com.pj.eshopping.repo.UserProfileRepository;
 import com.pj.eshopping.util.UserInfoUtil;
 import org.modelmapper.ModelMapper;

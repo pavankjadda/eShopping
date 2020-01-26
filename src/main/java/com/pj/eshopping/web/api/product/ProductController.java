@@ -1,8 +1,8 @@
 package com.pj.eshopping.web.api.product;
 
+import com.pj.eshopping.domain.inventory.ProductInventory;
+import com.pj.eshopping.domain.product.Product;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.inventory.ProductInventory;
-import com.pj.eshopping.model.product.Product;
 import com.pj.eshopping.repo.ProductInventoryRepository;
 import com.pj.eshopping.repo.ProductRepository;
 import org.springframework.http.HttpStatus;

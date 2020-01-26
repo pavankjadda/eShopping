@@ -1,6 +1,6 @@
 package com.pj.eshopping.web.api.address;
 
-import com.pj.eshopping.model.user.Country;
+import com.pj.eshopping.domain.user.Country;
 import com.pj.eshopping.repo.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

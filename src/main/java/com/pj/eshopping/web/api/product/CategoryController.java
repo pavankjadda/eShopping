@@ -1,8 +1,8 @@
 package com.pj.eshopping.web.api.product;
 
+import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.dto.CategoryDTO;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.model.category.Category;
 import com.pj.eshopping.repo.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

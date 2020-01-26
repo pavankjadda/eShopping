@@ -1,7 +1,7 @@
 package com.pj.eshopping.dto;
 
-import com.pj.eshopping.model.cart.Cart;
-import com.pj.eshopping.model.product.Product;
+import com.pj.eshopping.domain.cart.Cart;
+import com.pj.eshopping.domain.product.Product;
 import lombok.Data;
 
 import java.io.Serializable;

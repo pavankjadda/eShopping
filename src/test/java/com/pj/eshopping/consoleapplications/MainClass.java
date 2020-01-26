@@ -1,6 +1,6 @@
 package com.pj.eshopping.consoleapplications;
 
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.User;
 
 public class MainClass
 {

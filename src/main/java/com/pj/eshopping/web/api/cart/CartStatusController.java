@@ -1,7 +1,7 @@
 package com.pj.eshopping.web.api.cart;
 
 
-import com.pj.eshopping.model.cart.CartStatus;
+import com.pj.eshopping.domain.cart.CartStatus;
 import com.pj.eshopping.repo.CartStatusRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
