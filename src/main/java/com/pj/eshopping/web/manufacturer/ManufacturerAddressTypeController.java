@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.manufacturer;
+package com.pj.eshopping.web.manufacturer;
 
 import com.pj.eshopping.domain.manufacturer.ManufacturerAddressType;
 import com.pj.eshopping.repo.ManufacturerAddressTypeRepository;

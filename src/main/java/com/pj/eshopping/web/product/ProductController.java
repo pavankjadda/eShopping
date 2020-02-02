@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.product;
+package com.pj.eshopping.web.product;
 
 import com.pj.eshopping.domain.inventory.ProductInventory;
 import com.pj.eshopping.domain.product.Product;

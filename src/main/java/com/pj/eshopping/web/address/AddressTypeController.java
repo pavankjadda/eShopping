@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.address;
+package com.pj.eshopping.web.address;
 
 import com.pj.eshopping.domain.user.AddressType;
 import com.pj.eshopping.repo.AddressTypeRepository;

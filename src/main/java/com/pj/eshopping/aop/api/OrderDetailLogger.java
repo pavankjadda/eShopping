@@ -12,7 +12,7 @@ public class OrderDetailLogger
 {
 	private Logger logger = LoggerFactory.getLogger(OrderDetailLogger.class);
 
-	@Pointcut("within(com.pj.eshopping.web.api.order.OrderController)")
+	@Pointcut("within(com.pj.eshopping.web.order.OrderController)")
 	public void orderControllerPointcut()
 	{
 		//Point cut orderDetailControllerPointcut

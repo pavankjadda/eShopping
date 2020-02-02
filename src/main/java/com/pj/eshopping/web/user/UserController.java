@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.user;
+package com.pj.eshopping.web.user;
 
 import com.pj.eshopping.domain.user.User;
 import com.pj.eshopping.domain.user.UserProfile;

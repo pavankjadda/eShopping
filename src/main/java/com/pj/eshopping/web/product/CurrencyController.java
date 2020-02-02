@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.product;
+package com.pj.eshopping.web.product;
 
 import com.pj.eshopping.domain.order.Currency;
 import com.pj.eshopping.repo.CurrencyRepository;

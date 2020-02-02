@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.order;
+package com.pj.eshopping.web.order;
 
 import com.pj.eshopping.domain.order.Order;
 import com.pj.eshopping.service.OrderService;

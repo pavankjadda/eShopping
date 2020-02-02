@@ -1,5 +1,6 @@
 package com.pj.eshopping.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,6 +49,7 @@ public class User extends AbstractAuditingEntity
 	private Boolean accountNonExpired;
 
 	@Column(name = "password", nullable = false)
+	@JsonIgnore
 	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")

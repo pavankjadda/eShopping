@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.tax;
+package com.pj.eshopping.web.tax;
 
 import com.pj.eshopping.domain.tax.TaxRate;
 import com.pj.eshopping.dto.TaxRateDTO;

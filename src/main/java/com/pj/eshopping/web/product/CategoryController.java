@@ -1,4 +1,4 @@
-package com.pj.eshopping.web.api.product;
+package com.pj.eshopping.web.product;
 
 import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.dto.CategoryDTO;
