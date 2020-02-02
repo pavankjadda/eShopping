@@ -1,7 +1,7 @@
 package com.pj.eshopping.security;
 
-import com.pj.eshopping.model.user.Role;
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.Role;
+import com.pj.eshopping.domain.user.User;
 import com.pj.eshopping.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

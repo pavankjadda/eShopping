@@ -1,9 +1,9 @@
 package com.pj.eshopping.insertdata;
 
-import com.pj.eshopping.model.order.Currency;
-import com.pj.eshopping.model.product.Price;
-import com.pj.eshopping.model.product.Product;
-import com.pj.eshopping.model.product.ProductPrice;
+import com.pj.eshopping.domain.order.Currency;
+import com.pj.eshopping.domain.product.Price;
+import com.pj.eshopping.domain.product.Product;
+import com.pj.eshopping.domain.product.ProductPrice;
 import com.pj.eshopping.repo.CategoryRepository;
 import com.pj.eshopping.repo.CurrencyRepository;
 import com.pj.eshopping.repo.PriceRepository;

@@ -1,11 +1,11 @@
 package com.pj.eshopping.dto;
 
-import com.pj.eshopping.model.user.AddressType;
-import com.pj.eshopping.model.user.City;
-import com.pj.eshopping.model.user.Country;
-import com.pj.eshopping.model.user.Region;
-import com.pj.eshopping.model.user.State;
-import com.pj.eshopping.model.user.UserProfile;
+import com.pj.eshopping.domain.user.AddressType;
+import com.pj.eshopping.domain.user.City;
+import com.pj.eshopping.domain.user.Country;
+import com.pj.eshopping.domain.user.Region;
+import com.pj.eshopping.domain.user.State;
+import com.pj.eshopping.domain.user.UserProfile;
 import lombok.Data;
 
 @Data

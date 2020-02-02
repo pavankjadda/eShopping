@@ -1,6 +1,6 @@
 package com.pj.eshopping.security.handlers;
 
-import com.pj.eshopping.model.security.UnauthorizedRequest;
+import com.pj.eshopping.domain.security.UnauthorizedRequest;
 import com.pj.eshopping.repo.UnauthorizedRequestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

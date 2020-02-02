@@ -1,7 +1,7 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.user.Country;
-import com.pj.eshopping.model.user.Region;
+import com.pj.eshopping.domain.user.Country;
+import com.pj.eshopping.domain.user.Region;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 

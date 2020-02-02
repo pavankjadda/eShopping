@@ -1,7 +1,7 @@
 package com.pj.eshopping.dto;
 
-import com.pj.eshopping.model.user.Role;
-import com.pj.eshopping.model.user.UserProfile;
+import com.pj.eshopping.domain.user.Role;
+import com.pj.eshopping.domain.user.UserProfile;
 import lombok.Data;
 
 import java.io.Serializable;

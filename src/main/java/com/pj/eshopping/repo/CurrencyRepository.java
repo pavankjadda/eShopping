@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.order.Currency;
+import com.pj.eshopping.domain.order.Currency;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

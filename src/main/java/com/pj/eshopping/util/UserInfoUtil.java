@@ -1,6 +1,6 @@
 package com.pj.eshopping.util;
 
-import com.pj.eshopping.model.user.UserProfile;
+import com.pj.eshopping.domain.user.UserProfile;
 import com.pj.eshopping.repo.UserRepository;
 import com.pj.eshopping.security.MyUserDetails;
 import org.springframework.security.core.Authentication;

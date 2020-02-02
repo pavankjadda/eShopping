@@ -1,7 +1,7 @@
 package com.pj.eshopping.insertdata;
 
-import com.pj.eshopping.model.user.Role;
-import com.pj.eshopping.model.user.User;
+import com.pj.eshopping.domain.user.Role;
+import com.pj.eshopping.domain.user.User;
 import com.pj.eshopping.repo.PrivilegeRepository;
 import com.pj.eshopping.repo.RoleRepository;
 import com.pj.eshopping.repo.UserRepository;

@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.cart.CartBillingAddress;
+import com.pj.eshopping.domain.cart.CartBillingAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

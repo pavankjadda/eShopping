@@ -1,7 +1,7 @@
 package com.pj.eshopping.security.handlers;
 
 import com.pj.eshopping.constants.SecurityConstants;
-import com.pj.eshopping.model.user.FailedLogin;
+import com.pj.eshopping.domain.user.FailedLogin;
 import com.pj.eshopping.repo.FailedLoginRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

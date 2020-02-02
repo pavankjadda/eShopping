@@ -1,6 +1,6 @@
 package com.pj.eshopping.repo;
 
-import com.pj.eshopping.model.user.State;
+import com.pj.eshopping.domain.user.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

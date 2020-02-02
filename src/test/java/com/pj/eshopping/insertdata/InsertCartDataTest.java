@@ -1,7 +1,7 @@
 package com.pj.eshopping.insertdata;
 
-import com.pj.eshopping.model.cart.Cart;
-import com.pj.eshopping.model.cart.CartProduct;
+import com.pj.eshopping.domain.cart.Cart;
+import com.pj.eshopping.domain.cart.CartProduct;
 import com.pj.eshopping.repo.CartProductRepository;
 import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.CartStatusRepository;
