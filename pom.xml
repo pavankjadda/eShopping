@@ -168,6 +168,9 @@
         </dependencies>
     </dependencyManagement>
 
+    <scm>
+        <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
+    </scm>
     <distributionManagement>
         <repository>
             <id>github</id>
