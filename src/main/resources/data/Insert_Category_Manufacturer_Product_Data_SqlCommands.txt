@@ -12,7 +12,7 @@ INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20002,'Bus
 INSERT INTO `spring_security_data`.`address_type`(`id`,`type`) VALUES(20003,'Work');
 
 /* Insert Data into Address Table  */
-INSERT INTO `spring_security_data`.`address` (`id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`, `apartment`, `street_name`, `zip_code`, `address_type_id`, `city_id`, `country_id`, `state_id`, `user_profile_id`) VALUES ('1', 'admin', '2019-06-05 17:27:28', 'admin', '2019-06-05 17:27:28', '101', '2226 Mohegan Dr', '22043', '20001', '37495', '482', '82', '1');
+INSERT INTO `spring_security_data`.`address` (`id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`, `apartment`, `street_name`, `zip_code`, `address_type_id`, `city_id`, `country_id`, `state_id`, `user_profile_id`) VALUES ('1', 'admin', '2019-06-05 17:27:28', 'admin', '2019-06-05 17:27:28', '101', '2081 McLean Dr', '22043', '20001', '37495', '482', '82', '1');
 
 
 /* Insert Manufacturer Address Type*/
