@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <hibernate.version>5.4.11.Final</hibernate.version>
+        <hibernate.version>5.4.12.Final</hibernate.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
         <liquibase-maven-plugin.version>3.5.5</liquibase-maven-plugin.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
@@ -33,7 +33,7 @@
         <hazelcast-client.version>3.12.6</hazelcast-client.version>
         <modelmapper.version>2.3.6</modelmapper.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
-        <spring-cloud-starter-zuul.version>2.2.1.RELEASE</spring-cloud-starter-zuul.version>
+        <spring-cloud-starter-zuul.version>2.2.2.RELEASE</spring-cloud-starter-zuul.version>
     </properties>
 
 
