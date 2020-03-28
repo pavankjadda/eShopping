@@ -7,29 +7,25 @@ server:
                 secure: true
                 http-only: true
 
-
 #Spring Properties
-spring:
-    jackson:
-        serialization:
-            FAIL_ON_EMPTY_BEANS: false
 
+spring:
     application:
         name: SpringSecurity-Data-Application
     # Jpa Properties
     datasource:
-        url: jdbc:mysql://bcmc.cy8obdina40j.us-east-1.rds.amazonaws.com:3306/spring_security_data?serverTimezone=UTC
-        username: admin
-        password: MIURsO1WJd2oNFin6jju
+        url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
+        username: ${spring.datasource.username}
+        password: ${spring.datasource.password}
         driver-class-name: com.mysql.cj.jdbc.Driver
 
     jpa:
+        open-in-view: true
         generate-ddl: true
         properties:
             hibernate:
                 ddl-auto: update
-                show_sql: false
-
+                show_sql: true
                 cache:
                     use_query_cache: true
                     use_second_level_cache: true
@@ -46,17 +42,9 @@ spring:
     devtools:
         restart:
             enabled: true
+        #liquibase:
+        #contexts: dev
+        #change-log: classpath:db/db.changelog-master.xml
+        #enabled: false
 
-management:
-    endpoints:
-        web:
-            exposure:
-                include: ["health","info"]
-    endpoint:
-        auditevents:
-            enabled: true
-logging:
-    level:
-        org:
-            springframework:
-                web: DEBUG
+
