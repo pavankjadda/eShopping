@@ -18,7 +18,7 @@ spring:
     url: ${db.url}
     username: ${db.username}
     password: ${db.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
     open-in-view: true
@@ -27,6 +27,7 @@ spring:
       hibernate:
         ddl-auto: update
         show_sql: true
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
         cache:
           use_query_cache: true
           use_second_level_cache: true
