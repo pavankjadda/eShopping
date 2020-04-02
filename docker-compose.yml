@@ -4,18 +4,26 @@ services:
     build:
       context: .
     environment:
-      DB_URL: 'jdbc:mysql://db:3306/spring_security_data'
+      DB_URL: 'jdbc:mysql://db:3306/spring_security_data?serverTimezone=UTC'
       DB_USERNAME: 'root'
       DB_PASSWORD: 'Test@12345'
       ACTIVE_PROFILE: 'dev'
     ports:
       - 8082:8082
-
+    networks:
+      - eshopping
   db:
-    image: mysql
+    image: mariadb
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: 'Test@12345'
       MYSQL_DATABASE: 'spring_security_data'
     ports:
-      - 3306:3306
+      - 33061:3306
+    networks:
+      - eshopping
+networks:
+  eshopping:
+    # Use a custom driver
+    driver: bridge
 
