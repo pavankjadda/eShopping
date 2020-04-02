@@ -59,4 +59,4 @@ jobs:
           echo VERSION=$VERSION
 
           docker tag eshopping $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login docker.pkg.github.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin | docker push $IMAGE_ID:$VERSION
