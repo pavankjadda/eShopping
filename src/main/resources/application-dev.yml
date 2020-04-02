@@ -15,7 +15,7 @@ spring:
   # Jpa Properties
   datasource:
     #url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
-    url: jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC
+    url: ${db.url}
     username: ${db.username}
     password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,6 +27,7 @@ spring:
       hibernate:
         ddl-auto: update
         show_sql: true
+        dialect:  org.hibernate.dialect.MySQL8Dialect
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -47,5 +48,3 @@ spring:
     #contexts: dev
     #change-log: classpath:db/db.changelog-master.xml
     #enabled: false
-
-

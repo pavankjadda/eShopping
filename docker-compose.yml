@@ -1,0 +1,21 @@
+version: '3'
+services:
+  eshopping:
+    build:
+      context: .
+    environment:
+      DB_URL: 'jdbc:mysql://db:3306/spring_security_data'
+      DB_USERNAME: 'root'
+      DB_PASSWORD: 'Test@12345'
+      ACTIVE_PROFILE: 'dev'
+    ports:
+      - 8082:8082
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'Test@12345'
+      MYSQL_DATABASE: 'spring_security_data'
+    ports:
+      - 3306:3306
+
