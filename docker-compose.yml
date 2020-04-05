@@ -13,13 +13,13 @@ services:
     networks:
       - eshopping
   db:
-    image: mariadb
-    container_name: db
+    image: mysql
     environment:
+      MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: 'Test@12345'
       MYSQL_DATABASE: 'spring_security_data'
     ports:
-      - 33061:3306
+      - 3306:3306
     networks:
       - eshopping
 networks:
