@@ -84,3 +84,14 @@ INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('5', 
 INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('6', 'Completed');
 INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('7', 'Refunded');
 INSERT INTO `spring_security_data`.`order_status` (`id`, `status`) VALUES ('8', 'Exception Occurred');
+
+/* Create get_all_categories stored procedure*/
+DELIMITER //
+
+CREATE PROCEDURE get_all_categories()
+BEGIN
+    SELECT *  FROM category;
+END //
+
+DELIMITER ;
+

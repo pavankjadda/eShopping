@@ -19,6 +19,7 @@ spring:
     password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
   jpa:
     open-in-view: true
     generate-ddl: true
