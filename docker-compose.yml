@@ -6,7 +6,7 @@ services:
     build:
       context: .
     environment:
-      DB_URL: 'jdbc:mysql://db:3306/spring_security_data?serverTimezone=UTC&autoReconnect=true&useSSL=false'
+      DB_URL: 'jdbc:mysql://db:3306/spring_security_data?serverTimezone=UTC'
       DB_USERNAME: 'root'
       DB_PASSWORD: 'Test@12345'
       ACTIVE_PROFILE: 'dev'
@@ -26,6 +26,5 @@ services:
       - eshopping
 networks:
   eshopping:
-    # Use a custom driver
     driver: bridge
 
