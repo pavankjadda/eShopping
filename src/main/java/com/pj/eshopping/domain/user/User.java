@@ -1,6 +1,8 @@
 package com.pj.eshopping.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Collection;
 
 
@@ -24,9 +27,10 @@ import java.util.Collection;
 @Entity
 @Data
 @Table(name = "`user`")
-public class User extends AbstractAuditingEntity
+public class User extends AbstractAuditingEntity implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -1742305710555210987L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +58,7 @@ public class User extends AbstractAuditingEntity
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	@JoinColumn(name = "user_profile_id")
+	@JsonBackReference
 	private UserProfile userProfile;
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -62,6 +67,7 @@ public class User extends AbstractAuditingEntity
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
+	@JsonManagedReference
 	private Collection<Role> roles;
 
 	public User()

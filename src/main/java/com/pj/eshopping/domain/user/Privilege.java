@@ -1,6 +1,6 @@
 package com.pj.eshopping.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -18,17 +18,17 @@ import java.util.Collection;
 @Table(name = "privilege")
 public class Privilege implements Serializable
 {
-	private static final long serialVersionUID = 3L;
-
+	private static final long serialVersionUID = -5270912171640429546L;
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "name")
 	private String name;
 
 	@ManyToMany(mappedBy = "privileges")
-	@JsonIgnore
+	@JsonBackReference
 	private Collection<Role> roles;
 
 	public Privilege()

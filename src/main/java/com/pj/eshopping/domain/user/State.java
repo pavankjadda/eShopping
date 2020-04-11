@@ -1,6 +1,6 @@
 package com.pj.eshopping.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -36,7 +36,7 @@ public class State implements Serializable
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
-	@JsonIgnoreProperties(value = {"region"})
+	@JsonBackReference
 	private Country country;
 
 

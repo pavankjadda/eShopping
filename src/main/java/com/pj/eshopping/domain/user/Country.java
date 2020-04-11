@@ -1,6 +1,5 @@
 package com.pj.eshopping.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -41,7 +40,6 @@ public class Country implements Serializable
 
 	@ManyToOne
 	@JoinColumn(name = "region_id")
-	@JsonIgnore
 	private Region region;
 
 	public Country()

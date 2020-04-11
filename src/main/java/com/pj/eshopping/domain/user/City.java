@@ -1,6 +1,6 @@
 package com.pj.eshopping.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,13 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "city")
 @Cache(region = "cityCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Data
-public class City extends AbstractAuditingEntity
+public class City extends AbstractAuditingEntity  implements Serializable
 {
 	private static final long serialVersionUID = -8825045541258851493L;
 
@@ -31,13 +32,11 @@ public class City extends AbstractAuditingEntity
 	private Long id;
 
 	@Column(name = "name")
-	//@Length(max = 100,min = 2)
 	private String name;
-
 
 	@ManyToOne
 	@JoinColumn(name = "state_id")
-	@JsonIgnoreProperties(value = {"country"})
+	@JsonBackReference
 	private State state;
 
 	public City()

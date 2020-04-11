@@ -1,6 +1,6 @@
 package com.pj.eshopping.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user_profile")
-public class UserProfile extends AbstractAuditingEntity
+public class UserProfile extends AbstractAuditingEntity implements Serializable
 {
 
 	private static final long serialVersionUID = -5481697743705747733L;
@@ -59,12 +60,13 @@ public class UserProfile extends AbstractAuditingEntity
 
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfile")
+	@JsonManagedReference
 	private List<Address> addresses = new ArrayList<>();
 
 	/*  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","userProfile","roles"}) can be replaced with FetchType.EAGER  */
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "userProfile", "roles", "password"})
+	@JsonManagedReference
 	private User user;
 
 	@Override
