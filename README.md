@@ -49,4 +49,4 @@ Make sure docker is up and running on your local machine
     - Spring AOP
     - Spring Session
     - Spring Cache
-4. MySQL
+4. MySQL database
