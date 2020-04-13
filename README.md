@@ -30,7 +30,8 @@ Make sure docker is up and running on your local machine
     $ docker stop db && docker rm db
     $ docker run -e MYSQL_ROOT_PASSWORD=<db password> —name=db --network=eshopping_network mysql 
       ```
-6. Run eShopping application in the same docker network.
+6. Load data into MySql database my following [steps from here](https://github.com/pavankjadda/eShopping/wiki/Load-data-into-MySql-database) 
+7. Run eShopping application in the same docker network.
     ```shell script
     $ docker stop eshopping && docker rm eshopping
       
