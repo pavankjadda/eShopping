@@ -165,13 +165,6 @@
         <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
     </scm>
 
- <servers>
-    <server>
-      <id>github</id>
-      <username>${env.USERNAME}</username>
-      <password>${env.PASSWORD}</password>
-    </server>
-  </servers>
          
     <distributionManagement>
         <repository>
