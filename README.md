@@ -28,14 +28,14 @@ Make sure docker is up and running on your local machine
 5. Run MySql instance in the same docker network. This will help to resolve database hostname using the docker container name. Make sure to change the **MYSQL_ROOT_PASSWORD** place holder
     ```shell script
     $ docker stop db && docker rm db
-    $ docker run -e MYSQL_ROOT_PASSWORD=<db password> —name=db --network=eshopping_network mysql 
+    $ docker run -e MYSQL_ROOT_PASSWORD=<db password> —-name=db -p 3306:3306 --network=eshopping_network mysql 
       ```
 6. Load data into MySql database my following [steps from here](https://github.com/pavankjadda/eShopping/wiki/Load-data-into-MySql-database) 
 7. Run eShopping application in the same docker network.
     ```shell script
     $ docker stop eshopping && docker rm eshopping
       
-    $  docker run -e DB_USERNAME=root -e DB_PASSWORD=<db password> -e DB_URL='jdbc:mysql://db:3306/spring_security_data?serverTimezone=UTC' -e ACTIVE_PROFILE=dev --network=eshopping_network  eshopping
+    $  docker run -e DB_USERNAME=root -e DB_PASSWORD=<db password> -e DB_URL='jdbc:mysql://db:3306/spring_security_data?serverTimezone=UTC' -e ACTIVE_PROFILE=dev --network=eshopping_network -p 8082:8082 eshopping
     ```
 2. These commands will build the eshopping app and run the spring boot app and mysql database as docker containers
 3. Connect to MySql docker instance(Use MySql work bench) using the credentials from [docker-compose.yml](docker-compose.yml) file 
