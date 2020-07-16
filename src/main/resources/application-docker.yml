@@ -19,7 +19,9 @@ spring:
     password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
   jpa:
     open-in-view: true
     generate-ddl: true
