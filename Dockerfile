@@ -1,5 +1,5 @@
 # Use JDK 11 JRE image
-FROM openjdk:11-jre-buster
+FROM openjdk:11.0-jre-slim
 
 # Copy JAR file to app.jar
 COPY target/*.jar app.jar
