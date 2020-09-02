@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "manufacturer_address")
-
 public class ManufacturerAddress extends AbstractAuditingEntity
 {
 	private static final long serialVersionUID = 8733009552741603083L;

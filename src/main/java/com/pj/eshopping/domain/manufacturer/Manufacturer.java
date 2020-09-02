@@ -5,8 +5,6 @@ import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +24,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Cache(region = "manufacturerCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "manufacturer")
 public class Manufacturer extends AbstractAuditingEntity implements Serializable
 {

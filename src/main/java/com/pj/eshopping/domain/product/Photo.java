@@ -3,8 +3,6 @@ package com.pj.eshopping.domain.product;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +19,6 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Cache(region = "photoCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "photo")
 public class Photo extends AbstractAuditingEntity implements Serializable
 {

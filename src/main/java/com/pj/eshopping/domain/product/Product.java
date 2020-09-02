@@ -6,8 +6,6 @@ import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.domain.inventory.ProductInventory;
 import com.pj.eshopping.domain.manufacturer.Manufacturer;
 import lombok.Data;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +27,6 @@ import java.util.Objects;
 
 @Entity
 @Data
-@Cache(region = "productCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "product")
 public class Product extends AbstractAuditingEntity implements Serializable
 {

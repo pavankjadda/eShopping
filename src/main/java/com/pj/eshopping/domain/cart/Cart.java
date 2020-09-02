@@ -6,8 +6,6 @@ import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.UserProfile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +25,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Cache(region = "cartCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "cart")
 public class Cart extends AbstractAuditingEntity
 {

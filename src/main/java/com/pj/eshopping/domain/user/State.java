@@ -2,7 +2,6 @@ package com.pj.eshopping.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +30,6 @@ public class State implements Serializable
 	private String code;
 
 	@Column(name = "name")
-	@Length(max = 200, min = 2)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +42,7 @@ public class State implements Serializable
 	{
 	}
 
-	public State(@Length(max = 100, min = 2) String name, String code, Country country)
+	public State( String name, String code, Country country)
 	{
 		this.name = name;
 		this.code = code;

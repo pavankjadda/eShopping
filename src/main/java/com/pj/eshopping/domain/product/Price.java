@@ -5,8 +5,6 @@ import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.order.Currency;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +20,6 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "price")
-@Cache(region = "priceCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Data
 public class Price extends AbstractAuditingEntity
 {
