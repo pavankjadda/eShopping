@@ -29,9 +29,6 @@
         <liquibase-hibernate5.version>4.0.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <javassist.version>3.26.0-GA</javassist.version>
-        <hazelcast-hibernate53.version>2.1.1</hazelcast-hibernate53.version>
-        <hazelcast.version>3.12.6</hazelcast.version>
-        <hazelcast-client.version>3.12.9</hazelcast-client.version>
         <modelmapper.version>2.3.8</modelmapper.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
         <spring-cloud-starter-zuul.version>2.2.5.RELEASE</spring-cloud-starter-zuul.version>
