@@ -22,19 +22,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <hibernate.version>5.4.12.Final</hibernate.version>
+        <hibernate.version>5.4.21.Final</hibernate.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
-        <liquibase-maven-plugin.version>3.8.8</liquibase-maven-plugin.version>
-        <liquibase-hibernate5.version>3.8</liquibase-hibernate5.version>
+        <liquibase-maven-plugin.version>4.0.0</liquibase-maven-plugin.version>
+        <liquibase-hibernate5.version>4.0.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <javassist.version>3.26.0-GA</javassist.version>
-        <hazelcast-hibernate53.version>1.3.0</hazelcast-hibernate53.version>
+        <hazelcast-hibernate53.version>2.1.1</hazelcast-hibernate53.version>
         <hazelcast.version>3.12.6</hazelcast.version>
-        <hazelcast-client.version>3.12.6</hazelcast-client.version>
-        <modelmapper.version>2.3.6</modelmapper.version>
+        <hazelcast-client.version>3.12.9</hazelcast-client.version>
+        <modelmapper.version>2.3.8</modelmapper.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
-        <spring-cloud-starter-zuul.version>2.2.2.RELEASE</spring-cloud-starter-zuul.version>
-        <spring-cloud-dependencies.version>Hoxton.SR3</spring-cloud-dependencies.version>
+        <spring-cloud-starter-zuul.version>2.2.5.RELEASE</spring-cloud-starter-zuul.version>
+        <spring-cloud-dependencies.version>Hoxton.SR8</spring-cloud-dependencies.version>
     </properties>
 
 
