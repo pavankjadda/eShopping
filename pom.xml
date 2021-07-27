@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.5.2</version>
         <relativePath/>
     </parent>
 
@@ -22,17 +22,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <hibernate.version>5.4.21.Final</hibernate.version>
-        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+        <hibernate.version>5.5.4.Final</hibernate.version>
+        <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
-        <liquibase-maven-plugin.version>4.0.0</liquibase-maven-plugin.version>
-        <liquibase-hibernate5.version>4.0.0</liquibase-hibernate5.version>
+        <liquibase-maven-plugin.version>4.4.2</liquibase-maven-plugin.version>
+        <liquibase-hibernate5.version>4.4.2</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <javassist.version>3.26.0-GA</javassist.version>
-        <modelmapper.version>2.3.8</modelmapper.version>
-        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
-        <spring-cloud-starter-zuul.version>2.2.5.RELEASE</spring-cloud-starter-zuul.version>
-        <spring-cloud-dependencies.version>Hoxton.SR8</spring-cloud-dependencies.version>
+        <modelmapper.version>2.4.4</modelmapper.version>
+        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
     </properties>
 
 
@@ -56,11 +54,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-            <version>${spring-cloud-starter-zuul.version}</version>
         </dependency>
 
         <dependency>
@@ -133,19 +126,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
-                <type>pom</type>
-                <scope>runtime</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <scm>
         <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
@@ -165,17 +150,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

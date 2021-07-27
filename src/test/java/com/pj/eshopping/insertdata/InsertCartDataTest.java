@@ -7,25 +7,25 @@ import com.pj.eshopping.repo.CartRepository;
 import com.pj.eshopping.repo.CartStatusRepository;
 import com.pj.eshopping.repo.ProductRepository;
 import com.pj.eshopping.repo.UserProfileRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @ActiveProfiles(value = "dev")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class InsertCartDataTest
+class InsertCartDataTest
 {
 
     @Autowired
@@ -44,14 +44,14 @@ public class InsertCartDataTest
     private ProductRepository productRepository;
 
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         cartProductRepository.deleteAll();
         cartRepository.deleteAll();
     }
     @Test
-    public void insertCart()
+    void insertCart()
     {
         Cart cart=new Cart();
         cart.setUserProfile(userProfileRepository.findAllByUserId(1L).get());
@@ -73,7 +73,5 @@ public class InsertCartDataTest
         cart.setCartProducts(cartProducts);
 
         cartRepository.saveAndFlush(cart);
-
     }
-
 }

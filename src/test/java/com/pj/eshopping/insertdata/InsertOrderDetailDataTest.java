@@ -12,25 +12,25 @@ import com.pj.eshopping.repo.OrderStatusRepository;
 import com.pj.eshopping.repo.StateRepository;
 import com.pj.eshopping.repo.UserProfileRepository;
 import com.pj.eshopping.repo.UserRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @ActiveProfiles(value = "dev")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class InsertOrderDetailDataTest
+class InsertOrderDetailDataTest
 {
     @Autowired
     private AddressTypeRepository addressTypeRepository;
@@ -59,14 +59,14 @@ public class InsertOrderDetailDataTest
 
 
 
-    @Before
-    public void setUp()
+    @BeforeEach
+    void setUp()
     {
 
     }
 
     @Test
-    public void insertAddressType()
+    void insertAddressType()
     {
         AddressType addressType=new AddressType();
         addressType.setType("Home");
@@ -94,7 +94,7 @@ public class InsertOrderDetailDataTest
     }
 
     @Test
-    public void insertAddress()
+    void insertAddress()
     {
         Address address=new Address();
         address.setStreetName("3130 FAIRVIEW PARK DR");
@@ -127,7 +127,7 @@ public class InsertOrderDetailDataTest
     }
 
     @Test
-    public void insertUserProfile()
+    void insertUserProfile()
     {
         UserProfile userProfile=new UserProfile();
         userProfile.setFirstName("Admin");
@@ -144,7 +144,7 @@ public class InsertOrderDetailDataTest
     }
 
     @Test
-    public void insertOrderStatus()
+    void insertOrderStatus()
     {
         OrderStatus orderStatus=new OrderStatus();
         orderStatus.setStatus("Created");

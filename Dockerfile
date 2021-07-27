@@ -1,5 +1,5 @@
 # Use JDK 11 JRE image
-FROM openjdk:11.0-jre-slim
+FROM adoptopenjdk:11-jre-openj9-bionic
 
 # Copy JAR file to app.jar
 COPY target/*.jar app.jar

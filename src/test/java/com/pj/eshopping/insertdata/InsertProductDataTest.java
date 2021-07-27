@@ -9,21 +9,22 @@ import com.pj.eshopping.repo.CurrencyRepository;
 import com.pj.eshopping.repo.PriceRepository;
 import com.pj.eshopping.repo.ProductPriceRepository;
 import com.pj.eshopping.repo.ProductRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @ActiveProfiles(value = "integrationtest")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class InsertProductDataTest
+class InsertProductDataTest
 {
     @Autowired
     private PriceRepository priceRepository;
@@ -39,11 +40,10 @@ public class InsertProductDataTest
 
     @Autowired
     private ProductPriceRepository productPriceRepository;
-
-
+    
 
     @Test
-    public void insertCurrency()
+    void insertCurrency()
     {
         Currency currency=new Currency();
         currency.setSymbol("$");
@@ -59,7 +59,7 @@ public class InsertProductDataTest
     }
 
     @Test
-    public void insertPrice()
+    void insertPrice()
     {
         Price price=new Price();
         price.setAmount(20.99);
@@ -74,7 +74,7 @@ public class InsertProductDataTest
     }
 
     @Test
-    public void insertProduct()
+    void insertProduct()
     {
         Product product=new Product();
         product.setCategory(categoryRepository.findById(7L).get());
@@ -90,7 +90,7 @@ public class InsertProductDataTest
     }
 
     @Test
-    public void insertProductPrice()
+    void insertProductPrice()
     {
         ProductPrice productPrice=new ProductPrice();
         productPrice.setPriceId(1L);
