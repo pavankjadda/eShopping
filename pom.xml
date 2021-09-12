@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>16</java.version>
         <hibernate.version>5.5.4.Final</hibernate.version>
         <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>

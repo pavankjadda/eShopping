@@ -1,35 +1,35 @@
 
 /* Insert Data into User Table  */
-INSERT INTO `spring_security_data`.`user` VALUES(1,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2y$12$ALU6qByNCKqkaTyjdLyqyOe7nQ0mGwQY3gXqBQ3DQKdfS4Yqwd7Jq','admin');
-INSERT INTO `spring_security_data`.`user` VALUES(2,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2a$12$JZipNtfy6B/wa9AvbrPq6.o9yi9TYR7CK.j3XG6BY3P3DwuFg7pWe','user');
+INSERT INTO `eshopping`.`user` VALUES(1,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2y$12$ALU6qByNCKqkaTyjdLyqyOe7nQ0mGwQY3gXqBQ3DQKdfS4Yqwd7Jq','admin');
+INSERT INTO `eshopping`.`user` VALUES(2,'admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58',1,1,1,1,'$2a$12$JZipNtfy6B/wa9AvbrPq6.o9yi9TYR7CK.j3XG6BY3P3DwuFg7pWe','user');
 
 /* Insert Data into UserProfile Table  */
-INSERT INTO `spring_security_data`.`user_profile` VALUES(1,'Admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58','john.doe@gh.com','John','Doe','234-688-8940',1);
+INSERT INTO `eshopping`.`user_profile` VALUES(1,'Admin','2019-01-08 17:41:58','admin','2019-01-08 17:41:58','john.doe@gh.com','John','Doe','234-688-8940',1);
 
 
 /* Insert Data into Role Table  */
-insert into spring_security_data.role values(1,'ROLE_USER');
-insert into spring_security_data.role values(2,'ROLE_ADMIN');
-insert into spring_security_data.role values(3,'ROLE_APIUSER');
-insert into spring_security_data.role values(4,'ROLE_DBA');
-insert into spring_security_data.role values(5,'ROLE_SELLER');
-insert into spring_security_data.role values(6,'ROLE_BUYER');
+insert into eshopping.role values(1,'ROLE_USER');
+insert into eshopping.role values(2,'ROLE_ADMIN');
+insert into eshopping.role values(3,'ROLE_APIUSER');
+insert into eshopping.role values(4,'ROLE_DBA');
+insert into eshopping.role values(5,'ROLE_SELLER');
+insert into eshopping.role values(6,'ROLE_BUYER');
 
 /* Insert Data into Privilege Table  */
-insert into spring_security_data.privilege values(1,'READ_PRIVILEGE');
-insert into spring_security_data.privilege values(2,'WRITE_PRIVILEGE');
-insert into spring_security_data.privilege values(3,'DELETE_PRIVILEGE');
+insert into eshopping.privilege values(1,'READ_PRIVILEGE');
+insert into eshopping.privilege values(2,'WRITE_PRIVILEGE');
+insert into eshopping.privilege values(3,'DELETE_PRIVILEGE');
 
 /* Insert Data into UserRole Table  */
-INSERT INTO `spring_security_data`.`user_role`(`user_id`,`role_id`) VALUES (2,1);
-INSERT INTO `spring_security_data`.`user_role`(`user_id`,`role_id`) VALUES (1,2);
-INSERT INTO `spring_security_data`.`user_role`(`user_id`,`role_id`) VALUES (1,1);
+INSERT INTO `eshopping`.`user_role`(`user_id`,`role_id`) VALUES (2,1);
+INSERT INTO `eshopping`.`user_role`(`user_id`,`role_id`) VALUES (1,2);
+INSERT INTO `eshopping`.`user_role`(`user_id`,`role_id`) VALUES (1,1);
 
 
 /* Insert Data into RolePrivilege Table  */
-insert into spring_security_data.role_privilege values(2,1);
-insert into spring_security_data.role_privilege values(2,2);
-insert into spring_security_data.role_privilege values(2,3);
-insert into spring_security_data.role_privilege values(1,1);
+insert into eshopping.role_privilege values(2,1);
+insert into eshopping.role_privilege values(2,2);
+insert into eshopping.role_privilege values(2,3);
+insert into eshopping.role_privilege values(1,1);
 
 

@@ -9,5 +9,5 @@ ENTRYPOINT ["java","-jar","-Ddb.url=${DB_URL}","-Ddb.username=${DB_USERNAME}","-
 
 
 ############
-# docker run -e DB_USERNAME=root -e DB_PASSWORD='bcmc1234' -e DB_URL='jdbc:mysql://localhost:3306/spring_security_data?serverTimezone=UTC' -e ACTIVE_PROFILE=dev <image_name>
+# docker run -e DB_USERNAME=root -e DB_PASSWORD='bcmc1234' -e DB_URL='jdbc:mysql://localhost:3306/eshopping?serverTimezone=UTC' -e ACTIVE_PROFILE=dev <image_name>
 # docker run -e MYSQL_ROOT_PASSWORD='bcmc1234' mysql
