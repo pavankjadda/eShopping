@@ -8,12 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface CountryRepository extends JpaRepository<Country, Long>
-{
-	Optional<Country> findByNameAndRegion(String name, Region region);
+public interface CountryRepository extends JpaRepository<Country, Long> {
+    Optional<Country> findByNameAndRegion(String name, Region region);
 
-	Optional<Country> findByName(String name);
+    Optional<Country> findByName(String name);
 
-	@Override
-	List<Country> findAll(Sort sort);
+    @Override
+    List<Country> findAll(Sort sort);
 }

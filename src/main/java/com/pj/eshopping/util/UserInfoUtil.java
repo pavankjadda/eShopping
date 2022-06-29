@@ -10,24 +10,20 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class UserInfoUtil
-{
-	private final UserRepository userRepository;
+public class UserInfoUtil {
+    private final UserRepository userRepository;
 
-	public UserInfoUtil(UserRepository userRepository)
-	{
-		this.userRepository = userRepository;
-	}
+    public UserInfoUtil(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-	public UserProfile getCurrentUserProfile()
-	{
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
-		return userRepository.findByUsername(myUserDetails.getUsername()).getUserProfile();
-	}
+    public UserProfile getCurrentUserProfile() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+        return userRepository.findByUsername(myUserDetails.getUsername()).getUserProfile();
+    }
 
-	public boolean isValidUpdate(UserProfile newUserProfile)
-	{
-		return Objects.equals(getCurrentUserProfile().getId(), newUserProfile.getId());
-	}
+    public boolean isValidUpdate(UserProfile newUserProfile) {
+        return Objects.equals(getCurrentUserProfile().getId(), newUserProfile.getId());
+    }
 }

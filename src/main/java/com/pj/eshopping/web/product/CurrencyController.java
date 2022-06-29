@@ -12,25 +12,21 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/currency")
-public class CurrencyController
-{
-	private final CurrencyRepository currencyRepository;
+public class CurrencyController {
+    private final CurrencyRepository currencyRepository;
 
-	public CurrencyController(CurrencyRepository currencyRepository)
-	{
-		this.currencyRepository = currencyRepository;
-	}
+    public CurrencyController(CurrencyRepository currencyRepository) {
+        this.currencyRepository = currencyRepository;
+    }
 
 
-	@GetMapping(value = "/list")
-	public List<Currency> getCurrencies()
-	{
-		return currencyRepository.findAll();
-	}
+    @GetMapping(value = "/list")
+    public List<Currency> getCurrencies() {
+        return currencyRepository.findAll();
+    }
 
-	@GetMapping(value = "/find/{id}")
-	public Optional<Currency> getProductById(@PathVariable Long id)
-	{
-		return currencyRepository.findById(id);
-	}
+    @GetMapping(value = "/find/{id}")
+    public Optional<Currency> getProductById(@PathVariable Long id) {
+        return currencyRepository.findById(id);
+    }
 }

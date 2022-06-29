@@ -21,107 +21,86 @@ import java.time.ZoneId;
 import java.util.Collection;
 
 
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
-{
-	private Log logger = LogFactory.getLog(this.getClass());
-
-	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-	private SessionHistoryRepository sessionHistoryRepository;
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+    private final Log logger = LogFactory.getLog(this.getClass());
+    private final SessionHistoryRepository sessionHistoryRepository;
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 
-	public CustomAuthenticationSuccessHandler(SessionHistoryRepository sessionHistoryRepository)
-	{
-		this.sessionHistoryRepository = sessionHistoryRepository;
-	}
+    public CustomAuthenticationSuccessHandler(SessionHistoryRepository sessionHistoryRepository) {
+        this.sessionHistoryRepository = sessionHistoryRepository;
+    }
 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
-	{
-		handle(request, response, authentication);
-		clearAuthenticationAttributes(request);
-		saveRequesterInformation(request, authentication);
-	}
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        handle(request, response, authentication);
+        clearAuthenticationAttributes(request);
+        saveRequesterInformation(request, authentication);
+    }
 
-	private void saveRequesterInformation(HttpServletRequest request, Authentication authentication)
-	{
-		SessionHistory sessionHistory = new SessionHistory();
-		sessionHistory.setSessionId(request.getSession(false).getId());
-		sessionHistory.setCreationTime(convertLongTime(request.getSession(false).getCreationTime()));
-		sessionHistory.setLastAccessTime(convertLongTime(request.getSession(false).getLastAccessedTime()));
-		sessionHistory.setMaxInactiveInterval(request.getSession(false).getMaxInactiveInterval());
-		sessionHistory.setLoggedDataTime(LocalDateTime.now());
-		sessionHistory.setUsername(authentication.getName());
-		sessionHistory.setRequesterIpAddress(request.getRemoteAddr());
-		sessionHistory.setRequesterPort(request.getRemotePort());
-		sessionHistory.setRequestedMethod(request.getMethod());
-		sessionHistory.setLocalIpAddress(request.getLocalAddr());
-		sessionHistory.setLocalPort(request.getLocalPort());
-		sessionHistory.setServerName(request.getServerName());
-		sessionHistory.setServerPort(request.getServerPort());
-		sessionHistory.setBrowserInformation(request.getAuthType());
-		sessionHistory.setAuthType(request.getAuthType());
+    private void saveRequesterInformation(HttpServletRequest request, Authentication authentication) {
+        SessionHistory sessionHistory = new SessionHistory();
+        sessionHistory.setSessionId(request.getSession(false).getId());
+        sessionHistory.setCreationTime(convertLongTime(request.getSession(false).getCreationTime()));
+        sessionHistory.setLastAccessTime(convertLongTime(request.getSession(false).getLastAccessedTime()));
+        sessionHistory.setMaxInactiveInterval(request.getSession(false).getMaxInactiveInterval());
+        sessionHistory.setLoggedDataTime(LocalDateTime.now());
+        sessionHistory.setUsername(authentication.getName());
+        sessionHistory.setRequesterIpAddress(request.getRemoteAddr());
+        sessionHistory.setRequesterPort(request.getRemotePort());
+        sessionHistory.setRequestedMethod(request.getMethod());
+        sessionHistory.setLocalIpAddress(request.getLocalAddr());
+        sessionHistory.setLocalPort(request.getLocalPort());
+        sessionHistory.setServerName(request.getServerName());
+        sessionHistory.setServerPort(request.getServerPort());
+        sessionHistory.setBrowserInformation(request.getAuthType());
+        sessionHistory.setAuthType(request.getAuthType());
 
-		try
-		{
-			sessionHistoryRepository.saveAndFlush(sessionHistory);
-		}
-		catch (Exception e)
-		{
-			logger.info("Failed to save requester information. Exception message ", e);
-		}
-	}
+        try {
+            sessionHistoryRepository.saveAndFlush(sessionHistory);
+        } catch (Exception e) {
+            logger.info("Failed to save requester information. Exception message ", e);
+        }
+    }
 
-	private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
-	{
-		String targetUrl = determineTargetUrl(authentication);
-		if (response.isCommitted())
-		{
-			logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
-			return;
-		}
-		redirectStrategy.sendRedirect(request, response, targetUrl);
-	}
+    private void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        String targetUrl = determineTargetUrl(authentication);
+        if (response.isCommitted()) {
+            logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
+            return;
+        }
+        redirectStrategy.sendRedirect(request, response, targetUrl);
+    }
 
-	private String determineTargetUrl(Authentication authentication)
-	{
-		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		for (GrantedAuthority grantedAuthority : authorities)
-		{
+    private String determineTargetUrl(Authentication authentication) {
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority : authorities) {
 
-			if (grantedAuthority.getAuthority().equals("ROLE_USER"))
-			{
-				return "/home.html";
-			}
-			else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
-			{
-				return "/admin.html";
-			}
-		}
+            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+                return "/home.html";
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+                return "/admin.html";
+            }
+        }
 
-		return "/login";
-	}
+        return "/login";
+    }
 
-	private void clearAuthenticationAttributes(HttpServletRequest request)
-	{
-		HttpSession session = request.getSession(false);
-		if (session == null)
-			return;
-		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-	}
+    private void clearAuthenticationAttributes(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) return;
+        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+    }
 
-	protected RedirectStrategy getRedirectStrategy()
-	{
-		return redirectStrategy;
-	}
+    protected RedirectStrategy getRedirectStrategy() {
+        return redirectStrategy;
+    }
 
-	public void setRedirectStrategy(RedirectStrategy redirectStrategy)
-	{
-		this.redirectStrategy = redirectStrategy;
-	}
+    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+        this.redirectStrategy = redirectStrategy;
+    }
 
-	private LocalDateTime convertLongTime(long longValue)
-	{
-		return LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
-	}
+    private LocalDateTime convertLongTime(long longValue) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
+    }
 }

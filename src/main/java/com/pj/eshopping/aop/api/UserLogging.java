@@ -8,27 +8,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Aspect
-public class UserLogging
-{
-	private Logger logger = LoggerFactory.getLogger(UserLogging.class);
+public class UserLogging {
+    private final Logger logger = LoggerFactory.getLogger(UserLogging.class);
 
-	@Pointcut("execution(* com.pj.eshopping.domain.user.User.*(..))")
-	public void getUserPointCut()
-	{
-		//Pointcut
-	}
+    @Pointcut("execution(* com.pj.eshopping.domain.user.User.*(..))")
+    public void getUserPointCut() {
+        //Pointcut
+    }
 
 
-	@Before("getUserPointCut()")
-	public void beforeAdvice()
-	{
-		logger.error("Inside UserLogging.beforeAdvice() method");
-	}
+    @Before("getUserPointCut()")
+    public void beforeAdvice() {
+        logger.error("Inside UserLogging.beforeAdvice() method");
+    }
 
-	@After("getUserPointCut()")
-	public void afterAdvice()
-	{
-		logger.info("Inside UserLogging.afterAdvice() method");
-	}
+    @After("getUserPointCut()")
+    public void afterAdvice() {
+        logger.info("Inside UserLogging.afterAdvice() method");
+    }
 
 }

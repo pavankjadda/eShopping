@@ -4,7 +4,6 @@ import com.pj.eshopping.domain.category.Category;
 
 import java.util.List;
 
-public interface CategoryRepositoryCustom
-{
-	List<Category> getAllCategoriesThroughStoredProcedureCustom();
+public interface CategoryRepositoryCustom {
+    List<Category> getAllCategoriesThroughStoredProcedureCustom();
 }

@@ -5,29 +5,25 @@ import com.pj.eshopping.audit.AbstractAuditingEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "product_price")
 @Data
-public class ProductPrice extends AbstractAuditingEntity
-{
-	private static final long serialVersionUID = 2677217467401857039L;
+public class ProductPrice extends AbstractAuditingEntity {
+    @Serial
+    private static final long serialVersionUID = 2677217467401857039L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@Column(name = "product_id", nullable = false)
-	private Long productId;
+    @Column(name = "product_id", nullable = false)
+    private Long productId;
 
-	@Column(name = "price_id", nullable = false)
-	private Long priceId;
+    @Column(name = "price_id", nullable = false)
+    private Long priceId;
 }

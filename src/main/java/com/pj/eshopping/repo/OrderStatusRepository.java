@@ -4,7 +4,6 @@ import com.pj.eshopping.domain.order.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long>
-{
-	OrderStatus findByStatus(String status);
+public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {
+    OrderStatus findByStatus(String status);
 }

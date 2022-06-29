@@ -8,15 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class OrderDetailLogger
-{
-	private Logger logger = LoggerFactory.getLogger(OrderDetailLogger.class);
+public class OrderDetailLogger {
+    private final Logger logger = LoggerFactory.getLogger(OrderDetailLogger.class);
 
-	@Pointcut("within(com.pj.eshopping.web.order.OrderController)")
-	public void orderControllerPointcut()
-	{
-		//Point cut orderDetailControllerPointcut
-	}
+    @Pointcut("within(com.pj.eshopping.web.order.OrderController)")
+    public void orderControllerPointcut() {
+        //Point cut orderDetailControllerPointcut
+    }
 /*
     @Around("orderControllerPointcut()")
     public Object logOrderControllerRequests(ProceedingJoinPoint proceedingJoinPoint)

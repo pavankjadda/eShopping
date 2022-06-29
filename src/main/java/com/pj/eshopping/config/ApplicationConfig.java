@@ -10,30 +10,25 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ApplicationConfig implements WebMvcConfigurer
-{
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder()
-	{
-		return new BCryptPasswordEncoder();
-	}
+public class ApplicationConfig implements WebMvcConfigurer {
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Bean
-	public HttpSessionEventPublisher httpSessionEventPublisher()
-	{
-		return new HttpSessionEventPublisher();
-	}
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 
-	@Bean
-	public HttpSessionIdResolver httpSessionIdResolver()
-	{
-		return HeaderHttpSessionIdResolver.xAuthToken();
-	}
+    @Bean
+    public HttpSessionIdResolver httpSessionIdResolver() {
+        return HeaderHttpSessionIdResolver.xAuthToken();
+    }
 
-	@Bean
-	public ModelMapper modelMapper()
-	{
-		return new ModelMapper();
-	}
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
 

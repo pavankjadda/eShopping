@@ -8,10 +8,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CartDTO
-{
-	private Long id;
-	private UserProfile userProfile;
-	private CartStatus cartStatus;
-	private List<CartProduct> cartProducts;
+public class CartDTO {
+    private Long id;
+    private UserProfile userProfile;
+    private CartStatus cartStatus;
+    private List<CartProduct> cartProducts;
 }

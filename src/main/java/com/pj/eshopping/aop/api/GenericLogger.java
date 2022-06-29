@@ -14,26 +14,22 @@ import java.time.LocalDateTime;
 
 @Aspect
 @Component
-public class GenericLogger
-{
-	private Logger logger = LoggerFactory.getLogger(GenericLogger.class);
+public class GenericLogger {
+    private final Logger logger = LoggerFactory.getLogger(GenericLogger.class);
 
-	@Before(value = "within(com.pj.eshopping..*)")
-	public void beforeAdvice(JoinPoint joinPoint)
-	{
-		logger.info("Method {} execution started at {}", joinPoint.getSignature(), LocalDateTime.now());
-	}
+    @Before(value = "within(com.pj.eshopping..*)")
+    public void beforeAdvice(JoinPoint joinPoint) {
+        logger.info("Method {} execution started at {}", joinPoint.getSignature(), LocalDateTime.now());
+    }
 
-	@After(value = "within(com.pj.eshopping..*)")
-	public void afterAdvice(JoinPoint joinPoint)
-	{
-		logger.info("Method {} execution finished at {}", joinPoint.getSignature(), LocalDateTime.now());
-	}
+    @After(value = "within(com.pj.eshopping..*)")
+    public void afterAdvice(JoinPoint joinPoint) {
+        logger.info("Method {} execution finished at {}", joinPoint.getSignature(), LocalDateTime.now());
+    }
 
 
-	@AfterThrowing(value = "within(com.pj.eshopping..*)", throwing = "exception")
-	public void genericExceptionClass(GenericException exception)
-	{
-		logger.info("GenericException occurred and Error: {}", exception.getMessage());
-	}
+    @AfterThrowing(value = "within(com.pj.eshopping..*)", throwing = "exception")
+    public void genericExceptionClass(GenericException exception) {
+        logger.info("GenericException occurred and Error: {}", exception.getMessage());
+    }
 }

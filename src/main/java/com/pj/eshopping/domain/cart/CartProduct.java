@@ -6,47 +6,36 @@ import com.pj.eshopping.domain.product.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "cart_product")
-public class CartProduct extends AbstractAuditingEntity
-{
-	private static final long serialVersionUID = 6498067041321289048L;
+public class CartProduct extends AbstractAuditingEntity {
+    @Serial
+    private static final long serialVersionUID = 6498067041321289048L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@OneToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-	@Column(name = "quantity")
-	private Integer quantity;
+    @Column(name = "quantity")
+    private Integer quantity;
 
-	@ManyToOne
-	@JoinColumn(name = "cart_id", referencedColumnName = "id")
-	@JsonIgnoreProperties(value = {"userProfile", "cartStatus", "cartProducts"})
-	private Cart cart;
+    @ManyToOne
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"userProfile", "cartStatus", "cartProducts"})
+    private Cart cart;
 
-	@Override
-	public String toString()
-	{
-		return "CartProduct{" +
-				"id=" + id +
-				", quantity=" + quantity +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "CartProduct{" + "id=" + id + ", quantity=" + quantity + '}';
+    }
 }

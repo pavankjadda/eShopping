@@ -13,28 +13,23 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class UserRepositoryLogging
-{
-	private Logger logger = LoggerFactory.getLogger(UserRepositoryLogging.class);
+public class UserRepositoryLogging {
+    private final Logger logger = LoggerFactory.getLogger(UserRepositoryLogging.class);
 
 
-	@Pointcut(value = "execution(* com.pj.eshopping.repo.UserRepository.findAll(..)) && args(pageable,..)")
-	public void getUserRepositoryFindAll(Pageable pageable)
-	{
-		//Pointcut for getUserRepositoryFindAll
-	}
+    @Pointcut(value = "execution(* com.pj.eshopping.repo.UserRepository.findAll(..)) && args(pageable,..)")
+    public void getUserRepositoryFindAll(Pageable pageable) {
+        //Pointcut for getUserRepositoryFindAll
+    }
 
-	@After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
-	public void findAll(Pageable pageable)
-	{
-		logger.error("Log Message: Inside UserRepositoryLogging findAll() advice");
-	}
+    @After(value = "getUserRepositoryFindAll(pageable)", argNames = "pageable")
+    public void findAll(Pageable pageable) {
+        logger.error("Log Message: Inside UserRepositoryLogging findAll() advice");
+    }
 
 
-	@AfterReturning(pointcut = "execution(* com.pj.eshopping.repo.UserRepository.findAll(..))", returning = "pageUsers")
-	public void logReturningUsers(Page<User> pageUsers)
-	{
-		if (pageUsers.getSize() > 0)
-			logger.info("After returning from logReturningUsers() method");
-	}
+    @AfterReturning(pointcut = "execution(* com.pj.eshopping.repo.UserRepository.findAll(..))", returning = "pageUsers")
+    public void logReturningUsers(Page<User> pageUsers) {
+        if (pageUsers.getSize() > 0) logger.info("After returning from logReturningUsers() method");
+    }
 }

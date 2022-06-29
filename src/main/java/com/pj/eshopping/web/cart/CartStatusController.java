@@ -11,19 +11,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cart_status")
-public class CartStatusController
-{
-	private final CartStatusRepository cartStatusRepository;
+public class CartStatusController {
+    private final CartStatusRepository cartStatusRepository;
 
 
-	public CartStatusController(CartStatusRepository cartStatusRepository)
-	{
-		this.cartStatusRepository = cartStatusRepository;
-	}
+    public CartStatusController(CartStatusRepository cartStatusRepository) {
+        this.cartStatusRepository = cartStatusRepository;
+    }
 
-	@GetMapping(path = "/list")
-	public List<CartStatus> getAllCartStatuses()
-	{
-		return cartStatusRepository.findAll();
-	}
+    @GetMapping(path = "/list")
+    public List<CartStatus> getAllCartStatuses() {
+        return cartStatusRepository.findAll();
+    }
 }
