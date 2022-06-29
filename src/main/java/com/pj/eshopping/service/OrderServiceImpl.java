@@ -16,13 +16,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class that handles business logic to get, create, update Orders
+ *
+ * @author Pavan Kumar Jadda
+ * @since 1.0.0
+ */
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderStatusRepository orderStatusRepository;
@@ -36,8 +44,7 @@ public class OrderServiceImpl implements OrderService {
     private final ModelMapper modelMapper;
     private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository,
-                            OrderProductDetailRepository orderProductDetailRepository, OrderBillingAddressRepository orderBillingAddressRepository,
+    public OrderServiceImpl(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, OrderBillingAddressRepository orderBillingAddressRepository,
                             OrderShippingAddressRepository orderShippingAddressRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository,
                             TaxRateRepository taxRateRepository, ProductInventoryRepository productInventoryRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
@@ -148,11 +155,9 @@ public class OrderServiceImpl implements OrderService {
             if (productInventory.getQuantity() >= cartProduct.getQuantity()) {
                 productInventory.setQuantity(productInventory.getQuantity() - cartProduct.getQuantity());
             } else throw new GenericException(
-                    "Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order", null,
-                    HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now(), null, null);
-        } else
-            throw new GenericException("Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order",
-                    null, HttpStatus.BAD_REQUEST, LocalDateTime.now(), null, null);
+                    "Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order", null, HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now(), null, null);
+        } else throw new GenericException("Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order",
+                null, HttpStatus.BAD_REQUEST, LocalDateTime.now(), null, null);
     }
 
     private Double calculateTotalCostBeforeTax(Cart cart) {
