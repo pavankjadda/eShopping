@@ -2,48 +2,80 @@ package com.pj.eshopping.web.address;
 
 import com.pj.eshopping.domain.user.Address;
 import com.pj.eshopping.dto.AddressDTO;
-import com.pj.eshopping.repo.AddressRepository;
-import com.pj.eshopping.util.UserInfoUtil;
-import org.modelmapper.ModelMapper;
+import com.pj.eshopping.service.AddressService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Provides API endpoints for Address and related operations
+ *
+ * @author Pavan Kumar Jadda
+ * @since 1.0.0
+ */
 @RestController
 @RequestMapping(path = "/api/v1/address")
 public class AddressController {
+    private final AddressService addressService;
 
-    private final ModelMapper modelMapper;
-    private final AddressRepository addressRepository;
-    private final UserInfoUtil userInfoUtil;
-
-    public AddressController(AddressRepository addressRepository, ModelMapper modelMapper, UserInfoUtil userInfoUtil) {
-        this.addressRepository = addressRepository;
-        this.modelMapper = modelMapper;
-        this.userInfoUtil = userInfoUtil;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
+    /**
+     * Find all addresses
+     *
+     * @return List of addresses
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @GetMapping(value = "/list")
     public List<Address> getAddresses() {
-        return addressRepository.findAll();
+        return addressService.findAll();
     }
 
+    /**
+     * Find address by id.
+     *
+     * @param id ID of the Address to find
+     *
+     * @return Address that matches given ID
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @GetMapping(value = "/find/{id}")
     public Optional<Address> getAddressById(@PathVariable Long id) {
-        return addressRepository.findById(id);
+        return addressService.findById(id);
     }
 
+    /**
+     * Create or Update Address
+     *
+     * @param addressDTO the address to be created or updated
+     *
+     * @return Created or updated Address
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @PostMapping(path = {"/create", "/update"})
     public Address createAddress(@RequestBody AddressDTO addressDTO) {
-        Address address = modelMapper.map(addressDTO, Address.class);
-        address.setUserProfile(userInfoUtil.getCurrentUserProfile());
-
-        return addressRepository.saveAndFlush(address);
+        return addressService.saveAndFlush(addressDTO);
     }
 
+    /**
+     * Delete Address that matches the ID
+     *
+     * @param id ID of the Address record to delete
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @DeleteMapping(path = "/delete/{id}")
     public void deleteAddress(@PathVariable Long id) {
-        addressRepository.findById(id).ifPresent(addressRepository::delete);
+        addressService.deleteAddress(id);
     }
 }

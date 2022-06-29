@@ -13,9 +13,10 @@ spring:
     name: SpringSecurity-Data-Application
   # Jpa Properties
   datasource:
-    url: jdbc:mysql://localhost:3306/eshopping?serverTimezone=UTC
-    username: root
-    password: Test@2020
+    #url: jdbc:mysql://localhost:3306/eshopping?serverTimezone=UTC
+    url: ${db.url}
+    username: ${db.username}
+    password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     serialization:
