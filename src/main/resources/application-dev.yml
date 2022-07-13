@@ -18,6 +18,7 @@ spring:
     username: ${db.username}
     password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -31,7 +32,7 @@ spring:
         cache:
           use_query_cache: false
           use_second_level_cache: false
-          
+
   # Spring Session properties
   session:
     jdbc:
@@ -40,7 +41,42 @@ spring:
   devtools:
     restart:
       enabled: true
-  #liquibase:
-    #contexts: dev
-    #change-log: classpath:db/db.changelog-master.xml
-    #enabled: false
+
+  # Redis host details
+  redis:
+    host: "redis.example.com"
+    port: 6379
+    password: "password"
+    timeout: 3600
+
+
+### AWS S3 Properties ###
+aws:
+  s3:
+    bucket: ""
+
+### System Config ###
+core:
+  app:
+    version: "@version@"
+  hostname: "localhost"
+  domain_name: "example.com"
+  send_email: true
+  smtp_server: "example.com"
+  smtp_port: 25
+  smtp_debug: true
+
+#### Email properties ####
+email:
+  send_to: ""
+  send_from: ""
+  send_to_bcc: ""
+  reply_to: ""
+  subject: ""
+
+
+
+### LDAP Properties ###
+ldap:
+  url: "test.ad.example.com"
+  domain: "test.ad.example.com"

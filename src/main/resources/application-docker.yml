@@ -41,7 +41,42 @@ spring:
   devtools:
     restart:
       enabled: true
-  #liquibase:
-    #contexts: dev
-    #change-log: classpath:db/db.changelog-master.xml
-    #enabled: false
+
+  # Redis host details
+  redis:
+    host: "redis.example.com"
+    port: 6379
+    password: "password"
+    timeout: 3600
+
+
+### AWS S3 Properties ###
+aws:
+  s3:
+    bucket: ""
+
+### System Config ###
+core:
+  app:
+    version: "@version@"
+  hostname: "localhost"
+  domain_name: "example.com"
+  send_email: true
+  smtp_server: "example.com"
+  smtp_port: 25
+  smtp_debug: true
+
+#### Email properties ####
+email:
+  send_to: ${pres.email.send_to}
+  send_from: ${pres.email.send_from}
+  send_to_bcc: ${pres.email.send_to_bcc}
+  reply_to: ${pres.email.reply_to}
+  subject: ${pres.email.subject}
+
+
+
+### LDAP Properties ###
+ldap:
+  url: "test.ad.example.com"
+  domain: "test.ad.example.com"

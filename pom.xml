@@ -17,9 +17,17 @@
     <name>eShopping</name>
     <description>eShopping application built with Spring Boot, Spring Security,Spring Session and Spring Data</description>
 
+    <scm>
+        <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.7.1</spring-boot.version>
+        <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <spring-cloud-aws.version>2.4.1</spring-cloud-aws.version>
+
         <hibernate-envers.version>5.6.9.Final</hibernate-envers.version>
         <hibernate-validator.version>7.0.4.Final</hibernate-validator.version>
         <javax.interceptor-api.version>1.2.2</javax.interceptor-api.version>
@@ -42,6 +50,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -132,11 +144,20 @@
         </dependency>
     </dependencies>
 
-    <scm>
-        <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
-    </scm>
 
-         
+    <!-- Resolve Spring Cloud dependencies -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <distributionManagement>
         <repository>
             <id>github</id>
