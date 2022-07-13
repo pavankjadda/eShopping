@@ -7,7 +7,6 @@ import com.pj.eshopping.security.handlers.CustomAccessDeniedHandler;
 import com.pj.eshopping.security.handlers.CustomBasicAuthenticationEntryPoint;
 import com.pj.eshopping.security.handlers.CustomLogoutSuccessHandler;
 import com.pj.eshopping.security.providers.CustomDaoAuthenticationProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,12 +31,9 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final MyUserDetailsService userDetailsService;
-
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
-
     private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
 
-    @Autowired
     public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository unauthorizedRequestRepository,
                           CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint) {
         this.userDetailsService = userDetailsService;
