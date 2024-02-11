@@ -1,9 +1,9 @@
 package com.pj.eshopping.domain.user;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 

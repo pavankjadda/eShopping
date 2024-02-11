@@ -2,12 +2,12 @@ package com.pj.eshopping.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;

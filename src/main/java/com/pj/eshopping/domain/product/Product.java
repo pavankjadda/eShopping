@@ -5,9 +5,9 @@ import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.domain.inventory.ProductInventory;
 import com.pj.eshopping.domain.manufacturer.Manufacturer;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;

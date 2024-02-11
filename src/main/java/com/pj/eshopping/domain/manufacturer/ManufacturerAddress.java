@@ -5,10 +5,10 @@ import com.pj.eshopping.domain.user.City;
 import com.pj.eshopping.domain.user.Country;
 import com.pj.eshopping.domain.user.Region;
 import com.pj.eshopping.domain.user.State;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)

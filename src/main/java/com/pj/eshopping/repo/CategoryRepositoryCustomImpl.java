@@ -1,12 +1,12 @@
 package com.pj.eshopping.repo;
 
 import com.pj.eshopping.domain.category.Category;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 import java.util.ArrayList;
 import java.util.List;
 
