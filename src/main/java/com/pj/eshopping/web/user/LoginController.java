@@ -4,6 +4,7 @@ import com.pj.eshopping.domain.user.User;
 import com.pj.eshopping.dto.UserDto;
 import com.pj.eshopping.repo.UserRepository;
 import com.pj.eshopping.security.MyUserDetails;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/v1/login")

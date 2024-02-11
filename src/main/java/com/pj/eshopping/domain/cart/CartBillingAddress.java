@@ -3,10 +3,10 @@ package com.pj.eshopping.domain.cart;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.*;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)

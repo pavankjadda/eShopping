@@ -84,8 +84,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                        registry -> registry.antMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll().antMatchers("/api/**")
-                                .hasAnyAuthority(AuthorityConstants.ROLE_USER, ROLE_API_USER, ROLE_ADMIN).antMatchers("/login/**").permitAll().anyRequest()
+                        registry -> registry.requestMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll()
+                                .requestMatchers("/api/**")
+                                .hasAnyAuthority(AuthorityConstants.ROLE_USER, ROLE_API_USER, ROLE_ADMIN).requestMatchers("/login/**").permitAll().anyRequest()
                                 .authenticated().and()).httpBasic().and().exceptionHandling().authenticationEntryPoint(customBasicAuthenticationEntryPoint).and()
                 .logout().deleteCookies("X-Auth-Token").clearAuthentication(true).invalidateHttpSession(true)
                 .logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll().and().exceptionHandling()
@@ -98,7 +99,7 @@ public class SecurityConfig {
         http.cors().configurationSource(corsConfigurationSource());
 
         // Use CookieCsrfTokenRepository to issue cookie based CSRF(XSRF) tokens
-        http.csrf().ignoringAntMatchers("/api/v1/search/**", "/api/v1/actuator/**").csrfTokenRepository(cookieCsrfTokenRepository());
+        http.csrf().ignoringRequestMatchers("/api/v1/search/**", "/api/v1/actuator/**").csrfTokenRepository(cookieCsrfTokenRepository());
 
         // Disable CSRF(XSRF) tokens for API requests
         //http.csrf().disable();
@@ -148,7 +149,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/resources/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/console/**");
+                .requestMatchers("/resources/**", "/static/**", "/resources/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/console/**");
     }
 
     @Bean

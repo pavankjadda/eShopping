@@ -2,10 +2,10 @@ package com.pj.eshopping.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 

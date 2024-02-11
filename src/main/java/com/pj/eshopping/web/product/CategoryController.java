@@ -3,9 +3,9 @@ package com.pj.eshopping.web.product;
 import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.dto.CategoryDTO;
 import com.pj.eshopping.service.CategoryService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 

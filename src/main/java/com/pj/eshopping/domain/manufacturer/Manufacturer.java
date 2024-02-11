@@ -3,10 +3,10 @@ package com.pj.eshopping.domain.manufacturer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.product.Product;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -3,10 +3,10 @@ package com.pj.eshopping.domain.product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.order.Currency;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)

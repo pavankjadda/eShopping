@@ -2,8 +2,8 @@ package com.pj.eshopping.service;
 
 import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.dto.CategoryDTO;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface CategoryService {

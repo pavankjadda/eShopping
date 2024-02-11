@@ -1,8 +1,8 @@
 package com.pj.eshopping.domain.orderhistory;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;

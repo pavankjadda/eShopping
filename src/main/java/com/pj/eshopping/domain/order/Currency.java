@@ -2,10 +2,9 @@ package com.pj.eshopping.domain.order;
 
 
 import com.pj.eshopping.audit.AbstractAuditingEntity;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

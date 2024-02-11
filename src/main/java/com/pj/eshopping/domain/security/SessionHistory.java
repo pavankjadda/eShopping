@@ -1,8 +1,8 @@
 package com.pj.eshopping.domain.security;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.time.LocalDateTime;
 
