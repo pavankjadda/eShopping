@@ -13,7 +13,6 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/tax_rate")
 public class TaxRateController {
     private final TaxRateRepository taxRateRepository;
-
     private final ModelMapper modelMapper;
 
     public TaxRateController(TaxRateRepository taxRateRepository, ModelMapper modelMapper) {
@@ -38,17 +37,15 @@ public class TaxRateController {
 
     @PostMapping(path = "/create")
     public TaxRate createTaxRate(@RequestBody TaxRateDTO taxRateDTO) {
-        TaxRate taxRate = modelMapper.map(taxRateDTO, TaxRate.class);
+        var taxRate = modelMapper.map(taxRateDTO, TaxRate.class);
         return taxRateRepository.saveAndFlush(taxRate);
     }
 
     @PutMapping(path = "/update")
     public TaxRate updateTaxRate(@RequestBody TaxRateDTO taxRateDTO) {
-        TaxRate taxRate = modelMapper.map(taxRateDTO, TaxRate.class);
-        Optional<TaxRate> taxRateOptional = taxRateRepository.findById(taxRate.getId());
-        if (taxRateOptional.isPresent()) {
-            taxRate = taxRateRepository.saveAndFlush(taxRate);
-        }
+        var taxRate = modelMapper.map(taxRateDTO, TaxRate.class);
+        var taxRateOptional = taxRateRepository.findById(taxRate.getId());
+        if (taxRateOptional.isPresent()) return taxRateRepository.saveAndFlush(taxRate);
         return taxRate;
     }
 }

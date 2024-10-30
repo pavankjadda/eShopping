@@ -1,6 +1,5 @@
 package com.pj.eshopping.security.handlers;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         try {
@@ -29,6 +27,5 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
         } catch (Exception e) {
             logger.debug("Exception thrown while logging out");
         }
-
     }
 }

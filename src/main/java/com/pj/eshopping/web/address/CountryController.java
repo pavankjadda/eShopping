@@ -12,26 +12,26 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1/country")
 public class CountryController {
-    private final CountryRepository countryRepository;
+    private final CountryRepository repository;
 
     @Autowired
-    public CountryController(CountryRepository countryRepository) {
-        this.countryRepository = countryRepository;
+    public CountryController(CountryRepository repository) {
+        this.repository = repository;
     }
 
     @PostMapping(path = "/create")
     public void createCountry(@RequestBody Country country) {
-        countryRepository.save(country);
+        repository.save(country);
     }
 
     @GetMapping(value = "/list")
     public List<Country> getCountries() {
-        return countryRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<Country> getCountryById(@PathVariable Long id) {
-        return countryRepository.findById(id);
+        return repository.findById(id);
     }
 
 }

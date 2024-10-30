@@ -1,136 +1,103 @@
 package com.pj.eshopping.web.cart;
 
 import com.pj.eshopping.domain.cart.Cart;
-import com.pj.eshopping.domain.cart.CartProduct;
-import com.pj.eshopping.domain.product.Product;
-import com.pj.eshopping.domain.user.UserProfile;
-import com.pj.eshopping.dto.CartProductJson;
 import com.pj.eshopping.dto.UserProfileDTO;
-import com.pj.eshopping.exceptions.exceptions.GenericException;
-import com.pj.eshopping.repo.CartProductRepository;
-import com.pj.eshopping.repo.CartRepository;
-import com.pj.eshopping.repo.CartStatusRepository;
-import com.pj.eshopping.repo.ProductRepository;
-import com.pj.eshopping.util.UserInfoUtil;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
+import com.pj.eshopping.dto.request.CartProductRequest;
+import com.pj.eshopping.service.CartService;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/cart")
 public class CartController {
-    private final CartRepository cartRepository;
-    private final CartProductRepository cartProductRepository;
-    private final CartStatusRepository cartStatusRepository;
-    private final ProductRepository productRepository;
-    private final UserInfoUtil userInfoUtil;
+    private final CartService cartService;
 
-    private final ModelMapper modelMapper;
-
-    public CartController(CartRepository cartRepository, ModelMapper modelMapper, CartProductRepository cartProductRepository,
-                          CartStatusRepository cartStatusRepository, ProductRepository productRepository, UserInfoUtil userInfoUtil) {
-        this.cartRepository = cartRepository;
-        this.modelMapper = modelMapper;
-        this.cartProductRepository = cartProductRepository;
-        this.cartStatusRepository = cartStatusRepository;
-        this.productRepository = productRepository;
-        this.userInfoUtil = userInfoUtil;
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
     }
 
-    @GetMapping(path = "/find/user/{id}")
-    public Optional<Cart> getCartBasedOnUserId(@PathVariable Long id) {
-        return cartRepository.findAllByUserProfileUserId(id);
+    /**
+     * Finds the user cart based on user id
+     *
+     * @param userId User ID to find the cart
+     *
+     * @return Cart of the user
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
+    @GetMapping(path = "/find/user/{userId}")
+    public Cart getCartBasedOnUserId(@PathVariable Long userId) {
+        return cartService.getUserCart(userId);
     }
 
+    /**
+     * Initialize the cart for the user
+     *
+     * @param profileDTO User Profile DTO
+     *
+     * @return initialized cart
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @PostMapping(path = "/initialize")
-    public Cart initializeCart(@RequestBody UserProfileDTO userProfileDTO) {
-        UserProfile userProfile = modelMapper.map(userProfileDTO, UserProfile.class);
-
-        Cart cart = new Cart();
-        cart.setUserProfile(userProfile);
-        cart.setCartStatus(cartStatusRepository.findByStatus("Draft").orElse(null));
-        return cartRepository.saveAndFlush(cart);
+    public Cart initializeCart(@RequestBody UserProfileDTO profileDTO) {
+        return cartService.initializeCart(profileDTO);
     }
 
+    /**
+     * Validates and adds the product to the cart
+     *
+     * @param request Request object that contains product and cart details
+     *
+     * @return Cart with updated products
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @PostMapping(path = "/product/add")
-    public Cart addProductToCart(@RequestBody CartProductJson cartProductJson) {
-        if (cartProductJson.getCartProductId() != null) {
-            Optional<CartProduct> cartProductOptional = cartProductRepository.findById(cartProductJson.getCartProductId());
-            if (cartProductOptional.isPresent()) {
-                CartProduct cartProduct = cartProductOptional.get();
-                cartProduct.setQuantity(cartProductJson.getQuantity());
-                cartProductRepository.saveAndFlush(cartProduct);
-                return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
-            }
-        }
-        return createCartProductAndSaveIt(cartProductJson);
+    public Cart addProductToCart(@RequestBody CartProductRequest request) {
+        return cartService.addProductToCart(request);
     }
 
-    private Cart createCartProductAndSaveIt(CartProductJson cartProductJson) {
-        CartProduct cartProduct = new CartProduct();
-        cartProduct.setQuantity(cartProductJson.getQuantity());
-        if (cartProductJson.getProductId() == null) {
-            throw new GenericException("Failed to add product to Cart. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null,
-                    null);
-        }
-
-        //Check if provided product id is valid
-        Optional<Product> productOptional = productRepository.findById(cartProductJson.getProductId());
-        if (productOptional.isPresent()) {
-            cartProduct.setProduct(productOptional.get());
-        } else {
-            throw new GenericException("Failed to add product to Cart. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null,
-                    null);
-        }
-
-        // Get User Cart
-        Optional<Cart> cartOptional = cartRepository.findAllByUserProfileUserId(userInfoUtil.getCurrentUserProfile().getUser().getId());
-        if (cartOptional.isPresent()) {
-            cartProduct.setCart(cartOptional.get());
-        } else {
-            //If Cart does not exist, initialize the cart
-            Cart cart = new Cart();
-            cart.setUserProfile(userInfoUtil.getCurrentUserProfile());
-            cart.setCartStatus(cartStatusRepository.findByStatus("Draft").orElse(null));
-            cartProduct.setCart(cartRepository.saveAndFlush(cart));
-        }
-        cartProductRepository.saveAndFlush(cartProduct);
-        return cartRepository.findAllByUserProfileUserId(userInfoUtil.getCurrentUserProfile().getUser().getId()).orElse(null);
-    }
-
+    /**
+     * Updates the products in the cart
+     *
+     * @param request Request object that contains product and cart details
+     *
+     * @return Cart with updated products
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @PostMapping(path = "/product/update")
-    public Cart updateCartProduct(@RequestBody CartProductJson cartProductJson) {
-        Optional<CartProduct> cartProductOptional = cartProductRepository.findById(cartProductJson.getCartProductId());
-        if (cartProductOptional.isPresent()) {
-            CartProduct cartProduct = cartProductOptional.get();
-            if (cartProductJson.getQuantity() == 0) {
-                deleteCartProduct(cartProduct.getId());
-            } else {
-                cartProduct.setQuantity(cartProductJson.getQuantity());
-                cartProductRepository.saveAndFlush(cartProduct);
-            }
-            return cartRepository.findById(cartProduct.getCart().getId()).orElse(null);
-        } else
-            throw new GenericException("Failed to update Cart. Provided product ID is invalid ", null, HttpStatus.NOT_FOUND, LocalDateTime.now(), null, null);
+    public Cart updateCartProduct(@RequestBody CartProductRequest request) {
+        return cartService.updateCartProduct(request);
     }
 
+    /**
+     * Deletes the product from the cart
+     *
+     * @param id ID of the product to delete
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @DeleteMapping(path = "/product/delete/{id}")
     public void deleteCartProduct(@PathVariable Long id) {
-        Optional<CartProduct> optionalCartProduct = cartProductRepository.findById(id);
-        optionalCartProduct.ifPresent(cartProductRepository::delete);
+        cartService.deleteCartProduct(id);
     }
 
-
+    /**
+     * Deletes the cart and all the products in it
+     *
+     * @param id ID of the cart to delete
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
     @DeleteMapping(path = "/delete/{id}")
     public void deleteCart(@PathVariable Long id) {
-        Optional<Cart> cartOptional = cartRepository.findById(id);
-        if (cartOptional.isPresent()) {
-            Cart cart = cartOptional.get();
-            cartProductRepository.deleteAll(cart.getCartProducts());
-            cartRepository.delete(cart);
-        }
+        cartService.deleteCart(id);
     }
 }

@@ -10,25 +10,24 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1/manufacturer_address_type")
 public class ManufacturerAddressTypeController {
-    private final ManufacturerAddressTypeRepository manufacturerAddressTypeRepository;
+    private final ManufacturerAddressTypeRepository repository;
 
-    public ManufacturerAddressTypeController(ManufacturerAddressTypeRepository manufacturerAddressTypeRepository) {
-        this.manufacturerAddressTypeRepository = manufacturerAddressTypeRepository;
+    public ManufacturerAddressTypeController(ManufacturerAddressTypeRepository repository) {
+        this.repository = repository;
     }
 
     @PostMapping(path = "/create")
     public void createAddressType(@RequestBody ManufacturerAddressType manufacturerAddressType) {
-        manufacturerAddressTypeRepository.save(manufacturerAddressType);
+        repository.save(manufacturerAddressType);
     }
 
     @GetMapping(value = "/list")
     public List<ManufacturerAddressType> getAddressTypes() {
-        return manufacturerAddressTypeRepository.findAll();
+        return repository.findAll();
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<ManufacturerAddressType> getAddressTypeById(@PathVariable Long id) {
-        return manufacturerAddressTypeRepository.findById(id);
+        return repository.findById(id);
     }
-
 }

@@ -9,27 +9,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class OrderDetailLogger {
-    private final Logger logger = LoggerFactory.getLogger(OrderDetailLogger.class);
-
     @Pointcut("within(com.pj.eshopping.web.order.OrderController)")
     public void orderControllerPointcut() {
         //Point cut orderDetailControllerPointcut
     }
-/*
-    @Around("orderControllerPointcut()")
-    public Object logOrderControllerRequests(ProceedingJoinPoint proceedingJoinPoint)
-    {
-        Object result=null;
-        try
-        {
-            result = proceedingJoinPoint.proceed();
-        }
-        catch (Throwable throwable)
-        {
-            logger.warn("Exception: ",throwable);
-        }
-        logger.info("Log {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
-                proceedingJoinPoint.getSignature().getName(), result);
-        return result;
-    }*/
 }

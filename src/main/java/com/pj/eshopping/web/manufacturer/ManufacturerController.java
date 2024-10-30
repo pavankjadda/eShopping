@@ -11,34 +11,34 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/v1/manufacturer")
 public class ManufacturerController {
-    private final ManufacturerRepository manufacturerRepository;
+    private final ManufacturerRepository repository;
 
-    public ManufacturerController(ManufacturerRepository manufacturerRepository) {
-        this.manufacturerRepository = manufacturerRepository;
+    public ManufacturerController(ManufacturerRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping(value = "/list")
     public List<Manufacturer> getManufacturers() {
-        return manufacturerRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<Manufacturer> getManufacturerById(@PathVariable Long id) {
-        return manufacturerRepository.findById(id);
+        return repository.findById(id);
     }
 
     @PostMapping(path = "/create")
     public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
-        return manufacturerRepository.saveAndFlush(manufacturer);
+        return repository.saveAndFlush(manufacturer);
     }
 
     @PutMapping(path = "/update")
     public Manufacturer updateManufacturer(@RequestBody Manufacturer manufacturer) {
-        return manufacturerRepository.saveAndFlush(manufacturer);
+        return repository.saveAndFlush(manufacturer);
     }
 
     @DeleteMapping(path = "/delete/{id}")
     public void updateManufacturer(@PathVariable Long id) {
-        manufacturerRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }

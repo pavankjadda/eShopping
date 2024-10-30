@@ -44,7 +44,8 @@ public class OrderServiceImpl implements OrderService {
     private final ModelMapper modelMapper;
     private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository, OrderProductDetailRepository orderProductDetailRepository, OrderBillingAddressRepository orderBillingAddressRepository,
+    public OrderServiceImpl(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository,
+                            OrderProductDetailRepository orderProductDetailRepository, OrderBillingAddressRepository orderBillingAddressRepository,
                             OrderShippingAddressRepository orderShippingAddressRepository, UserInfoUtil userInfoUtil, CartRepository cartRepository,
                             TaxRateRepository taxRateRepository, ProductInventoryRepository productInventoryRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
@@ -59,6 +60,17 @@ public class OrderServiceImpl implements OrderService {
         this.modelMapper = modelMapper;
     }
 
+    private Double getTaxRate(Cart cart) {
+        return taxRateRepository.findByStateId(cart.getCartShippingAddress().getState().getId()).map(TaxRate::getRate).orElse(null);
+    }
+
+    public List<Order> getOrder() {
+        return orderRepository.findAll();
+    }
+
+    public Optional<Order> getOrderById(Long id) {
+        return orderRepository.findById(id);
+    }
 
     public Order createOrder() {
         Cart cart = getMyCart();
@@ -104,27 +116,17 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-
-    private Double getTaxRate(Cart cart) {
-        return taxRateRepository.findByStateId(cart.getCartShippingAddress().getState().getId()).map(TaxRate::getRate).orElse(null);
-    }
-
-    public List<Order> getOrder() {
-        return orderRepository.findAll();
-    }
-
-    public Optional<Order> getOrderById(Long id) {
-        return orderRepository.findById(id);
-    }
-
     public Order updateOrder(Order order) {
         return orderRepository.saveAndFlush(order);
     }
 
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
 
     private void rollBackOrderChanges(Order order) {
         if (order.getOrderProductDetails() != null) {
-            order.getOrderProductDetails().forEach(orderProductDetailRepository::delete);
+            orderProductDetailRepository.deleteAll(order.getOrderProductDetails());
         }
     }
 
@@ -155,9 +157,11 @@ public class OrderServiceImpl implements OrderService {
             if (productInventory.getQuantity() >= cartProduct.getQuantity()) {
                 productInventory.setQuantity(productInventory.getQuantity() - cartProduct.getQuantity());
             } else throw new GenericException(
-                    "Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order", null, HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now(), null, null);
-        } else throw new GenericException("Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order",
-                null, HttpStatus.BAD_REQUEST, LocalDateTime.now(), null, null);
+                    "Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order", null,
+                    HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now(), null, null);
+        } else
+            throw new GenericException("Requested product quantity of " + cartProduct.getProduct().getName() + " is not available. Failed to create the order",
+                    null, HttpStatus.BAD_REQUEST, LocalDateTime.now(), null, null);
     }
 
     private Double calculateTotalCostBeforeTax(Cart cart) {
@@ -171,9 +175,5 @@ public class OrderServiceImpl implements OrderService {
 
     private Cart getMyCart() {
         return cartRepository.findAllByUserProfileUserId(userInfoUtil.getCurrentUserProfile().getUser().getId()).orElse(null);
-    }
-
-    public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
     }
 }

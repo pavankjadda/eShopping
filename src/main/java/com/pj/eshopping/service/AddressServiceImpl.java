@@ -1,7 +1,7 @@
 package com.pj.eshopping.service;
 
 import com.pj.eshopping.domain.user.Address;
-import com.pj.eshopping.dto.AddressDTO;
+import com.pj.eshopping.dto.request.AddressRequest;
 import com.pj.eshopping.repo.AddressRepository;
 import com.pj.eshopping.util.UserInfoUtil;
 import org.modelmapper.ModelMapper;
@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
 
 /**
  * Service class that handles business logic to get, create, update Addresses
@@ -62,7 +61,7 @@ public class AddressServiceImpl implements AddressService {
     /**
      * Create or Update Address
      *
-     * @param addressDTO the address to be created or updated
+     * @param addressRequest the address to be created or updated
      *
      * @return Created or updated Address
      *
@@ -70,8 +69,8 @@ public class AddressServiceImpl implements AddressService {
      * @since 1.0.0
      */
     @Override
-    public Address saveAndFlush(AddressDTO addressDTO) {
-        Address address = modelMapper.map(addressDTO, Address.class);
+    public Address saveAndFlush(AddressRequest addressRequest) {
+        var address = modelMapper.map(addressRequest, Address.class);
         address.setUserProfile(userInfoUtil.getCurrentUserProfile());
 
         return addressRepository.saveAndFlush(address);

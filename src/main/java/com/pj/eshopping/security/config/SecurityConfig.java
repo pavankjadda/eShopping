@@ -1,6 +1,5 @@
 package com.pj.eshopping.security.config;
 
-
 import com.pj.eshopping.repo.UnauthorizedRequestRepository;
 import com.pj.eshopping.security.MyUserDetailsService;
 import com.pj.eshopping.security.handlers.CustomAccessDeniedHandler;
@@ -28,7 +27,6 @@ import java.util.Collections;
 import static com.pj.eshopping.security.config.AuthorityConstants.ROLE_ADMIN;
 import static com.pj.eshopping.security.config.AuthorityConstants.ROLE_API_USER;
 
-
 /**
  * Core security config class of the project
  *
@@ -39,16 +37,15 @@ import static com.pj.eshopping.security.config.AuthorityConstants.ROLE_API_USER;
 @EnableWebSecurity
 public class SecurityConfig {
     private final MyUserDetailsService userDetailsService;
-    private final UnauthorizedRequestRepository unauthorizedRequestRepository;
-    private final CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
+    private final UnauthorizedRequestRepository repository;
+    private final CustomBasicAuthenticationEntryPoint entryPoint;
 
-    public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository unauthorizedRequestRepository,
-                          CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint) {
+    public SecurityConfig(MyUserDetailsService userDetailsService, UnauthorizedRequestRepository repository,
+                          CustomBasicAuthenticationEntryPoint entryPoint) {
         this.userDetailsService = userDetailsService;
-        this.unauthorizedRequestRepository = unauthorizedRequestRepository;
-        this.customBasicAuthenticationEntryPoint = customBasicAuthenticationEntryPoint;
+        this.repository = repository;
+        this.entryPoint = entryPoint;
     }
-
 
     /**
      * JDBC Authentication Provider that provides integrates with Database to authenticate users
@@ -58,10 +55,10 @@ public class SecurityConfig {
      */
     @Bean
     public CustomDaoAuthenticationProvider getDaoAuthenticationProvider() {
-        CustomDaoAuthenticationProvider daoAuthenticationProvider = new CustomDaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());
-        return daoAuthenticationProvider;
+        var provider = new CustomDaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(getBCryptPasswordEncoder());
+        return provider;
     }
 
     /**
@@ -87,10 +84,14 @@ public class SecurityConfig {
                         registry -> registry.requestMatchers("/console/**", "/h2-console/**", "/static/**", "/resources/static/**").permitAll()
                                 .requestMatchers("/api/**")
                                 .hasAnyAuthority(AuthorityConstants.ROLE_USER, ROLE_API_USER, ROLE_ADMIN).requestMatchers("/login/**").permitAll().anyRequest()
-                                .authenticated().and()).httpBasic().and().exceptionHandling().authenticationEntryPoint(customBasicAuthenticationEntryPoint).and()
+                                .authenticated()
+                                .and()).httpBasic().and().exceptionHandling().authenticationEntryPoint(entryPoint)
+                .and()
                 .logout().deleteCookies("X-Auth-Token").clearAuthentication(true).invalidateHttpSession(true)
-                .logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll().and().exceptionHandling()
-                .accessDeniedHandler(new CustomAccessDeniedHandler(unauthorizedRequestRepository)).and().rememberMe()
+                .logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll()
+                .and().exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler(repository))
+                .and().rememberMe()
                 .rememberMeServices(springSessionRememberMeServices());
 
         http.headers().frameOptions().disable();
@@ -123,9 +124,9 @@ public class SecurityConfig {
      */
     @Bean
     CookieCsrfTokenRepository cookieCsrfTokenRepository() {
-        var cookieCsrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
-        cookieCsrfTokenRepository.setSecure(true);
-        return cookieCsrfTokenRepository;
+        var tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        tokenRepository.setSecure(true);
+        return tokenRepository;
     }
 
     /**
@@ -136,7 +137,7 @@ public class SecurityConfig {
      */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
+        var configuration = new CorsConfiguration();
         configuration.applyPermitDefaultValues();
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedOrigins(Collections.singletonList("*"));

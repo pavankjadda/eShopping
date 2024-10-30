@@ -76,7 +76,6 @@ public class UserController {
 
     }
 
-
     @GetMapping(value = "/users/list")
     public Page<User> findAll(@RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) Integer limit) {
         if (pageNumber == null) pageNumber = 0;
@@ -95,19 +94,19 @@ public class UserController {
     }
 
     private UserProfile createUserProfileObject(User newUser, RegisterUserDto registerUserDto) {
-        UserProfile userProfile = new UserProfile();
+        var userProfile = new UserProfile();
         userProfile.setUser(newUser);
-        userProfile.setEmail(registerUserDto.getEmail());
+        userProfile.setEmail(registerUserDto.email());
         userProfile.setFirstName("Admin");
         userProfile.setLastName("Admin");
         return userProfile;
     }
 
     private User createUserObject(RegisterUserDto registerUserDto) {
-        String encodedPassword = bCryptPasswordEncoder.encode(registerUserDto.getPassword());
+        var encodedPassword = bCryptPasswordEncoder.encode(registerUserDto.password());
 
-        User user = new User();
-        user.setUsername(registerUserDto.getUsername());
+        var user = new User();
+        user.setUsername(registerUserDto.username());
         user.setPassword(encodedPassword);
         user.setActive(true);
         user.setAccountNonExpired(true);

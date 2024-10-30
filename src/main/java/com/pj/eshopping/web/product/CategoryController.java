@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
  * Provides API endpoints for Category and related operations
  *
@@ -18,10 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/category")
 public class CategoryController {
-    private final CategoryService categoryService;
+    private final CategoryService service;
 
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public CategoryController(CategoryService service) {
+        this.service = service;
     }
 
     /**
@@ -34,7 +33,7 @@ public class CategoryController {
      */
     @GetMapping(path = "/list")
     public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
+        return service.getAllCategories();
     }
 
     /**
@@ -49,9 +48,8 @@ public class CategoryController {
      */
     @GetMapping(path = "/{id}")
     public Category findCategoryById(@PathVariable Long id, HttpServletRequest request) {
-        return categoryService.findById(id, request);
+        return service.findById(id, request);
     }
-
 
     /**
      * Create a new category and save it in the database.
@@ -65,7 +63,7 @@ public class CategoryController {
      */
     @PostMapping(value = "/create")
     public Category createNewCategory(@RequestBody CategoryDTO categoryDTO) {
-        return categoryService.saveAndFlush(categoryDTO);
+        return service.saveAndFlush(categoryDTO);
     }
 
     /**
@@ -80,7 +78,7 @@ public class CategoryController {
      */
     @PutMapping(value = "/update")
     public Category updateCategory(@RequestBody CategoryDTO categoryDTO, HttpServletRequest request) {
-        return categoryService.updateCategory(categoryDTO, request);
+        return service.updateCategory(categoryDTO, request);
     }
 
     /**
@@ -93,6 +91,6 @@ public class CategoryController {
      */
     @DeleteMapping(value = "/delete/{id}")
     public void deleteCategoryById(@PathVariable Long id, HttpServletRequest request) {
-        categoryService.deleteCategoryById(id, request);
+        service.deleteCategoryById(id, request);
     }
 }

@@ -1,7 +1,7 @@
 package com.pj.eshopping.web.address;
 
 import com.pj.eshopping.domain.user.Address;
-import com.pj.eshopping.dto.AddressDTO;
+import com.pj.eshopping.dto.request.AddressRequest;
 import com.pj.eshopping.service.AddressService;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +54,7 @@ public class AddressController {
     /**
      * Create or Update Address
      *
-     * @param addressDTO the address to be created or updated
+     * @param addressRequest the address to be created or updated
      *
      * @return Created or updated Address
      *
@@ -62,8 +62,8 @@ public class AddressController {
      * @since 1.0.0
      */
     @PostMapping(path = {"/create", "/update"})
-    public Address createAddress(@RequestBody AddressDTO addressDTO) {
-        return addressService.saveAndFlush(addressDTO);
+    public Address createAddress(@RequestBody AddressRequest addressRequest) {
+        return addressService.saveAndFlush(addressRequest);
     }
 
     /**

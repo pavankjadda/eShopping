@@ -16,16 +16,6 @@ public class GenericResponseDto {
     private HashMap<String, String> hashMap;
 
     public GenericResponseDto() {
+        // Default constructor
     }
-
-    public GenericResponseDto(String message, String httpStatus, String httpStatusCode, String exceptionMessage, String exceptionCode,
-                              LocalDateTime timeStamp) {
-        this.message = message;
-        this.httpStatus = httpStatus;
-        this.httpStatusCode = httpStatusCode;
-        this.exceptionMessage = exceptionMessage;
-        this.exceptionCode = exceptionCode;
-        this.timeStamp = timeStamp;
-    }
-
 }
