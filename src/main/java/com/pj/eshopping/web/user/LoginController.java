@@ -43,7 +43,7 @@ public class LoginController {
         try {
             var myUserDetails = (MyUserDetails) authentication.getPrincipal();
             var user = userRepository.findByUsername(myUserDetails.getUsername());
-            var token = request.getSession(false).getId();
+            var token = request.getSession(true).getId();
 
             var userDto = new UserDto();
             userDto.setId(user.getId());

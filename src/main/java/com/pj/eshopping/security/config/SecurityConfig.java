@@ -141,7 +141,7 @@ public class SecurityConfig {
         configuration.applyPermitDefaultValues();
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedOrigins(Collections.singletonList("*"));
-        configuration.setAllowCredentials(true);
+        //configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

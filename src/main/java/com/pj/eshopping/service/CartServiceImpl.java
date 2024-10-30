@@ -52,7 +52,7 @@ public class CartServiceImpl implements CartService {
      * @since 1.0.0
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Cart getUserCart(Long userId) {
         return cartRepository.findAllByUserProfileUserId(userId).orElse(null);
     }

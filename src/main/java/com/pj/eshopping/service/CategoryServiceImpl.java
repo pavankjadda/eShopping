@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @since 1.0.0
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<Category> getAllCategories() {
         return categoryRepository.getAllCategoriesThroughStoredProcedureCustom();
     }
@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @since 1.0.0
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Category findById(Long id, HttpServletRequest request) {
         return categoryRepository.findById(id).orElseThrow(
                 () -> new GenericException("Category with id:%d is not Found".formatted(id), "", HttpStatus.NOT_FOUND, LocalDateTime.now(), null,
