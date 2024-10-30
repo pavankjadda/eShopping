@@ -42,13 +42,6 @@ spring:
     restart:
       enabled: true
 
-  # Redis host details
-  redis:
-    host: "redis.example.com"
-    port: 6379
-    password: "password"
-    timeout: 3600
-
 
 ### AWS S3 Properties ###
 aws:

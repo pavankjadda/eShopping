@@ -1,17 +1,18 @@
 package com.pj.eshopping.domain.user;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "role")
 public class Role implements Serializable {
     @Serial
@@ -22,7 +23,6 @@ public class Role implements Serializable {
     @Column(name = "id")
     private Long id;
 
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -30,24 +30,20 @@ public class Role implements Serializable {
     @JsonBackReference
     private Collection<User> users;
 
-    @ManyToMany
-    @JoinTable(name = "role_privilege", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-    @JsonManagedReference
-    private Collection<Privilege> privileges;
-
-
     public Role() {
+        // Default constructor
     }
 
-    public Role(String name) {
-        this.name = name;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
-    public Role(String name, Collection<User> users, Collection<Privilege> privileges) {
-        this.name = name;
-        this.users = users;
-        this.privileges = privileges;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Role role)) return false;
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
     }
 
     @Override

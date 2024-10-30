@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.*;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "cart_shipping_address")
 public class CartShippingAddress extends AbstractAuditingEntity {
     @Serial
@@ -51,10 +52,33 @@ public class CartShippingAddress extends AbstractAuditingEntity {
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     @JsonIgnore
     private Cart cart;
 
+    @Override
+    public String toString() {
+        return "CartShippingAddress{" +
+                "id=" + id +
+                ", streetName='" + streetName + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", addressType=" + addressType +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, streetName, apartment, zipCode, addressType);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CartShippingAddress that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(streetName, that.streetName) &&
+                Objects.equals(apartment, that.apartment) && Objects.equals(zipCode, that.zipCode) &&
+                Objects.equals(addressType, that.addressType);
+    }
 }

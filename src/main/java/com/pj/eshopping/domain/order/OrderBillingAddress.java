@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.*;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "order_billing_address")
 public class OrderBillingAddress extends AbstractAuditingEntity {
     @Serial
@@ -50,7 +50,6 @@ public class OrderBillingAddress extends AbstractAuditingEntity {
     @ManyToOne
     @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     private AddressType addressType;
-
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

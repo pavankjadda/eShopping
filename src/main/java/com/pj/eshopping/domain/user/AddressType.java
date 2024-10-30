@@ -28,7 +28,7 @@ public class AddressType extends AbstractAuditingEntity implements Serializable 
     private String type;
 
     public AddressType() {
-
+        // Default Constructor
     }
 
     public AddressType(String type) {

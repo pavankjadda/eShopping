@@ -6,7 +6,8 @@ import com.pj.eshopping.domain.category.Category;
 import com.pj.eshopping.domain.inventory.ProductInventory;
 import com.pj.eshopping.domain.manufacturer.Manufacturer;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "product")
 public class Product extends AbstractAuditingEntity implements Serializable {
     @Serial
@@ -41,7 +42,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "manufacturer_id", referencedColumnName = "id")
     private Manufacturer manufacturer;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonIgnoreProperties(value = {"product"})
     private ProductInventory productInventory;
 
@@ -59,16 +60,16 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, name);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Product product = (Product) o;
         return id.equals(product.id) && Objects.equals(name, product.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name);
     }
 }

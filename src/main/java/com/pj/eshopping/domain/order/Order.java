@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.UserProfile;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,7 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "`order`")
 public class Order extends AbstractAuditingEntity implements Serializable {
     @Serial
@@ -42,11 +44,11 @@ public class Order extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "purchased_By")
     private UserProfile purchasedBy;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, optional = false)
     @JsonIgnoreProperties(value = {"order"})
     private OrderShippingAddress orderShippingAddress;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, optional = false)
     @JsonIgnoreProperties(value = {"order"})
     private OrderBillingAddress orderBillingAddress;
 
@@ -63,16 +65,16 @@ public class Order extends AbstractAuditingEntity implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, totalCost);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Order order = (Order) o;
         return id.equals(order.id) && Objects.equals(totalCost, order.totalCost);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id, totalCost);
     }
 }

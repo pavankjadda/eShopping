@@ -2,15 +2,16 @@ package com.pj.eshopping.domain.product;
 
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Table(name = "photo")
 public class Photo extends AbstractAuditingEntity implements Serializable {
     @Serial
@@ -34,4 +35,25 @@ public class Photo extends AbstractAuditingEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Photo photo)) return false;
+        return Objects.equals(id, photo.id) && Objects.equals(name, photo.name) && Objects.equals(description, photo.description);
+    }
 }
