@@ -1,7 +1,6 @@
 package com.pj.eshopping.web.inventory;
 
 import com.pj.eshopping.domain.inventory.ProductInventory;
-import com.pj.eshopping.domain.product.Product;
 import com.pj.eshopping.exceptions.exceptions.GenericException;
 import com.pj.eshopping.repo.ProductInventoryRepository;
 import com.pj.eshopping.repo.ProductRepository;
@@ -36,7 +35,7 @@ public class ProductInventoryController {
 
     @PostMapping(path = "/update")
     public ProductInventory updateProductInventory(@RequestParam(name = "product_id") Long productId, @RequestParam Long quantity) {
-        Optional<Product> productOptional = productRepository.findById(productId);
+        var productOptional = productRepository.findById(productId);
         if (productOptional.isPresent()) {
             ProductInventory productInventory = new ProductInventory();
             productInventory.setProduct(productOptional.get());
@@ -52,7 +51,7 @@ public class ProductInventoryController {
     public List<ProductInventory> getProductInventoryByProductIds(@RequestBody List<Long> productIdList) {
         List<ProductInventory> productInventories = new ArrayList<>();
         for (Long id : productIdList) {
-            Optional<ProductInventory> productInventoryOptional = productInventoryRepository.findByProductId(id);
+            var productInventoryOptional = productInventoryRepository.findByProductId(id);
             productInventoryOptional.ifPresent(productInventories::add);
         }
         return productInventories;

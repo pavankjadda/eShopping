@@ -1,13 +1,11 @@
 package com.pj.eshopping.web.user;
 
-import com.pj.eshopping.domain.user.User;
 import com.pj.eshopping.dto.UserDto;
 import com.pj.eshopping.repo.UserRepository;
 import com.pj.eshopping.security.MyUserDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/login")
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
     private final UserRepository userRepository;
 
-    @Autowired
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -43,14 +39,13 @@ public class LoginController {
         return null;
     }
 
-
     private UserDto copyUser(Authentication authentication, HttpServletRequest request) {
         try {
-            MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
-            User user = userRepository.findByUsername(myUserDetails.getUsername());
-            String token = request.getSession(false).getId();
+            var myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            var user = userRepository.findByUsername(myUserDetails.getUsername());
+            var token = request.getSession(true).getId();
 
-            UserDto userDto = new UserDto();
+            var userDto = new UserDto();
             userDto.setId(user.getId());
             if (user.getUserProfile() == null) {
                 userDto.setFirstName("");
@@ -66,5 +61,4 @@ public class LoginController {
         }
         return null;
     }
-
 }

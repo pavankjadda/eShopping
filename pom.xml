@@ -5,17 +5,18 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.3.5</version>
         <relativePath/>
     </parent>
 
     <groupId>com.pj</groupId>
     <artifactId>eShopping</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <packaging>jar</packaging>
 
     <name>eShopping</name>
-    <description>eShopping application built with Spring Boot, Spring Security,Spring Session and Spring Data</description>
+    <description>eShopping application built with Spring Boot, Spring Security,Spring Session and Spring Data
+    </description>
 
     <scm>
         <url>https://maven.pkg.github.com/pavankjadda/eShopping</url>
@@ -24,12 +25,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>3.2.2</spring-boot.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-cloud-aws.version>2.4.1</spring-cloud-aws.version>
-        <hibernate-envers.version>6.4.4.Final</hibernate-envers.version>
+        <hibernate-envers.version>6.6.1.Final</hibernate-envers.version>
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
-        <modelmapper.version>3.2.0</modelmapper.version>
+        <modelmapper.version>3.2.1</modelmapper.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -72,7 +73,7 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-envers</artifactId>
             <version>${hibernate-envers.version}</version>
         </dependency>
@@ -120,7 +121,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.34</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

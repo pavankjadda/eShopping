@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @since 1.0.0
      */
     @Override
+    @Transactional
     public List<Category> getAllCategories() {
         return categoryRepository.getAllCategoriesThroughStoredProcedureCustom();
     }
@@ -55,9 +56,10 @@ public class CategoryServiceImpl implements CategoryService {
      * @since 1.0.0
      */
     @Override
+    @Transactional
     public Category findById(Long id, HttpServletRequest request) {
         return categoryRepository.findById(id).orElseThrow(
-                () -> new GenericException(" Category with id:" + id + " is not Found", "", HttpStatus.NOT_FOUND, LocalDateTime.now(), null,
+                () -> new GenericException("Category with id:%d is not Found".formatted(id), "", HttpStatus.NOT_FOUND, LocalDateTime.now(), null,
                         request.getRequestURI()));
     }
 
@@ -90,9 +92,9 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Category updateCategory(CategoryDTO categoryDTO, HttpServletRequest request) {
-        Category category = findById(categoryDTO.getId(), request);
-        category.setName(categoryDTO.getName());
-        category.setDescription(categoryDTO.getDescription());
+        var category = findById(categoryDTO.id(), request);
+        category.setName(categoryDTO.name());
+        category.setDescription(categoryDTO.description());
         return categoryRepository.saveAndFlush(category);
     }
 
@@ -107,7 +109,6 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public void deleteCategoryById(Long id, HttpServletRequest request) {
-        Category category = findById(id, request);
-        categoryRepository.delete(category);
+        categoryRepository.deleteById(id);
     }
 }

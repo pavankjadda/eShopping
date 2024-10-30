@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.product.Product;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "cart_product")
 public class CartProduct extends AbstractAuditingEntity {
     @Serial
@@ -37,5 +38,17 @@ public class CartProduct extends AbstractAuditingEntity {
     @Override
     public String toString() {
         return "CartProduct{" + "id=" + id + ", quantity=" + quantity + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantity);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CartProduct that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(quantity, that.quantity);
     }
 }

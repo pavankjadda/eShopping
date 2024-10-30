@@ -1,16 +1,18 @@
 package com.pj.eshopping.domain.user;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
-
+import java.util.Objects;
 
 @Entity
 @Table(name = "country")
-@Data
+@Getter
+@Setter
 public class Country implements Serializable {
     @Serial
     private static final long serialVersionUID = 6396100319470393108L;
@@ -59,5 +61,18 @@ public class Country implements Serializable {
         this.name = name;
         this.code = code;
         this.isoCode = isoCode;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, code, isoCode, region);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Country country)) return false;
+        return Objects.equals(id, country.id) && Objects.equals(name, country.name) && Objects.equals(code, country.code) &&
+                Objects.equals(isoCode, country.isoCode) && Objects.equals(region, country.region);
     }
 }

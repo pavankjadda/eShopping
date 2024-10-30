@@ -4,11 +4,7 @@ import com.pj.eshopping.domain.order.Currency;
 import com.pj.eshopping.domain.product.Price;
 import com.pj.eshopping.domain.product.Product;
 import com.pj.eshopping.domain.product.ProductPrice;
-import com.pj.eshopping.repo.CategoryRepository;
-import com.pj.eshopping.repo.CurrencyRepository;
-import com.pj.eshopping.repo.PriceRepository;
-import com.pj.eshopping.repo.ProductPriceRepository;
-import com.pj.eshopping.repo.ProductRepository;
+import com.pj.eshopping.repo.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
@@ -24,8 +19,7 @@ import java.time.LocalDateTime;
 @DataJpaTest
 @ActiveProfiles(value = "integrationtest")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class InsertProductDataTest
-{
+class InsertProductDataTest {
     @Autowired
     private PriceRepository priceRepository;
 
@@ -40,12 +34,10 @@ class InsertProductDataTest
 
     @Autowired
     private ProductPriceRepository productPriceRepository;
-    
 
     @Test
-    void insertCurrency()
-    {
-        Currency currency=new Currency();
+    void insertCurrency() {
+        Currency currency = new Currency();
         currency.setSymbol("$");
         currency.setName("US Dollar");
         currency.setIsoCode("USD");
@@ -59,9 +51,8 @@ class InsertProductDataTest
     }
 
     @Test
-    void insertPrice()
-    {
-        Price price=new Price();
+    void insertPrice() {
+        Price price = new Price();
         price.setAmount(20.99);
         price.setCurrency(currencyRepository.findById(1L).get());
 
@@ -74,9 +65,8 @@ class InsertProductDataTest
     }
 
     @Test
-    void insertProduct()
-    {
-        Product product=new Product();
+    void insertProduct() {
+        Product product = new Product();
         product.setCategory(categoryRepository.findById(7L).get());
         product.setName("iPhone X");
         //product.setPriceList(Collections.singletonList(priceRepository.findById(1L).get()));
@@ -90,9 +80,8 @@ class InsertProductDataTest
     }
 
     @Test
-    void insertProductPrice()
-    {
-        ProductPrice productPrice=new ProductPrice();
+    void insertProductPrice() {
+        ProductPrice productPrice = new ProductPrice();
         productPrice.setPriceId(1L);
         productPrice.setProductId(1L);
 

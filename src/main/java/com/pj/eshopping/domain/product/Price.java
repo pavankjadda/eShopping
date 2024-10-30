@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.order.Currency;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "price")
-@Data
+@Getter
+@Setter
 public class Price extends AbstractAuditingEntity {
     @Serial
     private static final long serialVersionUID = -7104464402987718881L;
@@ -39,5 +40,26 @@ public class Price extends AbstractAuditingEntity {
     public Price(Currency currency, Double amount) {
         this.currency = currency;
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "amount=" + amount +
+                ", currency=" + currency +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, currency, amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Price price)) return false;
+        return Objects.equals(id, price.id) && Objects.equals(currency, price.currency) && Objects.equals(amount, price.amount);
     }
 }

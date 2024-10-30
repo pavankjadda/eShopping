@@ -11,32 +11,31 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1/state")
 public class StateController {
-    private final StateRepository stateRepository;
+    private final StateRepository repository;
 
     @Autowired
-    public StateController(StateRepository stateRepository) {
-        this.stateRepository = stateRepository;
+    public StateController(StateRepository repository) {
+        this.repository = repository;
     }
 
     @PostMapping(path = "/create")
     public void createState(@RequestBody State state) {
-        stateRepository.save(state);
+        repository.save(state);
     }
 
     @GetMapping(value = "/list")
     public List<State> getStates() {
-        return stateRepository.findAll();
+        return repository.findAll();
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<State> getStateById(@PathVariable Long id) {
-        return stateRepository.findById(id);
+        return repository.findById(id);
     }
-
 
     @GetMapping(value = "/find/country/{id}")
     public List<State> getStatesFilterByCountryId(@PathVariable Long id) {
-        return stateRepository.findAllByCountryIdOrderByNameAsc(id);
+        return repository.findAllByCountryIdOrderByNameAsc(id);
     }
 
 }

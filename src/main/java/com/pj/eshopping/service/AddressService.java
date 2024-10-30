@@ -1,7 +1,7 @@
 package com.pj.eshopping.service;
 
 import com.pj.eshopping.domain.user.Address;
-import com.pj.eshopping.dto.AddressDTO;
+import com.pj.eshopping.dto.request.AddressRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +32,14 @@ public interface AddressService {
     /**
      * Create or Update Address
      *
-     * @param addressDTO the address to be created or updated
+     * @param addressRequest the address to be created or updated
      *
      * @return Created or updated Address
      *
      * @author Pavan Kumar Jadda
      * @since 1.0.0
      */
-    Address saveAndFlush(AddressDTO addressDTO);
+    Address saveAndFlush(AddressRequest addressRequest);
 
     /**
      * Delete Address that matches the ID

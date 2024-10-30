@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/admin/session-registry")
 @Secured(value = AuthorityConstants.ROLE_ADMIN)
 public class SessionRegistryImplController {
-
     private final SessionRegistry sessionRegistry;
 
     @Autowired
@@ -39,7 +38,6 @@ public class SessionRegistryImplController {
         return sessionRegistry.getAllPrincipals().stream().filter(user -> !sessionRegistry.getAllSessions(user, false).isEmpty()).map(Object::toString)
                 .toList();
     }
-
 
     @GetMapping(value = {"/active-users/{username}"})
     @Secured(value = AuthorityConstants.ROLE_ADMIN)

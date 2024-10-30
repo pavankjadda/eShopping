@@ -6,14 +6,15 @@ import com.pj.eshopping.domain.user.Country;
 import com.pj.eshopping.domain.user.Region;
 import com.pj.eshopping.domain.user.State;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "manufacturer_address")
 public class ManufacturerAddress extends AbstractAuditingEntity {
     @Serial
@@ -52,4 +53,28 @@ public class ManufacturerAddress extends AbstractAuditingEntity {
     @ManyToOne
     @JoinColumn(name = "manufacturer_address_type_id")
     private ManufacturerAddressType manufacturerAddressType;
+
+    @Override
+    public String toString() {
+        return "ManufacturerAddress{" +
+                "streetName='" + streetName + '\'' +
+                ", id=" + id +
+                ", apartment='" + apartment + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, streetName, apartment, zipCode);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ManufacturerAddress that = (ManufacturerAddress) o;
+        return Objects.equals(id, that.id) && Objects.equals(streetName, that.streetName) &&
+                Objects.equals(apartment, that.apartment) && Objects.equals(zipCode, that.zipCode);
+    }
 }

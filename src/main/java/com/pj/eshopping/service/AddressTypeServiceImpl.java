@@ -19,23 +19,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class AddressTypeServiceImpl implements AddressTypeService {
-    private final AddressTypeRepository addressTypeRepository;
+    private final AddressTypeRepository repository;
 
-    public AddressTypeServiceImpl(AddressTypeRepository addressTypeRepository) {
-        this.addressTypeRepository = addressTypeRepository;
-    }
-
-    /**
-     * Create a new address type
-     *
-     * @param addressTypeDTO the address type to be created
-     *
-     * @author Pavan Kumar Jadda
-     * @since 1.0.0
-     */
-    @Override
-    public AddressType saveAndFlush(AddressTypeDTO addressTypeDTO) {
-        return addressTypeRepository.saveAndFlush(new AddressType(addressTypeDTO.getType()));
+    public AddressTypeServiceImpl(AddressTypeRepository repository) {
+        this.repository = repository;
     }
 
     /**
@@ -48,7 +35,7 @@ public class AddressTypeServiceImpl implements AddressTypeService {
      */
     @Override
     public List<AddressType> findAll() {
-        return addressTypeRepository.findAll(Sort.by("type"));
+        return repository.findAll(Sort.by("type"));
     }
 
     /**
@@ -63,6 +50,19 @@ public class AddressTypeServiceImpl implements AddressTypeService {
      */
     @Override
     public Optional<AddressType> findById(Long id) {
-        return addressTypeRepository.findById(id);
+        return repository.findById(id);
+    }
+
+    /**
+     * Create a new address type
+     *
+     * @param addressTypeDTO the address type to be created
+     *
+     * @author Pavan Kumar Jadda
+     * @since 1.0.0
+     */
+    @Override
+    public AddressType saveAndFlush(AddressTypeDTO addressTypeDTO) {
+        return repository.saveAndFlush(new AddressType(addressTypeDTO.type()));
     }
 }

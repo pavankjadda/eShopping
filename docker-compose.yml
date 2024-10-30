@@ -11,7 +11,7 @@ services:
       DB_PASSWORD: 'Test@12345'
       ACTIVE_PROFILE: 'docker'
     ports:
-      - 8082:8082
+      - "8082:8082"
     networks:
       - eshopping
   db:
@@ -21,10 +21,9 @@ services:
       MYSQL_ROOT_PASSWORD: 'Test@12345'
       MYSQL_DATABASE: 'eshopping'
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
       - eshopping
 networks:
   eshopping:
     driver: bridge
-

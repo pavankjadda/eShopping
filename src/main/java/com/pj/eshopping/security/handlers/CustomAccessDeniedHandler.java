@@ -15,14 +15,13 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     private final UnauthorizedRequestRepository unauthorizedRequestRepository;
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     public CustomAccessDeniedHandler(UnauthorizedRequestRepository unauthorizedRequestRepository) {
         this.unauthorizedRequestRepository = unauthorizedRequestRepository;
     }
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
-        UnauthorizedRequest unauthorizedRequest = new UnauthorizedRequest();
+        var unauthorizedRequest = new UnauthorizedRequest();
         unauthorizedRequest.setRequesterIpAddress(request.getRemoteAddr());
         unauthorizedRequest.setRequesterPort(request.getRemotePort());
         unauthorizedRequest.setRequestedMethod(request.getMethod());

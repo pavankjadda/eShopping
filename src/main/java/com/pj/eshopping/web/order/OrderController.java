@@ -10,7 +10,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
-
     private final OrderService orderService;
 
     public OrderController(OrderService orderService) {
@@ -31,7 +30,6 @@ public class OrderController {
     public Order createOrder(@RequestBody Long id) {
         return orderService.createOrder();
     }
-
 
     @PutMapping(path = "/update")
     public Order updateOrder(@RequestBody Order order) {

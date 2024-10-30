@@ -44,7 +44,6 @@ public class UserProfileController {
         return userProfileRepository.findById(id);
     }
 
-
     @GetMapping(value = "/user/{id}")
     public Optional<UserProfile> findByUserId(@PathVariable Long id) {
         return userProfileRepository.findAllByUserId(id);
@@ -52,20 +51,20 @@ public class UserProfileController {
 
     @PostMapping(value = "/create")
     public UserProfile createNewUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
-        UserProfile userProfile = modelMapper.map(userProfileDTO, UserProfile.class);
+        var userProfile = modelMapper.map(userProfileDTO, UserProfile.class);
         return userProfileRepository.saveAndFlush(userProfile);
     }
 
     @PostMapping(value = "/update")
     public UserProfile updateUserProfile(@RequestBody UserProfileDTO userProfileDTO, HttpServletRequest request) {
-        UserProfile newUserProfile = modelMapper.map(userProfileDTO, UserProfile.class);
+        var newUserProfile = modelMapper.map(userProfileDTO, UserProfile.class);
         if (userInfoUtil.isValidUpdate(newUserProfile)) {
             newUserProfile.setUser(userInfoUtil.getCurrentUserProfile().getUser());
             if (newUserProfile.getAddresses() != null && !newUserProfile.getAddresses().isEmpty()) {
                 newUserProfile.getAddresses().forEach(address -> address.setUserProfile(newUserProfile));
             }
             return userProfileRepository.saveAndFlush(newUserProfile);
-        } else throw new GenericException("Failed to Update UserProfile, You do not have access to update profile with id: " + userProfileDTO.getId(), null,
+        } else throw new GenericException("Failed to Update UserProfile, You do not have access to update profile with id: " + userProfileDTO.id(), null,
                 HttpStatus.NOT_FOUND, LocalDateTime.now(), null, request.getRequestURI());
     }
 }

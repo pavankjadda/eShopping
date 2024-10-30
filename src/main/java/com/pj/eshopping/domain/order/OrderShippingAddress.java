@@ -1,18 +1,17 @@
 package com.pj.eshopping.domain.order;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pj.eshopping.audit.AbstractAuditingEntity;
 import com.pj.eshopping.domain.user.*;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "order_shipping_address")
 public class OrderShippingAddress extends AbstractAuditingEntity {
     @Serial
@@ -56,4 +55,15 @@ public class OrderShippingAddress extends AbstractAuditingEntity {
     @JoinColumn(name = "order_id")
     @JsonIgnore
     private Order order;
+
+    @Override
+    public String toString() {
+        return "OrderShippingAddress{" +
+                "id=" + id +
+                ", streetName='" + streetName + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", addressType=" + addressType +
+                '}';
+    }
 }

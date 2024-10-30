@@ -13,6 +13,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
+import java.util.Objects;
+
 public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
     private static final String USER_NOT_FOUND_MESSAGE = "userNotFoundPassword";
 
@@ -23,7 +25,6 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     private UserDetailsService myUserDetailsService;
 
     private UserDetailsPasswordService userDetailsPasswordService;
-
 
     public CustomDaoAuthenticationProvider() {
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
@@ -39,7 +40,7 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
 
         String presentedPassword = authentication.getCredentials().toString();
 
-        if (presentedPassword.equals("")) {
+        if (Objects.equals(presentedPassword, "")) {
             logger.debug("Authentication failed: password is empty");
             throw new BadCredentialsException(
                     messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Message: Authentication failed: Password is Empty"));
@@ -48,6 +49,23 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials",
                     "Message: Authentication failed: password does not match stored value"));
         }
+    }
+
+    /**
+     * Creates a successful {@link Authentication} object.
+     * Subclasses will usually store the original credentials the user supplied (not
+     * salted or encoded passwords) in the returned <code>Authentication</code> object.
+     * </p>
+     */
+    @Override
+    protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
+        boolean upgradeEncoding = this.userDetailsPasswordService != null && this.passwordEncoder.upgradeEncoding(user.getPassword());
+        if (upgradeEncoding) {
+            String presentedPassword = authentication.getCredentials().toString();
+            String newPassword = this.passwordEncoder.encode(presentedPassword);
+            user = this.userDetailsPasswordService.updatePassword(user, newPassword);
+        }
+        return super.createSuccessAuthentication(principal, authentication, user);
     }
 
     @Override
@@ -73,23 +91,6 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
         }
     }
 
-    /**
-     * Creates a successful {@link Authentication} object.
-     * Subclasses will usually store the original credentials the user supplied (not
-     * salted or encoded passwords) in the returned <code>Authentication</code> object.
-     * </p>
-     */
-    @Override
-    protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
-        boolean upgradeEncoding = this.userDetailsPasswordService != null && this.passwordEncoder.upgradeEncoding(user.getPassword());
-        if (upgradeEncoding) {
-            String presentedPassword = authentication.getCredentials().toString();
-            String newPassword = this.passwordEncoder.encode(presentedPassword);
-            user = this.userDetailsPasswordService.updatePassword(user, newPassword);
-        }
-        return super.createSuccessAuthentication(principal, authentication, user);
-    }
-
     private void prepareTimingAttackProtection() {
         if (this.userNotFoundEncodedPassword == null) {
             this.userNotFoundEncodedPassword = this.passwordEncoder.encode(USER_NOT_FOUND_MESSAGE);
@@ -111,7 +112,6 @@ public class CustomDaoAuthenticationProvider extends AbstractUserDetailsAuthenti
     protected PasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
     }
-
 
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         Assert.notNull(passwordEncoder, "passwordEncoder cannot be null");

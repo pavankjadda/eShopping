@@ -29,5 +29,4 @@ public class GenericException extends RuntimeException {
         this.errors = errors;
         this.path = path;
     }
-
 }

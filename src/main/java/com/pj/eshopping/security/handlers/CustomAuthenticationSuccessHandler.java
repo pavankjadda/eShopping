@@ -20,12 +20,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
 
-
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final Log logger = LogFactory.getLog(this.getClass());
     private final SessionHistoryRepository sessionHistoryRepository;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
 
     public CustomAuthenticationSuccessHandler(SessionHistoryRepository sessionHistoryRepository) {
         this.sessionHistoryRepository = sessionHistoryRepository;
@@ -39,7 +37,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     }
 
     private void saveRequesterInformation(HttpServletRequest request, Authentication authentication) {
-        SessionHistory sessionHistory = new SessionHistory();
+        var sessionHistory = new SessionHistory();
         sessionHistory.setSessionId(request.getSession(false).getId());
         sessionHistory.setCreationTime(convertLongTime(request.getSession(false).getCreationTime()));
         sessionHistory.setLastAccessTime(convertLongTime(request.getSession(false).getLastAccessedTime()));

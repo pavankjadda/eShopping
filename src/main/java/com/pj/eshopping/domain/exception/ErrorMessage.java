@@ -20,5 +20,4 @@ public class ErrorMessage implements Serializable {
     private LocalDateTime timestamp;
     private Map<String, String> errors;
     private String path;
-
 }

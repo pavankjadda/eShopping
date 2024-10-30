@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 public class AuthenticationSuccessLogger {
     private final Logger logger = LoggerFactory.getLogger(AuthenticationSuccessLogger.class);
 
-
     @Pointcut("within(com.pj.eshopping.security.handlers.CustomAuthenticationSuccessHandler..*)")
     public void customAuthenticationSuccessHandlerPointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
@@ -38,12 +37,10 @@ public class AuthenticationSuccessLogger {
         } catch (Throwable throwable) {
             logger.warn("throwable: ", throwable);
         }
-
         logger.info("Exit: {}.{}() with result = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(), proceedingJoinPoint.getSignature().getName(),
                 result);
         return result;
     }
-
 
     @AfterThrowing(pointcut = "applicationPackagePointcut() && customAuthenticationSuccessHandlerPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
@@ -51,5 +48,4 @@ public class AuthenticationSuccessLogger {
                 e.getCause() != null ? e.getCause() : "NULL");
 
     }
-
 }
